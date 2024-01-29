@@ -9,7 +9,7 @@ const config = {
     './src/**/*.{ts,tsx}',
 	],
   corePlugins: {
-    preflight: false,
+    preflight: true,
   },
   prefix: "",
   theme: {
