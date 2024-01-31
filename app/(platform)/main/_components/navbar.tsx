@@ -7,7 +7,7 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import BusinessIcon from '@mui/icons-material/Business';
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
-import { useMediaQuery, useTheme, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { useMediaQuery, useTheme, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, ListItemButton } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
@@ -26,14 +26,17 @@ const MainNavBar = () => {
             <List>
                 {['Tasks', 'Insights', 'Organisation'].map((text, index) => (
                     <Link href={`/main/${text.toLowerCase()}`} passHref key={text}>
-                        <ListItem button selected={isActive(`/main/${text.toLowerCase()}`)}>
+                        <ListItemButton 
+                          selected={isActive(`/main/${text.toLowerCase()}`)}
+                          onClick={handleDrawerToggle}  // Drawer를 닫는 함수 연결
+                        >
                             <ListItemIcon>
                                 {index === 0 && <TaskAltIcon />}
                                 {index === 1 && <QueryStatsIcon />}
                                 {index === 2 && <BusinessIcon />}
                             </ListItemIcon>
                             <ListItemText primary={text} />
-                        </ListItem>
+                        </ListItemButton>
                     </Link>
                 ))}
             </List>
