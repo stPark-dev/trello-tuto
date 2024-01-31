@@ -6,7 +6,11 @@ html,
 body,
 :root {
   height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;

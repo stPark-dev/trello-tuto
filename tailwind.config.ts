@@ -8,9 +8,9 @@ const config = {
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
 	],
-  corePlugins: {
-    preflight: true,
-  },
+  // corePlugins: {
+  //   preflight: true,
+  // },
   prefix: "",
   theme: {
     container: {
