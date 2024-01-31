@@ -18,9 +18,13 @@ const MainPage = () => {
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         ...theme.typography.body2,
         padding: theme.spacing(1),
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
+    
 
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
