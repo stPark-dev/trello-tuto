@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,8 +8,11 @@ import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import BusinessIcon from '@mui/icons-material/Business';
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
+import { usePathname } from "next/navigation";
 
 const MainNavBar = () => {
+    const currentPathName = usePathname();
+    const isActive = (pathname: string) => currentPathName === pathname;
     return (
         <div className="bg-white border border-b-gray-200">
             <div className="px-4 sm:px-6 lg:px-8">
@@ -17,25 +22,25 @@ const MainNavBar = () => {
                         <Image alt="logo" src="/logo_main.png" width={Math.ceil(1664 / 10)} height={Math.ceil(217 / 10)} />
                         </Link>
                     </div>
-                    <div className="flex items-center w-full justify-between">
+                    <div className="flex items-center w-full justify-end sm:justify-between">
                         <div className="hidden sm:flex sm:space-x-10 border-l border-gray-300 my-5 ml-10 pl-14">
                             <Link
-                                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 opacity-60 hover:opacity-100"
-                                href="https://app.fixform.com/admin/tasks/all"
+                                className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${isActive('/main/tasks') ? 'text-brand-900' : 'text-gray-500 hover:text-gray-700 opacity-60 hover:opacity-100'}`}
+                                href="/main/tasks"
                             >
                                 <TaskAltIcon sx={{ marginRight: 1 }} />
                                 Tasks
                             </Link>
                             <Link
-                                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 hover:text-gray-700 opacity-60 hover:opacity-100"
-                                href="https://app.fixform.com/admin/insights/9509ea46-1cfd-403c-bc2b-209ee15b680b"
+                                className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${isActive('/main/insights') ? 'text-brand-900' : 'text-gray-500 hover:text-gray-700 opacity-60 hover:opacity-100'}`}
+                                href="/main/insights"
                             >
                                 <QueryStatsIcon sx={{ marginRight: 1 }} />
                                 Insights
                             </Link>
                             <Link
-                                className="inline-flex items-center px-1 pt-1 text-sm font-medium text-brand-900"
-                                href="https://app.fixform.com/admin/settings/organisation/buildings"
+                                className={`inline-flex items-center px-1 pt-1 text-sm font-medium ${isActive('/main/organisation') ? 'text-brand-900' : 'text-gray-500 hover:text-gray-700 opacity-60 hover:opacity-100'}`}
+                                href="/main/organisation"
                             >
                                 <BusinessIcon sx={{ marginRight: 1 }} />
                                 Organisation

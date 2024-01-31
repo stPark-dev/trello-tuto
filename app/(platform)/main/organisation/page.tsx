@@ -7,7 +7,8 @@ import { Box, Button } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { useRef, useState } from 'react';
 
-const MainPage = () => {
+
+const MainOrganisation = () => {
     const theme = useTheme();
     const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; url?: string }>>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -62,10 +63,42 @@ const MainPage = () => {
 
 
     return (
-        <Box sx={{ p: 5, overflow: 'auto' }}>
-            메인 페이지
+        <Box sx={{ backgroundColor: theme.palette.grey[100], p: 5, height: '100vh', overflow: 'auto' }}>
+            <Button
+                component="label"
+                variant="outlined"
+                color="warning"
+                startIcon={<CameraAltIcon />}
+                sx={{ mb: 3 }}
+            >
+                이미지 업로드
+                <VisuallyHiddenInput
+                    type="file"
+                    multiple
+                    onChange={handleFileChange}
+                    ref={fileInputRef}
+                    accept="image/*, .pdf"
+                />
+            </Button>
+            {uploadedFiles.map((file, index) => (
+                <Box key={index} mb={5}>
+                    {file.url ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={file.url} alt={file.name} style={{ width: 'auto', height: 'auto' }} />
+                    ) : (
+                        <span>{file.name}</span>
+                    )}
+                </Box>
+            ))}
+            <Grid container spacing={2}>
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((val) => (
+                    <Grid item xs={12} md={4} key={val}>
+                        <Item>{`Building ${val}`}</Item>
+                    </Grid>
+                ))}
+            </Grid>
         </Box>
     );
-};
+}
 
-export default MainPage;
+export default MainOrganisation;
