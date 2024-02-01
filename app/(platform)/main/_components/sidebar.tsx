@@ -3,14 +3,13 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Box, Paper, Typography, Link } from '@mui/material';
+import TaskIcon from '@mui/icons-material/Task';
 import BusinessIcon from '@mui/icons-material/Business';
 import ArticleIcon from '@mui/icons-material/Article';
 import RepeatIcon from '@mui/icons-material/Repeat';
 
 const MainSideBar = () => {
     const currPathName = usePathname();
-    const [sideText, setSideText] = useState("");
-
     const linkStyle = {
         display: 'flex',
         alignItems: 'center',
@@ -27,31 +26,31 @@ const MainSideBar = () => {
         textDecoration: 'none',
     };
 
-
-    useEffect(() => {
-        switch (currPathName) {
-            case '/main/tasks':
-                setSideText("Tasks");
-                break;
-            case '/main/insights':
-                setSideText("Insights");
-                break;
-            case '/main/organisation':
-                setSideText("Organisation");
-                break;
-            default:
-                setSideText("");
+    const calculateSideText = () => {
+        const pathSeg = currPathName.split('/').filter(Boolean); 
+        const mainSegIndex = pathSeg.findIndex(segment => segment === 'main'); 
+        if (mainSegIndex >= 0 && mainSegIndex + 1 < pathSeg.length) {
+            const nextSeg = pathSeg[mainSegIndex + 1]; 
+            return nextSeg.charAt(0).toUpperCase() + nextSeg.slice(1); 
         }
-    }, [currPathName]);
+        return "Main";
+    };
+
+    const sideText = calculateSideText();
 
     const renderSidebarComponent = () => {
         switch (currPathName) {
+            case '/main':
+                return (
+                    <>
+                    </>
+                );
             case '/main/tasks':
                 return (
                     <>
                         <Box sx={linkStyle} component={Link} href="/">
-                            <RepeatIcon sx={{ marginRight: 1 }} />
-                            Recurring Tasks
+                            <TaskIcon sx={{ marginRight: 1 }} />
+                            All Tasks
                         </Box>
                     </>
                 );
@@ -87,7 +86,7 @@ const MainSideBar = () => {
     }
     return (
         <>
-            <Paper id="sbPaper" elevation={6} sx={{
+            <Paper id="sbPaper" elevation={3} sx={{
                 width: "100%", maxWidth: "16rem", zIndex: 10, display: {
                     xs: 'none',
                     sm: 'flex',
@@ -98,7 +97,7 @@ const MainSideBar = () => {
                     overflowY: 'auto',
                     pt: 2,
                     pb: 2,
-                    height: '100%', // 'h-full'
+                    height: '100%',
                 }}>
                     <Box sx={{
                         pt: 2,
