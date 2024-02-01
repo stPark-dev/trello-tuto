@@ -14,7 +14,6 @@ const MainOrganisation = () => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const Item = styled(Paper)(({ theme }) => ({
-        // 기본 스타일
         height: 120,
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
         ...theme.typography.body2,

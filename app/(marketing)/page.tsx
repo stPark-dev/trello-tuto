@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
@@ -59,9 +61,9 @@ const MarketingPage = () => {
               <h2 className="mt-2 text-4xl font-bold text-gray-900 sm:text-5xl">
                 Start your Cooperation with your co-workers
               </h2>
-              <p className={cn("mt-4 text-lg text-gray-600", textFont.className)}>
+              <Box className={cn("mt-4 text-lg text-gray-600", textFont.className)}>
                 Follow these steps to cooperate with your co-workers
-              </p>
+              </Box>
             </Box>
           </Box>
           {/* steps */}
@@ -111,7 +113,7 @@ const MarketingPage = () => {
           zIndex: 0,
           width: "100vw",
           height: "auto",
-          bottom: "20px",
+          bottom: "0px",
         }}
       />
     </div>

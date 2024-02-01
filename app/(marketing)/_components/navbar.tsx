@@ -176,16 +176,16 @@ export const Navbar = () => {
         )}
 
         <div className={cn("space-x-4 md:block md:w-auto flex items-center w-full", isMobile ? "justify-end" : "")}>
-          <MUIButton size="small" variant="outlined">
+          <Button size="sm" variant="outline" asChild>
             <Link href="/sign-in">
               Login
             </Link>
-          </MUIButton>
-          <MUIButton size="small" variant="contained">
+          </Button>
+          <Button size="sm" asChild>
             <Link href="/sign-up">
               Get Teamvolt for free
             </Link>
-          </MUIButton>
+          </Button>
         </div>
       </div>
     </div>

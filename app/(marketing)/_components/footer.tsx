@@ -1,24 +1,46 @@
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
+import { Box, Typography } from "@mui/material";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <div className="fixed bottom-0 w-full p-4 border-t bg-slate-100">
-      <div className="md:max-w-screen-2xl mx-auto flex items-center w-full justify-between">
+    <Box sx={{ position: "fixed", bottom: 0, width: "100%", p: 2, borderTop: 1, borderTopColor: "divider", backgroundColor: "background.paper" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row", // Ensure the items are in a row
+          justifyContent: "space-between", // Apply space-between only for mobile by default
+          alignItems: "center",
+          maxWidth: "lg", // Use theme breakpoints for consistency
+          mx: "auto", // Automatically margin to center within the parent
+          width: "100%",
+        }}>
         <Logo />
-        <p className="text-xs text-center justify-between mt-4">
+        <Typography sx={{ 
+          display: { xs: "none", sm: "block" }, // Hide on mobile, show on tablet and above
+          fontSize: "0.75rem", 
+          mt: { sm: 2 }, // Apply margin top starting from the sm breakpoint
+        }}>
           © {currentYear}. Gractor, Inc. All rights reserved.
-        </p>
-        <div className="space-x-4 md:block md:w-auto flex items-center justify-between w-full">
+        </Typography>
+        <Box sx={{
+          display: "flex",
+          flexDirection: { xs: "row", sm: "row" }, // Stack items vertically on mobile, horizontally on desktop
+          alignItems: "center",
+          justifyContent: "center", // Center the items for mobile
+          "& > * + *": {
+            ml: { sm: 2 }, // Apply margin left starting from the sm breakpoint
+          }
+        }}>
           <Button size="sm" variant="ghost">
             Privacy Policy
           </Button>
           <Button size="sm" variant="ghost">
             Terms of Service
           </Button>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };

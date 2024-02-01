@@ -85,9 +85,9 @@ const PricingPage = () => {
                 <h2 className="mt-2 text-4xl font-bold text-gray-900 sm:text-5xl">
                   Pricing
                 </h2>
-                <p className="mt-4 text-lg text-gray-600">
+                <Box className="mt-4 text-lg text-gray-600">
                   We believe Teamvolt should be accessible to all companies.
-                </p>
+                </Box>
               </Box>
             </Box>
 

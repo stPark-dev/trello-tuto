@@ -1,30 +1,32 @@
-import Link from "next/link";
 import Image from "next/image";
-import localFont from "next/font/local";
+import { Box, Link } from "@mui/material";
+// import localFont from "next/font/local";
 
-import { cn } from "@/lib/utils";
-
-const headingFont = localFont({
-  src: "../public/fonts/font.woff2",
-});
+// const headingFont = localFont({
+//   src: "../public/fonts/font.woff2",
+// });
 
 export const Logo = () => {
   return (
-    <Link href="/">
-      <div className="flex-row hover:opacity-75 transition items-center gap-x-2 hidden md:flex">
-        <Image
-          src="/logo.svg"
-          alt="Logo"
-          height={30}
-          width={30}
-        />
-        <p className={cn(
-          "text-lg text-neutral-700 pb-1",
-          headingFont.className,
-        )}>
-          Teamvolt
-        </p>
-      </div>
-    </Link>
+    <>
+      <Link href="/" underline="none">
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 1,
+            opacity: 0.75,
+            '&:hover': {
+              opacity: 1,
+            },
+            transition: 'opacity 0.3s',
+            cursor: 'pointer',
+          }}
+        >
+            <Image alt="logo" src="/logo_main.png" width={Math.ceil(1664 / 10)} height={Math.ceil(217 / 10)} />
+        </Box>
+      </Link>
+    </>
   );
 };
