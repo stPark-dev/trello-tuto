@@ -1,7 +1,5 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-
 import Image from "next/image";
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import { Box, Button, Grid, Typography, styled } from "@mui/material";
