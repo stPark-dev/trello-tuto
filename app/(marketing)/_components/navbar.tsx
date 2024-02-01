@@ -156,6 +156,14 @@ export const Navbar = () => {
               open={Boolean(anchorEl) && menuType === 'Solution'}
               onClose={handleMenuClose}
               MenuListProps={{ onMouseLeave: handleMenuClose }}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
             >
               {renderMenuItems()}
             </Menu>

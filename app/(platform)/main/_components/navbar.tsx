@@ -28,7 +28,7 @@ const MainNavBar = () => {
                     <Link href={`/main/${text.toLowerCase()}`} passHref key={text}>
                         <ListItemButton 
                           selected={isActive(`/main/${text.toLowerCase()}`)}
-                          onClick={handleDrawerToggle}  // Drawer를 닫는 함수 연결
+                          onClick={handleDrawerToggle}
                         >
                             <ListItemIcon>
                                 {index === 0 && <TaskAltIcon />}
@@ -83,13 +83,14 @@ const MainNavBar = () => {
                                     aria-label="open drawer"
                                     onClick={handleDrawerToggle}
                                     edge="start"
+                                    sx={{mr : 1}}
                                 >
                                     <MenuIcon />
                                 </IconButton>
                             )}
                         </div>
                         <div className="flex space-x-4 font-medium">
-                            <div className="hidden sm:flex">
+                            {/* <div className="hidden sm:flex">
                                 <Link
                                     href="https://support.fixform.com"
                                     target="_blank"
@@ -97,7 +98,7 @@ const MainNavBar = () => {
                                 >
                                     Help Center
                                 </Link>
-                            </div>
+                            </div> */}
                             <div className="ml-auto flex items-center justify-center gap-x-2">
                                 <OrganizationSwitcher
                                     hidePersonal
