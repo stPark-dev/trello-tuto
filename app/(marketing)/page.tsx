@@ -5,7 +5,6 @@ import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import { Medal } from "lucide-react";
 
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Box } from "@mui/material";
@@ -31,76 +30,175 @@ const textFont = Poppins({
 
 const MarketingPage = () => {
   return (
-    <div className="flex items-center justify-center flex-col">
-      <div className={cn("flex items-center justify-center flex-col", headingFont.className)}>
-        <div className="mb-4 flex items-center justify-center border shadow-sm p-4 bg-amber-100 text-amber-700 rounded-full uppercase">
-          <Medal className="h-6 w-6 mr-2" />
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+      <Box className={headingFont.className} sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+        <Box sx={{ mb: 2, display: "flex", alignItems: "center", justifyContent: "center", borderWidth: 1, boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)', p: 2, backgroundColor: 'rgb(254 243 199)', color: 'rgb(180 83 9)', borderRadius: '9999px', textTransform: "uppercase" }}>
+          <Medal style={{ height: "1.5rem", width: "1.5rem", marginRight: "0.5rem" }} />
           No.1 Asset management
-        </div>
-        <h1 className="text-3xl md:text-6xl text-center text-neutral-800 mb-6">
+        </Box>
+        <Box sx={{
+          fontSize: { xs: "1.875rem", sm: "3.75rem" },
+          lineHeight: { xs: "2.25rem", sm: 1 },
+          mb: { sm: 3 },
+          color: "rgb(38, 38, 38)",
+          textAlign: "center",
+        }}>
           TeamVolt assists in
-        </h1>
-        <div className="text-3xl md:text-6xl bg-gradient-to-r text-center from-sky-600 to-indigo-600 text-white px-4 p-2 rounded-md pb-4 w-fit">
+        </Box>
+        <Box
+          sx={{
+            fontSize: { xs: "1.875rem", md: "3.75rem" },
+            background: "linear-gradient(40deg, #414141 10%, #FFD272 90%)",
+            color: "white",
+            textAlign: "center",
+            p: 1,
+            px: 4,
+            pb: 1,
+            borderRadius: "0.375rem",
+            width: "fit-content",
+          }}>
           building asset management.
-        </div>
-      </div>
-      <div className={cn("text-sm md:text-xl text-neutral-400 mt-4 max-w-xs md:max-w-2xl text-center mx-auto", textFont.className)}>
+        </Box>
+      </Box>
+      <Box className={textFont.className}
+        sx={{
+          fontSize: { xs: "0.875rem", md: "1.25rem" },
+          color: "text.secondary",
+          mt: 2,
+          maxWidth: { xs: "20rem", md: "42rem" },
+          textAlign: "center",
+          mx: "auto",
+        }}>
         Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique - accomplish it all with TeamVolt.
-      </div>
-      <Button className="mt-6" size="lg" asChild>
+      </Box>
+      <Button size="lg" asChild style={{ marginTop: "1.5rem" }}>
         <Link href="/sign-up">
           Get TeamVolt for free
         </Link>
       </Button>
 
-      <Box className={cn("mx-auto mt-20 mb-20 flex max-w-5xl flex-col gap-20 sm:mt-40 sm:gap-40", headingFont.className)}>
+      <Box className={headingFont.className}
+        sx={{
+          mx: "auto",
+          mt: { xs: 10, sm: 20 },
+          mb: 20,
+          maxWidth: "80rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: { xs: 10, sm: 20 },
+        }}>
         {/* Intro */}
         <Box>
-          <Box className="mb-6 px-6 lg:px-8">
-            <Box className="mx-auto max-w-2xl sm:text-center">
-              <h2 className="mt-2 text-4xl font-bold text-gray-900 sm:text-5xl">
+          <Box sx={{ mb: 3, px: { sm: 3, lg: 4 } }}>
+            <Box sx={{ mx: "2rem", maxWidth: "42rem", textAlign: "center" }}>
+              <Box sx={{ mt: 1, fontSize: { xs: "2.25rem", sm: "3rem" }, lineHeight: { xs: "2.25rem", sm: 1 }, fontWeight: 700, color: "rgb(17 24 39)" }}>
                 Start your Cooperation with your co-workers
-              </h2>
-              <Box className={cn("mt-4 text-lg text-gray-600", textFont.className)}>
+              </Box>
+              <Box className={textFont.className} sx={{ mt: 2, fontSize: "1.125rem", lineHeight: "1.75rem", color: "rgb(75 85 99)" }}>
                 Follow these steps to cooperate with your co-workers
               </Box>
             </Box>
           </Box>
           {/* steps */}
 
-          <ol className="my-2 space-y-4 pt-2 md:flex md:space-x-6 md:space-y-0 md:px-8">
-            <li className="md:flex-1">
-              <Box className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                <span className="text-sm font-medium text-blue-600">
+          <Box component="ol" sx={{
+            my: 1, pt: 1,
+            '& > * + *': {
+              my: 2,
+            },
+            '@media (min-width:640px)': {
+              display: "flex",
+              px: 4,
+              '& > * + *': {
+                mx: 3,
+                my: 0,
+              },
+            },
+          }}>
+            <Box component="li" sx={{ flex: { md: "1 1 0%" } }}>
+              <Box 
+                sx={{
+                  display: "flex", flexDirection: "column",
+                  "& > * + *": {
+                    mt: 1
+                  },
+                  borderLeftWidth: "4px",
+                  borderColor: "rgb(212 212 216)",
+                  py: 1,
+                  pl: 2,
+                  "@media (min-width:640px)": {
+                    borderLeftWidth: "0px",
+                    borderTopWidth: "2px",
+                    pb: 0,
+                    pl: 0,
+                    pt: 2
+                  }
+                }}>
+                <Box sx={{ fontSize: "0.875rem", lineHeight: "1.25rem", fontWeight: 500, color: "rgb(219 190 107)" }}>
                   Step 1
-                </span>
-                <span className="text-xl font-semibold">
+                </Box>
+                <span style={{fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600}}>
                   Sign up for a Free Account
                 </span>
               </Box>
-            </li>
-            <li className="md:flex-1">
-              <Box className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                <span className="text-sm font-medium text-blue-600">
+            </Box>
+            <Box component="li" sx={{ flex: { md: "1 1 0%" } }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  "& > * + *": {
+                    mt: 1
+                  },
+                  borderLeftWidth: "4px",
+                  borderColor: "rgb(212 212 216)",
+                  py: 1,
+                  pl: 2,
+                  "@media (min-width:640px)": {
+                    borderLeftWidth: 0,
+                    borderTopWidth: "2px",
+                    pb: 0,
+                    pl: 0,
+                    pt: 2,
+                  }
+                }}>
+                <span style={{ fontSize: "0.875rem", lineHeight: "1.25rem", fontWeight: 500, color: "rgb(219 190 107)" }}>
                   Step 2
                 </span>
-                <span className="text-xl font-semibold">
-                  Make a <span className="text-blue-600">Assets</span> &{" "}
-                  <span className="text-blue-600">Users</span>
+                <span style={{fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600}}>
+                  Make a <span style={{color: "rgb(219 190 107)"}}>Assets</span> &{" "}
+                  <span style={{color: "rgb(219 190 107)"}}>Users</span>
                 </span>
               </Box>
-            </li>
-            <li className="md:flex-1">
-              <Box className="flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4">
-                <span className="text-sm font-medium text-blue-600">
+            </Box>
+            <Box component="li" sx={{ flex: { md: "1 1 0%" } }}>
+              <Box sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  "& > * + *": {
+                    mt: 1
+                  },
+                  borderLeftWidth: "4px",
+                  borderColor: "rgb(212 212 216)",
+                  py: 1,
+                  pl: 2,
+                  "@media (min-width:640px)": {
+                    borderLeftWidth: 0,
+                    borderTopWidth: "2px",
+                    pb: 0,
+                    pl: 0,
+                    pt: 2,
+                  }
+                }}>
+                <span style={{ fontSize: "0.875rem", lineHeight: "1.25rem", fontWeight: 500, color: "rgb(219 190 107)" }}>
                   Step 3
                 </span>
-                <span className="text-xl font-semibold">
+                <span style={{fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600}}>
                   Start Your coorperation
                 </span>
               </Box>
-            </li>
-          </ol>
+            </Box>
+          </Box>
         </Box>
       </Box>
       <Image
@@ -116,7 +214,7 @@ const MarketingPage = () => {
           bottom: "0px",
         }}
       />
-    </div>
+    </Box>
   );
 };
 

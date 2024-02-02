@@ -9,28 +9,28 @@ export const Footer = () => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "row", // Ensure the items are in a row
-          justifyContent: "space-between", // Apply space-between only for mobile by default
+          flexDirection: "row",
+          justifyContent: "space-between",
           alignItems: "center",
-          maxWidth: "lg", // Use theme breakpoints for consistency
-          mx: "auto", // Automatically margin to center within the parent
+          maxWidth: "lg",
+          mx: "auto",
           width: "100%",
         }}>
         <Logo />
         <Typography sx={{ 
-          display: { xs: "none", sm: "block" }, // Hide on mobile, show on tablet and above
+          display: { xs: "none", sm: "block" },
           fontSize: "0.75rem", 
-          mt: { sm: 2 }, // Apply margin top starting from the sm breakpoint
+          mt: { sm: 2 },
         }}>
           © {currentYear}. Gractor, Inc. All rights reserved.
         </Typography>
         <Box sx={{
           display: "flex",
-          flexDirection: { xs: "row", sm: "row" }, // Stack items vertically on mobile, horizontally on desktop
+          flexDirection: { xs: "row", sm: "row" },
           alignItems: "center",
-          justifyContent: "center", // Center the items for mobile
+          justifyContent: "center",
           "& > * + *": {
-            ml: { sm: 2 }, // Apply margin left starting from the sm breakpoint
+            ml: { sm: 2 },
           }
         }}>
           <Button size="sm" variant="ghost">

@@ -63,6 +63,7 @@ const QrCodeGenerator = () => {
                     label="Enter text for QR code"
                     variant="outlined"
                     value={inputText}
+                    size="small"
                     onChange={handleChange}
                     fullWidth
                 />
