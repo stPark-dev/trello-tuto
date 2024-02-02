@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { Button as MUIButton, Menu, MenuItem, ListItemIcon, ListItemText, IconButton, ListItem, ListItemButton } from "@mui/material";
 
-import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 
@@ -125,8 +124,17 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 w-full h-14 px-4 border-b bg-white flex items-center">
-      <div className="md:max-w-screen-2xl mx-auto flex items-center w-full justify-between">
+    <Box sx={{ position: "fixed", top: "0px", width: "100%", height: "3.5rem", px: 2, borderBottomWidth: "1px", backgroundColor: "rgb(255 255 255)", display: "flex", alignItems: "center" }}>
+      <Box sx={{
+        "@media (min-width:1024px)": {
+          maxWidth: "1536px"
+        },
+        mx: "auto",
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        justifyContent: "space-between"
+      }}>
         {isMobile ? (
           <>
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
@@ -135,7 +143,14 @@ export const Navbar = () => {
             {mobileMenu}
           </>
         ) : (
-          <Box id="menu" className={cn("space-x-6 flex items-center text-neutral-500", textFont.className)}>
+          <Box id="menu" className={textFont.className} sx={{
+            display: "flex",
+            alignItems: "center",
+            color: "rgb(115 115 115)",
+            "& > * + *": {
+              mx: 1
+            }
+          }}>
             <Logo />
             <MUIButton color="inherit" component="span" onClick={(e) => handleMenuOpen(e, 'Industries')}>
               Industries <KeyboardArrowDownIcon sx={{ transform: rotate.Industries ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease-in-out' }} />
@@ -175,7 +190,16 @@ export const Navbar = () => {
           </Box>
         )}
 
-        <div className={cn("space-x-4 md:block md:w-auto flex items-center w-full", isMobile ? "justify-end" : "")}>
+        <Box
+          sx={{
+            "& > * + *": {
+              mx: 2,
+            },
+            display: { xs: "flex", md: "block", },
+            alignItems: "center",
+            width: { xs: "100%", md: "auto" },
+            justifyContent: { xs: "flex-end"}
+          }}>
           <Button size="sm" variant="outline" asChild>
             <Link href="/sign-in">
               Login
@@ -186,8 +210,8 @@ export const Navbar = () => {
               Get Teamvolt for free
             </Link>
           </Button>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };

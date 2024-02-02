@@ -106,6 +106,7 @@ const MarketingPage = () => {
             '& > * + *': {
               my: 2,
             },
+            ml: { xs: 6, md: 0 },
             '@media (min-width:640px)': {
               display: "flex",
               px: 4,
@@ -115,7 +116,7 @@ const MarketingPage = () => {
               },
             },
           }}>
-            <Box component="li" sx={{ flex: { md: "1 1 0%" } }}>
+            <Box component="li" sx={{ flex: { md: "1 1 0%" }, }}>
               <Box 
                 sx={{
                   display: "flex", flexDirection: "column",
