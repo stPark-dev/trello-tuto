@@ -23,6 +23,9 @@ export const Sidebar = ({
     {}
   );
 
+  // expanded가 유효한 객체인지 확인, 아니면 빈 객체를 사용
+  const safeExpanded = expanded || {};
+
   const {
     organization: activeOrganization,
     isLoaded: isLoadedOrg
@@ -36,9 +39,9 @@ export const Sidebar = ({
     },
   });
 
-  const defaultAccordionValue: string[] = Object.keys(expanded)
+  const defaultAccordionValue: string[] = Object.keys(safeExpanded)
     .reduce((acc: string[], key: string) => {
-      if (expanded[key]) {
+      if (safeExpanded[key]) {
         acc.push(key);
       }
 
