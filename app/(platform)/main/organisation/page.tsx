@@ -26,7 +26,8 @@ const MainOrganisation = () => {
         margin: 'auto',
 
         [theme.breakpoints.up('md')]: {
-            width: 480,
+            width: 320,
+            height: 200,
         },
         [theme.breakpoints.down('sm')]: {
             width: '100%',

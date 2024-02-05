@@ -48,7 +48,7 @@ const MainNavBar = () => {
     );
 
     return (
-        <Box sx={{ backgroundColor: "rgb(255 255 255 / 1)", borderWidth: 1, borderBottomColor: "rgb(229 231 235 / 1)", boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)' }}>
+        <Box sx={{ position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1100, backgroundColor: "rgb(255 255 255 / 1)", borderWidth: 1, borderBottomColor: "rgb(229 231 235 / 1)", boxShadow: '0px 3px 3px -2px rgba(0,0,0,0.2), 0px 3px 4px 0px rgba(0,0,0,0.14), 0px 1px 8px 0px rgba(0,0,0,0.12)' }}>
             <Box
                 sx={{
                     px: 4,
@@ -155,9 +155,9 @@ const MainNavBar = () => {
                                 )}
                                 <OrganizationSwitcher
                                     hidePersonal
-                                    afterCreateOrganizationUrl="/organization/:id"
+                                    afterCreateOrganizationUrl="/main"
                                     afterLeaveOrganizationUrl="/select-org"
-                                    afterSelectOrganizationUrl="/organization/:id"
+                                    afterSelectOrganizationUrl="/main"
                                     appearance={{
                                         elements: {
                                             rootBox: {
