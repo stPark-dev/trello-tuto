@@ -9,9 +9,9 @@ const MainLayout = ({
 }) => {
     return (
         <>
-            <Box sx={{ display: "flex", pt: "64px" }}>
+            <Box  sx={{ display: "flex", pt: "64px" }}>
                 <MainNavBar />
-                <Box sx={{ display: "flex" }}>
+                <Box sx={{ display: "flex", p: 1, width:"100vw", height: "100vh" }}>
                     <MainSideBar />
                     {children}
                 </Box>
