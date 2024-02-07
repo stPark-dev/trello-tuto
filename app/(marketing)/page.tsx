@@ -8,6 +8,7 @@ import { Medal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Box } from "@mui/material";
+import { motion, Variants } from "framer-motion";
 
 const headingFont = localFont({
   src: "../../public/fonts/font.woff2"
@@ -27,6 +28,62 @@ const textFont = Poppins({
     "900"
   ],
 });
+
+const textVariants: Variants = {
+  offscreen: {
+    y: 300
+  },
+  onscreen: {
+    y: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.4,
+      duration: 0.8
+    }
+  }
+};
+
+const imgVariants1: Variants = {
+  offscreen: {
+    x: -1400
+  },
+  onscreen: {
+    x: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 1
+    }
+  }
+};
+
+const imgVariants2: Variants = {
+  offscreen: {
+    x: 1400
+  },
+  onscreen: {
+    x: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 1
+    }
+  }
+};
+
+const contactVariants: Variants = {
+  offscreen: {
+    x: 1400
+  },
+  onscreen: {
+    x: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 1
+    }
+  }
+};
 
 const MarketingPage = () => {
   return (
@@ -88,17 +145,21 @@ const MarketingPage = () => {
           gap: { xs: 10, sm: 20 },
         }}>
         {/* Intro */}
-        <Box>
-          <Box sx={{ mb: 3, px: { sm: 3, lg: 4 } }}>
-            <Box sx={{ mx: "2rem", maxWidth: "42rem", textAlign: "center" }}>
-              <Box sx={{ mt: 1, fontSize: { xs: "2.25rem", sm: "3rem" }, lineHeight: { xs: "2.25rem", sm: 1 }, fontWeight: 700, color: "rgb(17 24 39)" }}>
-                Start your Cooperation with your co-workers
-              </Box>
-              <Box className={textFont.className} sx={{ mt: 2, fontSize: "1.125rem", lineHeight: "1.75rem", color: "rgb(75 85 99)" }}>
-                Follow these steps to cooperate with your co-workers
+
+
+        <Box sx={{ mt: 10 }}>
+          <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.5 }} variants={textVariants}>
+            <Box sx={{ mb: 3, px: { sm: 3, lg: 4 } }}>
+              <Box sx={{ mx: "2rem", maxWidth: "42rem", textAlign: "center" }}>
+                <Box sx={{ mt: 1, fontSize: { xs: "2.25rem", sm: "3rem" }, lineHeight: { xs: "2.25rem", sm: 1 }, fontWeight: 700, color: "rgb(17 24 39)" }}>
+                  Start your Cooperation with your co-workers
+                </Box>
+                <Box className={textFont.className} sx={{ mt: 2, fontSize: "1.125rem", lineHeight: "1.75rem", color: "rgb(75 85 99)" }}>
+                  Follow these steps to cooperate with your co-workers
+                </Box>
               </Box>
             </Box>
-          </Box>
+          </motion.div>
           {/* steps */}
 
           <Box component="ol" sx={{
@@ -117,7 +178,7 @@ const MarketingPage = () => {
             },
           }}>
             <Box component="li" sx={{ flex: { md: "1 1 0%" }, }}>
-              <Box 
+              <Box
                 sx={{
                   display: "flex", flexDirection: "column",
                   "& > * + *": {
@@ -138,7 +199,7 @@ const MarketingPage = () => {
                 <Box sx={{ fontSize: "0.875rem", lineHeight: "1.25rem", fontWeight: 500, color: "rgb(219 190 107)" }}>
                   Step 1
                 </Box>
-                <span style={{fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600}}>
+                <span style={{ fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600 }}>
                   Sign up for a Free Account
                 </span>
               </Box>
@@ -166,35 +227,35 @@ const MarketingPage = () => {
                 <span style={{ fontSize: "0.875rem", lineHeight: "1.25rem", fontWeight: 500, color: "rgb(219 190 107)" }}>
                   Step 2
                 </span>
-                <span style={{fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600}}>
-                  Make a <span style={{color: "rgb(219 190 107)"}}>Assets</span> &{" "}
-                  <span style={{color: "rgb(219 190 107)"}}>Users</span>
+                <span style={{ fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600 }}>
+                  Make a <span style={{ color: "rgb(219 190 107)" }}>Assets</span> &{" "}
+                  <span style={{ color: "rgb(219 190 107)" }}>Users</span>
                 </span>
               </Box>
             </Box>
             <Box component="li" sx={{ flex: { md: "1 1 0%" } }}>
               <Box sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  "& > * + *": {
-                    mt: 1
-                  },
-                  borderLeftWidth: "4px",
-                  borderColor: "rgb(212 212 216)",
-                  py: 1,
-                  pl: 2,
-                  "@media (min-width:640px)": {
-                    borderLeftWidth: 0,
-                    borderTopWidth: "2px",
-                    pb: 0,
-                    pl: 0,
-                    pt: 2,
-                  }
-                }}>
+                display: "flex",
+                flexDirection: "column",
+                "& > * + *": {
+                  mt: 1
+                },
+                borderLeftWidth: "4px",
+                borderColor: "rgb(212 212 216)",
+                py: 1,
+                pl: 2,
+                "@media (min-width:640px)": {
+                  borderLeftWidth: 0,
+                  borderTopWidth: "2px",
+                  pb: 0,
+                  pl: 0,
+                  pt: 2,
+                }
+              }}>
                 <span style={{ fontSize: "0.875rem", lineHeight: "1.25rem", fontWeight: 500, color: "rgb(219 190 107)" }}>
                   Step 3
                 </span>
-                <span style={{fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600}}>
+                <span style={{ fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600 }}>
                   Start Your coorperation
                 </span>
               </Box>
@@ -202,6 +263,21 @@ const MarketingPage = () => {
           </Box>
         </Box>
       </Box>
+      <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.2 }} variants={imgVariants1}>
+        <Box id="leftImg" sx={{ boxSizing: "content-box", border: "solid #5B6DCD 10px ", m: 10, width: "80vw", display: "flex", justifyContent: "center", alignItems: "center", height: 640 }}>
+          이미지 왼쪽에서 빡
+        </Box>
+      </motion.div>
+      <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.2 }} variants={imgVariants2}>
+        <Box id="rightImg" sx={{ boxSizing: "content-box", border: "solid #5B6DCD 10px ", m: 10, width: "80vw", display: "flex", justifyContent: "center", alignItems: "center", height: 640 }}>
+          이미지 오른쪽에서 빡
+        </Box>
+      </motion.div>
+      <motion.div initial={{opacity: 0, scale: 0.7, y: 100}} whileInView={{opacity: 1, scale: 1, y: 0}} transition={{duration: 0.5}} viewport={{ once: true, amount: 0.7 }} >
+        <Box sx={{ boxSizing: "content-box", border: "solid #5B6DCD 10px ", m: 10, width: "50vw", display: "flex", justifyContent: "center", alignItems: "center", height: 320 }}>
+          Contact us
+        </Box>
+      </motion.div>
       <Image
         alt="Mask"
         src="/v1-mask-dark.png"

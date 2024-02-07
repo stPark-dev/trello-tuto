@@ -152,8 +152,8 @@ export const Navbar = () => {
             }
           }}>
             <Logo />
-            <MUIButton color="inherit" component="span" onClick={(e) => handleMenuOpen(e, 'Industries')}>
-              Industries <KeyboardArrowDownIcon sx={{ transform: rotate.Industries ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease-in-out' }} />
+            <MUIButton color="inherit" component="span" onClick={(e) => handleMenuOpen(e, 'Industries')} sx={{ marginLeft: 2 }}>
+              Industries <KeyboardArrowDownIcon sx={{ transform: rotate.Industries ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease-in-out', }} />
             </MUIButton>
             <Menu
               anchorEl={anchorEl}
@@ -198,7 +198,7 @@ export const Navbar = () => {
             display: { xs: "flex", md: "block", },
             alignItems: "center",
             width: { xs: "100%", md: "auto" },
-            justifyContent: { xs: "flex-end"}
+            justifyContent: { xs: "flex-end" }
           }}>
           <Button size="sm" variant="outline" asChild>
             <Link href="/sign-in">
