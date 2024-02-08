@@ -124,7 +124,7 @@ export const Navbar = () => {
   };
 
   return (
-    <Box sx={{ position: "fixed", top: "0px", width: "100%", height: "3.5rem", px: 2, borderBottomWidth: "1px", backgroundColor: "rgb(255 255 255)", display: "flex", alignItems: "center" }}>
+    <Box sx={{ position: "fixed", top: "0px", width: "100%", height: "3.5rem", px: 2, borderBottomWidth: "1px", backgroundColor: "rgb(255 255 255)", display: "flex", alignItems: "center", zIndex: 9999 }}>
       <Box sx={{
         "@media (min-width:1024px)": {
           maxWidth: "1536px"

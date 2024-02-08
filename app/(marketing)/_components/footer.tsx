@@ -5,7 +5,7 @@ import { Box, Typography } from "@mui/material";
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
   return (
-    <Box sx={{ position: "fixed", bottom: 0, width: "100%", p: 2, borderTop: 1, borderTopColor: "divider", backgroundColor: "background.paper" }}>
+    <Box sx={{ position: "fixed", bottom: 0, width: "100%", p: 2, borderTop: 1, borderTopColor: "divider", backgroundColor: "background.paper", zIndex: 8000 }}>
       <Box
         sx={{
           display: "flex",

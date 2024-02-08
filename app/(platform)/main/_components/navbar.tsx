@@ -62,7 +62,7 @@ const MainNavBar = () => {
                 <Box sx={{ display: "flex", height: "4em", justifyContent: "space-between", alignItems: "center" }}>
                     <Box sx={{ display: "flex", alignItems: "center" }}>
                         <Box component={Link} href="/">
-                            <Image alt="logo" src="/logo_main.png" width={Math.ceil(1664 / 10)} height={Math.ceil(217 / 10)} />
+                            <Image alt="logo" src="/landing/logo_main.png" width={Math.ceil(1664 / 10)} height={Math.ceil(217 / 10)} />
                         </Box>
                     </Box>
                     <Box

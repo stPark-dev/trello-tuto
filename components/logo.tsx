@@ -24,7 +24,7 @@ export const Logo = () => {
             cursor: 'pointer',
           }}
         >
-            <Image alt="logo" src="/logo_main.png" width={Math.ceil(1664 / 10)} height={Math.ceil(217 / 10)} />
+            <Image alt="logo" src="/landing/logo_main.png" width={Math.ceil(1664 / 10)} height={Math.ceil(217 / 10)} />
         </Box>
       </Link>
     </>
