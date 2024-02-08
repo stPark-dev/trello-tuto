@@ -6,8 +6,8 @@ import { Button as MUIButton, Menu, MenuItem, ListItemIcon, ListItemText, IconBu
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-import { Logo } from "@/components/logo";
-import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/Logo";
+import { Button } from "@/components/ui/Button";
 import { Box } from "@mui/material";
 
 import MenuIcon from '@mui/icons-material/Menu';

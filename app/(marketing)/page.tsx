@@ -5,12 +5,12 @@ import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import { Medal } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import { Box, Card, CardActions, CardContent, CardMedia, Typography, Button as MuiButton, Grid } from "@mui/material";
 import { motion, Variants } from "framer-motion";
-import Contact from "./_components/contact";
-import ReasonGridContent from "./_components/reasonGrid";
+import Contact from "./_components/Contact";
+import ReasonGridContent from "./_components/ReasonGrid";
 
 const headingFont = localFont({
   src: "../../public/fonts/font.woff2"

@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
-import MainNavBar from "./_components/navbar";
-import MainSideBar from "./_components/sidebar";
+
+import MainNavBar from "./_components/Navbar";
+import MainSideBar from "./_components/Sidebar";
 
 const MainLayout = ({
     children

@@ -1,5 +1,5 @@
-import { Logo } from "@/components/logo";
-import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/Logo";
+import { Button } from "@/components/ui/Button";
 import { Box, Typography } from "@mui/material";
 
 export const Footer = () => {

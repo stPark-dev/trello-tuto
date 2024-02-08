@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import { Footer } from "./_components/footer";
-import { Navbar } from "./_components/navbar";
+import { Footer } from "./_components/Footer";
+import { Navbar } from "./_components/Navbar";
 
 const MarketingLayout = ({
   children
