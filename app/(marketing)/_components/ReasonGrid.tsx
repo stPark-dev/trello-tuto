@@ -13,7 +13,7 @@ const ReasonGridContent = () => {
             <Box
                 id="blur"
                 aria-hidden="true"
-                sx={{ pointerEvents: "none", position: "absolute", zIndex: -1, filter: "blur(30px)", }}
+                sx={{ pointerEvents: "none", position: "absolute", zIndex: -1, filter: "blur(50px)", }}
             >
                 <Box
                     sx={{
@@ -47,8 +47,8 @@ const ReasonGridContent = () => {
             }}>
                 Why you are using <span style={{ color: "#F2D575" }}>TeamVolt</span>
             </Box>
-            <Grid container spacing={2} sx={{ zIndex: 2 }}>
-                <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+            <Grid container spacing={2} sx={{ zIndex: 2, padding: "1vw" }}>
+                <Grid item xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
                     <Card elevation={10} sx={{ maxWidth: 345 }}>
                         <CardMedia
                             sx={{ height: 140 }}
@@ -68,7 +68,7 @@ const ReasonGridContent = () => {
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+                <Grid item xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
                     <Card elevation={10} sx={{ maxWidth: 345 }}>
                         <CardMedia
                             sx={{ height: 140 }}
@@ -88,7 +88,7 @@ const ReasonGridContent = () => {
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+                <Grid item xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
                     <Card elevation={10} sx={{ maxWidth: 345 }}>
                         <CardMedia
                             sx={{ height: 140 }}
@@ -108,7 +108,7 @@ const ReasonGridContent = () => {
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+                <Grid item xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
                     <Card elevation={10} sx={{ maxWidth: 345 }}>
                         <CardMedia
                             sx={{ height: 140 }}
@@ -128,7 +128,7 @@ const ReasonGridContent = () => {
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+                <Grid item xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
                     <Card elevation={10} sx={{ maxWidth: 345 }}>
                         <CardMedia
                             sx={{ height: 140 }}
@@ -148,7 +148,7 @@ const ReasonGridContent = () => {
                         </CardActions>
                     </Card>
                 </Grid>
-                <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
+                <Grid item xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
                     <Card elevation={10} sx={{ maxWidth: 345 }}>
                         <CardMedia
                             sx={{ height: 140 }}

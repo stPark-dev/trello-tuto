@@ -89,7 +89,7 @@ const contactVariants: Variants = {
 
 const MarketingPage = () => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "auto" }}>
       <Box className={headingFont.className} sx={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
         <Box sx={{ mb: 2, display: "flex", alignItems: "center", justifyContent: "center", borderWidth: 1, boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.05)', p: 2, backgroundColor: 'rgb(254 243 199)', color: 'rgb(180 83 9)', borderRadius: '9999px', textTransform: "uppercase" }}>
           <Medal style={{ height: "1.5rem", width: "1.5rem", marginRight: "0.5rem" }} />
@@ -275,7 +275,9 @@ const MarketingPage = () => {
           이미지 오른쪽에서 빡
         </Box>
       </motion.div>
-      <ReasonGridContent />
+      <Box sx={{height: "auto"}}>
+        <ReasonGridContent />
+      </Box>
       <motion.div initial={{ opacity: 0, scale: 0.7, y: 100 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.2, bounce: 0.3, type: "spring" }} viewport={{ once: true, amount: 0.7 }} >
         <Contact />
       </motion.div>

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 
-const textFont = Montserrat({
+const contactFont = Montserrat({
     subsets: ["latin"],
     weight: [
         "100",
@@ -25,12 +25,12 @@ const Contact = () => {
             >
                 <Grid container spacing={1} sx={{ maxWidth: "80vw" }}>
                     <Grid item xs={7} sx={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", position: "relative" }}>
-                        <Typography variant="h3" className={textFont.className}>Contact us</Typography>
+                        <Typography variant="h3" className={contactFont.className}>Contact us</Typography>
                         <Box mt={3}>
-                            <Typography variant="h6" className={textFont.className}>To use the Teamvolt service,</Typography>
+                            <Typography variant="h6" className={contactFont.className}>To use the Teamvolt service,</Typography>
                         </Box>
                         <Box>
-                            <Typography variant="h6" className={textFont.className}>please fill out the form on the right and press the submit button.</Typography>
+                            <Typography variant="h6" className={contactFont.className}>please fill out the form on the right and press the submit button.</Typography>
                         </Box>
                         <Image
                             alt="Mask"
@@ -45,7 +45,7 @@ const Contact = () => {
                         />
                     </Grid>
                     <Grid item xs={5} sx={{ display: "flex", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-                        <Card sx={{ width: "100%", p: 6 }}>
+                        <Card elevation={10} sx={{ width: "100%", p: 6 }}>
                             <Grid container spacing={2}>
                                 <Grid item xs={6}>
                                     <FormControl fullWidth sx={{ m: 1 }}>
