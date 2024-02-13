@@ -18,6 +18,7 @@ export const GET = async(
         //   }
         // });
         // return NextResponse.json(response.body.hits.hits)
+        return NextResponse.json("Temp Response")
       } catch (error) {
         console.error('Search error:', error);
       }
