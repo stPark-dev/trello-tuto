@@ -13,17 +13,17 @@ const ReasonGridContent = () => {
             <Box
                 id="blur"
                 aria-hidden="true"
-                sx={{ pointerEvents: "none", position: "absolute", zIndex: -1, filter: "blur(50px)", }}
+                sx={{ pointerEvents: "none", position: "absolute", zIndex: -1, filter: "blur(30px)", }}
             >
                 <Box
                     sx={{
-                        position: "relative", left: "calc(50% - 5rem)", aspectRatio: 1155 / 678, width: "36.125rem", transform: "translateX(-50%) rotate(30deg)", opacity: 0.3, background: "linear-gradient(to top right, #0a95ff, #95f2fa)",
+                        position: "relative", left: "calc(50% - 5rem)", aspectRatio: 1155 / 678, width: "36.125rem", transform: "translateX(-50%) rotate(30deg)", opacity: 0.2, background: "linear-gradient(to top right, #FFE450, #FFFEAD)",
                         "@media (min-width:600px)": {
                             left: "calc(50% - 20rem)",
                             width: "72.1875rem",
                             transform: "translateY(8px)",
                         },
-                        clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+                        clipPath: "polygon(25% 0%, 75% 0%, 59% 28%, 81% 28%, 25% 100%, 25% 59%);"
                     }}
                 />
             </Box>
