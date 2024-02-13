@@ -7,7 +7,7 @@ import { Medal } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
-import { Box, Card, CardActions, CardContent, CardMedia, Typography, Button as MuiButton, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import { motion, Variants } from "framer-motion";
 import Contact from "./_components/Contact";
 import ReasonGridContent from "./_components/ReasonGrid";
@@ -276,10 +276,8 @@ const MarketingPage = () => {
         </Box>
       </motion.div>
       <ReasonGridContent />
-      <motion.div initial={{ opacity: 0, scale: 0.7, y: 100 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.8, bounce: 0.3, type: "spring" }} viewport={{ once: true, amount: 0.7 }} >
-        <Box sx={{ boxSizing: "content-box", border: "solid #5B6DCD 10px ", m: 10, width: "50vw", display: "flex", justifyContent: "center", alignItems: "center", height: 320 }}>
-          <Contact />
-        </Box>
+      <motion.div initial={{ opacity: 0, scale: 0.7, y: 100 }} whileInView={{ opacity: 1, scale: 1, y: 0 }} transition={{ duration: 1.2, bounce: 0.3, type: "spring" }} viewport={{ once: true, amount: 0.7 }} >
+        <Contact />
       </motion.div>
       <Image
         alt="Mask"
