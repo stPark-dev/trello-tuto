@@ -20,7 +20,7 @@ import {
       <Box
         id="sixCard"
         className={headingFont.className}
-        sx={{ width: "80vw", height: "100vh", zIndex: 1 }}
+        sx={{ width: "80vw",  zIndex: 1 }}
       >
         <Box
           id="blur"

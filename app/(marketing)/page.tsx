@@ -382,9 +382,9 @@ const MarketingPage = () => {
           이미지 오른쪽에서 빡
         </Box>
       </motion.div>
-      <Box sx={{ height: "auto" }}>
-        <ReasonGridContent />
-      </Box>
+
+      <ReasonGridContent />
+
       <motion.div
         initial={{ opacity: 0, scale: 0.7, y: 100 }}
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -395,7 +395,7 @@ const MarketingPage = () => {
       </motion.div>
       <Image
         alt="Mask"
-        src="/v1-mask.dark.png"
+        src="/v1-mask-dark.png"
         width={1440}
         height={173}
         style={{
