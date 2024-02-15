@@ -1,53 +1,45 @@
 "use client";
 
 import Link from "next/link";
-import { Button as MUIButton, Menu, MenuItem, ListItemIcon, ListItemText, IconButton, ListItem, ListItemButton } from "@mui/material";
+import { Button, Menu, MenuItem, ListItemIcon, ListItemText, IconButton } from "@mui/material";
 
 import { Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
 
 import { Logo } from "@/components/Logo";
-import { Button } from "@/components/ui/Button";
 import { Box } from "@mui/material";
+import { CustomButton } from "@/components/Button";
 
-import MenuIcon from '@mui/icons-material/Menu';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import BuildIcon from '@mui/icons-material/Build';
-import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
-import CleanHandsIcon from '@mui/icons-material/CleanHands';
-import DescriptionIcon from '@mui/icons-material/Description';
-import StorageIcon from '@mui/icons-material/Storage';
+import MenuIcon from "@mui/icons-material/Menu";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import BuildIcon from "@mui/icons-material/Build";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import CleanHandsIcon from "@mui/icons-material/CleanHands";
+import DescriptionIcon from "@mui/icons-material/Description";
+import StorageIcon from "@mui/icons-material/Storage";
 
-import Drawer from '@mui/material/Drawer';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
+import Drawer from "@mui/material/Drawer";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 import { useState } from "react";
 
 const textFont = Poppins({
   subsets: ["latin"],
-  weight: [
-    "100",
-    "200",
-    "300",
-    "400",
-    "500",
-    "600",
-    "700",
-    "800",
-    "900"
-  ],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const Navbar = () => {
-
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-    if (event.type === 'keydown' && ((event as React.KeyboardEvent).key === 'Tab' || (event as React.KeyboardEvent).key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      ((event as React.KeyboardEvent).key === "Tab" ||
+        (event as React.KeyboardEvent).key === "Shift")
+    ) {
       return;
     }
 
@@ -55,7 +47,12 @@ export const Navbar = () => {
   };
   const mobileMenu = (
     <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-      <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+      <Box
+        sx={{ width: 250 }}
+        role="presentation"
+        onClick={toggleDrawer(false)}
+        onKeyDown={toggleDrawer(false)}
+      >
         {/* 여기에 모바일 메뉴 항목을 넣습니다 */}
       </Box>
     </Drawer>
@@ -63,26 +60,30 @@ export const Navbar = () => {
 
   const [rotate, setRotate] = useState<{ [key: string]: boolean }>({
     Industries: false,
-    Solution: false
+    Solution: false,
   });
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [menuType, setMenuType] = useState<string>('');
+  const [menuType, setMenuType] = useState<string>("");
+
+  const handleClick = () => {
+    alert("클릭이 되어부렀어요");
+  };
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, type: string) => {
     setAnchorEl(event.currentTarget);
     setMenuType(type);
-    setRotate(prev => ({ ...prev, [type]: true }));
+    setRotate((prev) => ({ ...prev, [type]: true }));
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
-    setMenuType('');
+    setMenuType("");
     setRotate({ Industries: false, Solution: false });
   };
 
   const renderMenuItems = () => {
     switch (menuType) {
-      case 'Industries':
+      case "Industries":
         return [
           <MenuItem key="maintenance">
             <ListItemIcon>
@@ -101,9 +102,9 @@ export const Navbar = () => {
               <CleanHandsIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Cleaning</ListItemText>
-          </MenuItem>
+          </MenuItem>,
         ];
-      case 'Solution':
+      case "Solution":
         return [
           <MenuItem key="document">
             <ListItemIcon>
@@ -116,7 +117,7 @@ export const Navbar = () => {
               <StorageIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Asset</ListItemText>
-          </MenuItem>
+          </MenuItem>,
         ];
       default:
         return [];
@@ -124,17 +125,32 @@ export const Navbar = () => {
   };
 
   return (
-    <Box sx={{ position: "fixed", top: "0px", width: "100%", height: "3.5rem", px: 2, borderBottomWidth: "1px", backgroundColor: "rgb(255 255 255)", display: "flex", alignItems: "center", zIndex: 9999 }}>
-      <Box sx={{
-        "@media (min-width:1024px)": {
-          maxWidth: "1536px"
-        },
-        mx: "auto",
+    <Box
+      sx={{
+        position: "fixed",
+        top: "0px",
+        width: "100vw",
+        height: "3.5rem",
+        px: 2,
+        borderBottomWidth: "1px",
+        backgroundColor: "rgb(255 255 255)",
         display: "flex",
         alignItems: "center",
-        width: "100%",
-        justifyContent: "space-between"
-      }}>
+        zIndex: 9999,
+      }}
+    >
+      <Box
+        sx={{
+          "@media (min-width:1024px)": {
+            maxWidth: "1536px",
+          },
+          mx: "auto",
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          justifyContent: "space-between",
+        }}
+      >
         {isMobile ? (
           <>
             <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
@@ -143,50 +159,71 @@ export const Navbar = () => {
             {mobileMenu}
           </>
         ) : (
-          <Box id="menu" className={textFont.className} sx={{
-            display: "flex",
-            alignItems: "center",
-            color: "rgb(115 115 115)",
-            "& > * + *": {
-              mx: 1
-            }
-          }}>
+          <Box
+            id="menu"
+            className={textFont.className}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              color: "rgb(115 115 115)",
+              "& > * + *": {
+                mx: 1,
+              },
+            }}
+          >
             <Logo />
-            <MUIButton color="inherit" component="span" onClick={(e) => handleMenuOpen(e, 'Industries')} sx={{ marginLeft: 2 }}>
-              Industries <KeyboardArrowDownIcon sx={{ transform: rotate.Industries ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease-in-out', }} />
-            </MUIButton>
+            <Button
+              color="inherit"
+              component="span"
+              onClick={(e) => handleMenuOpen(e, "Industries")}
+              sx={{ marginLeft: 2 }}
+            >
+              Industries{" "}
+              <KeyboardArrowDownIcon
+                sx={{
+                  transform: rotate.Industries ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.3s ease-in-out",
+                }}
+              />
+            </Button>
             <Menu
               anchorEl={anchorEl}
-              open={Boolean(anchorEl) && menuType === 'Industries'}
+              open={Boolean(anchorEl) && menuType === "Industries"}
               onClose={handleMenuClose}
               MenuListProps={{ onMouseLeave: handleMenuClose }}
             >
               {renderMenuItems()}
             </Menu>
-            <MUIButton color="inherit" component="span" onClick={(e) => handleMenuOpen(e, 'Solution')}>
-              Solution <KeyboardArrowDownIcon sx={{ transform: rotate.Solution ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease-in-out' }} />
-            </MUIButton>
+            <Button color="inherit" component="span" onClick={(e) => handleMenuOpen(e, "Solution")}>
+              Solution{" "}
+              <KeyboardArrowDownIcon
+                sx={{
+                  transform: rotate.Solution ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.3s ease-in-out",
+                }}
+              />
+            </Button>
             <Menu
               anchorEl={anchorEl}
-              open={Boolean(anchorEl) && menuType === 'Solution'}
+              open={Boolean(anchorEl) && menuType === "Solution"}
               onClose={handleMenuClose}
               MenuListProps={{ onMouseLeave: handleMenuClose }}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: "top",
+                horizontal: "left",
               }}
             >
               {renderMenuItems()}
             </Menu>
-            <MUIButton color="inherit" component="span">
-              <Link href="/pricing">
+            <CustomButton color="inherit" component="span">
+              <Link href="/main/pricing" style={{ textDecoration: "none", color: "#737373" }}>
                 Pricing
               </Link>
-            </MUIButton>
+            </CustomButton>
           </Box>
         )}
 
@@ -195,21 +232,22 @@ export const Navbar = () => {
             "& > * + *": {
               mx: 2,
             },
-            display: { xs: "flex", md: "block", },
+            display: { xs: "flex", md: "block" },
             alignItems: "center",
             width: { xs: "100%", md: "auto" },
-            justifyContent: { xs: "flex-end" }
-          }}>
-          <Button size="sm" variant="outline" asChild>
-            <Link href="/sign-in">
+            justifyContent: { xs: "flex-end" },
+          }}
+        >
+          <CustomButton size="small" cvariant="outline" sx={{ mx: 2 }}>
+            <Link href="/sign-in" style={{ textDecoration: "none", color: "#000000" }}>
               Login
             </Link>
-          </Button>
-          <Button size="sm" asChild>
-            <Link href="/sign-up">
+          </CustomButton>
+          <CustomButton size="small" cvariant="default">
+            <Link href="/sign-up" style={{ textDecoration: "none", color: "#FAFAFA" }}>
               Get Teamvolt for free
             </Link>
-          </Button>
+          </CustomButton>
         </Box>
       </Box>
     </Box>
