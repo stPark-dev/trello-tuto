@@ -6,10 +6,11 @@ import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import BusinessIcon from '@mui/icons-material/Business';
 import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
-import { useMediaQuery, useTheme, Box, Drawer, IconButton, List, ListItemIcon, ListItemText, ListItemButton, Link } from "@mui/material";
+import { useMediaQuery, useTheme, Box, Drawer, IconButton, List, ListItemIcon, ListItemText, ListItemButton, Link, Icon } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
+import LoginIcon from '@mui/icons-material/Login';
 
 const MainNavBar = () => {
     const currentPathName = usePathname();
@@ -137,10 +138,10 @@ const MainNavBar = () => {
                                 sx={{
                                     display: 'flex',
                                     alignItems: 'center',
-                                    justifyContent: 'center',
-                                    '@media (max-width:600px)': {
-                                        gap: 2, 
-                                    },
+                                    gap: { xs: 0, sm: 1, md: 2 }
+                                    // '@media (max-width:600px)': {
+                                    //     gap: 2, 
+                                    // },
                                 }}
                             >
                                 {isMobile && (
@@ -179,6 +180,9 @@ const MainNavBar = () => {
                                         }
                                     }}
                                 />
+                                <IconButton>
+                                    <Link href="/sign-in2" underline="none" color="#A2A2A2"><LoginIcon /></Link>
+                                </IconButton>
                             </Box>
                         </Box>
                     </Box>

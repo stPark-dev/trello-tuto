@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Button, Menu, MenuItem, ListItemIcon, ListItemText, IconButton } from "@mui/material";
+import { Button, Menu, MenuItem, ListItemIcon, ListItemText, IconButton, Link as MuiLink } from "@mui/material";
 
 import { Poppins } from "next/font/google";
 
@@ -22,6 +22,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 
 import { useState } from "react";
+import { LogInIcon } from "lucide-react";
 
 const textFont = Poppins({
   subsets: ["latin"],
@@ -220,7 +221,7 @@ export const Navbar = () => {
               {renderMenuItems()}
             </Menu>
             <CustomButton color="inherit" component="span">
-              <Link href="/main/pricing" style={{ textDecoration: "none", color: "#737373" }}>
+              <Link href="/pricing" style={{ textDecoration: "none", color: "#737373" }}>
                 Pricing
               </Link>
             </CustomButton>
@@ -248,6 +249,9 @@ export const Navbar = () => {
               Get Teamvolt for free
             </Link>
           </CustomButton>
+          <IconButton>
+            <MuiLink href="/sign-in2" underline="none" color="#A2A2A2"><LogInIcon /></MuiLink>
+          </IconButton>
         </Box>
       </Box>
     </Box>

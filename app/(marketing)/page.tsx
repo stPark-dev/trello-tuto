@@ -11,7 +11,6 @@ import { motion, Variants } from "framer-motion";
 import Contact from "./_components/Contact";
 import ReasonGridContent from "./_components/ReasonGrid";
 
-// import v1Mask from "@/../../packages/viewtrack/src/react/asset/landing/v1-mask-dark.png";+
 import { CustomButton } from "@/components/Button";
 
 const headingFont = localFont({
@@ -383,7 +382,9 @@ const MarketingPage = () => {
         </Box>
       </motion.div>
 
-      <ReasonGridContent />
+      <Box sx={{ my: 8 }}>
+        <ReasonGridContent />
+      </Box>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.7, y: 100 }}

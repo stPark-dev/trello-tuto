@@ -1,5 +1,4 @@
 import { ClerkProvider } from '@clerk/nextjs'
-
 const PlatformLayout = ({
     children
 }: {
@@ -9,6 +8,7 @@ const PlatformLayout = ({
         <ClerkProvider>
             {children}
         </ClerkProvider>
+
     )
 }
 
