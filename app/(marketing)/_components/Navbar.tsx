@@ -244,7 +244,7 @@ export const Navbar = () => {
               Login
             </Link>
           </CustomButton>
-          <CustomButton size="small" cvariant="default">
+          <CustomButton size="small" cvariant="teamvolt">
             <Link href="/sign-up" style={{ textDecoration: "none", color: "#FAFAFA" }}>
               Get Teamvolt for free
             </Link>

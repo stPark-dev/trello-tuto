@@ -32,10 +32,13 @@ export const authOptions: AuthOptions = {
   pages: NEXTAUTH_PAGES,
   callbacks: {
     async jwt({token, account}) {
-      console.info("########## : ", account?.provider)
       if(account) token.provider = account.provider;
       return token;
     },
+    async session({ session, token }) {
+      console.info(token)
+      return session
+    }
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

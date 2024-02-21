@@ -8,13 +8,13 @@ const MarketingLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-      <Box sx={{ height: "100%", backgroundColor: "rgb(241 245 249 / 1)" }}>
-        <Navbar />
-        <Box sx={{ pt: 20, backgroundColor: "rgb(241 245 249 / 1)" }}>
-          {children}
+        <Box sx={{ height: "100%", backgroundColor: "rgb(241 245 249 / 1)" }}>
+          <Navbar />
+          <Box sx={{ pt: 20, backgroundColor: "rgb(241 245 249 / 1)" }}>
+            {children}
+          </Box>
+          <Footer />
         </Box>
-        <Footer />
-      </Box>
   );
 };
 

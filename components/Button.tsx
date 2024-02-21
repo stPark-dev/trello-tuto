@@ -3,7 +3,7 @@ import Button, { ButtonProps } from "@mui/material/Button";
 
 // 사용자 정의 variant를 위한 타입 확장
 interface CustomButtonProps extends ButtonProps {
-  cvariant?: "default" | "primary" | "secondary" | "danger" | "outline" | "ghost";
+  cvariant?: "default" | "primary" | "secondary" | "danger" | "outline" | "ghost" | "teamvolt";
 }
 
 export const BootstrapButton = styled(Button)({
@@ -101,6 +101,15 @@ export const CustomButton = styled(Button)<CustomButtonProps>(({ theme, cvariant
     color: "#171717",
     "&:hover": {
       backgroundColor: "#F5F5F5",
+      color: "#171717",
+    },
+  }),
+  ...(cvariant === "teamvolt" && {
+    fontWeight: 600,
+    backgroundColor: "#F0C84A",
+    color: "#171717",
+    "&:hover": {
+      backgroundColor: "#F0DA4A",
       color: "#171717",
     },
   }),
