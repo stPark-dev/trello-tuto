@@ -373,7 +373,6 @@ const MarketingPage = () => {
           height={173}
           style={{
             opacity: 0.8,
-            zIndex: 0,
             width: "100vw",
             height: "auto",
             bottom: "0px",

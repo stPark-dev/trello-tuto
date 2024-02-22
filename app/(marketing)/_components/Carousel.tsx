@@ -43,7 +43,7 @@ const CarouselComponent = () => {
                         textAlign: "center",
                     }}
                 >
-                    <Typography variant="h4" sx={{ fontWeight: "bold" }}>효율적인 협업 시스템으로 완성하는</Typography>
+                    <Typography sx={{ fontWeight: "bold", fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' } }}>효율적인 협업 시스템으로 완성하는</Typography>
                 </Box>
                 <Box
                     sx={{
@@ -52,7 +52,7 @@ const CarouselComponent = () => {
                         textAlign: "center",
                     }}
                 >
-                    <Typography variant="h3" sx={{ fontWeight: "bold" }}>스마트 자산 관리 솔루션</Typography>
+                    <Typography sx={{ fontWeight: "bold", fontSize: { xs: '1.75rem', sm: '2.25rem', md: '3rem' } }}>스마트 자산 관리 솔루션</Typography>
                 </Box>
                 <Box
                     sx={{
@@ -61,13 +61,14 @@ const CarouselComponent = () => {
                         textAlign: "center",
                     }}
                 >
-                    <Typography variant="h5" sx={{ color: "text.secondary" }}>팀볼트는 나의 자산을 효율적으로 관리 할 수 있도록 보다 나은 관리 프로세스를 만들어 갑니다.</Typography>
+                    <Typography variant="h5" sx={{ color: "text.secondary", fontSize: { xs: '1rem', sm: '1.25rem', md: '1.5rem' } }}>팀볼트는 나의 자산을 효율적으로 관리 할 수 있도록 보다 나은 관리 프로세스를 만들어 갑니다.</Typography>
                 </Box>
                 <Box sx={{ justifyContent: "center", position: "relative" }}>
                     <Swiper
                         effect={'coverflow'}
                         grabCursor={true}
                         loop={true}
+                        centeredSlides={true}
                         slidesPerView={1}
                         coverflowEffect={{
                             rotate: 5,
@@ -100,7 +101,7 @@ const CarouselComponent = () => {
                     >
                         {images.map((image, index) => (
                             <SwiperSlide key={`image-${index}`}>
-                                <Image src={image.content} width={800} height={450} alt={`image-${index}`} loading="lazy" />
+                                <Image src={image.content} width={450} height={450} alt={`image-${index}`} loading="lazy" />
                             </SwiperSlide>
                         ))}
                     </Swiper>

@@ -16,7 +16,7 @@ export const Footer = () => {
         borderTop: 1,
         borderTopColor: "divider",
         backgroundColor: "background.paper",
-        zIndex: 8000,
+        zIndex: 9999,
       }}
     >
       <Box

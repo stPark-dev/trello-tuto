@@ -65,7 +65,6 @@ const Contact = () => {
               layout="fill"
               style={{
                 opacity: 0.3,
-                zIndex: 0,
                 rotate: "180deg",
                 bottom: "0px",
               }}

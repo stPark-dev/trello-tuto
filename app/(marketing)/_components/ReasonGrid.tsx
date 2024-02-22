@@ -20,12 +20,12 @@ import {
       <Box
         id="sixCard"
         className={headingFont.className}
-        sx={{ width: "80vw",  zIndex: 1, margin: "auto"  }}
+        sx={{ width: "80vw", margin: "auto", position: "relative" }}
       >
         <Box
           id="blur"
           aria-hidden="true"
-          sx={{ pointerEvents: "none", position: "absolute", zIndex: -1, filter: "blur(50px)" }}
+          sx={{ pointerEvents: "none", position: "absolute", filter: "blur(50px)" }}
         >
           <Box
             sx={{
@@ -52,7 +52,6 @@ import {
             mb: { sm: 3 },
             color: "rgb(38, 38, 38)",
             textAlign: "center",
-            zIndex: 2,
           }}
         >
           The Reason
@@ -64,12 +63,11 @@ import {
             mb: { sm: 3 },
             color: "rgb(38, 38, 38)",
             textAlign: "center",
-            zIndex: 2,
           }}
         >
           Why you are using <span style={{ color: "#F2D575" }}>TeamVolt</span>
         </Box>
-        <Grid container spacing={2} sx={{ zIndex: 2, padding: "1vw" }}>
+        <Grid container spacing={2} sx={{ padding: "1vw" }}>
           <Grid item xs={12} sm={6} md={4} sx={{ display: "flex", justifyContent: "center" }}>
             <Card elevation={10} sx={{ maxWidth: 345 }}>
               <CardMedia sx={{ height: 140 }} image="/landing/insight.webp" title="green iguana" />
