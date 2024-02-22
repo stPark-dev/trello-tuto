@@ -4,32 +4,16 @@ import Link from "next/link";
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
 import WorkspacePremiumIcon from "@mui/icons-material/WorkspacePremium";
-
 import Image from "next/image";
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { motion, Variants } from "framer-motion";
-import Contact from "./_components/Contact";
-import ReasonGridContent from "./_components/ReasonGrid";
 
+import { Box } from "@mui/material";
 import { CustomButton } from "@/components/Button";
-import { useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { motion, Variants } from "framer-motion";
+import CarouselComponent from "./_components/Carousel";
+import Contact from "./_components/Contact";
+import EnterprisesComponent from "./_components/Enterprises";
+import ReasonGridComponent from "./_components/ReasonGrid";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Navigation, Autoplay } from 'swiper/modules';
-// import Swiper styles
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import '@/styles/swiper.css';
-
-interface SliderImage {
-  content: string;
-  key: string;
-}
 
 const headingFont = localFont({
   src: "../../public/fonts/font.woff2",
@@ -52,119 +36,27 @@ const textVariants: Variants = {
     },
   },
 };
+
+const imgVariants1: Variants = {
+  offscreen: {
+    x: -200,
+  },
+  onscreen: {
+    x: 0,
+    transition: {
+      type: "spring",
+      bounce: 0.2,
+      duration: 1,
+    },
+  },
+};
+
 const MarketingPage = () => {
-
-  const [images, setImages] = useState<SliderImage[]>([
-    {
-      key: uuidv4(),
-      content: 'https://source.unsplash.com/1600x900/?nature',
-    },
-    {
-      key: uuidv4(),
-      content: 'https://source.unsplash.com/1600x900/?city',
-    },
-    {
-      key: uuidv4(),
-      content: 'https://source.unsplash.com/1600x900/?food',
-    },
-  ]);
-
   return (
     <>
-      {/* Carousel */}
-      <Box
-        sx={{
-          alignItems: "center",
-          my: 5,
-        }}>
-        <Box
-          sx={{
-            color: "rgb(38, 38, 38)",
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h4" sx={{ fontWeight: "bold" }}>효율적인 협업 시스템으로 완성하는</Typography>
-        </Box>
-        <Box
-          sx={{
-            mb: { sm: 2 },
-            color: "rgb(38, 38, 38)",
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h3" sx={{ fontWeight: "bold" }}>스마트 자산 관리 솔루션</Typography>
-        </Box>
-        <Box
-          sx={{
-            mb: { sm: 3 },
-            color: "rgb(38, 38, 38)",
-            textAlign: "center",
-          }}
-        >
-          <Typography variant="h5" sx={{ color: "text.secondary" }}>팀볼트는 나의 자산을 효율적으로 관리 할 수 있도록 보다 나은 관리 프로세스를 만들어 갑니다.</Typography>
-        </Box>
-        <Box sx={{ justifyContent: "center", position: "relative" }}>
-          <Swiper
-            effect={'coverflow'}
-            grabCursor={true}
-            centeredSlides={true}
-            loop={true}
-            slidesPerView={3}
-            coverflowEffect={{
-              rotate: 5,
-              stretch: 10,
-              depth: 100,
-              modifier: 12,
-              slideShadows: true,
-            }}
-            navigation={{
-              nextEl: '.swiper-button-next-custom',
-              prevEl: '.swiper-button-prev-custom',
-            }}
-            pagination={{
-              clickable: true,
-              type: "bullets"
-            }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
-            className="mySwiper"
-          >
-            {images.map((image) => (
-              <SwiperSlide key={image.key}>
-                <Image src={image.content} width={800} height={450} alt={image.key} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-          <IconButton className="swiper-button-prev-custom" sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '30%',
-            transform: 'translateY(-50%)',
-            backgroundColor: "#F1D773",
-            color: "#FFFFFF",
-            borderRadius: '100%',
-            '&:hover': {
-              backgroundColor: "#e6c065",
-            },
-            zIndex: 100
-          }}><ChevronLeftIcon /></IconButton>
-          <IconButton className="swiper-button-next-custom" sx={{
-            position: 'absolute',
-            top: '50%',
-            right: '30%',
-            transform: 'translateY(-50%)',
-            backgroundColor: "#F1D773",
-            color: "#FFFFFF",
-            borderRadius: '100%',
-            '&:hover': {
-              backgroundColor: "#e6c065",
-            },
-            zIndex: 100
-          }}><ChevronRightIcon /></IconButton>
-        </Box>
+      <CarouselComponent />
+      <Box sx={{ my: 10 }}>
+        <EnterprisesComponent />
       </Box>
       <Box
         sx={{
@@ -439,8 +331,31 @@ const MarketingPage = () => {
           </motion.div>
         </Box>
 
+        <motion.div
+          initial="offscreen"
+          whileInView="onscreen"
+          viewport={{ once: true, amount: 0.5 }}
+          variants={imgVariants1}
+        >
+          <Box
+            id="leftImg"
+            sx={{
+              boxSizing: "content-box",
+              border: "solid #5B6DCD 10px ",
+              m: 10,
+              width: "80vw",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: 640,
+            }}
+          >
+            이미지 왼쪽에서 빡
+          </Box>
+        </motion.div>
+
         <Box sx={{ my: 8 }}>
-          <ReasonGridContent />
+          <ReasonGridComponent />
         </Box>
 
         <motion.div

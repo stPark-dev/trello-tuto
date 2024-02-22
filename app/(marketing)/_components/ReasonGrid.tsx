@@ -15,12 +15,12 @@ import {
     src: "../../../public/fonts/font.woff2",
   });
   
-  const ReasonGridContent = () => {
+  const ReasonGridComponent = () => {
     return (
       <Box
         id="sixCard"
         className={headingFont.className}
-        sx={{ width: "80vw",  zIndex: 1 }}
+        sx={{ width: "80vw",  zIndex: 1, margin: "auto"  }}
       >
         <Box
           id="blur"
@@ -177,5 +177,5 @@ import {
     );
   };
   
-  export default ReasonGridContent;
+  export default ReasonGridComponent;
   
