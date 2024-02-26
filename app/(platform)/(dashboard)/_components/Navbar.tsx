@@ -1,6 +1,6 @@
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/Button";
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+// import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { Plus } from "lucide-react";
 
 export const Navbar = () => {
@@ -17,7 +17,7 @@ export const Navbar = () => {
                     <Plus className="h-4 w-4"/>
                 </Button>
             </div>
-            <div className="ml-auto flex items-center gap-x-2">
+            {/* <div className="ml-auto flex items-center gap-x-2">
                 <OrganizationSwitcher 
                 hidePersonal
                 afterCreateOrganizationUrl="/main"
@@ -44,7 +44,7 @@ export const Navbar = () => {
                     }
                 }}
                 />
-            </div>
+            </div> */}
         </nav>
     );
 };

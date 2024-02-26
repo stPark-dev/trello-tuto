@@ -239,19 +239,19 @@ export const Navbar = () => {
             justifyContent: { xs: "flex-end" },
           }}
         >
-          <CustomButton size="small" cvariant="outline" sx={{ mx: 2 }}>
+          {/* <CustomButton size="small" cvariant="outline" sx={{ mx: 2 }}>
             <Link href="/sign-in" style={{ textDecoration: "none", color: "#000000" }}>
               Login
             </Link>
-          </CustomButton>
+          </CustomButton> */}
           <CustomButton size="small" cvariant="teamvolt">
-            <Link href="/sign-up" style={{ textDecoration: "none", color: "#FAFAFA" }}>
+            <Link href="/sign-in2" style={{ textDecoration: "none", color: "#FAFAFA" }}>
               Get Teamvolt for free
             </Link>
           </CustomButton>
-          <IconButton>
+          {/* <IconButton>
             <MuiLink href="/sign-in2" underline="none" color="#A2A2A2"><LogInIcon /></MuiLink>
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Box>
     </Box>

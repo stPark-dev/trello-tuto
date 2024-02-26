@@ -1,16 +1,25 @@
-"use client";
-
+import { Button } from "@mui/material";
 import { signOut } from "next-auth/react";
 
 const SignOutButton = () => {
   return (
-    <button
-      className="px-4 py-2 text-white bg-gray-500"
+    <Button
+      variant="contained"
       onClick={() => signOut({ callbackUrl: "/" })}
       type="button"
+      sx={{
+        px: 2, 
+        py: 1,
+        mr: 4,
+        color: "white", 
+        bgcolor: "grey",
+        '&:hover': {
+          bgcolor: "grey.500",
+        }
+      }}
     >
       {"Sign out"}
-    </button>
+    </Button>
   );
 };
 

@@ -153,7 +153,7 @@ const EnterprisesComponent = () => {
                     display: "flex",
                     flexDirection: "row",
                     my: 10,
-                    p: 3,
+                    p: 10,
                     position: "relative",
                     zIndex: 1,
                     '::before': {

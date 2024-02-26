@@ -12,8 +12,9 @@ import defaultStyle from "./styles/default"
 interface MapProps extends BoxProps {}
 
 const Map = ({ children, ...props }: MapProps, ref: Ref<HTMLDivElement>) => {
-  const mapContainerRef = useRef<HTMLDivElement>();
-  const [instanceState, setInstanceState] = useState<MaplibreGL>();
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+const [instanceState, setInstanceState] = useState<MaplibreGL | null>(null);
+
 
   useEffect(() => {
     if (!mapContainerRef?.current || Boolean(instanceState)) return;
@@ -21,7 +22,7 @@ const Map = ({ children, ...props }: MapProps, ref: Ref<HTMLDivElement>) => {
     const initialState = {
       lng: 126.7770556,
       lat: 37.65590833,
-      zoom: 12,
+      zoom: 10,
     };
 
     const map = new MaplibreGL({

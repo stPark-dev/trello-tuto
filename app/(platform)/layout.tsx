@@ -1,14 +1,20 @@
+"use client"
 import { ClerkProvider } from '@clerk/nextjs'
+import { RecoilRoot, RecoilEnv } from "recoil";
+
+RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 const PlatformLayout = ({
     children
 }: {
     children: React.ReactNode;
 }) => {
     return (
-        <ClerkProvider>
+        <RecoilRoot>
             {children}
-        </ClerkProvider>
-
+        </RecoilRoot>
+        // <ClerkProvider>
+        //     {children}
+        // </ClerkProvider>
     )
 }
 

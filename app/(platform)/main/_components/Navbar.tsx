@@ -5,12 +5,13 @@ import Image from "next/image";
 import TaskAltIcon from '@mui/icons-material/TaskAlt';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import BusinessIcon from '@mui/icons-material/Business';
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+// import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
 import { useMediaQuery, useTheme, Box, Drawer, IconButton, List, ListItemIcon, ListItemText, ListItemButton, Link, Icon } from "@mui/material";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { MenuIcon } from "lucide-react";
 import LoginIcon from '@mui/icons-material/Login';
+import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 
 const MainNavBar = () => {
     const currentPathName = usePathname();
@@ -154,7 +155,7 @@ const MainNavBar = () => {
                                         <MenuIcon />
                                     </IconButton>
                                 )}
-                                <OrganizationSwitcher
+                                {/* <OrganizationSwitcher
                                     hidePersonal
                                     afterCreateOrganizationUrl="/main"
                                     afterLeaveOrganizationUrl="/select-org"
@@ -179,10 +180,11 @@ const MainNavBar = () => {
                                             }
                                         }
                                     }}
-                                />
-                                <IconButton>
+                                /> */}
+                                {/* <IconButton>
                                     <Link href="/sign-in2" underline="none" color="#A2A2A2"><LoginIcon /></Link>
-                                </IconButton>
+                                </IconButton> */}
+                                <SignOutButton />
                             </Box>
                         </Box>
                     </Box>

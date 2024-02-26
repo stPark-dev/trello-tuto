@@ -1,7 +1,8 @@
-"use client";
-
-import { signIn } from "next-auth/react";
-import { AuthProvider } from "@/types/constants";
+"use client"
+import * as React from 'react';
+import Button from '@mui/material/Button';
+import { signIn } from 'next-auth/react';
+import { AuthProvider } from '@/types/constants';
 
 interface SignInButtonProps {
   provider: AuthProvider;
@@ -9,11 +10,11 @@ interface SignInButtonProps {
 
 const SignInButton: React.FC<SignInButtonProps> = ({ provider }) => {
   // 각 인증 제공자별 버튼 스타일
-  const providerStyles: Record<string, string> = {
-    github: "bg-gray-800",
-    google: "bg-red-500",
-    kakao: "bg-yellow-300",
-    naver: "bg-green-600",
+  const providerStyles: Record<string, any> = {
+    github: { backgroundColor: '#2d333b', '&:hover': { backgroundColor: '#4b5563' } },
+    google: { backgroundColor: '#ea4335', '&:hover': { backgroundColor: '#d93025' } },
+    kakao: { backgroundColor: '#fee500', color: '#000', '&:hover': { backgroundColor: '#fcd200' } },
+    naver: { backgroundColor: '#03c75a', '&:hover': { backgroundColor: '#029e47' } },
   };
 
   // 인증 제공자별 버튼 텍스트
@@ -23,15 +24,14 @@ const SignInButton: React.FC<SignInButtonProps> = ({ provider }) => {
     kakao: "Sign In With Kakao",
     naver: "Sign In With Naver",
   };
-  
+
   return (
-    <button
-      className={`px-4 py-2 text-white ${providerStyles[provider]}`}
-      onClick={() => signIn(provider, { callbackUrl: "/profile2" })}
-      type="button"
+    <Button
+      sx={{ px: 2, py: 1, color: 'white', ...providerStyles[provider] }}
+      onClick={() => signIn(provider, { callbackUrl: '/main' })}
     >
       {buttonText[provider]}
-    </button>
+    </Button>
   );
 };
 
