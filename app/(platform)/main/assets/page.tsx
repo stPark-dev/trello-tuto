@@ -8,7 +8,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { useRef, useState } from 'react';
 
 
-const MainOrganisation = () => {
+const MainAssets = () => {
     const theme = useTheme();
     const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; url?: string }>>([]);
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -101,4 +101,4 @@ const MainOrganisation = () => {
     );
 }
 
-export default MainOrganisation;
+export default MainAssets;

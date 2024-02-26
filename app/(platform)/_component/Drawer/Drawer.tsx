@@ -7,8 +7,8 @@ import Box, { BoxProps } from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
 
 import Popper from "@mui/material/Popper";
 import Grow from "@mui/material/Grow";
@@ -25,7 +25,7 @@ import BrandLogoLight from "@/public/landing/logo_main.png";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { DrawerAtom, DrawerMode } from "./state/Drawer";
-import { CssBaseline, Divider, IconButton, Link, useMediaQuery } from "@mui/material";
+import { Button, CssBaseline, Divider, IconButton, Link, useMediaQuery } from "@mui/material";
 import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business } from "@mui/icons-material";
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 import Clock from "../Clock";
@@ -44,7 +44,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const navLinks = [
     { href: '/main/tasks', label: 'Tasks', Icon: TaskAlt, isActive: isActive('/main/tasks') },
     { href: '/main/insights', label: 'Insights', Icon: QueryStats, isActive: isActive('/main/insights') },
-    { href: '/main/organisation', label: 'Organisation', Icon: Business, isActive: isActive('/main/organisation') },
+    { href: '/main/assets', label: 'Assets', Icon: Business, isActive: isActive('/main/assets') },
   ];
 
   const headerHeight = 84;
@@ -63,6 +63,14 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const drawerMode = useMemo(() => drawerState.mode, [drawerState.mode]);
 
   const handleDrawerToggle = () => setDrawerState((prev) => ({ ...prev, open: !prev.open }));
+
+  // State to manage the right-side drawer visibility
+  const [rightDrawerOpen, setRightDrawerOpen] = useState(false);
+
+  // Function to toggle the right-side drawer
+  const toggleRightDrawer = () => {
+    setRightDrawerOpen(!rightDrawerOpen);
+  };
 
   const handleOnClose = (e: unknown, reason: "escapeKeyDown" | "backdropClick") =>
     "backdropClick" === reason && handleDrawerToggle();
@@ -403,7 +411,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           </Typography>
 
           <Box flexGrow={1} />
-
+          <Button variant="contained" onClick={toggleRightDrawer}>Open Right Drawer</Button>
           {drawerState.headerToolbox &&
             getToolbox(drawerState.headerToolbox, drawerState.headerToolboxProps)}
 
@@ -416,7 +424,19 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           {<SignOutButton />}
         </Toolbar>
       </AppBar>
-      <Divider />
+      {/* Right-side drawer */}
+      <MuiDrawer
+        anchor="right"
+        open={rightDrawerOpen}
+        onClose={toggleRightDrawer}
+        sx={{
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+          },
+        }}
+      >
+        <Box>Right-side drawer content</Box>
+      </MuiDrawer>
       <MuiDrawer
         transitionDuration={md ? 200 : theme.transitions.duration.leavingScreen}
         sx={{
