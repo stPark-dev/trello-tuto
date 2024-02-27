@@ -43,7 +43,7 @@ const MainInsight = () => {
                     </Grid>
                     <Grid item sm={12}>
                         <Item>
-                            {/* <Component style={{ height: "70vh" }} /> */}
+                            <Component style={{ height: "70vh" }} />
                         </Item>
                     </Grid>
                 </Grid>

@@ -4,7 +4,6 @@ const textFont = ["Roboto Condensed Italic", "Noto Sans Italic"];
 
 const style: StyleSpecification = {
   version: 8,
-  id: "streets",
   name: "Streets",
   metadata: {
     "mapbox:type": "template",
@@ -30,14 +29,15 @@ const style: StyleSpecification = {
       id: "background",
       type: "background",
       paint: {
-        "background-color": {
-          stops: [
-            [6, "rgba(252, 247, 229, 1)"],
-            [10, "rgba(252, 247, 229, 1)"],
-            [14, "rgba(246, 241, 229, 1)"],
-            [15, "rgba(246, 241, 229, 1)"],
-          ],
-        },
+      "background-color": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          6, "rgba(252, 247, 229, 1)",
+          10, "rgba(252, 247, 229, 1)",
+          14, "rgba(246, 241, 229, 1)",
+          15, "rgba(246, 241, 229, 1)"
+        ],
       },
       layout: {
         visibility: "visible",
@@ -48,13 +48,13 @@ const style: StyleSpecification = {
       type: "fill",
       paint: {
         "fill-color": "rgba(243, 235, 195, 1)",
-        "fill-opacity": {
-          base: 1,
-          stops: [
-            [4, 1],
-            [8, 0],
-          ],
-        },
+        "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          4, 1,
+          8, 0
+        ],
       },
       filter: ["all", ["==", "class", "crop"]],
       layout: {
@@ -68,13 +68,13 @@ const style: StyleSpecification = {
       type: "fill",
       paint: {
         "fill-color": "rgba(226, 236, 197, 1)",
-        "fill-opacity": {
-          base: 1,
-          stops: [
-            [4, 1],
-            [8, 0],
-          ],
-        },
+        "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          4, 1,
+          8, 0
+        ],
       },
       filter: ["all", ["==", "class", "grass"]],
       source: "openmaptiles",
@@ -85,13 +85,13 @@ const style: StyleSpecification = {
       type: "fill",
       paint: {
         "fill-color": "rgba(199, 230, 179, 1)",
-        "fill-opacity": {
-          base: 1,
-          stops: [
-            [4, 1],
-            [8, 0],
-          ],
-        },
+        "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          4, 1,
+          8, 0
+        ],
       },
       filter: ["all", ["==", "class", "scrub"]],
       source: "openmaptiles",
@@ -102,13 +102,13 @@ const style: StyleSpecification = {
       type: "fill",
       paint: {
         "fill-color": "rgba(190, 222, 173, 1)",
-        "fill-opacity": {
-          base: 1,
-          stops: [
-            [4, 1],
-            [8, 0],
-          ],
-        },
+        "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          4, 1,
+          8, 0
+        ],
       },
       filter: ["all", ["==", "class", "tree"]],
       source: "openmaptiles",
@@ -119,13 +119,13 @@ const style: StyleSpecification = {
       type: "fill",
       paint: {
         "fill-color": "rgba(171, 217, 170, 1)",
-        "fill-opacity": {
-          base: 1,
-          stops: [
-            [4, 1],
-            [8, 0],
-          ],
-        },
+        "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          4, 1,
+          8, 0
+        ],
       },
       filter: ["all", ["==", "class", "forest"]],
       source: "openmaptiles",
@@ -136,13 +136,13 @@ const style: StyleSpecification = {
       type: "fill",
       paint: {
         "fill-color": "hsl(0, 0%, 100%)",
-        "fill-opacity": {
-          base: 1,
-          stops: [
-            [4, 1],
-            [8, 0],
-          ],
-        },
+        "fill-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          4, 1,
+          8, 0
+        ],
       },
       filter: ["all", ["==", "class", "snow"]],
       layout: {
@@ -170,15 +170,16 @@ const style: StyleSpecification = {
       id: "landuse_residential",
       type: "fill",
       paint: {
-        "fill-color": {
-          base: 1,
-          stops: [
-            [9, "rgba(233, 227, 210, 0.80)"],
-            [12, "rgba(233, 227, 210, 0.55)"],
-            [16, "rgba(233, 227, 210, 0.35)"],
-          ],
-        },
+        "fill-color": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          9, "rgba(233, 227, 210, 0.80)",
+          12, "rgba(233, 227, 210, 0.55)",
+          16, "rgba(233, 227, 210, 0.35)"
+        ],
       },
+      
       filter: ["all", ["in", "class", "residential", "suburbs", "neighbourhood"]],
       layout: {
         visibility: "visible",
@@ -309,15 +310,16 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#a0c8f0",
-        "line-width": {
-          base: 1.3,
-          stops: [
-            [13, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],
+          13, 0.5,
+          20, 6
+        ],
         "line-dasharray": [2, 4],
       },
+      
       filter: ["all", ["==", "brunnel", "tunnel"]],
       layout: {
         "line-cap": "round",
@@ -332,13 +334,13 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#a0c8f0",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [11, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          11, 0.5,
+          20, 6
+        ],
       },
       filter: [
         "all",
@@ -359,13 +361,13 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#a0c8f0",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [11, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          11, 0.5,
+          20, 6
+        ],
         "line-dasharray": [3, 2],
       },
       filter: [
@@ -386,13 +388,13 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#a0c8f0",
-        "line-width": {
-          base: 1.3,
-          stops: [
-            [13, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.3],
+          ["zoom"],
+          13, 0.5,
+          20, 6
+        ],
       },
       filter: [
         "all",
@@ -413,13 +415,13 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#a0c8f0",
-        "line-width": {
-          base: 1.3,
-          stops: [
-            [13, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.3],
+          ["zoom"],
+          13, 0.5,
+          20, 6
+        ],
         "line-dasharray": [4, 3],
       },
       filter: [
@@ -517,13 +519,13 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#f0ede9",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [11, 3],
-            [20, 16],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          11, 3,
+          20, 16
+        ],
       },
       filter: ["all", ["==", "$type", "LineString"], ["==", "class", "runway"]],
       layout: {
@@ -539,13 +541,13 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#f0ede9",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [11, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          11, 0.5,
+          20, 6
+        ],
       },
       filter: ["all", ["==", "$type", "LineString"], ["==", "class", "taxiway"]],
       layout: {
@@ -577,18 +579,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 1],
-            [13, 3],
-            [14, 4],
-            [20, 15],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          12, 1,   
+          13, 3,   
+          14, 4,   
+          20, 15   
+        ],
         "line-opacity": 1,
         "line-dasharray": [0.5, 0.25],
       },
+      
       filter: ["all", ["==", "class", "motorway"], ["==", "ramp", 1], ["==", "brunnel", "tunnel"]],
       layout: {
         "line-join": "round",
@@ -603,14 +606,14 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#cfcdca",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15, 1],
-            [16, 4],
-            [20, 11],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          15, 1,
+          16, 4,
+          20, 11
+        ],
         "line-dasharray": [0.5, 0.25],
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["in", "class", "service", "track"]],
@@ -627,15 +630,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 1],
-            [13, 3],
-            [14, 4],
-            [20, 15],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          12, 1,
+          13, 3,
+          14, 4,
+          20, 15
+        ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "ramp", "1"], ["==", "brunnel", "tunnel"], [">", "layer", 0]],
@@ -652,21 +655,22 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#cfcdca",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 0.5],
-            [13, 1],
-            [14, 4],
-            [20, 15],
-          ],
-        },
-        "line-opacity": {
-          stops: [
-            [12, 0],
-            [12.5, 1],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          12, 0.5,
+          13, 1,
+          14, 4,
+          20, 15
+        ],
+        "line-opacity": [
+          "interpolate",
+          ["linear"],
+          ["zoom"],   
+          12, 0,
+          12.5, 1
+        ],
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["in", "class", "street", "street_limited"]],
       layout: {
@@ -682,13 +686,13 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(195, 189, 187, 1)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [8, 1.5],
-            [20, 17],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          8, 1.5,
+          20, 17,
+        ],
         "line-opacity": 1,
         "line-dasharray": [0.5, 0.25],
       },
@@ -706,15 +710,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0.4],
-            [6, 0.7],
-            [7, 1.75],
-            [20, 22],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          5, 0.4,
+          6, 0.7,
+          7, 1.75,
+          20, 22
+        ],
         "line-dasharray": [0.5, 0.25],
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["in", "class", "primary", "trunk"]],
@@ -731,15 +735,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0.4],
-            [6, 0.7],
-            [7, 1.75],
-            [20, 22],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          5, 0.4,
+          6, 0.7,
+          7, 1.75,
+          20, 22
+        ],
         "line-dasharray": [0.5, 0.25],
       },
       filter: ["all", ["==", "class", "motorway"], ["==", "brunnel", "tunnel"]],
@@ -756,13 +760,13 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(204, 196, 176, 0.45)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [14, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          14, 0.5,
+          20, 6,
+        ],
         "line-dasharray": [1, 0.75],
       },
       filter: [
@@ -783,15 +787,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fc8",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12.5, 0],
-            [13, 1.5],
-            [14, 2.5],
-            [20, 11.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          12.5, 0,
+          13, 1.5,
+          14, 2.5,
+          20, 11.5
+        ],
       },
       filter: [
         "all",
@@ -812,14 +816,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15.5, 0],
-            [16, 2],
-            [20, 7.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          15.5,
+          0,
+          16,
+          2,
+          20,
+          7.5
+        ],
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["in", "class", "service", "track"]],
       layout: {
@@ -835,14 +842,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15.5, 0],
-            [16, 2],
-            [20, 7.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          15.5,
+          0,
+          16,
+          2,
+          20,
+          7.5
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -863,15 +873,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff4c6",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12.5, 0],
-            [13, 1.5],
-            [14, 2.5],
-            [20, 11.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          12.5,
+          0,
+          13,
+          1.5,
+          14,
+          2.5,
+          20,
+          11.5
+        ],
       },
       filter: ["all", ["==", "ramp", "1"], ["==", "brunnel", "tunnel"], [">", "layer", 0]],
       layout: {
@@ -887,14 +901,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [13.5, 0],
-            [14, 2.5],
-            [20, 11.5],
-          ],
-        },
+        "line-width": [
+        "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          12.5,
+          0,
+          13,
+          1.5,
+          14,
+          2.5,
+          20,
+          11.5
+        ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["in", "class", "minor"]],
@@ -911,14 +930,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [13.5, 0],
-            [14, 2.5],
-            [20, 11.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          12.5,
+          0,
+          13,
+          1.5,
+          14,
+          2.5,
+          20,
+          11.5
+        ],
         "line-opacity": 1,
         "line-dasharray": [2, 2],
       },
@@ -936,14 +960,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(245, 245, 243, 1)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [6.5, 0],
-            [8, 0.5],
-            [20, 13],
-          ],
-        },
+        'line-width': [
+          'interpolate',
+          [ 'exponential', 1.2 ],
+          [ 'zoom' ],
+          6.5,
+          0,
+          8,
+          0.5,
+          20,
+          13
+        ]
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["in", "class", "secondary", "tertiary"]],
       layout: {
@@ -959,14 +986,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [6.5, 0],
-            [8, 0.5],
-            [20, 13],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          6.5,
+          0,
+          8,
+          0.5,
+          20,
+          13
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -987,14 +1017,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff4c6",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ]
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["in", "class", "primary", "trunk"]],
       layout: {
@@ -1010,14 +1043,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff4c6",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -1038,14 +1074,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#ffdaa6",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ]
       },
       filter: ["all", ["==", "class", "motorway"], ["==", "brunnel", "tunnel"]],
       layout: {
@@ -1061,14 +1100,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#ffdaa6",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ],
         "line-dasharray": [2, 2],
       },
       filter: ["all", ["==", "class", "motorway_construction"], ["==", "brunnel", "tunnel"]],
@@ -1085,14 +1127,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbb",
-        "line-width": {
-          base: 1.4,
-          stops: [
-            [14, 0.4],
-            [15, 0.75],
-            [20, 2],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.4 ],
+          [ "zoom" ],
+          14,
+          0.4,
+          15,
+          0.75,
+          20,
+          2
+        ]
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["in", "class", "rail"]],
       layout: {
@@ -1107,14 +1152,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbb",
-        "line-width": {
-          base: 1.4,
-          stops: [
-            [14.5, 0],
-            [15, 3],
-            [20, 8],
-          ],
-        },
+          "line-width": [
+    "interpolate",
+    [ "exponential", 1.4 ],
+    [ "zoom" ],
+    14.5,
+    0,
+    15,
+    3,
+    20,
+    8
+  ],
         "line-dasharray": [0.2, 8],
       },
       filter: ["all", ["==", "brunnel", "tunnel"], ["==", "class", "rail"]],
@@ -1145,13 +1193,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(246, 241, 229, 1)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15, 1],
-            [17, 4],
-          ],
-        },
+        'line-width': [ "interpolate", [ "exponential", 1.2 ], [ "zoom" ], 15, 1, 17, 4 ]
       },
       filter: ["all", ["==", "$type", "LineString"], ["in", "class", "pier"]],
       layout: {
@@ -1201,14 +1243,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#cfcdca",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15, 1],
-            [16, 4],
-            [20, 11],
-          ],
-        },
+          "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    15,
+    1,
+    16,
+    4,
+    20,
+    11
+  ]
       },
       filter: ["all", ["!in", "brunnel", "bridge", "tunnel"], ["in", "class", "service", "track"]],
       layout: {
@@ -1224,15 +1269,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 1],
-            [13, 3],
-            [14, 4],
-            [20, 15],
-          ],
-        },
+  "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    12,
+    1,
+    13,
+    3,
+    14,
+    4,
+    20,
+    15
+  ],
         "line-opacity": 1,
       },
       filter: [
@@ -1256,14 +1305,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 0.7],
-            [20, 14],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          0.7,
+          20,
+          14
+        ]
       },
       filter: [
         "all",
@@ -1285,15 +1337,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 1],
-            [13, 3],
-            [14, 4],
-            [20, 15],
-          ],
-        },
+  "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    12,
+    1,
+    13,
+    3,
+    14,
+    4,
+    20,
+    15
+  ],
         "line-opacity": 1,
       },
       filter: [
@@ -1317,21 +1373,20 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#cfcdca",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 0.5],
-            [13, 1],
-            [14, 4],
-            [20, 20],
-          ],
-        },
-        "line-opacity": {
-          stops: [
-            [12, 0],
-            [12.5, 1],
-          ],
-        },
+        'line-width': [
+          'interpolate',
+          [ 'exponential', 1.2 ],
+          [ 'zoom' ],
+          12,
+          0.5,
+          13,
+          1,
+          14,
+          4,
+          20,
+          20
+        ],
+        "line-opacity": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 12, 0, 12.5, 1 ]
       },
       filter: [
         "all",
@@ -1354,13 +1409,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(195, 189, 187, 1)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [8, 1.5],
-            [20, 17],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1.2 ], [ "zoom" ], 8, 1.5, 20, 17 ],
         "line-opacity": 1,
       },
       filter: [
@@ -1383,15 +1432,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0.4],
-            [6, 0.7],
-            [7, 1.75],
-            [20, 22],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          5, 0.4,
+          6, 0.7,
+          7, 1.75,
+          20, 22
+        ],
         "line-opacity": 1,
       },
       filter: [
@@ -1415,15 +1464,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0.4],
-            [6, 0.7],
-            [7, 1.75],
-            [20, 22],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          5, 0.4,
+          6, 0.7,
+          7, 1.75,
+          20, 22
+        ],
       },
       filter: [
         "all",
@@ -1446,13 +1495,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(204, 196, 176, 0.45)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [14, 1],
-            [20, 6],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1.2 ], [ "zoom" ], 14, 1, 20, 6 ],
         "line-dasharray": [1, 1],
       },
       filter: [
@@ -1475,15 +1518,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fea",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12.5, 0],
-            [13, 1.5],
-            [14, 2.5],
-            [20, 11.5],
-          ],
-        },
+        "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    12.5,
+    0,
+    13,
+    1.5,
+    14,
+    2.5,
+    20,
+    11.5
+  ]
       },
       filter: [
         "all",
@@ -1506,14 +1553,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fea",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 0.5],
-            [20, 10],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          0.5,
+          20,
+          10
+        ]
       },
       filter: [
         "all",
@@ -1535,15 +1585,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fc8",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12.5, 0],
-            [13, 1.5],
-            [14, 2.5],
-            [20, 11.5],
-          ],
-        },
+        "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    12.5,
+    0,
+    13,
+    1.5,
+    14,
+    2.5,
+    20,
+    11.5
+  ]
       },
       filter: [
         "all",
@@ -1566,14 +1620,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15.5, 0],
-            [16, 2],
-            [20, 7.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          15.5,
+          0,
+          16,
+          2,
+          20,
+          7.5
+        ],
       },
       filter: ["all", ["!in", "brunnel", "bridge", "tunnel"], ["in", "class", "service", "track"]],
       layout: {
@@ -1590,14 +1647,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15.5, 0],
-            [16, 2],
-            [20, 7.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          15.5,
+          0,
+          16,
+          2,
+          20,
+          7.5
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -1619,14 +1679,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [13.5, 0],
-            [14, 2.5],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          13.5,
+          0,
+          14,
+          2.5,
+          20,
+          18
+        ],
         "line-opacity": 1,
       },
       filter: [
@@ -1648,14 +1711,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [13.5, 0],
-            [14, 2.5],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    13.5,
+    0,
+    14,
+    2.5,
+    20,
+    18
+  ],
         "line-opacity": 1,
         "line-dasharray": [2, 2],
       },
@@ -1678,14 +1744,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(245, 245, 243, 1)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [6.5, 0],
-            [8, 0.5],
-            [20, 13],
-          ],
-        },
+          "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    6.5,
+    0,
+    8,
+    0.5,
+    20,
+    13
+  ]
       },
       filter: [
         "all",
@@ -1706,14 +1775,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [6.5, 0],
-            [8, 0.5],
-            [20, 13],
-          ],
-        },
+          "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    6.5,
+    0,
+    8,
+    0.5,
+    20,
+    13
+  ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -1735,14 +1807,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fea",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ]
       },
       filter: [
         "all",
@@ -1764,14 +1839,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fea",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -1793,21 +1871,26 @@ const style: StyleSpecification = {
       id: "road_motorway",
       type: "line",
       paint: {
-        "line-color": {
-          base: 1,
-          stops: [
-            [5, "hsl(26, 87%, 62%)"],
-            [6, "#fc8"],
-          ],
-        },
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-color": [
+    "interpolate",
+    [ "exponential", 1 ],
+    [ "zoom" ],
+    5,
+    "hsl(26, 87%, 62%)",
+    6,
+    "#fc8"
+  ],
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ]
       },
       filter: [
         "all",
@@ -1829,21 +1912,26 @@ const style: StyleSpecification = {
       id: "road_motorway_construction",
       type: "line",
       paint: {
-        "line-color": {
-          base: 1,
-          stops: [
-            [5, "hsl(26, 87%, 62%)"],
-            [6, "#fc8"],
-          ],
-        },
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-color": [
+    "interpolate",
+    [ "exponential", 1 ],
+    [ "zoom" ],
+    5,
+    "hsl(26, 87%, 62%)",
+    6,
+    "#fc8"
+  ],
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -1867,14 +1955,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbb",
-        "line-width": {
-          base: 1.4,
-          stops: [
-            [14, 0.4],
-            [15, 0.75],
-            [20, 2],
-          ],
-        },
+        'line-width': [
+    "interpolate",
+    [ "exponential", 1.4 ],
+    [ "zoom" ],
+    14,
+    0.4,
+    15,
+    0.75,
+    20,
+    2
+  ]
       },
       filter: ["all", ["!in", "brunnel", "bridge", "tunnel"], ["in", "class", "rail"]],
       source: "openmaptiles",
@@ -1886,14 +1977,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbb",
-        "line-width": {
-          base: 1.4,
-          stops: [
-            [14.5, 0],
-            [15, 3],
-            [20, 8],
-          ],
-        },
+          "line-width": [
+    "interpolate",
+    [ "exponential", 1.4 ],
+    [ "zoom" ],
+    14.5,
+    0,
+    15,
+    3,
+    20,
+    8
+  ],
         "line-dasharray": [0.2, 8],
       },
       filter: ["all", ["!in", "brunnel", "bridge", "tunnel"], ["==", "class", "rail"]],
@@ -1906,14 +2000,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbb",
-        "line-width": {
-          base: 1.4,
-          stops: [
-            [14, 0.4],
-            [15, 0.75],
-            [20, 2],
-          ],
-        },
+        "line-width": [
+    "interpolate",
+    [ "exponential", 1.4 ],
+    [ "zoom" ],
+    14,
+    0.4,
+    15,
+    0.75,
+    20,
+    2
+  ]
       },
       filter: [
         "all",
@@ -1929,14 +2026,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbb",
-        "line-width": {
-          base: 1.4,
-          stops: [
-            [14.5, 0],
-            [15, 2],
-            [20, 6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.4 ],
+          [ "zoom" ],
+          14.5,
+          0,
+          15,
+          2,
+          20,
+          6
+        ],
         "line-dasharray": [0.2, 4],
       },
       filter: [
@@ -1953,13 +2053,15 @@ const style: StyleSpecification = {
       type: "fill",
       paint: {
         "fill-color": "rgba(189, 185, 181, 0.3)",
-        "fill-outline-color": {
-          base: 1,
-          stops: [
-            [13, "hsla(35, 6%, 79%, 0.32)"],
-            [14, "hsl(35, 6%, 79%)"],
-          ],
-        },
+        "fill-outline-color": [
+          "interpolate",
+          [ "exponential", 1 ],
+          [ "zoom" ],
+          13,
+          "hsla(35, 6%, 79%, 0.32)",
+          14,
+          "hsl(35, 6%, 79%)"
+        ]
       },
       layout: {
         visibility: "visible",
@@ -1999,20 +2101,8 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbbbbb",
-        "line-width": {
-          base: 1.6,
-          stops: [
-            [12, 0.5],
-            [20, 5],
-          ],
-        },
-        "line-gap-width": {
-          base: 1.3,
-          stops: [
-            [13, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1.6 ], [ "zoom" ], 12, 0.5, 20, 5 ],
+        "line-gap-width": [ "interpolate", [ "exponential", 1.3 ], [ "zoom" ], 13, 0.5, 20, 6 ]
       },
       filter: ["all", ["==", "$type", "LineString"], ["==", "brunnel", "bridge"]],
       layout: {
@@ -2027,13 +2117,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(134, 204, 250, 1)",
-        "line-width": {
-          base: 1.3,
-          stops: [
-            [13, 0.5],
-            [20, 6],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1.3 ], [ "zoom" ], 13, 0.5, 20, 6 ]
       },
       filter: ["all", ["==", "$type", "LineString"], ["==", "brunnel", "bridge"]],
       layout: {
@@ -2048,15 +2132,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 1],
-            [13, 3],
-            [14, 4],
-            [20, 15],
-          ],
-        },
+  "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    12,
+    1,
+    13,
+    3,
+    14,
+    4,
+    20,
+    15
+  ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "class", "motorway"], ["==", "ramp", 1], ["==", "brunnel", "bridge"]],
@@ -2072,14 +2160,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#cfcdca",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15, 1],
-            [16, 4],
-            [20, 11],
-          ],
-        },
+          "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    15,
+    1,
+    16,
+    4,
+    20,
+    11
+  ]
       },
       filter: ["all", ["==", "brunnel", "bridge"], ["in", "class", "service", "track"]],
       layout: {
@@ -2094,15 +2185,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 1],
-            [13, 3],
-            [14, 4],
-            [20, 15],
-          ],
-        },
+  "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    12,
+    1,
+    13,
+    3,
+    14,
+    4,
+    20,
+    15
+  ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "class", "link"], ["==", "brunnel", "bridge"]],
@@ -2118,21 +2213,20 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "hsl(36, 6%, 74%)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12, 0.5],
-            [13, 1],
-            [14, 4],
-            [20, 25],
-          ],
-        },
-        "line-opacity": {
-          stops: [
-            [12, 0],
-            [12.5, 1],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          12,
+          0.5,
+          13,
+          1,
+          14,
+          4,
+          20,
+          25
+        ],
+        "line-opacity": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 12, 0, 12.5, 1 ]
       },
       filter: ["all", ["==", "brunnel", "bridge"], ["in", "class", "street", "street_limited"]],
       layout: {
@@ -2147,13 +2241,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "hsl(35, 6%, 80%)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [14, 1.5],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          14,
+          1.5,
+          20,
+          18
+        ],
         "line-dasharray": [1, 0],
       },
       filter: [
@@ -2175,13 +2271,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(195, 189, 187, 1)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [8, 1.5],
-            [20, 17],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1.2 ], [ "zoom" ], 8, 1.5, 20, 17 ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "brunnel", "bridge"], ["in", "class", "secondary", "tertiary"]],
@@ -2197,15 +2287,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0.4],
-            [6, 0.7],
-            [7, 1.75],
-            [20, 22],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          5, 0.4,
+          6, 0.7,
+          7, 1.75,
+          20, 22
+        ],
       },
       filter: ["all", ["==", "brunnel", "bridge"], ["in", "class", "primary", "trunk"]],
       layout: {
@@ -2220,15 +2310,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#e9ac77",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0.4],
-            [6, 0.7],
-            [7, 1.75],
-            [20, 22],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          ["exponential", 1.2],
+          ["zoom"],
+          5, 0.4,
+          6, 0.7,
+          7, 1.75,
+          20, 22
+        ],
       },
       filter: ["all", ["==", "class", "motorway"], ["==", "brunnel", "bridge"], ["!=", "ramp", 1]],
       layout: {
@@ -2243,13 +2333,15 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "hsl(0, 0%, 100%)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [14, 0.5],
-            [20, 10],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          14,
+          0.5,
+          20,
+          10
+        ],
         "line-dasharray": [1, 0.3],
       },
       filter: [
@@ -2267,15 +2359,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fc8",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12.5, 0],
-            [13, 1.5],
-            [14, 2.5],
-            [20, 11.5],
-          ],
-        },
+        "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    12.5,
+    0,
+    13,
+    1.5,
+    14,
+    2.5,
+    20,
+    11.5
+  ]
       },
       filter: ["all", ["==", "class", "motorway"], ["==", "ramp", 1], ["==", "brunnel", "bridge"]],
       layout: {
@@ -2290,14 +2386,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15.5, 0],
-            [16, 2],
-            [20, 7.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          15.5,
+          0,
+          16,
+          2,
+          20,
+          7.5
+        ],
       },
       filter: ["all", ["==", "brunnel", "bridge"], ["in", "class", "service", "track"]],
       layout: {
@@ -2313,14 +2412,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [15.5, 0],
-            [16, 2],
-            [20, 7.5],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          15.5,
+          0,
+          16,
+          2,
+          20,
+          7.5
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -2341,15 +2443,19 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fea",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [12.5, 0],
-            [13, 1.5],
-            [14, 2.5],
-            [20, 11.5],
-          ],
-        },
+        "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    12.5,
+    0,
+    13,
+    1.5,
+    14,
+    2.5,
+    20,
+    11.5
+  ]
       },
       filter: ["all", ["==", "class", "link"], ["==", "brunnel", "bridge"]],
       layout: {
@@ -2365,14 +2471,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [13.5, 0],
-            [14, 2.5],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    13.5,
+    0,
+    14,
+    2.5,
+    20,
+    18
+  ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "brunnel", "bridge"], ["in", "class", "minor"]],
@@ -2388,14 +2497,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [13.5, 0],
-            [14, 2.5],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    13.5,
+    0,
+    14,
+    2.5,
+    20,
+    18
+  ],
         "line-opacity": 1,
         "line-dasharray": [2, 2],
       },
@@ -2413,14 +2525,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(245, 245, 243, 1)",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [6.5, 0],
-            [8, 0.5],
-            [20, 13],
-          ],
-        },
+          "line-width": [
+    "interpolate",
+    [ "exponential", 1.2 ],
+    [ "zoom" ],
+    6.5,
+    0,
+    8,
+    0.5,
+    20,
+    13
+  ]
       },
       filter: ["all", ["==", "brunnel", "bridge"], ["in", "class", "secondary", "tertiary"]],
       layout: {
@@ -2435,14 +2550,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fff",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [6.5, 0],
-            [8, 0.5],
-            [20, 13],
-          ],
-        },
+          'line-width': [
+    'interpolate',
+    [ 'exponential', 1.2 ],
+    [ 'zoom' ],
+    6.5,
+    0,
+    8,
+    0.5,
+    20,
+    13
+  ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -2462,14 +2580,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fea",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ]
       },
       filter: ["all", ["==", "brunnel", "bridge"], ["in", "class", "primary", "trunk"]],
       layout: {
@@ -2485,14 +2606,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fea",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -2513,14 +2637,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fc8",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ]
       },
       filter: ["all", ["==", "class", "motorway"], ["==", "brunnel", "bridge"], ["!=", "ramp", 1]],
       layout: {
@@ -2535,14 +2662,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#fc8",
-        "line-width": {
-          base: 1.2,
-          stops: [
-            [5, 0],
-            [7, 1],
-            [20, 18],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1.2 ],
+          [ "zoom" ],
+          5,
+          0,
+          7,
+          1,
+          20,
+          18
+        ],
         "line-dasharray": [2, 2],
       },
       filter: [
@@ -2563,14 +2693,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbb",
-        "line-width": {
-          base: 1.4,
-          stops: [
-            [14, 0.4],
-            [15, 0.75],
-            [20, 2],
-          ],
-        },
+        'line-width': [
+    'interpolate',
+    [ 'exponential', 1.4 ],
+    [ 'zoom' ],
+    14,
+    0.4,
+    15,
+    0.75,
+    20,
+    2
+  ]
       },
       filter: ["all", ["==", "class", "rail"], ["==", "brunnel", "bridge"]],
       source: "openmaptiles",
@@ -2582,14 +2715,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#bbb",
-        "line-width": {
-          base: 1.4,
-          stops: [
-            [14.5, 0],
-            [15, 3],
-            [20, 8],
-          ],
-        },
+          "line-width": [
+    "interpolate",
+    [ "exponential", 1.4 ],
+    [ "zoom" ],
+    14.5,
+    0,
+    15,
+    3,
+    20,
+    8
+  ],
         "line-dasharray": [0.2, 8],
       },
       filter: ["all", ["==", "class", "rail"], ["==", "brunnel", "bridge"]],
@@ -2602,13 +2738,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "hsl(0, 0%, 70%)",
-        "line-width": {
-          base: 1,
-          stops: [
-            [11, 1],
-            [19, 2.5],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 11, 1, 19, 2.5 ]
       },
       filter: ["==", "class", "aerialway"],
       layout: {
@@ -2624,13 +2754,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "hsl(0, 0%, 70%)",
-        "line-width": {
-          base: 1,
-          stops: [
-            [11, 3],
-            [19, 5.5],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 11, 3, 19, 5.5 ],
         "line-dasharray": [2, 3],
       },
       filter: ["==", "class", "aerialway"],
@@ -2647,14 +2771,17 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "#9e9cab",
-        "line-width": {
-          base: 1,
-          stops: [
-            [4, 0.4],
-            [5, 0.7],
-            [12, 1.6],
-          ],
-        },
+        "line-width": [
+          "interpolate",
+          [ "exponential", 1 ],
+          [ "zoom" ],
+          4,
+          0.4,
+          5,
+          0.7,
+          12,
+          1.6
+        ],
         "line-dasharray": [5, 3],
       },
       filter: ["all", ["in", "admin_level", 3, 4], ["==", "maritime", 0]],
@@ -2672,13 +2799,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(139, 139, 139, 1)",
-        "line-width": {
-          base: 1,
-          stops: [
-            [3, 1],
-            [5, 1.2],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 3, 1, 5, 1.2 ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "admin_level", 2], ["==", "maritime", 0], ["!has", "claimed_by"]],
@@ -2698,13 +2819,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(98,185,229,1)",
-        "line-width": {
-          base: 1,
-          stops: [
-            [3, 1],
-            [5, 1.2],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 3, 1, 5, 1.2 ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "admin_level", 2], ["!has", "claimed_by"], ["==", "maritime", 1]],
@@ -2724,13 +2839,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(139, 139, 139, 1)",
-        "line-width": {
-          base: 1,
-          stops: [
-            [5, 1.2],
-            [12, 3],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 5, 1.2, 12, 3 ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "admin_level", 2], ["==", "disputed", 0], ["==", "maritime", 0]],
@@ -2749,13 +2858,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(120, 120, 120, 1)",
-        "line-width": {
-          base: 1,
-          stops: [
-            [5, 1.2],
-            [12, 3],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 5, 1.2, 12, 3 ],
         "line-opacity": 1,
         "line-dasharray": [4, 3],
       },
@@ -2775,13 +2878,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(98,185,229,1)",
-        "line-width": {
-          base: 1,
-          stops: [
-            [5, 1.2],
-            [12, 3],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 5, 1.2, 12, 3 ],
         "line-opacity": 1,
         "line-dasharray": [4, 3],
       },
@@ -2801,13 +2898,7 @@ const style: StyleSpecification = {
       type: "line",
       paint: {
         "line-color": "rgba(98,185,229,1)",
-        "line-width": {
-          base: 1,
-          stops: [
-            [5, 1.2],
-            [12, 3],
-          ],
-        },
+        "line-width": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 5, 1.2, 12, 3 ],
         "line-opacity": 1,
       },
       filter: ["all", ["==", "admin_level", 2], ["==", "disputed", 0], ["==", "maritime", 1]],
@@ -3077,12 +3168,7 @@ const style: StyleSpecification = {
         ],
       ],
       layout: {
-        "icon-size": {
-          stops: [
-            [15, 0.5],
-            [19, 1],
-          ],
-        },
+        "icon-size": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 15, 0.5, 19, 1 ],
         "icon-image": "oneway",
         visibility: "visible",
         "icon-rotate": 90,
@@ -3117,12 +3203,7 @@ const style: StyleSpecification = {
         ],
       ],
       layout: {
-        "icon-size": {
-          stops: [
-            [15, 0.5],
-            [19, 1],
-          ],
-        },
+        "icon-size": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 15, 0.5, 19, 1 ],
         "icon-image": "oneway",
         "icon-rotate": -90,
         "icon-padding": 2,
@@ -3145,13 +3226,7 @@ const style: StyleSpecification = {
       filter: ["all"],
       layout: {
         "text-font": ["Roboto Regular", "Noto Sans Regular"],
-        "text-size": {
-          base: 1,
-          stops: [
-            [13, 12],
-            [14, 13],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 13, 12, 14, 13 ],
         "text-field": "{name:ko}",
         "text-anchor": "center",
         "text-offset": [0, 0.15],
@@ -3180,13 +3255,13 @@ const style: StyleSpecification = {
         "icon-image": "road_{ref_length}",
         "text-field": "{ref}",
         "symbol-spacing": 200,
-        "symbol-placement": {
-          base: 1,
-          stops: [
-            [10, "point"],
-            [11, "line"],
-          ],
-        },
+        // "symbol-placement": {
+        //   base: 1,
+        //   stops: [
+        //     [10, "point"],
+        //     [11, "line"],
+        //   ],
+        // },
         "symbol-avoid-edges": true,
         "icon-rotation-alignment": "viewport",
         "text-rotation-alignment": "viewport",
@@ -3214,14 +3289,14 @@ const style: StyleSpecification = {
         "icon-image": "{network}_{ref_length}",
         "text-field": "{ref}",
         "symbol-spacing": 200,
-        "symbol-placement": {
-          base: 1,
-          stops: [
-            [7, "point"],
-            [7, "line"],
-            [8, "line"],
-          ],
-        },
+        // "symbol-placement": {
+        //   base: 1,
+        //   stops: [
+        //     [7, "point"],
+        //     [7, "line"],
+        //     [8, "line"],
+        //   ],
+        // },
         "symbol-avoid-edges": true,
         "icon-rotation-alignment": "viewport",
         "text-rotation-alignment": "viewport",
@@ -3249,13 +3324,13 @@ const style: StyleSpecification = {
         "icon-image": "{network}_{ref_length}",
         "text-field": "{ref}",
         "symbol-spacing": 200,
-        "symbol-placement": {
-          base: 1,
-          stops: [
-            [10, "point"],
-            [11, "line"],
-          ],
-        },
+        // "symbol-placement": {
+        //   base: 1,
+        //   stops: [
+        //     [10, "point"],
+        //     [11, "line"],
+        //   ],
+        // },
         "symbol-avoid-edges": true,
         "icon-rotation-alignment": "viewport",
         "text-rotation-alignment": "viewport",
@@ -3302,12 +3377,7 @@ const style: StyleSpecification = {
       filter: ["all", ["==", "class", "gate"]],
       layout: {
         "text-font": ["Roboto Medium", "Noto Sans Regular"],
-        "text-size": {
-          stops: [
-            [17, 9],
-            [19, 15],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 17, 9, 19, 15 ],
         "text-field": "{ref}",
       },
       source: "openmaptiles",
@@ -3325,13 +3395,7 @@ const style: StyleSpecification = {
       filter: ["all", ["in", "class", "hamlet", "island", "islet", "neighbourhood", "suburb"]],
       layout: {
         "text-font": textFont,
-        "text-size": {
-          base: 1.2,
-          stops: [
-            [12, 10],
-            [15, 14],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1.2 ], [ "zoom" ], 12, 10, 15, 14 ],
         "text-field": "{name:ko}",
         visibility: "visible",
         "text-max-width": 9,
@@ -3354,13 +3418,7 @@ const style: StyleSpecification = {
       filter: ["all", ["==", "class", "village"]],
       layout: {
         "text-font": ["Roboto Regular", "Noto Sans Regular"],
-        "text-size": {
-          base: 1.2,
-          stops: [
-            [10, 12],
-            [15, 22],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1.2 ], [ "zoom" ], 10, 12, 15, 22 ],
         "text-field": "{name:ko}",
         "text-max-width": 8,
       },
@@ -3380,20 +3438,13 @@ const style: StyleSpecification = {
       filter: ["all", ["==", "class", "town"]],
       layout: {
         "text-font": ["Roboto Regular", "Noto Sans Regular"],
-        "text-size": {
-          base: 1.2,
-          stops: [
-            [7, 12],
-            [11, 16],
-          ],
-        },
-        "icon-image": {
-          base: 1,
-          stops: [
-            [0, "circle-stroked_16"],
-            [10, ""],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1.2 ], [ "zoom" ], 7, 12, 11, 16 ],
+        "icon-image": [
+          "step",
+          ["zoom"],
+          "circle-stroked_16",
+          10, ""
+        ],
         "text-field": "{name:ko}",
         "text-anchor": "bottom",
         "text-offset": [0, 0],
@@ -3415,20 +3466,14 @@ const style: StyleSpecification = {
       filter: ["all", ["==", "class", "city"]],
       layout: {
         "text-font": ["Roboto Medium", "Noto Sans Regular"],
-        "text-size": {
-          base: 1.2,
-          stops: [
-            [7, 14],
-            [11, 24],
-          ],
-        },
-        "icon-image": {
-          base: 1,
-          stops: [
-            [0, "circle-stroked_16"],
-            [10, ""],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1.2 ], [ "zoom" ], 7, 14, 11, 24 ],
+        "icon-image": [
+          "step",
+          ["zoom"],
+          "circle-stroked_16",
+          10, ""
+        ],
+        
         "text-field": "{name:ko}",
         "text-anchor": "bottom",
         "text-offset": [0, 0],
@@ -3452,12 +3497,7 @@ const style: StyleSpecification = {
       filter: ["all", ["==", "class", "state"]],
       layout: {
         "text-font": ["Roboto Medium", "Noto Sans Regular"],
-        "text-size": {
-          stops: [
-            [3, 10],
-            [6, 14],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 3, 10, 6, 14 ],
         "text-field": "{name:ko}",
         "text-padding": 2,
         "text-transform": "uppercase",
@@ -3481,12 +3521,7 @@ const style: StyleSpecification = {
       filter: ["all", ["==", "class", "country"], ["!has", "iso_a2"]],
       layout: {
         "text-font": textFont,
-        "text-size": {
-          stops: [
-            [3, 9],
-            [7, 15],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 3, 9, 7, 15 ],
         "text-field": "{name:ko}",
         "text-max-width": 6.25,
         "text-transform": "none",
@@ -3507,12 +3542,7 @@ const style: StyleSpecification = {
       filter: ["all", [">=", "rank", 3], ["==", "class", "country"], ["has", "iso_a2"]],
       layout: {
         "text-font": textFont,
-        "text-size": {
-          stops: [
-            [3, 11],
-            [7, 17],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 3, 11, 7, 17 ],
         "text-field": "{name:ko}",
         "text-max-width": 6.25,
         "text-transform": "none",
@@ -3533,12 +3563,7 @@ const style: StyleSpecification = {
       filter: ["all", ["==", "rank", 2], ["==", "class", "country"], ["has", "iso_a2"]],
       layout: {
         "text-font": textFont,
-        "text-size": {
-          stops: [
-            [2, 11],
-            [5, 17],
-          ],
-        },
+        "text-size": [ "interpolate", [ "exponential", 1 ], [ "zoom" ], 2, 11, 5, 17 ],
         "text-field": "{name:ko}",
         "text-max-width": 6.25,
         "text-transform": "none",
@@ -3559,13 +3584,17 @@ const style: StyleSpecification = {
       filter: ["all", ["==", "rank", 1], ["==", "class", "country"], ["has", "iso_a2"]],
       layout: {
         "text-font": textFont,
-        "text-size": {
-          stops: [
-            [1, 11],
-            [4, 17],
-            [6, 19],
-          ],
-        },
+        "text-size": [
+          "interpolate",
+          [ "exponential", 1 ],
+          [ "zoom" ],
+          1,
+          11,
+          4,
+          17,
+          6,
+          19
+        ],
         "text-field": "{name:ko}",
         "text-max-width": 6.25,
         "text-transform": "none",

@@ -22,7 +22,7 @@ const [instanceState, setInstanceState] = useState<MaplibreGL | null>(null);
     const initialState = {
       lng: 126.7770556,
       lat: 37.65590833,
-      zoom: 10,
+      zoom: 12,
     };
 
     const map = new MaplibreGL({
