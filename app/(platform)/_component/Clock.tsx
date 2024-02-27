@@ -28,10 +28,10 @@ const Clock = () => {
 
   return (
     <Box>
-      <Typography sx={{ color: "rgba(0,0,0,0.5)", fontSize: 20 }}>
+      <Typography sx={{ color: "rgba(0,0,0,0.5)", fontSize: { xs: 12, md: 16 } }} >
         {formattedTime}
       </Typography>
-    </Box>
+    </Box >
   );
 };
 

@@ -137,8 +137,8 @@ const MarketingPage = () => {
           Collaborate, manage projects, and reach new productivity peaks. From high rises to the home
           office, the way your team works is unique - accomplish it all with TeamVolt.
         </Box>
-        <CustomButton size="large" cvariant="default" sx={{ my: 5 }}>
-          <Link href="/sign-up">
+        <CustomButton size="small" cvariant="teamvolt" sx={{ my: 5 }}>
+          <Link href="/sign-in2" style={{ textDecoration: "none", color: "#FAFAFA" }}>
             Get Teamvolt for free
           </Link>
         </CustomButton>

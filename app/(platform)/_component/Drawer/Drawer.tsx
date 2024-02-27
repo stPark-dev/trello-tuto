@@ -411,7 +411,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           </Typography>
 
           <Box flexGrow={1} />
-          <Button variant="contained" onClick={toggleRightDrawer}>Open Right Drawer</Button>
+          <Button size="small" variant="contained" onClick={toggleRightDrawer}>Open</Button>
           {drawerState.headerToolbox &&
             getToolbox(drawerState.headerToolbox, drawerState.headerToolboxProps)}
 
