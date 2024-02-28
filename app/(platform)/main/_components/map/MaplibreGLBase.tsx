@@ -45,6 +45,25 @@ const Map = ({ children, ...props }: MapProps, ref: Ref<HTMLDivElement>) => {
             type: 'geojson',
             data: data
           });
+          
+          map.addLayer({
+            'id': 'area-labels',
+            'type': 'symbol',
+            'source': 'goyang',
+            'layout': {
+                'text-field': ['get', 'adm_nm'],
+                'text-variable-anchor': ['top', 'bottom', 'left', 'right'],
+                'text-radial-offset': 0.5,
+                'text-justify': 'auto',
+                'text-size': 14
+            },
+            'paint': {
+                'text-color': '#000000',
+                'text-halo-color': '#ffffff',
+                'text-halo-width': 2
+            }
+        });
+
 
           map.addLayer({
             id: 'goyang-fill',
