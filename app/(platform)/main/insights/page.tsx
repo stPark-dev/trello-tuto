@@ -4,6 +4,7 @@ import { useState } from "react";
 import Component from "../_components/map";
 import EChartsBase from "@/components/echarts/BaseChart";
 import ChartJsBase from "@/components/chartjs/BaseChart";
+import InsightCard from "../_components/Card";
 
 const Item = styled(Paper)(({ theme }) => ({
     height: "100%",
@@ -32,16 +33,16 @@ const MainInsight = () => {
                 </Grid>
                 <Grid item xs={12} sm={6} container spacing={2} justifyContent="center" alignItems="center">
                     <Grid item sm={3}>
-                        <Item>item</Item>
+                        <InsightCard title="Views" data={7250} color="#F0F4F8" ratio={11.84} />
                     </Grid>
                     <Grid item sm={3}>
-                        <Item>item</Item>
+                        <InsightCard title="Visits" data={423} color="#EFF4FF" ratio={-31.42} />
                     </Grid>
                     <Grid item sm={3}>
-                        <Item>item</Item>
+                        <InsightCard title="New Users" data={156} color="#F0F4F8" ratio={-1.33} />
                     </Grid>
                     <Grid item sm={3}>
-                        <Item>item</Item>
+                        <InsightCard title="Active Users" data={2318} color="#EFF4FF" ratio={0.04} />
                     </Grid>
                     <Grid item sm={12}>
                         <Item>

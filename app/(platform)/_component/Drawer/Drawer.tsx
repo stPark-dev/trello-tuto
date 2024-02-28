@@ -509,6 +509,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                       alt={`Profile Pic for ${sessionData.user.name}`}
                       priority={true}
                       onClick={handleOpenUserMenu}
+                      style={{ borderRadius: "50%" }}
                     />
                   </Tooltip>
                   <Menu
@@ -570,7 +571,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
       >
         <Box>
           <Typography variant="subtitle2" fontWeight="bold">Notification</Typography>
-          
+
         </Box>
         <Box>
           <Typography variant="subtitle2" fontWeight="bold">Activities</Typography>
