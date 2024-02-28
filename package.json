@@ -37,6 +37,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/chart.js": "^2.9.41",
     "@types/node": "^20",
     "@types/qrcode": "^1.5.5",
     "@types/react": "^18",
