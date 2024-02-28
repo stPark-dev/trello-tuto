@@ -101,7 +101,7 @@ const CarouselComponent = () => {
                     >
                         {images.map((image, index) => (
                             <SwiperSlide key={`image-${index}`}>
-                                <Image src={image.content} width={450} height={450} alt={`image-${index}`} loading="lazy" />
+                                <Image src={image.content} width={800} height={500} alt={`image-${index}`} loading="lazy" />
                             </SwiperSlide>
                         ))}
                     </Swiper>
