@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@mui/material/styles";
+import { alpha, styled, useTheme } from "@mui/material/styles";
 
 import { createElement, useEffect, useMemo, useState } from "react";
 import Box, { BoxProps } from "@mui/material/Box";
@@ -8,25 +8,25 @@ import MuiDrawer from "@mui/material/Drawer";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import List from "@mui/material/List";
-
 import Popper from "@mui/material/Popper";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
+import List from "@mui/material/List";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import MenuList from "@mui/material/MenuList";
 import MenuItem from "@mui/material/MenuItem";
 
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 import BrandLogoDark from "@/public/landing/logo_main.png";
 import BrandLogoLight from "@/public/landing/logo_main.png";
 
-import { useParams, usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { DrawerAtom, DrawerMode } from "./state/Drawer";
-import { Button, CssBaseline, Divider, IconButton, Link, useMediaQuery } from "@mui/material";
-import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business } from "@mui/icons-material";
+import { Button, CssBaseline, Divider, IconButton, InputBase, Link, Menu, Tooltip, useMediaQuery } from "@mui/material";
+import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert } from "@mui/icons-material";
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 import Clock from "../Clock";
 
@@ -37,14 +37,80 @@ interface DrawerProps extends React.PropsWithChildren {
 const Drawer = ({ profile, children }: DrawerProps) => {
   const theme = useTheme();
   const currentPathName = usePathname();
-  const params = useParams();
-  const router = useRouter();
+  const { data: sessionData } = useSession();
+  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    border: "1px solid transparent",
+    borderColor: "#00897B",
+    borderWidth: "2px",
+    borderRadius: "50px",
+    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.25),
+    },
+    marginLeft: 0,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      marginLeft: theme.spacing(1),
+      width: "auto",
+    },
+  }));
+
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    color: "rgba(0,0,0,0.5)",
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    right: 0,
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "rgba(0,0,0,0.5)",
+    width: "100%",
+    "& .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+      transition: theme.transitions.create("width"),
+      borderRadius: "50px",
+      [theme.breakpoints.up("sm")]: {
+        width: "20ch",
+        "&:focus": {
+          width: "32ch",
+        },
+      },
+    },
+  }));
+
 
   const isActive = (pathname: string) => currentPathName === pathname;
   const navLinks = [
-    { href: '/main/tasks', label: 'Tasks', Icon: TaskAlt, isActive: isActive('/main/tasks') },
-    { href: '/main/insights', label: 'Insights', Icon: QueryStats, isActive: isActive('/main/insights') },
-    { href: '/main/assets', label: 'Assets', Icon: Business, isActive: isActive('/main/assets') },
+    { href: "/main/tasks", label: "Tasks", Icon: TaskAlt, isActive: isActive("/main/tasks") },
+    { href: "/main/insights", label: "Insights", Icon: QueryStats, isActive: isActive("/main/insights") },
+    { href: "/main/assets", label: "Assets", Icon: Business, isActive: isActive("/main/assets") },
   ];
 
   const headerHeight = 84;
@@ -88,7 +154,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          // borderBottom: `1px solid`,
           padding: theme.spacing(0, 1),
         }}
       >
@@ -356,7 +421,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           boxShadow: "none",
         }}
       >
-        <Toolbar disableGutters sx={{ px: 1 }}>
+        <Toolbar disableGutters sx={{ px: 4 }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -382,24 +447,24 @@ const Drawer = ({ profile, children }: DrawerProps) => {
               <Box
                 key={href}
                 sx={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
+                  display: "inline-flex",
+                  alignItems: "center",
                   px: "1rem",
                   pt: 1,
-                  fontSize: '1rem',
-                  fontWeight: isActive ? 'bold' : 'normal',
-                  color: isActive ? '#004d40' : '#212121',
+                  fontSize: "1rem",
+                  fontWeight: isActive ? "bold" : "normal",
+                  color: isActive ? "#004d40" : "#212121",
                   opacity: 0.8,
-                  '&:hover': {
-                    color: '#00897b',
+                  "&:hover": {
+                    color: "#00897b",
                     opacity: 1,
-                    textDecorationThickness: '2px', // Example thickness, adjust as needed
-                    textUnderlineOffset: '10px', // Example offset, adjust as needed
+                    textDecorationThickness: "2px", // Example thickness, adjust as needed
+                    textUnderlineOffset: "10px", // Example offset, adjust as needed
                   },
-                  textDecoration: isActive ? 'underline' : 'none',
-                  textDecorationColor: '#004d40',
-                  textDecorationThickness: '2px', // Maintain consistent thickness with hover
-                  textUnderlineOffset: '10px', // Adjust the space between text and underline
+                  textDecoration: isActive ? "underline" : "none",
+                  textDecorationColor: "#004d40",
+                  textDecorationThickness: "2px", // Maintain consistent thickness with hover
+                  textUnderlineOffset: "10px", // Adjust the space between text and underline
                 }}
                 component={Link}
                 href={href}
@@ -411,31 +476,108 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           </Typography>
 
           <Box flexGrow={1} />
-          <Button size="small" variant="contained" onClick={toggleRightDrawer}>Open</Button>
-          {drawerState.headerToolbox &&
-            getToolbox(drawerState.headerToolbox, drawerState.headerToolboxProps)}
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1 }}>
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="검색어를 입력하세요"
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
 
-          {profile && profile}
+            <IconButton sx={{ flexShrink: 0 }} onClick={toggleRightDrawer}>
+              <Notifications />
+            </IconButton>
 
-          <Box sx={{ display: 'flex', justifyContent: 'flex-end', mx: 5 }}>
+            {drawerState.headerToolbox &&
+              getToolbox(drawerState.headerToolbox, drawerState.headerToolboxProps)}
+
+            {profile && profile}
+
             <Clock />
-            {"|"}
+
+            {sessionData?.user?.image ? (
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Tooltip title="사용자 설정" arrow>
+                    <Image
+                      src={sessionData.user.image}
+                      width={50}
+                      height={50}
+                      alt={`Profile Pic for ${sessionData.user.name}`}
+                      priority={true}
+                      onClick={handleOpenUserMenu}
+                    />
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: '45px' }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: 'top',
+                      horizontal: 'right',
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
+                  >
+                    {settings.map((setting) => (
+                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                        <Typography textAlign="center">{setting}</Typography>
+                      </MenuItem>
+                    ))}
+                  </Menu>
+                </Box>
+                <Box sx={{ ml: 2 }}>
+                  <SignOutButton />
+                </Box>
+              </Box>
+            ) : (
+              <Box sx={{ ml: 2 }}>
+                <SignOutButton />
+              </Box>
+            )}
+            <IconButton
+              color="inherit"
+              size="large"
+              aria-label="display more actions"
+              edge="end"
+              sx={{ color: "rgba(0,0,0,0.5)" }}
+            >
+              <MoreVert />
+            </IconButton>
           </Box>
-          {<SignOutButton />}
         </Toolbar>
       </AppBar>
       {/* Right-side drawer */}
       <MuiDrawer
         anchor="right"
+        variant="persistent"
         open={rightDrawerOpen}
         onClose={toggleRightDrawer}
         sx={{
           '& .MuiDrawer-paper': {
-            width: drawerWidth,
+            width: drawerWidth * 1.5,
+            marginTop: `${headerHeight}px`
           },
         }}
       >
-        <Box>Right-side drawer content</Box>
+        <Box>
+          <Typography variant="subtitle2" fontWeight="bold">Notification</Typography>
+          
+        </Box>
+        <Box>
+          <Typography variant="subtitle2" fontWeight="bold">Activities</Typography>
+        </Box>
+        <Box>
+          <Typography variant="subtitle2" fontWeight="bold">빠른 연락처</Typography>
+        </Box>
       </MuiDrawer>
       <MuiDrawer
         transitionDuration={md ? 200 : theme.transitions.duration.leavingScreen}

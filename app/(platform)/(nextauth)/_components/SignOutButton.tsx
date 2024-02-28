@@ -10,7 +10,6 @@ const SignOutButton = () => {
       sx={{
         px: 2, 
         py: 1,
-        mr: 4,
         color: "white", 
         bgcolor: "grey",
         '&:hover': {

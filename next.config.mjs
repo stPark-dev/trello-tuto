@@ -32,6 +32,18 @@ const nextConfig = {
           }
         ]
       },
+      webpack: (config, { isServer }) => {
+        if (!isServer) {
+          config.resolve.fallback.fs = false;
+        }
+    
+        config.module.rules.push({
+          test: /\.geojson$/,
+          type: 'json',
+        });
+    
+        return config;
+      },
 };
 
 export default nextConfig;
