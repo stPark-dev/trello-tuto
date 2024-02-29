@@ -147,6 +147,13 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     setAnchorRefState(null);
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (!md) return;
+
+    setDrawerState((prev) => ({ ...prev, submenu: {} }));
+  }, [md, setDrawerState]);
+
   const drawerContent = (
     <>
       <Box
@@ -504,8 +511,8 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                   <Tooltip title="사용자 설정" arrow>
                     <Image
                       src={sessionData.user.image}
-                      width={50}
-                      height={50}
+                      width={40}
+                      height={40}
                       alt={`Profile Pic for ${sessionData.user.name}`}
                       priority={true}
                       onClick={handleOpenUserMenu}

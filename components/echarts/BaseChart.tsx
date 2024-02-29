@@ -157,7 +157,7 @@ const EChartsBase: React.FC<ChartProps> = (props) => {
     }, [props, chartInstance]);
 
     return (
-        <div ref={chartRef} style={{ width: '100%', height: '400px' }}></div>
+        <div ref={chartRef} style={{ width: '100%', height: '380px' }}></div>
     );
 };
 
