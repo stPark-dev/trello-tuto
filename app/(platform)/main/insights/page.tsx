@@ -40,7 +40,7 @@ const MainInsight = () => {
                         <InsightCard title="Views" data={7250} color="#F0F4F8" ratio={11.84} />
                     </Grid>
                     <Grid item sm={3}>
-                        <InsightCard title="Visits" data={423} color="#EFF4FF" ratio={-31.42} />
+                        <InsightCard title="Visits" data={423} color="#c" ratio={-31.42} />
                     </Grid>
                     <Grid item sm={3}>
                         <InsightCard title="New Users" data={156} color="#F0F4F8" ratio={-1.33} />
