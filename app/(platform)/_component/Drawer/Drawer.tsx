@@ -12,8 +12,8 @@ import Popper from "@mui/material/Popper";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import MenuList from "@mui/material/MenuList";
+import { SvgIconTypeMap } from "@mui/material";
+import { OverridableComponent } from "@mui/material/OverridableComponent";
 import MenuItem from "@mui/material/MenuItem";
 
 import Image from "next/image";
@@ -25,17 +25,23 @@ import BrandLogoLight from "@/public/landing/logo_main.png";
 import { usePathname } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { DrawerAtom, DrawerMode } from "./state/Drawer";
-import { Button, CssBaseline, Divider, IconButton, InputBase, Link, Menu, Tooltip, useMediaQuery } from "@mui/material";
-import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert } from "@mui/icons-material";
+import { CssBaseline, Divider, IconButton, InputBase, Link, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
+import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat } from "@mui/icons-material";
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 import Clock from "../Clock";
-
+import { useRouter } from 'next/navigation';
 
 interface DrawerProps extends React.PropsWithChildren {
   profile?: React.ReactNode;
 }
+interface DrawerMenuItem {
+  text: string;
+  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
+  route: string;
+}
 const Drawer = ({ profile, children }: DrawerProps) => {
   const theme = useTheme();
+  const router = useRouter();
   const currentPathName = usePathname();
   const { data: sessionData } = useSession();
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -106,11 +112,11 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   }));
 
 
-  const isActive = (pathname: string) => currentPathName === pathname;
+  const isActive = (pathname: string) => currentPathName.startsWith(pathname);
   const navLinks = [
-    { href: "/main/tasks", label: "Tasks", Icon: TaskAlt, isActive: isActive("/main/tasks") },
+    { href: "/main/tasks/all", label: "Tasks", Icon: TaskAlt, isActive: isActive("/main/tasks") },
     { href: "/main/insights", label: "Insights", Icon: QueryStats, isActive: isActive("/main/insights") },
-    { href: "/main/assets", label: "Assets", Icon: Business, isActive: isActive("/main/assets") },
+    { href: "/main/assets/buildings", label: "Assets", Icon: Business, isActive: isActive("/main/assets") },
   ];
 
   const headerHeight = 84;
@@ -154,6 +160,31 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     setDrawerState((prev) => ({ ...prev, submenu: {} }));
   }, [md, setDrawerState]);
 
+  const drawerMenuItems: { [key: string]: DrawerMenuItem[] } = {
+    '/main/tasks': [
+      { text: 'All Tasks', icon: Task, route: '/main/tasks/all' },
+      { text: 'Assigned to me', icon: AssignmentReturn, route: '/main/tasks/views' }
+    ],
+    '/main/insights': [
+      { text: 'Location', icon: LocationOn, route: '/main/insights/location' }
+    ],
+    '/main/assets': [
+      { text: 'Buildings', icon: Apartment, route: '/main/assets/buildings' },
+      { text: 'Documents', icon: DocumentScanner, route: '/main/assets/documents' },
+      { text: 'Recurring Tasks', icon: EventRepeat, route: '/main/assets/recurring-tasks' }
+    ]
+  };
+  const getCurrentMenuItems = (currentPath: string): DrawerMenuItem[] => {
+    for (const key in drawerMenuItems) {
+      if (currentPath.startsWith(key)) {
+        return drawerMenuItems[key];
+      }
+    }
+    return [];
+  };
+
+  const currentMenuItems = useMemo(() => getCurrentMenuItems(currentPathName), [currentPathName]);
+
   const drawerContent = (
     <>
       <Box
@@ -192,182 +223,22 @@ const Drawer = ({ profile, children }: DrawerProps) => {
       </Box>
 
       <Box component="nav">
-        {/* {typedNavigation.primary.map((item, i) => {
-          const { icon, iconProps, name, abstract, dev, href, children, subheader } = item;
-          const isOpen = drawerState.submenu[href];
-          const isActive = href === pathname;
-          const hasChild = !!children?.length;
-  
-          return (
-            <List
-              key={`sysmenu_${i}`}
-              sx={{
-                p: 0,
-                bgcolor: isOpen ? "rgba(255,255,255,0.04)" : null,
-                borderBottom: (theme) => `1px solid`,
-              }}
-            >
-              {subheader ? (
-                <ListSubheader
-                  sx={{
-                    lineHeight: 1.5,
-                    py: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: drawerModeIsMini ? "center" : undefined,
-                    fontSize: drawerModeIsMini ? 16 : undefined,
-                  }}
-                  title={name}
-                >
-                  {drawerModeIsMini
-                    ? icon && createElement(icon, { ...iconProps, fontSize: "inherit" })
-                    : name}
-                </ListSubheader>
-              ) : (
-                <>
-                  <ListItemButton
-                    alignItems="flex-start"
-                    onClick={(e) => handleClickNavigationItem(e, href, item)}
-                    onMouseOver={(e) => handleMouseOverTopNavigation(e, item)}
-                    title={name}
-                    sx={{
-                      px: drawerModeIsMini ? 2 : 3,
-                      py: 1.5,
-                      height: headerHeight - 1,
-                      backgroundColor: !isActive ? null : "rgba(255,255,255,0.04)",
-                    }}
-                  >
-                    <ListItemIcon
-                      sx={{
-                        color: !isActive ? "text.primary" : "primary.main",
-                        my: "auto",
-                        minWidth: "34px",
-                      }}
-                    >
-                      {icon && createElement(icon, iconProps)}
-                    </ListItemIcon>
-
-                    <ListItemText
-                      primary={name}
-                      primaryTypographyProps={{
-                        fontSize: 14,
-                        fontWeight: "medium",
-                        lineHeight: "20px",
-                        mb: "auto",
-                      }}
-                      sx={{ my: 0 }}
-                    />
-
-                    {abstract && isDev ? (
-                      <Tooltip
-                        placement="right"
-                        title="임시적으로 표시된 메뉴입니다. 운영환경에서는 표시되지 않습니다."
-                      >
-                        <HelpOutlineSharp
-                          sx={{ my: "auto", color: "warning.main", mr: hasChild ? 0.5 : -1 }}
-                        />
-                      </Tooltip>
-                    ) : (
-                      dev && (
-                        <Tooltip
-                          placement="right"
-                          title="개발중인 페이지입니다. 오류가 발생할 수 있습니다."
-                        >
-                          <ConstructionSharp
-                            sx={{ my: "auto", color: "warning.main", mr: hasChild ? 0.5 : -1 }}
-                          />
-                        </Tooltip>
-                      )
-                    )}
-
-                    {hasChild && (
-                      <KeyboardArrowDownSharp
-                        className="arrow"
-                        sx={{
-                          my: "auto",
-                          mr: -1,
-                          transform: isOpen ? "rotate(-180deg)" : "rotate(0)",
-                          transition: "0.2s",
-                        }}
-                      />
-                    )}
-                  </ListItemButton>
-
-                  {isOpen &&
-                    hasChild &&
-                    children.map(
-                      (
-                        {
-                          icon: childIcon,
-                          iconProps: childIconProps,
-                          name: childName,
-                          href: childHref,
-                          dev: childDev,
-                          abstract: childAbstract,
-                        },
-                        j
-                      ) => {
-                        const isActive = childHref === pathname;
-
-                        if (childAbstract && !isDev) return;
-
-                        return (
-                          <ListItemButton
-                            key={`sysmenu_${i}_${j}`}
-                            title={childName}
-                            sx={{
-                              pl: 4,
-                              py: 1,
-                              minHeight: 32,
-                              color: "text.primary",
-                              backgroundColor: !isActive ? null : "rgba(255, 255, 255, 0.04)",
-                            }}
-                            onClick={(e) => handleClickNavigationItem(e, childHref)}
-                          >
-                            <ListItemIcon
-                              sx={{
-                                color: !isActive ? "text.primary" : "primary.main",
-                                minWidth: "34px",
-                              }}
-                            >
-                              {childIcon && createElement(childIcon, childIconProps)}
-                            </ListItemIcon>
-                            <ListItemText
-                              primary={childName}
-                              primaryTypographyProps={{ fontSize: 13, fontWeight: "medium" }}
-                            />
-                            {childAbstract && isDev ? (
-                              <Tooltip
-                                placement="right"
-                                title="임시적으로 표시된 메뉴입니다. 운영환경에서는 표시되지 않습니다."
-                              >
-                                <HelpOutlineSharp sx={{ my: "auto", color: "warning.main" }} />
-                              </Tooltip>
-                            ) : (
-                              childDev && (
-                                <Tooltip
-                                  placement="right"
-                                  title="개발중인 페이지입니다. 오류가 발생할 수 있습니다."
-                                >
-                                  <ConstructionSharp
-                                    className="arrow"
-                                    sx={{ my: "auto", color: "warning.main" }}
-                                  />
-                                </Tooltip>
-                              )
-                            )}
-                          </ListItemButton>
-                        );
-                      }
-                    )}
-                </>
-              )}
-            </List>
-          );
-        })} */}
+        <Box sx={{ width: 250 }} role="presentation">
+          <List dense>
+            {currentMenuItems.map((menuItem: DrawerMenuItem, index: number) => (
+              <ListItem key={index} disablePadding>
+                <ListItemButton onClick={() => router.push(menuItem.route)}>
+                  <ListItemIcon>
+                    <menuItem.icon />
+                  </ListItemIcon>
+                  <ListItemText primary={menuItem.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+        </Box>
       </Box>
-      <Popper
+      {/* <Popper
         open={open}
         anchorEl={anchorRefState}
         role={undefined}
@@ -385,7 +256,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
             </Paper>
           </Grow>
         )}
-      </Popper>
+      </Popper> */}
     </>
   );
   const getToolbox = (Tools: React.ReactNode, headerToolboxProps?: BoxProps) => {
