@@ -12,10 +12,8 @@ const MainLayout = ({
     return (
         <>
             <Drawer>
-                <Box sx={{ display: "flex", pt: "64px" }}>
-                    <Box sx={{ display: "flex", p: 1, width: "100vw", height: "100vh" }}>
-                        {children}
-                    </Box>
+                <Box sx={{ display: "flex", p: 1, pt: "64px" }}>
+                    {children}
                 </Box>
             </Drawer>
         </>
