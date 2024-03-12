@@ -48,7 +48,7 @@ const rows = [
     { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-const DocumentPage = () => {
+const RecurringTaskPage = () => {
     return (
         <>
             <Box sx={{ height: 400, width: '100%' }}>
@@ -71,4 +71,4 @@ const DocumentPage = () => {
     )
 };
 
-export default DocumentPage;
+export default RecurringTaskPage;

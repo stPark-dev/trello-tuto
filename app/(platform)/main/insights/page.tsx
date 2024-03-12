@@ -46,7 +46,7 @@ const MainInsight = () => {
     };
     return (
         <Box sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
-            <Box sx={{ my: 4, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+            <Box sx={{ px: 4, my: 4, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Typography variant="h5" fontWeight="bold">Insights</Typography>
                 <Button
                     component="label"
@@ -88,7 +88,7 @@ const MainInsight = () => {
                         <InsightCard title="Views" data={7250} color="#F0F4F8" ratio={11.84} />
                     </Grid>
                     <Grid item xs={12} sm={3}>
-                        <InsightCard title="Visits" data={423} color="#c" ratio={-31.42} />
+                        <InsightCard title="Visits" data={423} color="#EFF4FF" ratio={-31.42} />
                     </Grid>
                     <Grid item xs={12} sm={3}>
                         <InsightCard title="New Users" data={156} color="#F0F4F8" ratio={-1.33} />

@@ -3,15 +3,22 @@
 import { useTheme, styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Avatar, Box, Button, Typography } from "@mui/material";
+import { Avatar, Box, Button, Dialog, TextField, Typography, Icon } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { useRef, useState } from "react";
-
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import { useState } from "react";
 
 const BuildingPage = () => {
     const theme = useTheme();
-    const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; url?: string }>>([]);
-    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const Item = styled(Paper)(({ theme }) => ({
         height: 120,
@@ -33,37 +40,66 @@ const BuildingPage = () => {
         cursor: "pointer"
     }));
 
-
-
-    const VisuallyHiddenInput = styled("input")({
-        clip: "rect(0 0 0 0)",
-        clipPath: "inset(50%)",
-        height: 1,
-        overflow: "hidden",
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        whiteSpace: "nowrap",
-        width: 1,
-    });
-
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const files = event.target.files;
-        if (files) {
-            const filesArray = Array.from(files).map(file => {
-                if (file.type.startsWith("image/")) {
-                    return { name: file.name, url: URL.createObjectURL(file) };
-                }
-                return { name: file.name };
-            });
-            setUploadedFiles(filesArray);
-        }
-    };
-
+    const BuildingCreateDialog = () => {
+        return (
+            <>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    PaperProps={{
+                        component: 'form',
+                        onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
+                            event.preventDefault();
+                            const formData = new FormData(event.currentTarget);
+                            const formJson = Object.fromEntries((formData as any).entries());
+                            const name = formJson.name;
+                            const customer = formJson.customer;
+                            console.log(name, customer);
+                            handleClose();
+                        },
+                    }}
+                >   <Box>
+                        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center"}}>
+                            <Box sx={{ borderWidth: "1px", borderRadius: "4px", borderColor: "#ffffff", padding: "0.625rem" }}><ApartmentIcon /></Box>
+                            Add Buildings
+                        </Box>
+                        <Box>
+                            <TextField
+                                autoFocus
+                                required
+                                margin="dense"
+                                id="name"
+                                name="name"
+                                label="Name"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                            />
+                            <TextField
+                                autoFocus
+                                required
+                                margin="dense"
+                                id="customer"
+                                name="customer"
+                                label="Customer"
+                                type="text"
+                                fullWidth
+                                variant="standard"
+                            />
+                        </Box>
+                        <Box sx={{ alignItems: "center" }}>
+                            <Button onClick={handleClose}>Cancel</Button>
+                            <Button type="submit">Submit</Button>
+                        </Box>
+                    </Box>
+                </Dialog>
+            </>
+        );
+    }
 
     return (
         <Box sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
-            <Box sx={{ my: 4, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+            <Box sx={{ px: 4, my: 4, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Typography variant="h5" fontWeight="bold">Buildings</Typography>
                 <Button
                     component="label"
@@ -75,26 +111,10 @@ const BuildingPage = () => {
                             bgcolor: "#2B5A52",
                         }
                     }}
+                    onClick={handleClickOpen}
                 >
                     Add building
-                    <VisuallyHiddenInput
-                        type="file"
-                        multiple
-                        onChange={handleFileChange}
-                        ref={fileInputRef}
-                        accept="image/*, .pdf"
-                    />
                 </Button>
-                {uploadedFiles.map((file, index) => (
-                    <Box key={index} mb={5}>
-                        {file.url ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img src={file.url} alt={file.name} style={{ width: "auto", height: "auto" }} />
-                        ) : (
-                            <span>{file.name}</span>
-                        )}
-                    </Box>
-                ))}
             </Box>
             <Box sx={{ backgroundColor: theme.palette.grey[100], p: 5, overflow: "auto" }}>
                 <Grid container spacing={2}>
@@ -135,6 +155,7 @@ const BuildingPage = () => {
                     </Grid>
                 </Grid>
             </Box>
+            <BuildingCreateDialog />
         </Box>
     );
 }
