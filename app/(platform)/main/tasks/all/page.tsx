@@ -1,10 +1,11 @@
 "use client";
-import { Box, Button, Grid, Paper, Typography, Chip, useTheme, useMediaQuery, IconButton } from "@mui/material"
+import { Box, Button, Grid, Paper, Typography, Chip, useTheme, useMediaQuery, IconButton, styled } from "@mui/material"
 import { CheckCircleOutline, FileOpenSharp, AccessTime, AddCircleOutlineSharp, Delete } from '@mui/icons-material';
 import QrCodeGenerator from "@/components/QrCodeGenerator";
 import QrCodeScanner from "@/components/QrCodeScanner";
+import TaskIcon from '@mui/icons-material/Task';
 import { DragDropContext, Droppable, Draggable, type DropResult } from "react-beautiful-dnd";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export type Id = string;
 
@@ -28,6 +29,9 @@ const initialColumns: Record<Id, Column> = {
 const MainTasks = () => {
     const [columns, setColumns] = useState(initialColumns);
     const [newTaskCount, setNewTaskCount] = useState(0);
+    const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; url?: string }>>([]);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
     const theme = useTheme();
     const sm = useMediaQuery(theme.breakpoints.up("sm"));
     const handleScanSuccess = (decodedText: string) => {
@@ -118,10 +122,65 @@ const MainTasks = () => {
             }));
         }
     };
+    const VisuallyHiddenInput = styled("input")({
+        clip: "rect(0 0 0 0)",
+        clipPath: "inset(50%)",
+        height: 1,
+        overflow: "hidden",
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        whiteSpace: "nowrap",
+        width: 1,
+    });
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const files = event.target.files;
+        if (files) {
+            const filesArray = Array.from(files).map(file => {
+                if (file.type.startsWith("image/")) {
+                    return { name: file.name, url: URL.createObjectURL(file) };
+                }
+                return { name: file.name };
+            });
+            setUploadedFiles(filesArray);
+        }
+    };
     return (
         <>
-            <Box sx={{ display: 'flex', flexDirection: "column", p: 3, height: "100vh", width: "100vw", overflow: "auto" }}>
-                <Typography variant="h4" sx={{ mb: 4, alignSelf: "center" }}>Tasks</Typography>
+            <Box sx={{ display: 'flex', flexDirection: "column", width: '100%', height: '100%', overflow: "auto" }}>
+                <Box sx={{ my: 4, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                    <Typography variant="h5" fontWeight="bold">All Tasks</Typography>
+                    <Button
+                        component="label"
+                        variant="contained"
+                        startIcon={<TaskIcon />}
+                        sx={{
+                            bgcolor: '#004d40', 
+                            '&:hover': {
+                                bgcolor: "#2B5A52",
+                            }
+                        }}
+                    >
+                        Create Tasks
+                        <VisuallyHiddenInput
+                            type="file"
+                            multiple
+                            onChange={handleFileChange}
+                            ref={fileInputRef}
+                            accept="image/*, .pdf"
+                        />
+                    </Button>
+                    {uploadedFiles.map((file, index) => (
+                        <Box key={index} mb={5}>
+                            {file.url ? (
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img src={file.url} alt={file.name} style={{ width: "auto", height: "auto" }} />
+                            ) : (
+                                <span>{file.name}</span>
+                            )}
+                        </Box>
+                    ))}
+                </Box>
                 <Grid container spacing={2} sx={{ flexGrow: 1 }}>
                     <Grid item xs={12}> {/* QR 코드 생성기와 스캐너를 이 부분에 배치 */}
                         <Box id="qr" sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

@@ -2,7 +2,7 @@
 
 import { alpha, styled, useTheme } from "@mui/material/styles";
 
-import { createElement, useEffect, useMemo, useState } from "react";
+import { ChangeEvent, createElement, useEffect, useMemo, useRef, useState } from "react";
 import Box, { BoxProps } from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import AppBar from "@mui/material/AppBar";
@@ -25,7 +25,7 @@ import BrandLogoLight from "@/public/landing/logo_main.png";
 import { usePathname } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { DrawerAtom, DrawerMode } from "./state/Drawer";
-import { CssBaseline, Divider, IconButton, InputBase, Link, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
+import { CssBaseline, IconButton, InputBase, Link, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
 import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat } from "@mui/icons-material";
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 import Clock from "../Clock";
@@ -46,18 +46,11 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const { data: sessionData } = useSession();
   const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -120,12 +113,29 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   ];
 
   const headerHeight = 84;
-  const drawerWidth = 210;
+  const drawerWidth = 360;
 
   const Logos = {
     dark: BrandLogoDark.src,
     light: BrandLogoLight.src,
   };
+
+  // logo 이미지 교체
+  const [logoImage, setLogoImage] = useState(Logos[theme.palette.mode]);
+
+  const handleLogoChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (typeof reader.result === "string") {
+          setLogoImage(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [anchorRefState, setAnchorRefState] = useState<HTMLElement | null>(null);
   const md = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: true });
@@ -136,10 +146,9 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
   const handleDrawerToggle = () => setDrawerState((prev) => ({ ...prev, open: !prev.open }));
 
-  // State to manage the right-side drawer visibility
+  // Right Drawer
   const [rightDrawerOpen, setRightDrawerOpen] = useState(false);
 
-  // Function to toggle the right-side drawer
   const toggleRightDrawer = () => {
     setRightDrawerOpen(!rightDrawerOpen);
   };
@@ -200,19 +209,27 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           sx={{
             flexGrow: 1,
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
-            p: 5
+            borderBottom: "1px solid #A3A3A3",
+            p: 3,
+            cursor: "pointer",
           }}
+          onClick={() => fileInputRef.current?.click()}
         >
-          <Link href="/" sx={{ display: "inline-flex" }}>
-            <Image
-              src={Logos[theme.palette.mode]}
-              width={Math.ceil(240 / 2)}
-              height={Math.ceil(38 / 2)}
-              alt="Brand Logo"
-            />
-          </Link>
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleLogoChange}
+            style={{ display: "none" }}
+            accept="image/*"
+          />
+          <Image
+            src={logoImage}
+            width={Math.ceil(360 / 2)}
+            height={Math.ceil(56 / 2)}
+            alt="Brand Logo"
+          />
         </Box>
 
         {!md && (
@@ -224,7 +241,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
       <Box component="nav">
         <Box sx={{ width: 250 }} role="presentation">
-          <List dense>
+          <List sx={{ ml: 5 }}>
             {currentMenuItems.map((menuItem: DrawerMenuItem, index: number) => (
               <ListItem key={index} disablePadding>
                 <ListItemButton onClick={() => router.push(menuItem.route)}>
@@ -238,25 +255,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           </List>
         </Box>
       </Box>
-      {/* <Popper
-        open={open}
-        anchorEl={anchorRefState}
-        role={undefined}
-        placement="right-start"
-        transition
-      >
-        {({ TransitionProps }) => (
-          <Grow {...TransitionProps} style={{ transformOrigin: "left top" }}>
-            <Paper
-              sx={{
-                minWidth: 150,
-                border: (theme) => `1px solid ${theme.palette.divider}`,
-              }}
-            >
-            </Paper>
-          </Grow>
-        )}
-      </Popper> */}
     </>
   );
   const getToolbox = (Tools: React.ReactNode, headerToolboxProps?: BoxProps) => {
