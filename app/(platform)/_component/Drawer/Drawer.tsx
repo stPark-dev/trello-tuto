@@ -269,7 +269,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
       <Box component="nav">
         <Box sx={{ width: 250 }} role="presentation">
-          <List sx={{ ml: 5 }}>
+          <List sx={{ ml: 3, mt: 1 }}>
             {currentMenuItems.map((menuItem: DrawerMenuItem, index: number) => (
               <ListItem key={index} disablePadding>
                 <ListItemButton onClick={() => router.push(menuItem.route)}>

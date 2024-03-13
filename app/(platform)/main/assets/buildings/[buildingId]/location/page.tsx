@@ -3,7 +3,7 @@ import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
 const InformationPage = ({ params }: { params: { buildingId: string } }) => {
     return (
         <>
-            <Box sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Box sx={{ px: 2, my: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <Typography variant="h5" fontWeight="bold">Information({params.buildingId})</Typography>
                 </Box>
@@ -50,7 +50,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                             />
                         </Box>
 
-                        {/* "Address" 필드 변환 */}
+                        {/* "Address" 필드 */}
                         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
                             <Typography variant="body1" fontWeight="medium">
                                 Address
@@ -65,7 +65,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                             />
                         </Box>
 
-                        {/* "City & Postal Code" 필드 변환 */}
+                        {/* "City & Postal Code" 필드 */}
                         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
                             <Typography variant="body1" fontWeight="medium">
                                 City & Postal Code
@@ -90,7 +90,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                             </Box>
                         </Box>
 
-                        {/* "Country" 필드 변환 */}
+                        {/* "Country" 필드 */}
                         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
                             <Typography variant="body1" fontWeight="medium">
                                 Country
@@ -105,7 +105,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                             />
                         </Box>
 
-                        {/* "VAT Number" 필드 변환 */}
+                        {/* "VAT Number" 필드 */}
                         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
                             <Typography variant="body1" fontWeight="medium">
                                 VAT Number
@@ -120,7 +120,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                             />
                         </Box>
 
-                        {/* "Contact Person" 필드 변환 */}
+                        {/* "Contact Person" 필드 */}
                         <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
                             <Typography variant="body1" fontWeight="medium">
                                 Contact Person
