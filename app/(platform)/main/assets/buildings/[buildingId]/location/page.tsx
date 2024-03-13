@@ -1,10 +1,10 @@
 import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
 
-const DetailBuildingPage = ({ params }: { params: { buildingId: string } }) => {
+const InformationPage = ({ params }: { params: { buildingId: string } }) => {
     return (
         <>
             <Box sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
-                <Box sx={{ px: 2, my: 4, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <Box sx={{ px: 2, my: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                     <Typography variant="h5" fontWeight="bold">Information({params.buildingId})</Typography>
                 </Box>
                 <Box sx={{ bgcolor: "background.paper", p: 6, overflow: "auto" }}>
@@ -141,4 +141,4 @@ const DetailBuildingPage = ({ params }: { params: { buildingId: string } }) => {
     )
 }
 
-export default DetailBuildingPage;
+export default InformationPage;

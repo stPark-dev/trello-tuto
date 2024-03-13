@@ -22,14 +22,13 @@ import { useSession } from "next-auth/react";
 import BrandLogoDark from "@/public/landing/logo_main.png";
 import BrandLogoLight from "@/public/landing/logo_main.png";
 
-import { usePathname } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { DrawerAtom, DrawerMode } from "./state/Drawer";
 import { CssBaseline, IconButton, InputBase, Link, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
-import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat } from "@mui/icons-material";
+import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat, Info, Interests, LocalOffer, Person, Shield, CreditCard } from "@mui/icons-material";
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 import Clock from "../Clock";
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface DrawerProps extends React.PropsWithChildren {
   profile?: React.ReactNode;
@@ -164,6 +163,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   };
 
   useEffect(() => {
+    console.info('currentMenuItems : ', currentMenuItems);
     if (!md) return;
 
     setDrawerState((prev) => ({ ...prev, submenu: {} }));
@@ -181,9 +181,36 @@ const Drawer = ({ profile, children }: DrawerProps) => {
       { text: 'Buildings', icon: Apartment, route: '/main/assets/buildings' },
       { text: 'Documents', icon: DocumentScanner, route: '/main/assets/documents' },
       { text: 'Recurring Tasks', icon: EventRepeat, route: '/main/assets/recurring-tasks' }
+    ],
+    '/main/assets/buildings/[buildingId]': [
+      { text: 'Information', icon: Info, route: '/main/assets/buildings/[buildingId]/location' },
+      { text: 'Notifiactions', icon: Notifications, route: '/main/assets/buildings/[buildingId]/notifications' },
+      { text: 'Spaces', icon: LocationOn, route: '/main/assets/buildings/[buildingId]/spaces' },
+      { text: 'Assets', icon: Interests, route: '/main/assets/buildings/[buildingId]/assets' },
+      { text: 'Categories', icon: LocalOffer, route: '/main/assets/buildings/[buildingId]/categories' },
+      { text: 'Users', icon: Person, route: '/main/assets/buildings/[buildingId]/users' },
+      { text: 'Roles', icon: Shield, route: '/main/assets/buildings/[buildingId]/roles' },
+      { text: 'Billing and Plan', icon: CreditCard, route: '/main/assets/buildings/[buildingId]/billing' },
     ]
   };
   const getCurrentMenuItems = (currentPath: string): DrawerMenuItem[] => {
+    const pathSegments = currentPath.split('/');
+    const buildingIdIndex = pathSegments.findIndex(segment => segment === 'buildings') + 1;
+    const buildingId = pathSegments.length > buildingIdIndex ? pathSegments[buildingIdIndex] : null;
+
+    if (buildingId) {
+      // 'buildingId'가 있는 경우, 동적 경로를 체크합니다.
+      const dynamicKey = '/main/assets/buildings/[buildingId]';
+      const regex = new RegExp(dynamicKey.replace('[buildingId]', '[^/]+'));
+      if (regex.test(currentPath)) {
+        // 현재 경로가 동적 경로와 일치하는 경우, 해당하는 메뉴 항목을 반환합니다.
+        return drawerMenuItems[dynamicKey].map(item => ({
+          ...item,
+          route: item.route.replace('[buildingId]', buildingId)
+        }));
+      }
+    }
+
     for (const key in drawerMenuItems) {
       if (currentPath.startsWith(key)) {
         return drawerMenuItems[key];
@@ -191,6 +218,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     }
     return [];
   };
+
 
   const currentMenuItems = useMemo(() => getCurrentMenuItems(currentPathName), [currentPathName]);
 
@@ -334,13 +362,13 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                   "&:hover": {
                     color: "#00897b",
                     opacity: 1,
-                    textDecorationThickness: "2px", // Example thickness, adjust as needed
-                    textUnderlineOffset: "10px", // Example offset, adjust as needed
+                    textDecorationThickness: "2px",
+                    textUnderlineOffset: "10px",
                   },
                   textDecoration: isActive ? "underline" : "none",
                   textDecorationColor: "#004d40",
-                  textDecorationThickness: "2px", // Maintain consistent thickness with hover
-                  textUnderlineOffset: "10px", // Adjust the space between text and underline
+                  textDecorationThickness: "2px",
+                  textUnderlineOffset: "10px",
                 }}
                 component={Link}
                 href={href}
