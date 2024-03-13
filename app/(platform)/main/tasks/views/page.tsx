@@ -1,9 +1,9 @@
 "use client";
 import { Box, Button, Grid, Paper, Typography, Chip, useTheme, useMediaQuery, IconButton, styled } from "@mui/material"
-import { CheckCircleOutline, FileOpenSharp, AccessTime, AddCircleOutlineSharp, Delete } from '@mui/icons-material';
+import { CheckCircleOutline, FileOpenSharp, AccessTime, AddCircleOutlineSharp, Delete } from "@mui/icons-material";
 import QrCodeGenerator from "@/components/QrCodeGenerator";
 import QrCodeScanner from "@/components/QrCodeScanner";
-import TaskIcon from '@mui/icons-material/Task';
+import TaskIcon from "@mui/icons-material/Task";
 import { DragDropContext, Droppable, Draggable, type DropResult } from "react-beautiful-dnd";
 import { useRef, useState } from "react";
 
@@ -22,9 +22,9 @@ export type Task = {
 
 // 가상의 초기 데이터
 const initialColumns: Record<Id, Column> = {
-    open: { id: 'open', title: "Open", items: [{ id: "item1", content: "Task 1" }] },
-    scheduled: { id: 'scheduled', title: "Scheduled", items: [{ id: "item2", content: "Task 2" }] },
-    completed: { id: 'completed', title: "Completed", items: [{ id: "item3", content: "Task 3" }] },
+    open: { id: "open", title: "Open", items: [{ id: "item1", content: "Task 1" }] },
+    scheduled: { id: "scheduled", title: "Scheduled", items: [{ id: "item2", content: "Task 2" }] },
+    completed: { id: "completed", title: "Completed", items: [{ id: "item3", content: "Task 3" }] },
 };
 const MainTasks = () => {
     const [columns, setColumns] = useState(initialColumns);
@@ -147,16 +147,16 @@ const MainTasks = () => {
     };
     return (
         <>
-            <Box sx={{ display: 'flex', flexDirection: "column", width: '100%', height: '100%', overflow: "auto" }}>
-                <Box sx={{ px: 4, my: 4, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", overflow: "auto" }}>
+                <Box sx={{ px: 2, my: 4, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     <Typography variant="h5" fontWeight="bold">All Tasks</Typography>
                     <Button
                         component="label"
                         variant="contained"
                         startIcon={<TaskIcon />}
                         sx={{
-                            bgcolor: '#004d40', 
-                            '&:hover': {
+                            bgcolor: "#004d40", 
+                            "&:hover": {
                                 bgcolor: "#2B5A52",
                             }
                         }}
@@ -183,7 +183,7 @@ const MainTasks = () => {
                 </Box>
                 <Grid container spacing={2} sx={{ flexGrow: 1 }}>
                     <Grid item xs={12}> {/* QR 코드 생성기와 스캐너를 이 부분에 배치 */}
-                        <Box id="qr" sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <Box id="qr" sx={{ p: 2, display: "flex", flexDirection: "column", alignItems: "center" }}>
                             <QrCodeGenerator />
                             <QrCodeScanner onScanSuccess={handleScanSuccess} />
                             <Button id="opensearch" variant="outlined" onClick={handleClickOpenSearch} sx={{ mt: 4 }}>
@@ -193,20 +193,20 @@ const MainTasks = () => {
                     </Grid>
                     <Grid item xs={12}> {/* 드래그 앤 드롭 컨텍스트를 이 부분에 배치 */}
                         <DragDropContext onDragEnd={onDragEnd}>
-                            <Box sx={{ flexGrow: 1, height: "100%", overflow: 'auto' }}> {/* 여기에 flexGrow 속성을 추가하여 남은 공간을 모두 차지하게 함 */}
+                            <Box sx={{ flexGrow: 1, height: "100%", overflow: "auto" }}> {/* 여기에 flexGrow 속성을 추가하여 남은 공간을 모두 차지하게 함 */}
                                 <Grid container spacing={2}>
                                     {Object.entries(columns).map(([columnId, column]) => (
                                         <Grid item xs={12} sm={4} key={columnId}>
-                                            <Paper elevation={3} sx={{ minHeight: '100%', p: 2 }}>
+                                            <Paper elevation={3} sx={{ minHeight: "100%", p: 2 }}>
                                                 <Box display="flex" alignItems="center">
-                                                    {columnId === 'open' && <FileOpenSharp color="action" sx={{ mr: 1 }} />}
-                                                    {columnId === 'scheduled' && <AccessTime color="warning" sx={{ mr: 1 }} />}
-                                                    {columnId === 'completed' && <CheckCircleOutline color="success" sx={{ mr: 1 }} />}
+                                                    {columnId === "open" && <FileOpenSharp color="action" sx={{ mr: 1 }} />}
+                                                    {columnId === "scheduled" && <AccessTime color="warning" sx={{ mr: 1 }} />}
+                                                    {columnId === "completed" && <CheckCircleOutline color="success" sx={{ mr: 1 }} />}
                                                     <Typography variant="subtitle1">{column.title}</Typography>
                                                     <Chip label={column.items.length.toString()} size="small" sx={{ ml: 1 }} />
                                                     <IconButton
                                                         onClick={() => addTaskToColumn(columnId, "New Task")}
-                                                        sx={{ ml: 'auto' }}
+                                                        sx={{ ml: "auto" }}
                                                     ><AddCircleOutlineSharp /></IconButton>
                                                 </Box>
                                                 <Droppable droppableId={columnId}>
@@ -214,7 +214,7 @@ const MainTasks = () => {
                                                         <Box
                                                             {...provided.droppableProps}
                                                             ref={provided.innerRef}
-                                                            sx={{ mt: 2, bgcolor: snapshot.isDraggingOver ? 'background.default' : 'background.paper' }}
+                                                            sx={{ mt: 2, bgcolor: snapshot.isDraggingOver ? "background.default" : "background.paper" }}
                                                         >
                                                             {column.items.map((item, index) => {
                                                                 return (
@@ -226,12 +226,12 @@ const MainTasks = () => {
                                                                                 {...provided.dragHandleProps}
                                                                                 sx={{
                                                                                     my: 2, p: 2,
-                                                                                    bgcolor: snapshot.isDragging ? 'rgba(156, 156, 156, 0.5)' : '#9C9C9C',
+                                                                                    bgcolor: snapshot.isDragging ? "rgba(156, 156, 156, 0.5)" : "#9C9C9C",
                                                                                     borderRadius: "10px",
-                                                                                    display: 'flex',
-                                                                                    justifyContent: 'space-between',
-                                                                                    alignItems: 'center',
-                                                                                    '&:hover': {
+                                                                                    display: "flex",
+                                                                                    justifyContent: "space-between",
+                                                                                    alignItems: "center",
+                                                                                    "&:hover": {
                                                                                         boxShadow: 3,
                                                                                     }
                                                                                 }}
@@ -240,7 +240,7 @@ const MainTasks = () => {
                                                                                 <IconButton
                                                                                     onClick={() => removeTaskFromColumn(columnId, item.id)}
                                                                                     size="small"
-                                                                                    sx={{ ml: 'auto' }}
+                                                                                    sx={{ ml: "auto" }}
                                                                                 >
                                                                                     <Delete />
                                                                                 </IconButton>
