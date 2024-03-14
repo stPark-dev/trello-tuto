@@ -3,13 +3,13 @@ import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
 const InformationPage = ({ params }: { params: { buildingId: string } }) => {
     return (
         <>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Box sx={{ px: 2, my: 2, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                    <Typography variant="h5" fontWeight="bold">Information({params.buildingId})</Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
+                <Box sx={{ px: 5, my: 5, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
+                    <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Information({params.buildingId})</Typography>
                 </Box>
                 <Box sx={{ bgcolor: "background.paper", p: 6, overflow: "auto" }}>
                     <Box sx={{ maxWidth: "xl", display: "flex", flexDirection: "column", gap: 2 }}>
-                        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
+                        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 6, alignItems: "center" }}>
                             <Box sx={{ flexGrow: 1 }}>
                                 <Typography variant="body1" fontWeight="medium">
                                     Pictures
@@ -36,7 +36,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 </Box>
                             </Box>
                         </Box>
-                        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
+                        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 6, alignItems: "center" }}>
                             <Typography variant="body1" fontWeight="medium">
                                 Name
                             </Typography>
@@ -44,14 +44,14 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 fullWidth
                                 id="name"
                                 name="name"
-                                placeholder="e.g. Office"
+                                placeholder="ex) 현대빌딩"
                                 variant="outlined"
-                                sx={{ bgcolor: 'background.paper', borderColor: 'grey.300' }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
                             />
                         </Box>
 
                         {/* "Address" 필드 */}
-                        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
+                        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 6, alignItems: "center" }}>
                             <Typography variant="body1" fontWeight="medium">
                                 Address
                             </Typography>
@@ -59,39 +59,39 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 fullWidth
                                 id="address"
                                 name="address"
-                                placeholder="e.g. 123 Main Street, New York, NY 10001"
+                                placeholder="ex) 올림픽로 82"
                                 variant="outlined"
-                                sx={{ bgcolor: 'background.paper', borderColor: 'grey.300' }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
                             />
                         </Box>
 
                         {/* "City & Postal Code" 필드 */}
-                        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
+                        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 6, alignItems: "center" }}>
                             <Typography variant="body1" fontWeight="medium">
                                 City & Postal Code
                             </Typography>
-                            <Box sx={{ display: 'flex', gap: 4 }}>
+                            <Box sx={{ display: "flex", gap: 4 }}>
                                 <TextField
                                     fullWidth
                                     id="city"
                                     name="city"
-                                    placeholder="City"
+                                    placeholder="도시"
                                     variant="outlined"
-                                    sx={{ bgcolor: 'background.paper', borderColor: 'grey.300' }}
+                                    sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
                                 />
                                 <TextField
                                     fullWidth
                                     id="postal_code"
                                     name="postal_code"
-                                    placeholder="Postal Code"
+                                    placeholder="우편번호"
                                     variant="outlined"
-                                    sx={{ bgcolor: 'background.paper', borderColor: 'grey.300' }}
+                                    sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
                                 />
                             </Box>
                         </Box>
 
                         {/* "Country" 필드 */}
-                        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
+                        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 6, alignItems: "center" }}>
                             <Typography variant="body1" fontWeight="medium">
                                 Country
                             </Typography>
@@ -99,14 +99,14 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 fullWidth
                                 id="country"
                                 name="country"
-                                placeholder="e.g. United States"
+                                placeholder="ex) 대한민국"
                                 variant="outlined"
-                                sx={{ bgcolor: 'background.paper', borderColor: 'grey.300' }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
                             />
                         </Box>
 
                         {/* "VAT Number" 필드 */}
-                        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
+                        {/* <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 6, alignItems: "center" }}>
                             <Typography variant="body1" fontWeight="medium">
                                 VAT Number
                             </Typography>
@@ -116,12 +116,12 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 name="vat"
                                 placeholder="e.g. BE123456789B01"
                                 variant="outlined"
-                                sx={{ bgcolor: 'background.paper', borderColor: 'grey.300' }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
                             />
-                        </Box>
+                        </Box> */}
 
                         {/* "Contact Person" 필드 */}
-                        <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 6, alignItems: 'center' }}>
+                        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 6, alignItems: "center" }}>
                             <Typography variant="body1" fontWeight="medium">
                                 Contact Person
                             </Typography>
@@ -129,9 +129,9 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 fullWidth
                                 id="contact_person"
                                 name="contact_person"
-                                placeholder="e.g. John Doe"
+                                placeholder="ex) 홍길동"
                                 variant="outlined"
-                                sx={{ bgcolor: 'background.paper', borderColor: 'grey.300' }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
                             />
                         </Box>
                     </Box>

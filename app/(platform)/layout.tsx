@@ -28,9 +28,6 @@ const PlatformLayout = ({
             ></SnackbarProvider>
             {children}
         </RecoilRoot>
-        // <ClerkProvider>
-        //     {children}
-        // </ClerkProvider>
     )
 }
 

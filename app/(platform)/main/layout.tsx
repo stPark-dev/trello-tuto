@@ -1,8 +1,18 @@
-import { Box } from "@mui/material";
+'use client'
 
-import MainNavBar from "./_components/Navbar";
-import MainSideBar from "./_components/Sidebar";
+import { Box, ThemeProvider, createTheme } from "@mui/material";
 import Drawer from "../_component/Drawer/Drawer";
+import { roboto, montserrat, inter } from "@/font/fonts";
+
+const headingFont = createTheme({
+    typography: {
+        fontFamily: [
+            inter,
+            roboto,
+            montserrat,
+         ].join(','),
+    },
+});
 
 const MainLayout = ({
     children
@@ -11,11 +21,13 @@ const MainLayout = ({
 }) => {
     return (
         <>
-            <Drawer>
-                <Box sx={{ display: "flex", p: 1, pt: "64px" }}>
-                    {children}
-                </Box>
-            </Drawer>
+            <ThemeProvider theme={headingFont}>
+                <Drawer>
+                    <Box sx={{ display: "flex", pt: "64px" }}>
+                        {children}
+                    </Box>
+                </Drawer>
+            </ThemeProvider>
         </>
     )
 }

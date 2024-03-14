@@ -239,7 +239,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            borderBottom: "1px solid #A3A3A3",
+            borderBottom: "1px solid #e0e0e0",
             p: 3,
             cursor: "pointer",
           }}
@@ -522,7 +522,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
       >
         <Box
           sx={{
-            p: 2,
             display: "flex",
             flexDirection: "column",
             flexGrow: 1,

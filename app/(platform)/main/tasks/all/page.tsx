@@ -148,7 +148,7 @@ const MainTasks = () => {
     return (
         <>
             <Box sx={{ display: 'flex', flexDirection: "column", width: '100%', height: '100%', overflow: "auto" }}>
-                <Box sx={{ px: 2, my: 2, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+                <Box sx={{ px: 5, my: 5, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     <Typography variant="h5" fontWeight="bold">All Tasks</Typography>
                     <Button
                         component="label"
