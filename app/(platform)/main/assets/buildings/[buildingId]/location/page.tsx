@@ -1,6 +1,25 @@
+"use client"
+
 import { Avatar, Box, Button, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 
 const InformationPage = ({ params }: { params: { buildingId: string } }) => {
+
+    const [image, setImage] = useState('https://app.fixform.com/images/logo/8e7e5369-9b7e-4662-985d-2c8ebb98b722?p=logo&t=1709859358&signature=6e07d02fded9883e4eec985d39f589326c9de1c68ba25eb5a58f1a7ea50ff632');
+
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (event.target.files && event.target.files[0]) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                if (e.target && e.target.result) {
+                    setImage(e.target.result.toString());
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+    };
     return (
         <>
             <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -8,7 +27,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                     <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Information({params.buildingId})</Typography>
                 </Box>
                 <Box sx={{ bgcolor: "background.paper", p: 6, overflow: "auto" }}>
-                    <Box sx={{ maxWidth: "xl", display: "flex", flexDirection: "column", gap: 2 }}>
+                    <Box sx={{ maxWidth: "36rem", display: "flex", flexDirection: "column", gap: 3 }}>
                         <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 6, alignItems: "center" }}>
                             <Box sx={{ flexGrow: 1 }}>
                                 <Typography variant="body1" fontWeight="medium">
@@ -26,13 +45,33 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                             borderRadius: "50%",
                                             img: { objectFit: "cover" },
                                         }}
-                                        src="https://app.fixform.com/images/logo/8e7e5369-9b7e-4662-985d-2c8ebb98b722?p=logo&t=1709859358&signature=6e07d02fded9883e4eec985d39f589326c9de1c68ba25eb5a58f1a7ea50ff632"
+                                        src={image}
                                         alt=""
                                     />
-                                    <input type="file" accept="image/*" hidden />
-                                    <Button variant="outlined" sx={{ p: 1, textTransform: "none", color: "text.primary", bgcolor: "background.paper", borderColor: "grey.300", ":hover": { bgcolor: "background.paper", color: "text.secondary" }, fontWeight: "medium" }}>
-                                        Change
-                                    </Button>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        hidden
+                                        onChange={handleImageChange}
+                                        id="file-input"
+                                    />
+                                    <label htmlFor="file-input"> {/* label을 사용하여 input과 버튼을 연결합니다. */}
+                                        <Button
+                                            variant="outlined"
+                                            component="span"
+                                            sx={{
+                                                p: 1,
+                                                textTransform: 'none',
+                                                color: 'text.primary',
+                                                bgcolor: 'background.paper',
+                                                borderColor: 'grey.300',
+                                                ':hover': { bgcolor: 'background.paper', color: 'text.secondary' },
+                                                fontWeight: 'medium',
+                                            }}
+                                        >
+                                            Change
+                                        </Button>
+                                    </label>
                                 </Box>
                             </Box>
                         </Box>
@@ -46,7 +85,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 name="name"
                                 placeholder="ex) 현대빌딩"
                                 variant="outlined"
-                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300", height: "40px", '.MuiInputBase-root': { height: '40px', alignItems: 'center' }, '.MuiOutlinedInput-input': { padding: '10px 14px' } }}
                             />
                         </Box>
 
@@ -61,7 +100,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 name="address"
                                 placeholder="ex) 올림픽로 82"
                                 variant="outlined"
-                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300", height: "40px", '.MuiInputBase-root': { height: '40px', alignItems: 'center' }, '.MuiOutlinedInput-input': { padding: '10px 14px' } }}
                             />
                         </Box>
 
@@ -77,7 +116,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                     name="city"
                                     placeholder="도시"
                                     variant="outlined"
-                                    sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
+                                    sx={{ bgcolor: "background.paper", borderColor: "grey.300", height: "40px", '.MuiInputBase-root': { height: '40px', alignItems: 'center' }, '.MuiOutlinedInput-input': { padding: '10px 14px' } }}
                                 />
                                 <TextField
                                     fullWidth
@@ -85,7 +124,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                     name="postal_code"
                                     placeholder="우편번호"
                                     variant="outlined"
-                                    sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
+                                    sx={{ bgcolor: "background.paper", borderColor: "grey.300", height: "40px", '.MuiInputBase-root': { height: '40px', alignItems: 'center' }, '.MuiOutlinedInput-input': { padding: '10px 14px' } }}
                                 />
                             </Box>
                         </Box>
@@ -101,7 +140,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 name="country"
                                 placeholder="ex) 대한민국"
                                 variant="outlined"
-                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300", height: "40px", '.MuiInputBase-root': { height: '40px', alignItems: 'center' }, '.MuiOutlinedInput-input': { padding: '10px 14px' } }}
                             />
                         </Box>
 
@@ -131,7 +170,7 @@ const InformationPage = ({ params }: { params: { buildingId: string } }) => {
                                 name="contact_person"
                                 placeholder="ex) 홍길동"
                                 variant="outlined"
-                                sx={{ bgcolor: "background.paper", borderColor: "grey.300" }}
+                                sx={{ bgcolor: "background.paper", borderColor: "grey.300", height: "40px", '.MuiInputBase-root': { height: '40px', alignItems: 'center' }, '.MuiOutlinedInput-input': { padding: '10px 14px' } }}
                             />
                         </Box>
                     </Box>
