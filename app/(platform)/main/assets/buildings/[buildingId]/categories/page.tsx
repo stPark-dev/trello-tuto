@@ -1,7 +1,7 @@
 "use client"
 
-import { CleaningServices, Devices, ElectricBolt, ExpandLess, Wifi } from "@mui/icons-material";
-import { Box, Button, Divider, Drawer, List, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { CleaningServices, Devices, ElectricBolt, HelpOutline, MoreVert, Wifi } from "@mui/icons-material";
+import { Box, Button, Divider, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemText, OutlinedInput, TextField, Tooltip, Typography } from "@mui/material";
 import { useState } from "react";
 
 const CategoryObj = [
@@ -111,14 +111,141 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                     onClose={toggleDrawer(false)}
                 >
                     <Box
-                        sx={{ width: 500 }}
-                        role="space detail"
-                        onClick={toggleDrawer(false)}
-                        onKeyDown={toggleDrawer(false)}
+                        sx={{ width: 500, height: "100vh", display: "flex", flexDirection: "column" }}
+                        role="space_detail"
                     >
-                        <Typography variant="h6" sx={{ m: 2 }}>
-                            Category Details
-                        </Typography>
+                        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
+                            <Typography variant="h6" sx={{ m: 2 }}>
+                                Details
+                            </Typography>
+                            <IconButton size="small" sx={{ m: 2, border: "solid", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}><MoreVert /></IconButton>
+                        </Box>
+                        <Box sx={{ flexGrow: 1, p: 3 }}>
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Icon</Typography>
+                                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 2 }}>
+                                    <Box sx={{ width: "3.5rem", height: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center", sborder: "solid", bgcolor: "grey.100", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}>
+                                        <MoreVert fontSize="large" />
+                                    </Box>
+                                    <Button variant="contained" color="action" sx={{ borderRadius: "5%" }}>Edit icon</Button>
+                                </Box>
+                            </Box>
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Category name</Typography>
+                                <FormControl sx={{ width: "100%" }} variant="outlined">
+                                    <OutlinedInput
+                                        id="outlined-adornment-name"
+                                        size="small"
+                                        endAdornment={<InputAdornment position="end"><Tooltip title="Provide a category name."><HelpOutline sx={{ cursor: "default" }} /></Tooltip></InputAdornment>}
+                                        aria-describedby="outlined-name-helper-text"
+                                        inputProps={{
+                                            "aria-label": "name",
+                                        }}
+                                    />
+                                </FormControl>
+                            </Box>
+                            <Box sx={{ mt: 2 }}>
+                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Translations</Typography>
+                                <Box sx={{ p: 2, bgcolor: "grey.200", borderRadius: "1%" }}>
+                                    <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 2, alignItems: "center" }}>
+                                        <Typography variant="body1" fontWeight="medium">Korean</Typography>
+                                        <TextField
+                                            fullWidth
+                                            id="korean"
+                                            name="korean"
+                                            variant="outlined"
+                                            sx={{
+                                                bgcolor: "grey.100",
+                                                "& .MuiOutlinedInput-root": {
+                                                    height: '40px',
+                                                    alignItems: 'center',
+                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                        borderColor: "grey.500",
+                                                    },
+                                                    "& .MuiOutlinedInput-notchedOutline": {
+                                                        borderColor: "transparent",
+                                                    },
+                                                },
+                                                '& .MuiOutlinedInput-input': {
+                                                    padding: '10px 14px',
+                                                    fontWeight: 'bold',
+                                                    color: 'black',
+                                                },
+                                            }}
+                                        />
+                                        <Typography variant="body1" fontWeight="medium">Japanese</Typography>
+                                        <TextField
+                                            fullWidth
+                                            id="japanese"
+                                            name="japanese"
+                                            variant="outlined"
+                                            sx={{
+                                                bgcolor: "grey.100",
+                                                "& .MuiOutlinedInput-root": {
+                                                    height: '40px',
+                                                    alignItems: 'center',
+                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                        borderColor: "grey.500",
+                                                    },
+                                                    "& .MuiOutlinedInput-notchedOutline": {
+                                                        borderColor: "transparent",
+                                                    },
+                                                },
+                                                '& .MuiOutlinedInput-input': {
+                                                    padding: '10px 14px',
+                                                    fontWeight: 'bold',
+                                                    color: 'black',
+                                                },
+                                            }}
+                                        />
+                                        <Typography variant="body1" fontWeight="medium">English</Typography>
+                                        <TextField
+                                            fullWidth
+                                            id="english"
+                                            name="english"
+                                            variant="outlined"
+                                            sx={{
+                                                bgcolor: "grey.100",
+                                                "& .MuiOutlinedInput-root": {
+                                                    height: '40px',
+                                                    alignItems: 'center',
+                                                    "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                        borderColor: "grey.500",
+                                                    },
+                                                    "& .MuiOutlinedInput-notchedOutline": {
+                                                        borderColor: "transparent",
+                                                    },
+                                                },
+                                                '& .MuiOutlinedInput-input': {
+                                                    padding: '10px 14px',
+                                                    fontWeight: 'bold',
+                                                    color: 'black',
+                                                },
+                                            }}
+                                        />
+                                    </Box>
+                                </Box>
+                            </Box>
+
+                        </Box>
+                        <Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
+                            <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", p: 2 }}>
+                                <Button variant="contained" onClick={toggleDrawer(false)} sx={{
+                                    bgcolor: "#ffffff", color: "#0A0A0A",
+                                    "&:hover": {
+                                        bgcolor: "#ffffff",
+                                        color: "#0A0A0A",
+                                        opacity: 0.7
+                                    }, borderRadius: "5%"
+                                }}>Cancel</Button>
+                                <Button variant="contained" sx={{
+                                    bgcolor: "#004d40",
+                                    "&:hover": {
+                                        bgcolor: "#2B5A52",
+                                    }
+                                }}>Save Changes</Button>
+                            </Box>
+                        </Box>
                     </Box>
                 </Drawer>
             </Box>

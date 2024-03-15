@@ -53,7 +53,7 @@ const MainInsight = () => {
                     variant="contained"
                     startIcon={<TableChartIcon />}
                     sx={{
-                        bgcolor: '#004d40', 
+                        bgcolor: '#004d40',
                         '&:hover': {
                             bgcolor: "#2B5A52",
                         }
@@ -100,19 +100,19 @@ const MainInsight = () => {
                         <EChartsBase theme="light" backgroundColor="#FFFFFF" dataset={[120, 200, 150, 80, 70, 110]} xAxis={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <ChartJsBase />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <ChartJsBase />
+                        <EChartsBase theme="light" backgroundColor="#FFFFFF" dataset={[120, 200, 150, 80, 70, 110]} xAxis={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
                         <EChartsBase theme="light" backgroundColor="#FFFFFF" dataset={[120, 200, 150, 80, 70, 110]} xAxis={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <ChartJsBase />
+                        <EChartsBase theme="light" backgroundColor="#FFFFFF" dataset={[120, 200, 150, 80, 70, 110]} xAxis={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]} />
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <ChartJsBase />
+                        <EChartsBase theme="light" backgroundColor="#FFFFFF" dataset={[120, 200, 150, 80, 70, 110]} xAxis={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]} />
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                        <EChartsBase theme="light" backgroundColor="#FFFFFF" dataset={[120, 200, 150, 80, 70, 110]} xAxis={["Jan", "Feb", "Mar", "Apr", "May", "Jun"]} />
                     </Grid>
                 </Grid>
             </Box>

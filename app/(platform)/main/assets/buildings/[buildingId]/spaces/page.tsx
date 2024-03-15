@@ -154,7 +154,6 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                         inputProps={{
                                             "aria-label": "name",
                                         }}
-                                        sx={{ boxShadow: 1 }}
                                     />
                                 </FormControl>
                             </Box>
@@ -169,7 +168,6 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                         inputProps={{
                                             "aria-label": "identifier",
                                         }}
-                                        sx={{ boxShadow: 1 }}
                                     />
                                 </FormControl>
                             </Box>
@@ -184,7 +182,6 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                         onChange={handleSelectBoxChange}
                                         renderValue={(selected) => selected.join("s, ")}
                                         MenuProps={MenuProps}
-                                        sx={{ boxShadow: 1 }}
                                     >
                                         {space_types.map(({ value, label }) => (
                                             <MenuItem key={label} value={value}>
@@ -206,7 +203,6 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                         onChange={handleSelectBoxChange}
                                         renderValue={(selected) => selected.join("s, ")}
                                         MenuProps={MenuProps}
-                                        sx={{ boxShadow: 1 }}
                                     >
                                         {space_types.map(({ value, label }) => (
                                             <MenuItem key={label} value={value}>
