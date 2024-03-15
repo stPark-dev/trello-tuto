@@ -1,12 +1,70 @@
 "use client"
 
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { Box, Button, Collapse, Drawer, List, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { ExpandLess, ExpandMore, HelpOutline, MoreVert } from "@mui/icons-material";
+import { Box, Button, Checkbox, Collapse, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Tooltip, Typography } from "@mui/material";
+import Image from "next/image";
 import { useState } from "react";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
+
+const names = [
+    "Oliver Hansen",
+    "Van Henry",
+    "April Tucker",
+    "Ralph Hubbard",
+    "Omar Alexander",
+    "Carlos Abbott",
+    "Miriam Wagner",
+    "Bradley Wilkerson",
+    "Virginia Andrews",
+    "Kelly Snyder",
+];
+
+const space_types = [
+    {
+        value: "Building",
+        label: "Building"
+    },
+    {
+        value: "Floor",
+        label: "Floor"
+    },
+    {
+        value: "Location",
+        label: "Location"
+    },
+    {
+        value: "Room",
+        label: "Room"
+    },
+    {
+        value: "Department",
+        label: "Department"
+    }
+]
 
 const SpacePage = ({ params }: { params: { buildingId: string } }) => {
     const [open, setOpen] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [spaceType, setSpaceType] = useState<string[]>([]);
+
+    const handleSelectBoxChange = (event: SelectChangeEvent<typeof spaceType>) => {
+        const {
+            target: { value },
+        } = event;
+        setSpaceType(
+            typeof value === "string" ? value.split(",") : value,
+        );
+    };
 
     const handleCollapseClick = () => {
         setOpen(!open);
@@ -34,14 +92,14 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
         <>
             <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
                 <Box sx={{ px: 5, mt: 5, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
-                    <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Spaces({params.buildingId})</Typography>
+                    <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Spaces</Typography>
                     <Button
                         component="label"
                         variant="contained"
                         onClick={handleListItemClick}
                         sx={{
-                            bgcolor: '#004d40',
-                            '&:hover': {
+                            bgcolor: "#004d40",
+                            "&:hover": {
                                 bgcolor: "#2B5A52",
                             }
                         }}
@@ -52,6 +110,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                 <List
                     sx={{ width: "100%", bgcolor: "background.paper" }}
                     component="nav"
+                    disablePadding={true}
                 >
                     <ListItemButton onClick={handleListItemClick} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
                         <Box onClick={(e) => { e.stopPropagation(); handleCollapseClick(); }} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -73,14 +132,125 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                     onClose={toggleDrawer(false)}
                 >
                     <Box
-                        sx={{ width: 500 }}
-                        role="space detail"
-                        onClick={toggleDrawer(false)}
-                        onKeyDown={toggleDrawer(false)}
+                        sx={{ width: 500, height: "100vh", display: "flex", flexDirection: "column" }}
+                        role="space_detail"
                     >
-                        <Typography variant="h6" sx={{ m: 2 }}>
-                            Space Details
-                        </Typography>
+                        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
+                            <Typography variant="h6" sx={{ m: 2 }}>
+                                Details
+                            </Typography>
+                            <IconButton size="small" sx={{ m: 2, border: "solid", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}><MoreVert /></IconButton>
+                        </Box>
+                        <Box sx={{ p: 3, flexGrow: 1 }}>
+                            <Box sx={{ my: 2 }}>
+                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Name</Typography>
+                                <FormControl sx={{ width: "100%" }} variant="outlined">
+                                    <OutlinedInput
+                                        id="outlined-adornment-name"
+                                        size="small"
+                                        placeholder="Room A"
+                                        endAdornment={<InputAdornment position="end"><Tooltip title="Provide the name for the space."><HelpOutline sx={{ cursor: "default" }} /></Tooltip></InputAdornment>}
+                                        aria-describedby="outlined-name-helper-text"
+                                        inputProps={{
+                                            "aria-label": "name",
+                                        }}
+                                        sx={{ boxShadow: 1 }}
+                                    />
+                                </FormControl>
+                            </Box>
+                            <Box sx={{ my: 2 }}>
+                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Identifier</Typography>
+                                <FormControl sx={{ width: "100%" }} variant="outlined">
+                                    <OutlinedInput
+                                        id="outlined-adornment-identifier"
+                                        size="small"
+                                        endAdornment={<InputAdornment position="end"><Tooltip title="Provide an optional identifier."><HelpOutline sx={{ cursor: "default" }} /></Tooltip></InputAdornment>}
+                                        aria-describedby="outlined-identifier-helper-text"
+                                        inputProps={{
+                                            "aria-label": "identifier",
+                                        }}
+                                        sx={{ boxShadow: 1 }}
+                                    />
+                                </FormControl>
+                            </Box>
+                            <Box sx={{ my: 2 }}>
+                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Type</Typography>
+                                <FormControl fullWidth size="small">
+                                    <Select
+                                        labelId="type-multiple-checkbox-label"
+                                        id="type-multiple-checkbox"
+                                        multiple
+                                        value={spaceType}
+                                        onChange={handleSelectBoxChange}
+                                        renderValue={(selected) => selected.join("s, ")}
+                                        MenuProps={MenuProps}
+                                        sx={{ boxShadow: 1 }}
+                                    >
+                                        {space_types.map(({ value, label }) => (
+                                            <MenuItem key={label} value={value}>
+                                                <Checkbox checked={spaceType.indexOf(value) > -1} />
+                                                <ListItemText primary={value} />
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                            <Box sx={{ my: 2 }}>
+                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Parent space</Typography>
+                                <FormControl fullWidth size="small">
+                                    <Select
+                                        labelId="space-multiple-checkbox-label"
+                                        id="space-multiple-checkbox"
+                                        multiple
+                                        value={spaceType}
+                                        onChange={handleSelectBoxChange}
+                                        renderValue={(selected) => selected.join("s, ")}
+                                        MenuProps={MenuProps}
+                                        sx={{ boxShadow: 1 }}
+                                    >
+                                        {space_types.map(({ value, label }) => (
+                                            <MenuItem key={label} value={value}>
+                                                <Checkbox checked={spaceType.indexOf(value) > -1} />
+                                                <ListItemText primary={value} />
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                            <Box sx={{ my: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1, alignSelf: "flex-start" }}>QR Codes</Typography>
+                                <Box sx={{ width: 200, display: "flex", justifyContent: "center" }}>
+                                    <Image src="/qr_vector.jpg" width={200} height={200} alt="qr_vector" />
+                                </Box>
+                                <Typography variant="h6" fontWeight="bold" sx={{ mt: 2, alignSelf: "center" }}>QR Codes</Typography>
+                                <Typography sx={{ alignSelf: "center" }}>Currently, no QR codes re assinged to this asset.</Typography>
+                                <Button
+                                    component="label"
+                                    variant="contained"
+                                    onClick={handleListItemClick}
+                                    sx={{
+                                        mt: 4,
+                                        bgcolor: "#004d40",
+                                        "&:hover": {
+                                            bgcolor: "#2B5A52",
+                                        }
+                                    }}
+                                >
+                                    Add QR code
+                                </Button>
+                            </Box>
+                        </Box>
+                        <Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
+                            <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", p: 2 }}>
+                                <Button variant="contained" color="inherit" onClick={toggleDrawer(false)}>Cancel</Button>
+                                <Button variant="contained" sx={{
+                                    bgcolor: "#004d40",
+                                    "&:hover": {
+                                        bgcolor: "#2B5A52",
+                                    }
+                                }}>Save Changes</Button>
+                            </Box>
+                        </Box>
                     </Box>
                 </Drawer>
             </Box>

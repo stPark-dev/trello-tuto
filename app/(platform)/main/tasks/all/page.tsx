@@ -193,7 +193,7 @@ const MainTasks = () => {
                     </Grid>
                     <Grid item xs={12}> {/* 드래그 앤 드롭 컨텍스트를 이 부분에 배치 */}
                         <DragDropContext onDragEnd={onDragEnd}>
-                            <Box sx={{ flexGrow: 1, height: "100%", overflow: 'auto' }}> {/* 여기에 flexGrow 속성을 추가하여 남은 공간을 모두 차지하게 함 */}
+                            <Box sx={{ flexGrow: 1, height: "100%", overflow: 'auto' }}>
                                 <Grid container spacing={2}>
                                     {Object.entries(columns).map(([columnId, column]) => (
                                         <Grid item xs={12} sm={4} key={columnId}>

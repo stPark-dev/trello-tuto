@@ -163,7 +163,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   };
 
   useEffect(() => {
-    console.info('currentMenuItems : ', currentMenuItems);
     if (!md) return;
 
     setDrawerState((prev) => ({ ...prev, submenu: {} }));
@@ -381,7 +380,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
           <Box flexGrow={1} />
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1 }}>
-            <Search>
+            {md && <Search>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
@@ -390,10 +389,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                 inputProps={{ 'aria-label': 'search' }}
               />
             </Search>
-
-            <IconButton sx={{ flexShrink: 0 }} onClick={toggleRightDrawer}>
-              <Notifications />
-            </IconButton>
+            }
 
             {drawerState.headerToolbox &&
               getToolbox(drawerState.headerToolbox, drawerState.headerToolboxProps)}
@@ -448,15 +444,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                 <SignOutButton />
               </Box>
             )}
-            <IconButton
-              color="inherit"
-              size="large"
-              aria-label="display more actions"
-              edge="end"
-              sx={{ color: "rgba(0,0,0,0.5)" }}
-            >
-              <MoreVert />
-            </IconButton>
           </Box>
         </Toolbar>
       </AppBar>

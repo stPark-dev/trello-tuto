@@ -89,20 +89,21 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                 <List
                     sx={{ width: "100%", bgcolor: "background.paper" }}
                     component="nav"
+                    disablePadding={true}
                 >
-                    {CategoryObj.map(({name, Icon, color}) => {
-                        return (
-                            <>
-                                <ListItemButton onClick={handleListItemClick} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                        <Icon sx={{ color: {color}}}/>
-                                    </Box>
-                                    <ListItemText primary={name} sx={{ ml: 5 }} />
-                                </ListItemButton>
-                                <Divider />
-                            </>
-                        )
-                    })}
+                    {CategoryObj.map(({ id, name, Icon, color }) =>
+                    (
+                        <Box key={id}>
+                            <ListItemButton onClick={handleListItemClick} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                    <Icon sx={{ color: { color } }} />
+                                </Box>
+                                <ListItemText primary={name} sx={{ ml: 5 }} />
+                            </ListItemButton>
+                            <Divider />
+                        </Box>
+                    )
+                    )}
                 </List>
                 <Drawer
                     anchor={"right"}

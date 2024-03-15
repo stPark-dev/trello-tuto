@@ -3,7 +3,7 @@ import { Box, Switch, Typography } from "@mui/material";
 const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
     return (
         <>
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
                 <Box sx={{ px: 5, my: 5, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
                     <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Notifications({params.buildingId})</Typography>
                 </Box>
@@ -13,9 +13,7 @@ const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
                     <Box sx={{
                         display: "grid", gridTemplateColumns: { sm: "repeat(3, 1fr)" }, gap: 4
                     }}>
-                        <Box sx={{
-                            gridColumn: "span 2"
-                        }}>
+                        <Box>
                             <Typography variant="body2" sx={{ fontWeight: "medium" }}>
                                 New problem or upvote
                             </Typography>
@@ -49,9 +47,7 @@ const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
                     <Box sx={{
                         display: "grid", gridTemplateColumns: { sm: "repeat(3, 1fr)" }, gap: 4
                     }}>
-                        <Box sx={{
-                            gridColumn: "span 2"
-                        }}>
+                        <Box>
                             <Typography variant="body2" sx={{ fontWeight: "medium" }}>
                                 New comment
                             </Typography>
@@ -84,9 +80,7 @@ const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
                     <Box sx={{
                         display: "grid", gridTemplateColumns: { sm: "repeat(3, 1fr)" }, gap: 4
                     }}>
-                        <Box sx={{
-                            gridColumn: "span 2"
-                        }}>
+                        <Box>
                             <Typography variant="body2" sx={{ fontWeight: "medium" }}>
                                 Problem assigned
                             </Typography>
@@ -119,9 +113,7 @@ const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
                     <Box sx={{
                         display: "grid", gridTemplateColumns: { sm: "repeat(3, 1fr)" }, gap: 4
                     }}>
-                        <Box sx={{
-                            gridColumn: "span 2"
-                        }}>
+                        <Box>
                             <Typography variant="body2" sx={{ fontWeight: "medium" }}>
                                 Tagged in comment
                             </Typography>
