@@ -1,7 +1,9 @@
 "use client"
 
+import QrCodeGenerator from "@/components/QrCodeGenerator";
+import QrCodeScanner from "@/components/QrCodeScanner";
 import { ExpandLess, ExpandMore, HelpOutline, MoreVert } from "@mui/icons-material";
-import { Box, Button, Checkbox, Collapse, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Collapse, Drawer, FormControl, Grid, IconButton, InputAdornment, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Tooltip, Typography } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -72,6 +74,10 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
 
     const handleListItemClick = () => {
         setDrawerOpen(true);
+    };
+
+    const handleScanSuccess = (decodedText: string) => {
+        console.log(`QR Code decoded: ${decodedText}`);
     };
 
     const toggleDrawer = (open: boolean) => (
@@ -234,6 +240,14 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                 >
                                     Add QR code
                                 </Button>
+                                <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+                                    <Grid item xs={12}> {/* QR 코드 생성기와 스캐너를 이 부분에 배치 */}
+                                        <Box id="qr" sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                            <QrCodeGenerator />
+                                            <QrCodeScanner />
+                                        </Box>
+                                    </Grid>
+                                </Grid>
                             </Box>
                         </Box>
                         <Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>

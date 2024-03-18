@@ -12,7 +12,7 @@ import Popper from "@mui/material/Popper";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
-import { SvgIconTypeMap } from "@mui/material";
+import { SvgIconTypeMap, Tab, Tabs } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -47,6 +47,17 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
+  const [tabValue, setTabValue] = useState(0);
+  const md = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: true });
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [drawerState, setDrawerState] = useRecoilState(DrawerAtom);
+
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue);
+    if (isMobile) {
+      handleDrawerToggle();
+    }
+  };
 
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
@@ -137,8 +148,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [anchorRefState, setAnchorRefState] = useState<HTMLElement | null>(null);
-  const md = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: true });
-  const [drawerState, setDrawerState] = useRecoilState(DrawerAtom);
 
   const drawerIsOpen = useMemo(() => drawerState.open, [drawerState.open]);
   const drawerMode = useMemo(() => drawerState.mode, [drawerState.mode]);
@@ -154,13 +163,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
   const handleOnClose = (e: unknown, reason: "escapeKeyDown" | "backdropClick") =>
     "backdropClick" === reason && handleDrawerToggle();
-
-  const [open, setOpen] = useState(false);
-
-  const handleClose = () => {
-    setAnchorRefState(null);
-    setOpen(false);
-  };
 
   useEffect(() => {
     if (!md) return;
@@ -267,6 +269,22 @@ const Drawer = ({ profile, children }: DrawerProps) => {
       </Box>
 
       <Box component="nav">
+        {isMobile && (
+        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            aria-label="basic tabs example"
+            variant="fullWidth"
+            textColor="primary"
+            indicatorColor="primary"
+          >
+            <Tab label="Tasks" onClick={() => router.push('/main/tasks/all')} />
+            <Tab label="Insights" onClick={() => router.push('/main/insights')} />
+            <Tab label="Assets" onClick={() => router.push('/main/assets/buildings')} />
+          </Tabs>
+        </Box>
+        )}
         <Box sx={{ width: 250 }} role="presentation">
           <List sx={{ ml: 3, mt: 1 }}>
             {currentMenuItems.map((menuItem: DrawerMenuItem, index: number) => (

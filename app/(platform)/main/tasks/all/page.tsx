@@ -185,7 +185,7 @@ const MainTasks = () => {
                     <Grid item xs={12}> {/* QR 코드 생성기와 스캐너를 이 부분에 배치 */}
                         <Box id="qr" sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <QrCodeGenerator />
-                            <QrCodeScanner onScanSuccess={handleScanSuccess} />
+                            <QrCodeScanner />
                             <Button id="opensearch" variant="outlined" onClick={handleClickOpenSearch} sx={{ mt: 4 }}>
                                 버어어어어어튼
                             </Button>
