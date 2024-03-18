@@ -23,20 +23,20 @@ const CustomQrScanner: React.FC = () => {
         if (qrRef.current) {
             html5QrcodeScanner = new Html5Qrcode(qrRef.current.id);
 
-            const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+            const config = { fps: 10, qrbox: { width: 200, height: 200 } };
             html5QrcodeScanner.start(
                 { facingMode: "environment" },
                 config,
                 (decodedText: string) => {
                     setDetectedUrl(decodedText);
                     // 스캔 성공 후 스캐너 중지
-                    if (html5QrcodeScanner) {
-                        html5QrcodeScanner.stop().then(() => {
-                            setIsScanning(false);
-                        }).catch((err: Error) => {
-                            console.error("Unable to stop QR scanner.", err);
-                        });
-                    }
+                    // if (html5QrcodeScanner) {
+                    //     html5QrcodeScanner.stop().then(() => {
+                    //         setIsScanning(false);
+                    //     }).catch((err: Error) => {
+                    //         console.error("Unable to stop QR scanner.", err);
+                    //     });
+                    // }
                 },
                 (errorMessage: string) => {
                     console.log(`QR Code no longer in front of camera: ${errorMessage}`);
