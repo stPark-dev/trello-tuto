@@ -42,14 +42,13 @@ const CustomQrScanner: React.FC = () => {
                     console.log(`QR Code no longer in front of camera: ${errorMessage}`);
                 }
             ).then(() => {
-                setIsScanning(true); // 스캐너가 성공적으로 시작되면 상태 업데이트
+                setIsScanning(true);
             }).catch((err: Error) => {
                 console.error(`Unable to start QR scanner: ${err}`);
             });
         }
 
         return () => {
-            // 컴포넌트가 언마운트될 때 스캐너가 실행 중이면 중지
             if (html5QrcodeScanner && isScanning) {
                 html5QrcodeScanner.stop().then(() => {
                     console.log("QR Scanner stopped.");
@@ -61,12 +60,12 @@ const CustomQrScanner: React.FC = () => {
     }, []);
 
     const handleClose = () => {
-        setDetectedUrl(null); // Close dialog
+        setDetectedUrl(null);
     };
 
     const handleConfirm = () => {
         if (detectedUrl) {
-            window.location.href = detectedUrl; // Navigate to the detected URL
+            window.location.href = detectedUrl;
         }
     };
 
@@ -84,13 +83,13 @@ const CustomQrScanner: React.FC = () => {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        {`QR Code detected: ${detectedUrl}. Do you want to open this URL?`}
+                        {`QR 코드 감지: ${detectedUrl}. 감지된 URL로 이동하시겠습니까??`}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>No</Button>
-                    <Button onClick={handleConfirm} autoFocus>
-                        Yes
+                    <Button variant="contained" color="error" onClick={handleClose}>아니오</Button>
+                    <Button variant="contained" color="primary" onClick={handleConfirm} autoFocus>
+                        예
                     </Button>
                 </DialogActions>
             </Dialog>
