@@ -1,4 +1,5 @@
 "use client";
+
 import { Box, Button, Grid, Paper, Typography, Chip, useTheme, useMediaQuery, IconButton, styled } from "@mui/material"
 import { CheckCircleOutline, FileOpenSharp, AccessTime, AddCircleOutlineSharp, Delete } from '@mui/icons-material';
 import QrCodeGenerator from "@/components/QrCodeGenerator";
@@ -186,9 +187,9 @@ const MainTasks = () => {
                         <Box id="qr" sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <QrCodeGenerator />
                             <QrCodeScanner />
-                            <Button id="opensearch" variant="outlined" onClick={handleClickOpenSearch} sx={{ mt: 4 }}>
+                            {/* <Button id="opensearch" variant="outlined" onClick={handleClickOpenSearch} sx={{ mt: 4 }}>
                                 버어어어어어튼
-                            </Button>
+                            </Button> */}
                         </Box>
                     </Grid>
                     <Grid item xs={12}> {/* 드래그 앤 드롭 컨텍스트를 이 부분에 배치 */}

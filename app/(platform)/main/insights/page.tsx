@@ -1,4 +1,5 @@
 "use client"
+
 import { Box, Button, Grid, Paper, Typography, styled } from "@mui/material"
 import { useRef, useState } from "react";
 import Component from "../_components/map";
