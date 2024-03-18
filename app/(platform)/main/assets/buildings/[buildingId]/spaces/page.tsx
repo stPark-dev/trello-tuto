@@ -93,6 +93,9 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
         }
 
         setDrawerOpen(open);
+        if (!open) {
+            setShowQR(false);
+        }
     };
 
     return (
