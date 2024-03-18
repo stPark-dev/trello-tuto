@@ -139,7 +139,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                     onClose={toggleDrawer(false)}
                 >
                     <Box
-                        sx={{ width: 450, height: "100vh", display: "flex", flexDirection: "column" }}
+                        sx={{ width: { sm: "100vw", md: 500 }, height: "100vh", display: "flex", flexDirection: "column" }}
                         role="space_detail"
                     >
                         <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
