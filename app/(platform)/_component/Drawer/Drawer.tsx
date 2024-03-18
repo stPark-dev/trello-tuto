@@ -270,26 +270,29 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
       <Box component="nav">
         {isMobile && (
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs
-            value={tabValue}
-            onChange={handleTabChange}
-            aria-label="basic tabs example"
-            variant="fullWidth"
-            textColor="primary"
-            indicatorColor="primary"
-          >
-            <Tab label="Tasks" onClick={() => router.push('/main/tasks/all')} />
-            <Tab label="Insights" onClick={() => router.push('/main/insights')} />
-            <Tab label="Assets" onClick={() => router.push('/main/assets/buildings')} />
-          </Tabs>
-        </Box>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              aria-label="basic tabs example"
+              variant="fullWidth"
+              textColor="primary"
+              indicatorColor="primary"
+            >
+              <Tab label="Tasks" onClick={() => router.push('/main/tasks/all')} />
+              <Tab label="Insights" onClick={() => router.push('/main/insights')} />
+              <Tab label="Assets" onClick={() => router.push('/main/assets/buildings')} />
+            </Tabs>
+          </Box>
         )}
         <Box sx={{ width: 250 }} role="presentation">
           <List sx={{ ml: 3, mt: 1 }}>
             {currentMenuItems.map((menuItem: DrawerMenuItem, index: number) => (
               <ListItem key={index} disablePadding>
-                <ListItemButton onClick={() => router.push(menuItem.route)}>
+                <ListItemButton onClick={() => {
+                  if(isMobile) handleDrawerToggle();
+                  router.push(menuItem.route)
+                }}>
                   <ListItemIcon>
                     <menuItem.icon />
                   </ListItemIcon>
