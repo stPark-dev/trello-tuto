@@ -28,7 +28,7 @@ const SignInButton: React.FC<SignInButtonProps> = ({ provider }) => {
   return (
     <Button
       sx={{ px: 2, py: 1, color: 'white', ...providerStyles[provider] }}
-      onClick={() => signIn(provider, { callbackUrl: '/main' })}
+      onClick={() => signIn(provider, { callbackUrl: '/main/tasks/all' })}
     >
       {buttonText[provider]}
     </Button>

@@ -9,7 +9,7 @@ const SignInPage = async () => {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect("/main");
+    redirect("/main/tasks/all");
   } else {
     return (
       <Box sx={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", alignItems: "cneter", justifyContent: "center", textAlign: "center" }}>
