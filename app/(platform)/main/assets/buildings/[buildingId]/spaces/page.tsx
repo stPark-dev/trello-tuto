@@ -57,6 +57,7 @@ const space_types = [
 const SpacePage = ({ params }: { params: { buildingId: string } }) => {
     const [open, setOpen] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [showQR, setShowQR] = useState(false);
     const [spaceType, setSpaceType] = useState<string[]>([]);
 
     const handleSelectBoxChange = (event: SelectChangeEvent<typeof spaceType>) => {
@@ -138,7 +139,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                     onClose={toggleDrawer(false)}
                 >
                     <Box
-                        sx={{ width: 400, height: "100vh", display: "flex", flexDirection: "column" }}
+                        sx={{ width: 450, height: "100vh", display: "flex", flexDirection: "column" }}
                         role="space_detail"
                     >
                         <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
@@ -220,34 +221,32 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                 </FormControl>
                             </Box>
                             <Box sx={{ my: 2, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                                <Typography variant="body1" fontWeight="bold" sx={{ mb: 1, alignSelf: "flex-start" }}>QR Codes</Typography>
-                                <Box sx={{ width: 200, display: "flex", justifyContent: "center" }}>
-                                    <Image src="/qr_vector.jpg" width={200} height={200} alt="qr_vector" />
-                                </Box>
-                                <Typography variant="h6" fontWeight="bold" sx={{ mt: 2, alignSelf: "center" }}>QR Codes</Typography>
-                                <Typography sx={{ alignSelf: "center" }}>Currently, no QR codes re assinged to this asset.</Typography>
-                                <Button
-                                    component="label"
-                                    variant="contained"
-                                    onClick={handleListItemClick}
-                                    sx={{
-                                        mt: 4,
-                                        bgcolor: "#004d40",
-                                        "&:hover": {
-                                            bgcolor: "#2B5A52",
-                                        }
-                                    }}
-                                >
-                                    Add QR code
-                                </Button>
-                                <Grid container spacing={2} sx={{ flexGrow: 1 }}>
+                                {!showQR && (
+                                    <><Typography variant="body1" fontWeight="bold" sx={{ mb: 1, alignSelf: "flex-start" }}>QR Codes</Typography><Box sx={{ width: 200, display: "flex", justifyContent: "center" }}>
+                                        <Image src="/qr_vector.jpg" width={200} height={200} alt="qr_vector" />
+                                    </Box><Typography variant="h6" fontWeight="bold" sx={{ mt: 2, alignSelf: "center" }}>QR Codes</Typography><Typography sx={{ alignSelf: "center" }}>Currently, no QR codes re assinged to this asset.</Typography><Button
+                                        component="label"
+                                        variant="contained"
+                                        onClick={() => setShowQR(true)}
+                                        sx={{
+                                            mt: 4,
+                                            bgcolor: "#004d40",
+                                            "&:hover": {
+                                                bgcolor: "#2B5A52",
+                                            }
+                                        }}
+                                    >
+                                            Add QR code
+                                        </Button></>)}
+
+                                {showQR && (<Grid container spacing={2} sx={{ flexGrow: 1 }}>
                                     <Grid item xs={12}>
-                                        <Box id="qr" sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                            {/* <QrCodeGenerator /> */}
+                                        <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                             <QrCodeScanner />
                                         </Box>
                                     </Grid>
                                 </Grid>
+                                )}
                             </Box>
                         </Box>
                         <Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>

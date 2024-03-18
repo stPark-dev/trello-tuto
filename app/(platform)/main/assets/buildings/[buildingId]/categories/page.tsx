@@ -111,7 +111,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                     onClose={toggleDrawer(false)}
                 >
                     <Box
-                        sx={{ width: 500, height: "100vh", display: "flex", flexDirection: "column" }}
+                        sx={{ width: 450, height: "100vh", display: "flex", flexDirection: "column" }}
                         role="space_detail"
                     >
                         <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
@@ -127,7 +127,15 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                     <Box sx={{ width: "3.5rem", height: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center", sborder: "solid", bgcolor: "grey.100", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}>
                                         <MoreVert fontSize="large" />
                                     </Box>
-                                    <Button variant="contained" color="inherit" sx={{ borderRadius: "5%" }}>Edit icon</Button>
+                                    <Button variant="contained" sx={{
+                                        borderRadius: "0.5rem", 
+                                        bgcolor: "#ffffff",
+                                        color: "#000000",
+                                        "&:hover": {
+                                            bgcolor: "#f0f0f0",
+                                            opacity: 0.8,
+                                        },
+                                    }}>EDIT ICON</Button>
                                 </Box>
                             </Box>
                             <Box sx={{ mt: 2 }}>
