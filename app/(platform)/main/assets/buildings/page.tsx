@@ -9,7 +9,7 @@ import ApartmentIcon from "@mui/icons-material/Apartment";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 45;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
     PaperProps: {
@@ -64,7 +64,7 @@ const BuildingPage = () => {
     };
 
     const Item = styled(Paper)(({ theme }) => ({
-        height: 120,
+        height: 200,
         backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
         ...theme.typography.body2,
         padding: theme.spacing(2),
@@ -75,7 +75,6 @@ const BuildingPage = () => {
         justifyContent: "space-between",
         [theme.breakpoints.up("md")]: {
             width: 320,
-            height: 200,
         },
         [theme.breakpoints.down("sm")]: {
             width: "100%",
@@ -199,11 +198,11 @@ const BuildingPage = () => {
             <Box sx={{ backgroundColor: theme.palette.grey[100], p: 5, overflow: "auto" }}>
                 <Grid container spacing={2}>
                     {buildings.map((building, index) => (
-                        <Grid item xs={12} md={4} key={index}>
+                        <Grid item xs={12} sm={6} md={4} key={index}>
                             <Item onClick={() => router.push(`/main/assets/buildings/${building._id}/location`)}>
                                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                                     <Box sx={{ display: "flex", width: "100%", alignItems: "center", gap: 2 }}>
-                                        <Avatar>{building.name[index]}</Avatar>
+                                        <Avatar>{building.name[0]}</Avatar>
                                         <Typography variant="h6" fontWeight="bold">{building.name}</Typography>
                                     </Box>
                                     <Box sx={{ typography: "body2" }}>

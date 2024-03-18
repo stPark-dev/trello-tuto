@@ -71,7 +71,7 @@ const CustomQrScanner: React.FC = () => {
 
     return (
         <Box>
-            <div ref={qrRef} id="qr-scanner" style={{ width: "300px", height: "300px" }}></div>
+            <div ref={qrRef} id="qr-scanner" style={{ width: "300px", height: "250" }}></div>
             <Dialog
                 open={Boolean(detectedUrl)}
                 onClose={handleClose}
