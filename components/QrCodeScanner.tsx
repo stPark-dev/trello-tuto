@@ -23,7 +23,7 @@ const CustomQrScanner: React.FC = () => {
         if (qrRef.current) {
             html5QrcodeScanner = new Html5Qrcode(qrRef.current.id);
 
-            const config = { fps: 10, qrbox: { width: 300, height: 300 } };
+            const config = { fps: 10, qrbox: { width: 250, height: 250 } };
             html5QrcodeScanner.start(
                 { facingMode: "environment" },
                 config,
