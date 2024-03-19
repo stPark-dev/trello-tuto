@@ -1,7 +1,10 @@
 "use client"
 
-import { CleaningServices, Devices, ElectricBolt, HelpOutline, MoreVert, Wifi, SvgIconComponent } from "@mui/icons-material";
-import { Box, Button, Divider, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemText, OutlinedInput, TextField, Tooltip, Typography } from "@mui/material";
+import {
+    CleaningServices, Devices, HelpOutline, MoreVert, SvgIconComponent, Close,
+    Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Cloud, VolumeUp, Restaurant, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
+} from "@mui/icons-material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, Grid, IconButton, InputAdornment, InputLabel, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 
 type Translations = {
@@ -9,7 +12,6 @@ type Translations = {
     jpn: string;
     eng: string;
 };
-
 
 type Category = {
     id: string;
@@ -86,8 +88,13 @@ const CategoryObj: Category[] = [
     },
 ]
 
+const DialogIcons = [
+    Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Cloud, VolumeUp, Restaurant, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
+]
+
 const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [iconDiagOpen, setIconDiagOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<Category | null>(null);
     const [categoryName, setCategoryName] = useState("");
     const [categoryTranslations, setCategoryTranslations] = useState<Translations>({
@@ -95,7 +102,25 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
         jpn: "",
         eng: ""
     });
+    const [selectedColor, setSelectedColor] = useState("black");
 
+    const [selectedIconIndex, setSelectedIconIndex] = useState<number | null>(null);
+
+    const handleIconSelect = (index: number) => {
+        setSelectedIconIndex(index);
+    };
+
+
+    const handleColorChange = (event: SelectChangeEvent) => {
+        setSelectedColor(event.target.value);
+    }
+    const handleDiagClickOpen = () => {
+        setIconDiagOpen(true);
+    };
+
+    const handleDiagClose = () => {
+        setIconDiagOpen(false);
+    };
 
     const handleListItemClick = (item: Category) => {
         setSelectedItem(item);
@@ -129,7 +154,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
             setCategoryTranslations(selectedItem.translations);
         }
     }, [selectedItem]);
-    
+
     return (
         <>
             <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
@@ -149,26 +174,28 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                         Add Category
                     </Button>
                 </Box>
-                <List
-                    sx={{ width: "100%", bgcolor: "background.paper" }}
-                    component="nav"
-                    disablePadding={true}
-                >
-                    {CategoryObj.map((category) => {
-                        return (
-                            <Box key={category.id}>
-                                <ListItemButton onClick={() => handleListItemClick(category)} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                                        <category.Icon sx={{ color: category.color }} />
-                                    </Box>
-                                    <ListItemText primary={category.name} sx={{ ml: 5 }} />
-                                </ListItemButton>
-                                <Divider />
-                            </Box>
-                        );
-                    }
-                    )}
-                </List>
+                <Box sx={{ width: "100vw", height: "100vh", bgcolor: "#F2F4F7" }}>
+                    <List
+                        sx={{ width: "100%", bgcolor: "background.paper" }}
+                        component="nav"
+                        disablePadding={true}
+                    >
+                        {CategoryObj.map((category) => {
+                            return (
+                                <Box key={category.id}>
+                                    <ListItemButton onClick={() => handleListItemClick(category)} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                            <category.Icon sx={{ color: category.color }} />
+                                        </Box>
+                                        <ListItemText primary={category.name} sx={{ ml: 5 }} />
+                                    </ListItemButton>
+                                    <Divider />
+                                </Box>
+                            );
+                        }
+                        )}
+                    </List>
+                </Box>
                 <Drawer
                     anchor={"right"}
                     open={drawerOpen}
@@ -190,15 +217,17 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                         <Box sx={{ width: "3.5rem", height: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center", sborder: "solid", bgcolor: "grey.100", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}>
                                             <selectedItem.Icon fontSize="large" sx={{ color: `${selectedItem.color}` }} />
                                         </Box>
-                                        <Button variant="contained" sx={{
-                                            borderRadius: "0.5rem",
-                                            bgcolor: "#ffffff",
-                                            color: "#000000",
-                                            "&:hover": {
-                                                bgcolor: "#f0f0f0",
-                                                opacity: 0.8,
-                                            },
-                                        }}>EDIT ICON</Button>
+                                        <Button variant="contained"
+                                            onClick={handleDiagClickOpen}
+                                            sx={{
+                                                borderRadius: "0.5rem",
+                                                bgcolor: "#ffffff",
+                                                color: "#000000",
+                                                "&:hover": {
+                                                    bgcolor: "#f0f0f0",
+                                                    opacity: 0.8,
+                                                },
+                                            }}>EDIT ICON</Button>
                                     </Box>
                                 </Box>
                                 <Box sx={{ mt: 2 }}>
@@ -324,6 +353,69 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                     </Box>
                 </Drawer>
             </Box>
+            <Dialog
+                open={iconDiagOpen}
+                onClose={handleDiagClose}
+                fullWidth={true}
+                maxWidth={"xs"}
+                aria-labelledby="icon-dialog-title"
+                aria-describedby="icon-dialog-description"
+            >
+                <DialogTitle id="icon-dialog-title">
+                    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                        {"아이콘 선택"}
+                        <IconButton onClick={handleDiagClose} size="small"><Close /></IconButton>
+                    </Box>
+                </DialogTitle>
+                <DialogContent>
+                    <Box sx={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center" }}>
+                        <FormControl fullWidth size="small" sx={{ my: 2 }}>
+                            <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={selectedColor}
+                                onChange={handleColorChange}
+                                displayEmpty
+                            >
+                                <MenuItem value="black">Black</MenuItem>
+                                <MenuItem value="red">Red</MenuItem>
+                                <MenuItem value="blue">Blue</MenuItem>
+                                <MenuItem value="green">Green</MenuItem>
+                                <MenuItem value="yellow">Yellow</MenuItem>
+                                <MenuItem value="purple">Purple</MenuItem>
+                                <MenuItem value="orange">Orange</MenuItem>
+                                <MenuItem value="grey">Grey</MenuItem>
+                                <MenuItem value="pink">Pink</MenuItem>
+                                <MenuItem value="cyan">Cyan</MenuItem>
+                            </Select>
+                        </FormControl>
+
+                        <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", maxWidth: 400, m: "auto" }}>
+                            {DialogIcons.map((IconComponent, index) => (
+                                <Box
+                                    key={index}
+                                    sx={{
+                                        width: "20%",
+                                        display: "flex",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        p: 1,
+                                        "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.07)" },
+                                        backgroundColor: selectedIconIndex === index ? "rgba(0, 0, 0, 0.07)" : "transparent"
+                                    }}
+                                >
+                                    <IconComponent sx={{ color: selectedColor }} />
+                                </Box>
+                            ))}
+                        </Box>
+                    </Box>
+                </DialogContent>
+                <DialogActions>
+                    <Button color="primary" autoFocus>
+                        저장
+                    </Button>
+                </DialogActions>
+            </Dialog >
         </>
     )
 }

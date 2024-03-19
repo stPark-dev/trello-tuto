@@ -117,25 +117,27 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                         Add Space
                     </Button>
                 </Box>
-                <List
-                    sx={{ width: "100%", bgcolor: "background.paper" }}
-                    component="nav"
-                    disablePadding={true}
-                >
-                    <ListItemButton onClick={handleListItemClick} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                        <Box onClick={(e) => { e.stopPropagation(); handleCollapseClick(); }} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                            {open ? <ExpandLess /> : <ExpandMore />}
-                        </Box>
-                        <ListItemText primary="Office Building" sx={{ ml: 5 }} />
-                    </ListItemButton>
-                    <Collapse in={open} timeout="auto" unmountOnExit>
-                        <List component="div" disablePadding >
-                            <ListItemButton onClick={handleListItemClick} sx={{ pl: 4 }}>
-                                <ListItemText primary="Room1" sx={{ pl: 8 }} />
-                            </ListItemButton>
-                        </List>
-                    </Collapse>
-                </List>
+                <Box sx={{ width: "100vw", height: "100vh",  bgcolor: "#F2F4F7"}}>
+                    <List
+                        sx={{ width: "100%", bgcolor: "background.paper" }}
+                        component="nav"
+                        disablePadding={true}
+                    >
+                        <ListItemButton onClick={handleListItemClick} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <Box onClick={(e) => { e.stopPropagation(); handleCollapseClick(); }} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                                {open ? <ExpandLess /> : <ExpandMore />}
+                            </Box>
+                            <ListItemText primary="Office Building" sx={{ ml: 5 }} />
+                        </ListItemButton>
+                        <Collapse in={open} timeout="auto" unmountOnExit>
+                            <List component="div" disablePadding >
+                                <ListItemButton onClick={handleListItemClick} sx={{ pl: 4 }}>
+                                    <ListItemText primary="Room1" sx={{ pl: 8 }} />
+                                </ListItemButton>
+                            </List>
+                        </Collapse>
+                    </List>
+                </Box>
                 <Drawer
                     anchor={"right"}
                     open={drawerOpen}
