@@ -4,7 +4,7 @@ import {
     CleaningServices, Devices, HelpOutline, MoreVert, SvgIconComponent, Close,
     Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Cloud, VolumeUp, Restaurant, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
 } from "@mui/icons-material";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, Grid, IconButton, InputAdornment, InputLabel, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, Grid, IconButton, InputAdornment, InputLabel, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 
 type Translations = {
@@ -102,17 +102,30 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
         jpn: "",
         eng: ""
     });
-    const [selectedColor, setSelectedColor] = useState("black");
 
+    const [selectedColor, setSelectedColor] = useState("black");
     const [selectedIconIndex, setSelectedIconIndex] = useState<number | null>(null);
 
-    const handleIconSelect = (index: number) => {
-        setSelectedIconIndex(index);
+    const handleIconSelect = (index: number) => () => {
+        if (selectedItem) {
+            const newIcon = DialogIcons[index];
+            setSelectedItem({
+                ...selectedItem,
+                Icon: newIcon,
+            });
+            setSelectedIconIndex(index);
+        }
     };
 
 
     const handleColorChange = (event: SelectChangeEvent) => {
-        setSelectedColor(event.target.value);
+        if (selectedItem) {
+            setSelectedItem({
+                ...selectedItem,
+                color: event.target.value as string,
+            });
+            setSelectedColor(event.target.value);
+        }
     }
     const handleDiagClickOpen = () => {
         setIconDiagOpen(true);
@@ -205,151 +218,154 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                         sx={{ width: 450, height: "100vh", display: "flex", flexDirection: "column" }}
                         role="space_detail"
                     >
-                        {selectedItem && (<><Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
-                            <Typography variant="h6" sx={{ m: 2 }}>
-                                Details
-                            </Typography>
-                            <IconButton size="small" sx={{ m: 2, border: "solid", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}><MoreVert /></IconButton>
-                        </Box><Box sx={{ flexGrow: 1, p: 3 }}>
-                                <Box sx={{ mt: 2 }}>
-                                    <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Icon</Typography>
-                                    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 2 }}>
-                                        <Box sx={{ width: "3.5rem", height: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center", sborder: "solid", bgcolor: "grey.100", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}>
-                                            <selectedItem.Icon fontSize="large" sx={{ color: `${selectedItem.color}` }} />
+                        {selectedItem && (
+                            <>
+                                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
+                                    <Typography variant="h6" sx={{ m: 2 }}>
+                                        Details
+                                    </Typography>
+                                    <IconButton size="small" sx={{ m: 2, border: "solid", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}><MoreVert /></IconButton>
+                                </Box><Box sx={{ flexGrow: 1, p: 3 }}>
+                                    <Box sx={{ mt: 2 }}>
+                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Icon</Typography>
+                                        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 2 }}>
+                                            <Box sx={{ width: "3.5rem", height: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center", sborder: "solid", bgcolor: "grey.100", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}>
+                                                <selectedItem.Icon fontSize="large" sx={{ color: `${selectedItem.color}` }} />
+                                            </Box>
+                                            <Button variant="contained"
+                                                onClick={handleDiagClickOpen}
+                                                sx={{
+                                                    borderRadius: "0.5rem",
+                                                    bgcolor: "#ffffff",
+                                                    color: "#000000",
+                                                    "&:hover": {
+                                                        bgcolor: "#f0f0f0",
+                                                        opacity: 0.8,
+                                                    },
+                                                }}>EDIT ICON</Button>
                                         </Box>
-                                        <Button variant="contained"
-                                            onClick={handleDiagClickOpen}
+                                    </Box>
+                                    <Box sx={{ mt: 2 }}>
+                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Category name</Typography>
+                                        <FormControl sx={{ width: "100%" }} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-name"
+                                                size="small"
+                                                value={categoryName}
+                                                onChange={(e) => setCategoryName(e.target.value)}
+                                                endAdornment={<InputAdornment position="end"><Tooltip title="Provide a category name."><HelpOutline sx={{ cursor: "default" }} /></Tooltip></InputAdornment>}
+                                                aria-describedby="outlined-name-helper-text"
+                                                inputProps={{
+                                                    "aria-label": "name",
+                                                }} />
+                                        </FormControl>
+                                    </Box>
+                                    <Box sx={{ mt: 2 }}>
+                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Translations</Typography>
+                                        <Box sx={{ p: 2, bgcolor: "grey.200", borderRadius: "1%" }}>
+                                            <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 2, alignItems: "center" }}>
+                                                <Typography variant="body1" fontWeight="medium">Korean</Typography>
+                                                <TextField
+                                                    fullWidth
+                                                    id="korean"
+                                                    name="korean"
+                                                    variant="outlined"
+                                                    value={categoryTranslations.kor}
+                                                    onChange={(e) => updateCategoryTranslations("kor", e.target.value)}
+                                                    sx={{
+                                                        bgcolor: "grey.100",
+                                                        "& .MuiOutlinedInput-root": {
+                                                            height: "40px",
+                                                            alignItems: "center",
+                                                            "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "grey.500",
+                                                            },
+                                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "transparent",
+                                                            },
+                                                        },
+                                                        "& .MuiOutlinedInput-input": {
+                                                            padding: "10px 14px",
+                                                            fontWeight: "bold",
+                                                            color: "black",
+                                                        },
+                                                    }} />
+                                                <Typography variant="body1" fontWeight="medium">Japanese</Typography>
+                                                <TextField
+                                                    fullWidth
+                                                    id="japanese"
+                                                    name="japanese"
+                                                    variant="outlined"
+                                                    value={categoryTranslations.jpn}
+                                                    onChange={(e) => updateCategoryTranslations("jpn", e.target.value)}
+                                                    sx={{
+                                                        bgcolor: "grey.100",
+                                                        "& .MuiOutlinedInput-root": {
+                                                            height: "40px",
+                                                            alignItems: "center",
+                                                            "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "grey.500",
+                                                            },
+                                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "transparent",
+                                                            },
+                                                        },
+                                                        "& .MuiOutlinedInput-input": {
+                                                            padding: "10px 14px",
+                                                            fontWeight: "bold",
+                                                            color: "black",
+                                                        },
+                                                    }} />
+                                                <Typography variant="body1" fontWeight="medium">English</Typography>
+                                                <TextField
+                                                    fullWidth
+                                                    id="english"
+                                                    name="english"
+                                                    variant="outlined"
+                                                    value={categoryTranslations.eng}
+                                                    onChange={(e) => updateCategoryTranslations("eng", e.target.value)}
+                                                    sx={{
+                                                        bgcolor: "grey.100",
+                                                        "& .MuiOutlinedInput-root": {
+                                                            height: "40px",
+                                                            alignItems: "center",
+                                                            "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "grey.500",
+                                                            },
+                                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "transparent",
+                                                            },
+                                                        },
+                                                        "& .MuiOutlinedInput-input": {
+                                                            padding: "10px 14px",
+                                                            fontWeight: "bold",
+                                                            color: "black",
+                                                        },
+                                                    }} />
+                                            </Box>
+                                        </Box>
+                                    </Box>
+
+                                </Box><Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
+                                    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", p: 2 }}>
+                                        <Button variant="contained" onClick={toggleDrawer(false)}
                                             sx={{
-                                                borderRadius: "0.5rem",
-                                                bgcolor: "#ffffff",
-                                                color: "#000000",
+                                                bgcolor: "#ffffff", color: "#0A0A0A",
                                                 "&:hover": {
-                                                    bgcolor: "#f0f0f0",
-                                                    opacity: 0.8,
-                                                },
-                                            }}>EDIT ICON</Button>
+                                                    bgcolor: "#ffffff",
+                                                    color: "#0A0A0A",
+                                                    opacity: 0.7
+                                                }, borderRadius: "5%"
+                                            }}>Cancel</Button>
+                                        <Button variant="contained" sx={{
+                                            bgcolor: "#004d40",
+                                            "&:hover": {
+                                                bgcolor: "#2B5A52",
+                                            }
+                                        }}>Save Changes</Button>
                                     </Box>
-                                </Box>
-                                <Box sx={{ mt: 2 }}>
-                                    <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Category name</Typography>
-                                    <FormControl sx={{ width: "100%" }} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-name"
-                                            size="small"
-                                            value={categoryName}
-                                            onChange={(e) => setCategoryName(e.target.value)}
-                                            endAdornment={<InputAdornment position="end"><Tooltip title="Provide a category name."><HelpOutline sx={{ cursor: "default" }} /></Tooltip></InputAdornment>}
-                                            aria-describedby="outlined-name-helper-text"
-                                            inputProps={{
-                                                "aria-label": "name",
-                                            }} />
-                                    </FormControl>
-                                </Box>
-                                <Box sx={{ mt: 2 }}>
-                                    <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Translations</Typography>
-                                    <Box sx={{ p: 2, bgcolor: "grey.200", borderRadius: "1%" }}>
-                                        <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 2, alignItems: "center" }}>
-                                            <Typography variant="body1" fontWeight="medium">Korean</Typography>
-                                            <TextField
-                                                fullWidth
-                                                id="korean"
-                                                name="korean"
-                                                variant="outlined"
-                                                value={categoryTranslations.kor}
-                                                onChange={(e) => updateCategoryTranslations("kor", e.target.value)}
-                                                sx={{
-                                                    bgcolor: "grey.100",
-                                                    "& .MuiOutlinedInput-root": {
-                                                        height: "40px",
-                                                        alignItems: "center",
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
-                                                            borderColor: "grey.500",
-                                                        },
-                                                        "& .MuiOutlinedInput-notchedOutline": {
-                                                            borderColor: "transparent",
-                                                        },
-                                                    },
-                                                    "& .MuiOutlinedInput-input": {
-                                                        padding: "10px 14px",
-                                                        fontWeight: "bold",
-                                                        color: "black",
-                                                    },
-                                                }} />
-                                            <Typography variant="body1" fontWeight="medium">Japanese</Typography>
-                                            <TextField
-                                                fullWidth
-                                                id="japanese"
-                                                name="japanese"
-                                                variant="outlined"
-                                                value={categoryTranslations.jpn}
-                                                onChange={(e) => updateCategoryTranslations("jpn", e.target.value)}
-                                                sx={{
-                                                    bgcolor: "grey.100",
-                                                    "& .MuiOutlinedInput-root": {
-                                                        height: "40px",
-                                                        alignItems: "center",
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
-                                                            borderColor: "grey.500",
-                                                        },
-                                                        "& .MuiOutlinedInput-notchedOutline": {
-                                                            borderColor: "transparent",
-                                                        },
-                                                    },
-                                                    "& .MuiOutlinedInput-input": {
-                                                        padding: "10px 14px",
-                                                        fontWeight: "bold",
-                                                        color: "black",
-                                                    },
-                                                }} />
-                                            <Typography variant="body1" fontWeight="medium">English</Typography>
-                                            <TextField
-                                                fullWidth
-                                                id="english"
-                                                name="english"
-                                                variant="outlined"
-                                                value={categoryTranslations.eng}
-                                                onChange={(e) => updateCategoryTranslations("eng", e.target.value)}
-                                                sx={{
-                                                    bgcolor: "grey.100",
-                                                    "& .MuiOutlinedInput-root": {
-                                                        height: "40px",
-                                                        alignItems: "center",
-                                                        "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
-                                                            borderColor: "grey.500",
-                                                        },
-                                                        "& .MuiOutlinedInput-notchedOutline": {
-                                                            borderColor: "transparent",
-                                                        },
-                                                    },
-                                                    "& .MuiOutlinedInput-input": {
-                                                        padding: "10px 14px",
-                                                        fontWeight: "bold",
-                                                        color: "black",
-                                                    },
-                                                }} />
-                                        </Box>
-                                    </Box>
-                                </Box>
-
-                            </Box><Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
-                                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", p: 2 }}>
-                                    <Button variant="contained" onClick={toggleDrawer(false)} sx={{
-                                        bgcolor: "#ffffff", color: "#0A0A0A",
-                                        "&:hover": {
-                                            bgcolor: "#ffffff",
-                                            color: "#0A0A0A",
-                                            opacity: 0.7
-                                        }, borderRadius: "5%"
-                                    }}>Cancel</Button>
-                                    <Button variant="contained" sx={{
-                                        bgcolor: "#004d40",
-                                        "&:hover": {
-                                            bgcolor: "#2B5A52",
-                                        }
-                                    }}>Save Changes</Button>
-                                </Box>
-                            </Box></>)}
-
+                                </Box></>)
+                        }
                     </Box>
                 </Drawer>
             </Box>
@@ -377,16 +393,14 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                 onChange={handleColorChange}
                                 displayEmpty
                             >
-                                <MenuItem value="black">Black</MenuItem>
-                                <MenuItem value="red">Red</MenuItem>
-                                <MenuItem value="blue">Blue</MenuItem>
-                                <MenuItem value="green">Green</MenuItem>
-                                <MenuItem value="yellow">Yellow</MenuItem>
-                                <MenuItem value="purple">Purple</MenuItem>
-                                <MenuItem value="orange">Orange</MenuItem>
-                                <MenuItem value="grey">Grey</MenuItem>
-                                <MenuItem value="pink">Pink</MenuItem>
-                                <MenuItem value="cyan">Cyan</MenuItem>
+                                {["black", "red", "blue", "green", "yellow", "purple", "orange", "grey", "pink", "cyan"].map((color) => (
+                                    <MenuItem value={color} key={color}>
+                                        <ListItemIcon sx={{ minWidth: 32 }}>
+                                            <Box sx={{ width: 14, height: 14, bgcolor: color, borderRadius: "50%" }} />
+                                        </ListItemIcon>
+                                        {color.charAt(0).toUpperCase() + color.slice(1)}
+                                    </MenuItem>
+                                ))}
                             </Select>
                         </FormControl>
 
@@ -400,9 +414,13 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                         justifyContent: "center",
                                         alignItems: "center",
                                         p: 1,
+                                        cursor: "pointer",
                                         "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.07)" },
-                                        backgroundColor: selectedIconIndex === index ? "rgba(0, 0, 0, 0.07)" : "transparent"
+                                        backgroundColor: selectedIconIndex === index ? "rgba(0, 0, 0, 0.07)" : "transparent",
+                                        boxShadow: 1,
+                                        borderRadius: '4px',
                                     }}
+                                    onClick={handleIconSelect(index)}
                                 >
                                     <IconComponent sx={{ color: selectedColor }} />
                                 </Box>
@@ -410,11 +428,6 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                         </Box>
                     </Box>
                 </DialogContent>
-                <DialogActions>
-                    <Button color="primary" autoFocus>
-                        저장
-                    </Button>
-                </DialogActions>
             </Dialog >
         </>
     )
