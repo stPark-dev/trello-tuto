@@ -1,11 +1,11 @@
 "use client"
 
 import {
-    CleaningServices, Devices, HelpOutline, MoreVert, SvgIconComponent, Close,
-    Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Cloud, VolumeUp, Restaurant, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
+    HelpOutline, MoreVert, SvgIconComponent, Close,
+    Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Devices, VolumeUp, CleaningServices, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
 } from "@mui/icons-material";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, Grid, IconButton, InputAdornment, InputLabel, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled } from "@mui/material";
+import { createElement, useEffect, useState } from "react";
 
 type Translations = {
     kor: string;
@@ -25,12 +25,29 @@ type Category = {
     translations: Translations;
 };
 
+const DialogIcons: SvgIconComponent[] = [
+    Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Devices, VolumeUp, CleaningServices, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
+]
+
+const COLORS = {
+    BLACK: "#191919",
+    RED: "#E72929",
+    BLUE: "#2196F3",
+    GREEN: "#0D9276",
+    YELLOW: "#FCDC2A",
+    PURPLE: "#7F27FF",
+    ORANGE: "#FDA403",
+    GREY: "#B4B4B8",
+    PINK: "#FC819E",
+    CYAN: "#00BCD4",
+};
+
 const CategoryObj: Category[] = [
     {
         id: "ae33546c-f16d-4894-83df-07eca7a2cc39",
         tenant_id: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
         name: "Cleaning",
-        color: "#2196f3",
+        color: COLORS.BLUE,
         Icon: CleaningServices,
         created_at: "2024-03-07T04:42:00.000000Z",
         updated_at: "2024-03-07T04:42:00.000000Z",
@@ -45,7 +62,7 @@ const CategoryObj: Category[] = [
         id: "673bbd74-8d2d-4fab-903b-c8912ac26550",
         tenant_id: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
         name: "Connectivity",
-        color: "#00bcd4",
+        color: COLORS.CYAN,
         Icon: Wifi,
         created_at: "2024-03-07T04:42:00.000000Z",
         updated_at: "2024-03-07T04:42:00.000000Z",
@@ -60,7 +77,7 @@ const CategoryObj: Category[] = [
         id: "90bccb5a-a089-40e9-97f4-130973bd398e",
         tenant_id: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
         name: "Devices",
-        color: "#ff9800",
+        color: COLORS.YELLOW,
         Icon: Devices,
         created_at: "2024-03-07T04:42:00.000000Z",
         updated_at: "2024-03-07T04:42:00.000000Z",
@@ -75,7 +92,7 @@ const CategoryObj: Category[] = [
         id: "2fd6771a-a4fc-435b-9e22-df7f29ecd15a",
         tenant_id: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
         name: "Electricity & Lighting",
-        color: "#ffa000",
+        color: COLORS.ORANGE,
         Icon: ElectricBolt,
         created_at: "2024-03-07T04:42:00.000000Z",
         updated_at: "2024-03-07T04:42:00.000000Z",
@@ -88,9 +105,7 @@ const CategoryObj: Category[] = [
     },
 ]
 
-const DialogIcons = [
-    Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Cloud, VolumeUp, Restaurant, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
-]
+
 
 const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
@@ -103,8 +118,17 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
         eng: ""
     });
 
-    const [selectedColor, setSelectedColor] = useState("black");
+    const [selectedColor, setSelectedColor] = useState(COLORS.BLACK);
     const [selectedIconIndex, setSelectedIconIndex] = useState<number | null>(null);
+
+    const resetSelectedItem = () => {
+        setSelectedItem(null);
+        setSelectedColor(COLORS.BLACK);
+        setSelectedIconIndex(null);
+        setCategoryName("");
+        setCategoryTranslations({ kor: "", jpn: "", eng: "" });
+        setDrawerOpen(true);
+    }
 
     const handleIconSelect = (index: number) => () => {
         if (selectedItem) {
@@ -112,7 +136,10 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
             setSelectedItem({
                 ...selectedItem,
                 Icon: newIcon,
+                color: selectedColor
             });
+            setSelectedIconIndex(index);
+        } else {
             setSelectedIconIndex(index);
         }
     };
@@ -124,6 +151,8 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                 ...selectedItem,
                 color: event.target.value as string,
             });
+            setSelectedColor(event.target.value);
+        } else {
             setSelectedColor(event.target.value);
         }
     }
@@ -176,7 +205,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                     <Button
                         component="label"
                         variant="contained"
-                        onClick={() => setDrawerOpen(true)}
+                        onClick={resetSelectedItem}
                         sx={{
                             bgcolor: "#004d40",
                             "&:hover": {
@@ -225,7 +254,8 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                         Details
                                     </Typography>
                                     <IconButton size="small" sx={{ m: 2, border: "solid", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}><MoreVert /></IconButton>
-                                </Box><Box sx={{ flexGrow: 1, p: 3 }}>
+                                </Box>
+                                <Box sx={{ flexGrow: 1, p: 3 }}>
                                     <Box sx={{ mt: 2 }}>
                                         <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Icon</Typography>
                                         <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 2 }}>
@@ -345,8 +375,8 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                             </Box>
                                         </Box>
                                     </Box>
-
-                                </Box><Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
+                                </Box>
+                                <Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
                                     <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", p: 2 }}>
                                         <Button variant="contained" onClick={toggleDrawer(false)}
                                             sx={{
@@ -365,6 +395,138 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                         }}>Save Changes</Button>
                                     </Box>
                                 </Box></>)
+                        }
+                        {selectedItem === null && (
+                            <>
+                                <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
+                                    <Typography variant="h6" sx={{ m: 2 }}>
+                                        Details
+                                    </Typography>
+                                    <IconButton size="small" sx={{ m: 2, border: "solid", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}><MoreVert /></IconButton>
+                                </Box>
+                                <Box sx={{ flexGrow: 1, p: 3 }}>
+                                    <Box sx={{ mt: 2 }}>
+                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Icon</Typography>
+                                        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "flex-start", gap: 2 }}>
+                                            <Box sx={{ width: "3.5rem", height: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center", border: "solid", bgcolor: "grey.100", borderWidth: 1, borderColor: "grey.300", borderRadius: "25%" }}>
+                                                {selectedIconIndex !== null && createElement(DialogIcons[selectedIconIndex], { style: { color: selectedColor, fontSize: "2.5rem" } })}
+                                            </Box>
+                                            <Button variant="contained"
+                                                onClick={handleDiagClickOpen}
+                                                sx={{
+                                                    borderRadius: "0.5rem",
+                                                    bgcolor: "#ffffff",
+                                                    color: "#000000",
+                                                    "&:hover": {
+                                                        bgcolor: "#f0f0f0",
+                                                        opacity: 0.8,
+                                                    },
+                                                }}>EDIT ICON</Button>
+                                        </Box>
+                                    </Box>
+                                    <Box sx={{ mt: 2 }}>
+                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Category name</Typography>
+                                        <FormControl sx={{ width: "100%" }} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-name"
+                                                size="small"
+                                                value={categoryName}
+                                                onChange={(e) => setCategoryName(e.target.value)}
+                                                endAdornment={<InputAdornment position="end"><Tooltip title="Provide a category name."><HelpOutline sx={{ cursor: "default" }} /></Tooltip></InputAdornment>}
+                                                aria-describedby="outlined-name-helper-text"
+                                                inputProps={{
+                                                    "aria-label": "name",
+                                                }} />
+                                        </FormControl>
+                                    </Box>
+                                    <Box sx={{ mt: 2 }}>
+                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Translations</Typography>
+                                        <Box sx={{ p: 2, bgcolor: "grey.200", borderRadius: "1%" }}>
+                                            <Box sx={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 2, alignItems: "center" }}>
+                                                <Typography variant="body1" fontWeight="medium">Korean</Typography>
+                                                <TextField
+                                                    fullWidth
+                                                    id="korean"
+                                                    name="korean"
+                                                    variant="outlined"
+                                                    value={categoryTranslations.kor}
+                                                    onChange={(e) => updateCategoryTranslations("kor", e.target.value)}
+                                                    sx={{
+                                                        bgcolor: "grey.100",
+                                                        "& .MuiOutlinedInput-root": {
+                                                            height: "40px",
+                                                            alignItems: "center",
+                                                            "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "grey.500",
+                                                            },
+                                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "transparent",
+                                                            },
+                                                        },
+                                                        "& .MuiOutlinedInput-input": {
+                                                            padding: "10px 14px",
+                                                            fontWeight: "bold",
+                                                            color: "black",
+                                                        },
+                                                    }} />
+                                                <Typography variant="body1" fontWeight="medium">Japanese</Typography>
+                                                <TextField
+                                                    fullWidth
+                                                    id="japanese"
+                                                    name="japanese"
+                                                    variant="outlined"
+                                                    value={categoryTranslations.jpn}
+                                                    onChange={(e) => updateCategoryTranslations("jpn", e.target.value)}
+                                                    sx={{
+                                                        bgcolor: "grey.100",
+                                                        "& .MuiOutlinedInput-root": {
+                                                            height: "40px",
+                                                            alignItems: "center",
+                                                            "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "grey.500",
+                                                            },
+                                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "transparent",
+                                                            },
+                                                        },
+                                                        "& .MuiOutlinedInput-input": {
+                                                            padding: "10px 14px",
+                                                            fontWeight: "bold",
+                                                            color: "black",
+                                                        },
+                                                    }} />
+                                                <Typography variant="body1" fontWeight="medium">English</Typography>
+                                                <TextField
+                                                    fullWidth
+                                                    id="english"
+                                                    name="english"
+                                                    variant="outlined"
+                                                    value={categoryTranslations.eng}
+                                                    onChange={(e) => updateCategoryTranslations("eng", e.target.value)}
+                                                    sx={{
+                                                        bgcolor: "grey.100",
+                                                        "& .MuiOutlinedInput-root": {
+                                                            height: "40px",
+                                                            alignItems: "center",
+                                                            "&.Mui-focused .MuiOutlinedInput-notchedOutline, &:hover .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "grey.500",
+                                                            },
+                                                            "& .MuiOutlinedInput-notchedOutline": {
+                                                                borderColor: "transparent",
+                                                            },
+                                                        },
+                                                        "& .MuiOutlinedInput-input": {
+                                                            padding: "10px 14px",
+                                                            fontWeight: "bold",
+                                                            color: "black",
+                                                        },
+                                                    }} />
+                                            </Box>
+                                        </Box>
+                                    </Box>
+                                </Box>
+                            </>
+                        )
                         }
                     </Box>
                 </Drawer>
@@ -393,12 +555,12 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                 onChange={handleColorChange}
                                 displayEmpty
                             >
-                                {["black", "red", "blue", "green", "yellow", "purple", "orange", "grey", "pink", "cyan"].map((color) => (
-                                    <MenuItem value={color} key={color}>
+                                {Object.entries(COLORS).map(([colorName, colorValue]) => (
+                                    <MenuItem value={colorValue} key={colorName}>
                                         <ListItemIcon sx={{ minWidth: 32 }}>
-                                            <Box sx={{ width: 14, height: 14, bgcolor: color, borderRadius: "50%" }} />
+                                            <Box sx={{ width: 14, height: 14, bgcolor: colorValue, borderRadius: "50%" }} />
                                         </ListItemIcon>
-                                        {color.charAt(0).toUpperCase() + color.slice(1)}
+                                        {colorName.charAt(0).toUpperCase() + colorName.slice(1).toLowerCase()}
                                     </MenuItem>
                                 ))}
                             </Select>
@@ -418,7 +580,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                         "&:hover": { backgroundColor: "rgba(0, 0, 0, 0.07)" },
                                         backgroundColor: selectedIconIndex === index ? "rgba(0, 0, 0, 0.07)" : "transparent",
                                         boxShadow: 1,
-                                        borderRadius: '4px',
+                                        borderRadius: "4px",
                                     }}
                                     onClick={handleIconSelect(index)}
                                 >
