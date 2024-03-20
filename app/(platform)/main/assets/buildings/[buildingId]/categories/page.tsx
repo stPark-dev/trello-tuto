@@ -394,7 +394,8 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                             }
                                         }}>Save Changes</Button>
                                     </Box>
-                                </Box></>)
+                                </Box>
+                            </>)
                         }
                         {selectedItem === null && (
                             <>
@@ -523,6 +524,25 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                                     }} />
                                             </Box>
                                         </Box>
+                                    </Box>
+                                </Box>
+                                <Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
+                                    <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", p: 2 }}>
+                                        <Button variant="contained" onClick={toggleDrawer(false)}
+                                            sx={{
+                                                bgcolor: "#ffffff", color: "#0A0A0A",
+                                                "&:hover": {
+                                                    bgcolor: "#ffffff",
+                                                    color: "#0A0A0A",
+                                                    opacity: 0.7
+                                                }, borderRadius: "5%"
+                                            }}>Cancel</Button>
+                                        <Button variant="contained" sx={{
+                                            bgcolor: "#004d40",
+                                            "&:hover": {
+                                                bgcolor: "#2B5A52",
+                                            }
+                                        }}>Save Changes</Button>
                                     </Box>
                                 </Box>
                             </>

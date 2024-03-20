@@ -45,12 +45,12 @@ const MainSideBar = () => {
                     <>
                     </>
                 );
-            case '/main/tasks':
+            case '/main/works':
                 return (
                     <>
                         <Box sx={linkStyle} component={Link} href="/">
                             <TaskIcon sx={{ marginRight: 1 }} />
-                            All Tasks
+                            All Works
                         </Box>
                     </>
                 );
@@ -76,7 +76,7 @@ const MainSideBar = () => {
                         </Box>
                         <Box sx={linkStyle} component={Link} href="/">
                             <RepeatIcon sx={{ marginRight: 1 }} />
-                            Recurring Tasks
+                            Recurring Works
                         </Box>
                     </>
                 );

@@ -117,7 +117,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
   const isActive = (pathname: string) => currentPathName.startsWith(pathname);
   const navLinks = [
-    { href: "/main/tasks/all", label: "Tasks", Icon: TaskAlt, isActive: isActive("/main/tasks") },
+    { href: "/main/works/all", label: "Works", Icon: TaskAlt, isActive: isActive("/main/works") },
     { href: "/main/insights", label: "Insights", Icon: QueryStats, isActive: isActive("/main/insights") },
     { href: "/main/assets/buildings", label: "Assets", Icon: Business, isActive: isActive("/main/assets") },
   ];
@@ -171,9 +171,9 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   }, [md, setDrawerState]);
 
   const drawerMenuItems: { [key: string]: DrawerMenuItem[] } = {
-    '/main/tasks': [
-      { text: 'All Tasks', icon: Task, route: '/main/tasks/all' },
-      { text: 'Assigned to me', icon: AssignmentReturn, route: '/main/tasks/views' }
+    '/main/works': [
+      { text: 'All Works', icon: Task, route: '/main/works/all' },
+      { text: 'Assigned to me', icon: AssignmentReturn, route: '/main/works/views' }
     ],
     '/main/insights': [
       { text: 'Location', icon: LocationOn, route: '/main/insights/location' }
@@ -181,7 +181,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     '/main/assets': [
       { text: 'Buildings', icon: Apartment, route: '/main/assets/buildings' },
       { text: 'Documents', icon: DocumentScanner, route: '/main/assets/documents' },
-      { text: 'Recurring Tasks', icon: EventRepeat, route: '/main/assets/recurring-tasks' }
+      { text: 'Recurring Works', icon: EventRepeat, route: '/main/assets/recurring-works' }
     ],
     '/main/assets/buildings/[buildingId]': [
       { text: 'Information', icon: Info, route: '/main/assets/buildings/[buildingId]/location' },
@@ -279,7 +279,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
               textColor="primary"
               indicatorColor="primary"
             >
-              <Tab label="Tasks" onClick={() => router.push('/main/tasks/all')} />
+              <Tab label="Works" onClick={() => router.push('/main/works/all')} />
               <Tab label="Insights" onClick={() => router.push('/main/insights')} />
               <Tab label="Assets" onClick={() => router.push('/main/assets/buildings')} />
             </Tabs>

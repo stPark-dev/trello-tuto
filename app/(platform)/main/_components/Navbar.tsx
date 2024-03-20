@@ -19,7 +19,7 @@ const MainNavBar = () => {
     const isActive = (pathname: string) => currentPathName === pathname;
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const navLinks = [
-        { href: '/main/tasks', label: 'Tasks', Icon: TaskAltIcon, isActive: isActive('/main/tasks') },
+        { href: '/main/works', label: 'Works', Icon: TaskAltIcon, isActive: isActive('/main/works') },
         { href: '/main/insights', label: 'Insights', Icon: QueryStatsIcon, isActive: isActive('/main/insights') },
         { href: '/main/organisation', label: 'Organisation', Icon: BusinessIcon, isActive: isActive('/main/organisation') },
     ];
@@ -30,7 +30,7 @@ const MainNavBar = () => {
     const drawer = (
         <Box>
             <List>
-                {['Tasks', 'Insights', 'Organisation'].map((text, index) => (
+                {['Works', 'Insights', 'Organisation'].map((text, index) => (
                     <Box component={Link} href={`/main/${text.toLowerCase()}`} key={text} sx={{ textDecoration: "none", color: 'text.secondary', }}>
                         <ListItemButton
                             selected={isActive(`/main/${text.toLowerCase()}`)}

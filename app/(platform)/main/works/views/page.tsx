@@ -26,7 +26,7 @@ const initialColumns: Record<Id, Column> = {
     scheduled: { id: "scheduled", title: "Scheduled", items: [{ id: "item2", content: "Task 2" }] },
     completed: { id: "completed", title: "Completed", items: [{ id: "item3", content: "Task 3" }] },
 };
-const MainTasks = () => {
+const MainWorks = () => {
     const [columns, setColumns] = useState(initialColumns);
     const [newTaskCount, setNewTaskCount] = useState(0);
     const [uploadedFiles, setUploadedFiles] = useState<Array<{ name: string; url?: string }>>([]);
@@ -149,7 +149,7 @@ const MainTasks = () => {
         <>
             <Box sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", overflow: "auto" }}>
                 <Box sx={{ px: 5, mt: 5, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                    <Typography variant="h5" fontWeight="bold">All Tasks</Typography>
+                    <Typography variant="h5" fontWeight="bold">All Works</Typography>
                     <Button
                         component="label"
                         variant="contained"
@@ -161,7 +161,7 @@ const MainTasks = () => {
                             }
                         }}
                     >
-                        Create Tasks
+                        Create Works
                         <VisuallyHiddenInput
                             type="file"
                             multiple
@@ -266,4 +266,4 @@ const MainTasks = () => {
     )
 }
 
-export default MainTasks;
+export default MainWorks;

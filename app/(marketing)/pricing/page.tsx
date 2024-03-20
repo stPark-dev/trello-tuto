@@ -66,7 +66,7 @@ const PricingPage = () => {
     createData("Manage up to 30 spaces ", "O", "O", "O"),
     createData("Access to all basic features ", "O", "O", "O"),
     createData("Team collaboration", "X", "O", "O"),
-    createData("Schedule recurring tasks", "X", "O", "O"),
+    createData("Schedule recurring works", "X", "O", "O"),
     createData("Work with external service providers", "X", "O", "O"),
     createData("Workflow automation", "X", "X", "O"),
     createData("24/7 priority support", "X", "X", "O"),
@@ -217,7 +217,7 @@ const PricingPage = () => {
                     <List sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}>
                       <ListItem>
                         <CheckCircleOutlineIcon color="primary" />
-                        <ListItemText sx={{ ml: 2 }} primary="Schedule recurring tasks" />
+                        <ListItemText sx={{ ml: 2 }} primary="Schedule recurring works" />
                       </ListItem>
                       <ListItem>
                         <CheckCircleOutlineIcon color="primary" />
