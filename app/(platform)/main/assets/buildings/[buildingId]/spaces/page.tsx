@@ -1,6 +1,5 @@
 "use client"
 
-import QrCodeGenerator from "@/components/QrCodeGenerator";
 import QrCodeScanner from "@/components/QrCodeScanner";
 import { ExpandLess, ExpandMore, HelpOutline, MoreVert } from "@mui/icons-material";
 import { Box, Button, Checkbox, Collapse, Drawer, FormControl, Grid, IconButton, InputAdornment, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Tooltip, Typography } from "@mui/material";
@@ -117,7 +116,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                         Add Space
                     </Button>
                 </Box>
-                <Box sx={{ width: "100vw", height: "100vh",  bgcolor: "#F2F4F7"}}>
+                <Box sx={{ width: "100%", height: "100vh",  bgcolor: "#F2F4F7"}}>
                     <List
                         sx={{ width: "100%", bgcolor: "background.paper" }}
                         component="nav"

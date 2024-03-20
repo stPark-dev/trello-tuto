@@ -15,13 +15,13 @@ type Translations = {
 
 type Category = {
     id: string;
-    tenant_id: string;
+    tenantId: string;
     name: string;
     color: string;
     Icon: SvgIconComponent;
-    created_at: string;
-    updated_at: string;
-    deleted_at: string | null;
+    createdAt: string;
+    updatedAt: string | null;
+    deletedAt: string | null;
     translations: Translations;
 };
 
@@ -45,13 +45,13 @@ const COLORS = {
 const CategoryObj: Category[] = [
     {
         id: "ae33546c-f16d-4894-83df-07eca7a2cc39",
-        tenant_id: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
+        tenantId: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
         name: "Cleaning",
         color: COLORS.BLUE,
         Icon: CleaningServices,
-        created_at: "2024-03-07T04:42:00.000000Z",
-        updated_at: "2024-03-07T04:42:00.000000Z",
-        deleted_at: null,
+        createdAt: "2024-03-07T04:42:00.000000Z",
+        updatedAt: "2024-03-07T04:42:00.000000Z",
+        deletedAt: null,
         translations: {
             kor: "청소",
             jpn: "クリーニング",
@@ -60,13 +60,13 @@ const CategoryObj: Category[] = [
     },
     {
         id: "673bbd74-8d2d-4fab-903b-c8912ac26550",
-        tenant_id: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
+        tenantId: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
         name: "Connectivity",
         color: COLORS.CYAN,
         Icon: Wifi,
-        created_at: "2024-03-07T04:42:00.000000Z",
-        updated_at: "2024-03-07T04:42:00.000000Z",
-        deleted_at: null,
+        createdAt: "2024-03-07T04:42:00.000000Z",
+        updatedAt: "2024-03-07T04:42:00.000000Z",
+        deletedAt: null,
         translations: {
             kor: "연결성",
             jpn: "コネクティビティ",
@@ -75,13 +75,13 @@ const CategoryObj: Category[] = [
     },
     {
         id: "90bccb5a-a089-40e9-97f4-130973bd398e",
-        tenant_id: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
+        tenantId: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
         name: "Devices",
         color: COLORS.YELLOW,
         Icon: Devices,
-        created_at: "2024-03-07T04:42:00.000000Z",
-        updated_at: "2024-03-07T04:42:00.000000Z",
-        deleted_at: null,
+        createdAt: "2024-03-07T04:42:00.000000Z",
+        updatedAt: "2024-03-07T04:42:00.000000Z",
+        deletedAt: null,
         translations: {
             kor: "장치",
             jpn: "デバイス",
@@ -90,13 +90,13 @@ const CategoryObj: Category[] = [
     },
     {
         id: "2fd6771a-a4fc-435b-9e22-df7f29ecd15a",
-        tenant_id: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
+        tenantId: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
         name: "Electricity & Lighting",
         color: COLORS.ORANGE,
         Icon: ElectricBolt,
-        created_at: "2024-03-07T04:42:00.000000Z",
-        updated_at: "2024-03-07T04:42:00.000000Z",
-        deleted_at: null,
+        createdAt: "2024-03-07T04:42:00.000000Z",
+        updatedAt: "2024-03-07T04:42:00.000000Z",
+        deletedAt: null,
         translations: {
             kor: "전기 & 조명",
             jpn: "電気＆照明",
@@ -216,7 +216,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                         Add Category
                     </Button>
                 </Box>
-                <Box sx={{ width: "100vw", height: "100vh", bgcolor: "#F2F4F7" }}>
+                <Box sx={{ width: "100%", height: "100vh", bgcolor: "#F2F4F7" }}>
                     <List
                         sx={{ width: "100%", bgcolor: "background.paper" }}
                         component="nav"
@@ -270,7 +270,6 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                                     color: "#000000",
                                                     "&:hover": {
                                                         bgcolor: "#f0f0f0",
-                                                        opacity: 0.8,
                                                     },
                                                 }}>EDIT ICON</Button>
                                         </Box>
@@ -384,7 +383,6 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                                 "&:hover": {
                                                     bgcolor: "#ffffff",
                                                     color: "#0A0A0A",
-                                                    opacity: 0.7
                                                 }, borderRadius: "5%"
                                             }}>Cancel</Button>
                                         <Button variant="contained" sx={{
@@ -420,7 +418,6 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                                     color: "#000000",
                                                     "&:hover": {
                                                         bgcolor: "#f0f0f0",
-                                                        opacity: 0.8,
                                                     },
                                                 }}>EDIT ICON</Button>
                                         </Box>
@@ -534,7 +531,6 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                                 "&:hover": {
                                                     bgcolor: "#ffffff",
                                                     color: "#0A0A0A",
-                                                    opacity: 0.7
                                                 }, borderRadius: "5%"
                                             }}>Cancel</Button>
                                         <Button variant="contained" sx={{
