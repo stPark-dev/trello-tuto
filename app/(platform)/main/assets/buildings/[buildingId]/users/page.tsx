@@ -1,9 +1,10 @@
 "use client"
 
 import { HelpOutline, MoreVert } from "@mui/icons-material";
-import { Avatar, Box, Button, Checkbox, Drawer, FormControl, IconButton, InputAdornment, ListItemText, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Tooltip, Typography, alpha, styled } from "@mui/material";
-import { DataGrid, GridColDef, gridClasses } from "@mui/x-data-grid";
-import { useDemoData } from "@mui/x-data-grid-generator";
+import {
+    Autocomplete, Avatar, Box, Button, Drawer, FormControl, IconButton, InputAdornment, OutlinedInput, Paper, SelectChangeEvent,
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography, alpha, styled
+} from "@mui/material";
 import { useState } from "react";
 
 export type User = {
@@ -69,32 +70,24 @@ const MenuProps = {
     },
 };
 
-const space_types = [
+const role_types = [
     {
-        value: "Building",
-        label: "Building"
+        value: "Manager",
+        label: "Manager"
     },
     {
-        value: "Floor",
-        label: "Floor"
+        value: "Staff",
+        label: "Staff"
     },
     {
-        value: "Location",
-        label: "Location"
-    },
-    {
-        value: "Room",
-        label: "Room"
-    },
-    {
-        value: "Department",
-        label: "Department"
+        value: "Service Provider",
+        label: "Service Provider"
     }
 ]
 
 const UserPage = () => {
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [spaceType, setSpaceType] = useState<string[]>([]);
+    const [roleType, setRoleType] = useState<string[]>([]);
     const [selectedItem, setSelectedItem] = useState<User | null>(null);
     const [image, setImage] = useState("https://app.fixform.com/images/logo/8e7e5369-9b7e-4662-985d-2c8ebb98b722?p=logo&t=1709859358&signature=6e07d02fded9883e4eec985d39f589326c9de1c68ba25eb5a58f1a7ea50ff632");
 
@@ -134,13 +127,14 @@ const UserPage = () => {
         }
     };
 
-    const handleSelectBoxChange = (event: SelectChangeEvent<typeof spaceType>) => {
-        const {
-            target: { value },
-        } = event;
-        setSpaceType(
-            typeof value === "string" ? value.split(",") : value,
-        );
+    const handleRoleChange = (newValue: string[]) => {
+        if (selectedItem) {
+            setSelectedItem({
+                ...selectedItem,
+                role: newValue,
+            });
+        }
+        setRoleType(newValue);
     };
 
     return (
@@ -284,25 +278,43 @@ const UserPage = () => {
                                         </Box>
                                     </Box>
                                     <Box sx={{ my: 2 }}>
-                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Roles</Typography>
-                                        <FormControl fullWidth size="small">
-                                            <Select
-                                                labelId="type-multiple-checkbox-label"
-                                                id="type-multiple-checkbox"
-                                                multiple
-                                                value={spaceType}
-                                                onChange={handleSelectBoxChange}
-                                                renderValue={(selected) => selected.join("s, ")}
-                                                MenuProps={MenuProps}
-                                            >
-                                                {space_types.map(({ value, label }) => (
-                                                    <MenuItem key={label} value={value}>
-                                                        <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                        <ListItemText primary={value} />
-                                                    </MenuItem>
-                                                ))}
-                                            </Select>
+                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>E-Mail</Typography>
+                                        <FormControl sx={{ width: "100%" }} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-email"
+                                                size="small"
+                                                placeholder="john.doe@teamvolt.com"
+                                                value={selectedItem.email}
+                                                endAdornment={<InputAdornment position="end"><Tooltip title="Provide an email address."><HelpOutline sx={{ cursor: "default" }} /></Tooltip></InputAdornment>}
+                                                aria-describedby="outlined-name-helper-text"
+                                                inputProps={{
+                                                    "aria-label": "email",
+                                                }}
+                                            />
                                         </FormControl>
+                                    </Box>
+                                    <Box sx={{ my: 2 }}>
+                                        <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Roles</Typography>
+                                        <Autocomplete
+                                            multiple
+                                            id="tags-outlined"
+                                            options={role_types.map((option) => option.label)}
+                                            getOptionLabel={(option) => option}
+                                            defaultValue={[]}
+                                            filterSelectedOptions
+                                            renderInput={(params) => (
+                                                <TextField
+                                                    {...params}
+                                                    variant="outlined"
+                                                    label="Select roles"
+                                                />
+                                            )}
+                                            value={selectedItem ? selectedItem.role : []}
+                                            onChange={(event, newValue) => {
+                                                handleRoleChange(newValue)
+                                            }}
+                                            size="small"
+                                        />
                                     </Box>
                                     <Box sx={{ my: 2 }}>
                                         <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Function</Typography>
@@ -342,24 +354,26 @@ const UserPage = () => {
                                     </Box>
                                     <Box sx={{ my: 2 }}>
                                         <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Roles</Typography>
-                                        <FormControl fullWidth size="small">
-                                            <Select
-                                                labelId="type-multiple-checkbox-roles"
-                                                id="type-multiple-checkbox"
-                                                multiple
-                                                value={spaceType}
-                                                onChange={handleSelectBoxChange}
-                                                renderValue={(selected) => selected.join("s, ")}
-                                                MenuProps={MenuProps}
-                                            >
-                                                {space_types.map(({ value, label }) => (
-                                                    <MenuItem key={label} value={value}>
-                                                        <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                        <ListItemText primary={value} />
-                                                    </MenuItem>
-                                                ))}
-                                            </Select>
-                                        </FormControl>
+                                        <Autocomplete
+                                            multiple
+                                            id="tags-outlined"
+                                            options={role_types.map((option) => option.label)}
+                                            getOptionLabel={(option) => option}
+                                            defaultValue={[]}
+                                            filterSelectedOptions
+                                            renderInput={(params) => (
+                                                <TextField
+                                                    {...params}
+                                                    variant="outlined"
+                                                    label="Select roles"
+                                                />
+                                            )}
+                                            value={roleType}
+                                            onChange={(event, newValue) => {
+                                                setRoleType(newValue);
+                                            }}
+                                            size="small"
+                                        />
                                     </Box>
                                     <Box sx={{ my: 2 }}>
                                         <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Function</Typography>
@@ -382,7 +396,7 @@ const UserPage = () => {
                     <Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
                         <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", p: 2 }}>
                             <Button variant="contained" onClick={toggleDrawer(false)} sx={{
-                                color: "#000000", bgcolor: "#ffffff", 
+                                color: "#000000", bgcolor: "#ffffff",
                                 "&:hover": {
                                     bgcolor: "#ffffff",
                                     color: "#0A0A0A",
