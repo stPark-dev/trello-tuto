@@ -181,10 +181,10 @@ const BuildingPage = () => {
             <Box sx={{ px: 5, my: 5, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Typography variant="h5" fontWeight="bold">Buildings</Typography>
                 <Button
-                    component="label"
                     variant="contained"
                     startIcon={<AddIcon />}
                     sx={{
+                        fontWeight: "bold",
                         bgcolor: "#004d40",
                         ":hover": {
                             bgcolor: "#2B5A52",

@@ -151,10 +151,10 @@ const MainWorks = () => {
                 <Box sx={{ px: 5, mt: 5, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                     <Typography variant="h5" fontWeight="bold">All Works</Typography>
                     <Button
-                        component="label"
                         variant="contained"
                         startIcon={<TaskIcon />}
                         sx={{
+                            fontWeight: "bold",
                             bgcolor: "#004d40", 
                             "&:hover": {
                                 bgcolor: "#2B5A52",

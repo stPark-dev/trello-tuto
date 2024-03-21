@@ -142,10 +142,10 @@ const UserPage = () => {
             <Box sx={{ px: 5, mt: 5, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
                 <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Users</Typography>
                 <Button
-                    component="label"
                     variant="contained"
                     onClick={resetItemClick}
                     sx={{
+                        fontWeight: "bold",
                         bgcolor: "#004d40",
                         "&:hover": {
                             bgcolor: "#2B5A52",

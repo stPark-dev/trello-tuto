@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Button, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Typography } from "@mui/material";
-import { FolderOutlined, Delete, MoreVert, EditNote } from "@mui/icons-material";
+import { FolderOutlined, Delete, MoreVert, EditNote, ExpandMore, Interests, FolderCopy } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem, GridColDef, GridRowModel } from "@mui/x-data-grid";
 
@@ -81,15 +81,25 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
     const [assets, setAssets] = useState<AssetType[]>(data);
     const [assetGroups, setAssetGroups] = useState<GroupType[]>([]);
     const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    const [groupAnchorEl, setGroupAnchorEl] = useState<null | HTMLElement>(null);
+    const groupMenuOpen = Boolean(groupAnchorEl);
+    const [addAnchorEl, setAddAnchorEl] = useState<null | HTMLElement>(null);
+    const addMenuOpen = Boolean(addAnchorEl);
 
-    const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+    const handleGroupMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setGroupAnchorEl(event.currentTarget);
     };
 
-    const handleMenuClose = () => {
-        setAnchorEl(null);
+    const handleGroupMenuClose = () => {
+        setGroupAnchorEl(null);
+    }
+
+    const handleAddMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAddAnchorEl(event.currentTarget);
+    };
+
+    const handleAddMenuClose = () => {
+        setAddAnchorEl(null);
     }
 
     useEffect(() => {
@@ -165,17 +175,30 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                 <Box sx={{ px: 5, mt: 5, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
                     <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Assets</Typography>
                     <Button
-                        component="label"
                         variant="contained"
+                        onClick={handleAddMenuClick}
                         sx={{
+                            fontWeight: "bold",
+                            fontSize: "0.875rem",
                             bgcolor: "#004d40",
                             "&:hover": {
                                 bgcolor: "#2B5A52",
                             }
                         }}
                     >
-                        Add
+                        Add<ExpandMore />
                     </Button>
+                    <Menu
+                        anchorEl={addAnchorEl}
+                        open={addMenuOpen}
+                        onClose={handleAddMenuClose}
+                        MenuListProps={{
+                            "aria-labelledby": "basic-button",
+                        }}
+                    >
+                        <MenuItem onClick={handleAddMenuClose}><Interests sx={{ mr: 1 }} />Single Asset</MenuItem>
+                        <MenuItem onClick={handleAddMenuClose}><FolderCopy sx={{ mr: 1 }} />Asset Group</MenuItem>
+                    </Menu>
                 </Box>
                 <Box sx={{ width: "100%", height: "100vh", display: "flex", flexDirection: "row" }}>
                     <Box sx={{ flex: 1, display: "flex", flexDirection: "column", bgcolor: "#F2F4F7", p: 3, gap: 2 }}>
@@ -212,19 +235,19 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                                     </ListItemIcon>
                                                     <ListItemText primary={group.name} />
                                                 </Box>
-                                                <IconButton edge="end" size="small" onClick={handleMenuClick}>
+                                                <IconButton edge="end" size="small" onClick={handleGroupMenuClick}>
                                                     <MoreVert />
                                                 </IconButton>
                                                 <Menu
-                                                    anchorEl={anchorEl}
-                                                    open={open}
-                                                    onClose={handleMenuClose}
+                                                    anchorEl={groupAnchorEl}
+                                                    open={groupMenuOpen}
+                                                    onClose={handleGroupMenuClose}
                                                     MenuListProps={{
                                                         "aria-labelledby": "basic-button",
                                                     }}
                                                 >
-                                                    <MenuItem onClick={handleMenuClose}><EditNote sx={{ mr: 1 }} />Details</MenuItem>
-                                                    <MenuItem onClick={handleMenuClose}><Delete sx={{ mr: 1 }} />Delete</MenuItem>
+                                                    <MenuItem onClick={handleGroupMenuClose}><EditNote sx={{ mr: 1 }} />Details</MenuItem>
+                                                    <MenuItem onClick={handleGroupMenuClose}><Delete sx={{ mr: 1 }} />Delete</MenuItem>
                                                 </Menu>
                                             </ListItemButton>
                                         </ListItem>

@@ -90,10 +90,10 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                 <Box sx={{ px: 5, mt: 5, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: 1, borderColor: "grey.300" }}>
                     <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Spaces</Typography>
                     <Button
-                        component="label"
                         variant="contained"
                         onClick={handleListItemClick}
                         sx={{
+                            fontWeight: "bold",
                             bgcolor: "#004d40",
                             "&:hover": {
                                 bgcolor: "#2B5A52",
@@ -216,12 +216,12 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                     <><Typography variant="body1" fontWeight="bold" sx={{ mb: 1, alignSelf: "flex-start" }}>QR Codes</Typography><Box sx={{ width: 200, display: "flex", justifyContent: "center" }}>
                                         <Image src="/qr_vector.jpg" width={200} height={200} alt="qr_vector" />
                                     </Box><Typography variant="h6" fontWeight="bold" sx={{ mt: 2, alignSelf: "center" }}>QR Codes</Typography><Typography sx={{ alignSelf: "center" }}>Currently, no QR codes re assinged to this asset.</Typography><Button
-                                        component="label"
                                         variant="contained"
                                         onClick={() => setShowQR(true)}
                                         sx={{
                                             mt: 4,
                                             bgcolor: "#004d40",
+                                            fontWeight: "bold",
                                             "&:hover": {
                                                 bgcolor: "#2B5A52",
                                             }
