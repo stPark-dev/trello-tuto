@@ -24,7 +24,7 @@ export type User = {
     updatedAt: string | null;
 }
 
-const Users: User[] = [
+const data: User[] = [
     {
         id: "78f99651-e184-4189-ae5e-be1bce1b5149",
         firstName: "ST",
@@ -166,7 +166,7 @@ const UserPage = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {Users.map((user) => (
+                            {data.map((user) => (
                                 <TableRow
                                     key={user.id}
                                     hover
@@ -343,7 +343,7 @@ const UserPage = () => {
                                             <OutlinedInput
                                                 id="outlined-adornment-email"
                                                 size="small"
-                                                placeholder="john.doe@teamvolt.com"
+                                                placeholder="ex) john.doe@teamvolt.com"
                                                 endAdornment={<InputAdornment position="end"><Tooltip title="Provide an email address."><HelpOutline sx={{ cursor: "default" }} /></Tooltip></InputAdornment>}
                                                 aria-describedby="outlined-name-helper-text"
                                                 inputProps={{

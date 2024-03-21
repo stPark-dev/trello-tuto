@@ -7,13 +7,13 @@ import {
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled } from "@mui/material";
 import { createElement, useEffect, useState } from "react";
 
-type Translations = {
+export type Translations = {
     kor: string;
     jpn: string;
     eng: string;
 };
 
-type Category = {
+export type Category = {
     id: string;
     tenantId: string;
     name: string;
@@ -42,7 +42,7 @@ const COLORS = {
     CYAN: "#00BCD4",
 };
 
-const CategoryObj: Category[] = [
+const data: Category[] = [
     {
         id: "ae33546c-f16d-4894-83df-07eca7a2cc39",
         tenantId: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
@@ -222,7 +222,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                         component="nav"
                         disablePadding={true}
                     >
-                        {CategoryObj.map((category) => {
+                        {data.map((category) => {
                             return (
                                 <Box key={category.id}>
                                     <ListItemButton onClick={() => handleListItemClick(category)} sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>

@@ -17,20 +17,7 @@ const MenuProps = {
     },
 };
 
-const names = [
-    "Oliver Hansen",
-    "Van Henry",
-    "April Tucker",
-    "Ralph Hubbard",
-    "Omar Alexander",
-    "Carlos Abbott",
-    "Miriam Wagner",
-    "Bradley Wilkerson",
-    "Virginia Andrews",
-    "Kelly Snyder",
-];
-
-const space_types = [
+const data = [
     {
         value: "Building",
         label: "Building"
@@ -194,7 +181,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                         renderValue={(selected) => selected.join("s, ")}
                                         MenuProps={MenuProps}
                                     >
-                                        {space_types.map(({ value, label }) => (
+                                        {data.map(({ value, label }) => (
                                             <MenuItem key={label} value={value}>
                                                 <Checkbox checked={spaceType.indexOf(value) > -1} />
                                                 <ListItemText primary={value} />
@@ -215,7 +202,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                         renderValue={(selected) => selected.join("s, ")}
                                         MenuProps={MenuProps}
                                     >
-                                        {space_types.map(({ value, label }) => (
+                                        {data.map(({ value, label }) => (
                                             <MenuItem key={label} value={value}>
                                                 <Checkbox checked={spaceType.indexOf(value) > -1} />
                                                 <ListItemText primary={value} />

@@ -20,7 +20,7 @@ const MenuProps = {
     },
 };
 
-const buildings = [
+const data = [
     { _id: "2eccsdgdc-dscxcsw-edcv", name: "Building A", address: "123 Main St", postalCode: "12345", city: "CityA", users: "10" },
     { _id: "3sazxcxxd-anmvcss-zwet", name: "Building B", address: "456 Second St", postalCode: "67890", city: "CityB", users: "15" },
     { _id: "sasnp43sk-ccnlfsb-mbbn", name: "Building C", address: "54 Third St", postalCode: "67890", city: "CityC", users: "2" },
@@ -197,7 +197,7 @@ const BuildingPage = () => {
             </Box>
             <Box sx={{ backgroundColor: theme.palette.grey[100], p: 5, overflow: "auto" }}>
                 <Grid container spacing={2}>
-                    {buildings.map((building, index) => (
+                    {data.map((building, index) => (
                         <Grid item xs={12} sm={6} md={4} key={index}>
                             <Item onClick={() => router.push(`/main/assets/buildings/${building._id}/location`)}>
                                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
