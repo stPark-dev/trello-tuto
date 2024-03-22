@@ -160,14 +160,10 @@ const BuildingPage = () => {
                                     bgcolor: "#ffffff",
                                 },
                             }}>Cancel</Button>
-                            <Button type="submit" variant="contained"
+                            <Button type="submit" variant="contained" color="primary"
                                 sx={{
                                     mr: 1,
-                                    bgcolor: "#004d40",
                                     flexGrow: 1,
-                                    ":hover": {
-                                        bgcolor: "#2B5A52",
-                                    }
                                 }}>Submit</Button>
                         </Box>
                     </Box>
@@ -182,13 +178,10 @@ const BuildingPage = () => {
                 <Typography variant="h5" fontWeight="bold">Buildings</Typography>
                 <Button
                     variant="contained"
+                    color="primary"
                     startIcon={<AddIcon />}
                     sx={{
                         fontWeight: "bold",
-                        bgcolor: "#004d40",
-                        ":hover": {
-                            bgcolor: "#2B5A52",
-                        }
                     }}
                     onClick={handleClickOpen}
                 >

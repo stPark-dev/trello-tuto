@@ -152,13 +152,10 @@ const MainWorks = () => {
                     <Typography variant="h5" fontWeight="bold">All Works</Typography>
                     <Button
                         variant="contained"
+                        color="primary"
                         startIcon={<TaskIcon />}
                         sx={{
                             fontWeight: "bold",
-                            bgcolor: "#004d40", 
-                            "&:hover": {
-                                bgcolor: "#2B5A52",
-                            }
                         }}
                     >
                         Create Works

@@ -1,18 +1,8 @@
-'use client'
+"use client"
 
-import { Box, ThemeProvider, createTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import Drawer from "../_component/Drawer/Drawer";
-import { roboto, montserrat, inter } from "@/font/fonts";
-
-const headingFont = createTheme({
-    typography: {
-        fontFamily: [
-            inter,
-            roboto,
-            montserrat,
-         ].join(','),
-    },
-});
+import ThemeProvider from "@/components/mui/ThemeProvider";
 
 const MainLayout = ({
     children
@@ -21,7 +11,7 @@ const MainLayout = ({
 }) => {
     return (
         <>
-            <ThemeProvider theme={headingFont}>
+            <ThemeProvider>
                 <Drawer>
                     <Box sx={{ display: "flex", pt: "64px" }}>
                         {children}

@@ -204,13 +204,10 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                     <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Categories</Typography>
                     <Button
                         variant="contained"
+                        color="primary"
                         onClick={resetSelectedItem}
                         sx={{
                             fontWeight: "bold",
-                            bgcolor: "#004d40",
-                            "&:hover": {
-                                bgcolor: "#2B5A52",
-                            }
                         }}
                     >
                         Add Category
@@ -385,12 +382,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                                     color: "#0A0A0A",
                                                 }, borderRadius: "5%"
                                             }}>Cancel</Button>
-                                        <Button variant="contained" sx={{
-                                            bgcolor: "#004d40",
-                                            "&:hover": {
-                                                bgcolor: "#2B5A52",
-                                            }
-                                        }}>Save Changes</Button>
+                                        <Button variant="contained" color="primary">Save Changes</Button>
                                     </Box>
                                 </Box>
                             </>)
@@ -533,12 +525,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                                                     color: "#0A0A0A",
                                                 }, borderRadius: "5%"
                                             }}>Cancel</Button>
-                                        <Button variant="contained" sx={{
-                                            bgcolor: "#004d40",
-                                            "&:hover": {
-                                                bgcolor: "#2B5A52",
-                                            }
-                                        }}>Save Changes</Button>
+                                        <Button variant="contained" color="primary">Save Changes</Button>
                                     </Box>
                                 </Box>
                             </>

@@ -8,12 +8,9 @@ const RolesPage = ({ params }: { params: { buildingId: string } }) => {
                     <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Roles</Typography>
                     <Button
                         variant="contained"
+                        color="primary"
                         sx={{
                             fontWeight: "bold",
-                            bgcolor: "#004d40",
-                            "&:hover": {
-                                bgcolor: "#2B5A52",
-                            }
                         }}
                     >
                         Add Roles

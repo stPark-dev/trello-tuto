@@ -146,7 +146,7 @@ const UserPage = () => {
                     onClick={resetItemClick}
                     sx={{
                         fontWeight: "bold",
-                        bgcolor: "#004d40",
+                        bgcolor: "#",
                         "&:hover": {
                             bgcolor: "#2B5A52",
                         }
@@ -403,7 +403,7 @@ const UserPage = () => {
                                 }
                             }}>Cancel</Button>
                             <Button variant="contained" sx={{
-                                bgcolor: "#004d40",
+                                bgcolor: "#",
                                 "&:hover": {
                                     bgcolor: "#2B5A52",
                                 }

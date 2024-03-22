@@ -51,13 +51,10 @@ const MainInsight = () => {
                 <Typography variant="h5" fontWeight="bold">Insights</Typography>
                 <Button
                     variant="contained"
+                    color="primary"
                     startIcon={<TableChartIcon />}
                     sx={{
                         fontWeight: "bold",
-                        bgcolor: '#004d40',
-                        '&:hover': {
-                            bgcolor: "#2B5A52",
-                        }
                     }}
                 >
                     Export

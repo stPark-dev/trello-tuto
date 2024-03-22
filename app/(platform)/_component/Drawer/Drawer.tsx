@@ -29,6 +29,7 @@ import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStat
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 import Clock from "../Clock";
 import { useRouter, usePathname } from 'next/navigation';
+import Toggler from "@/components/mui/ThemeProvider/Toggler";
 
 interface DrawerProps extends React.PropsWithChildren {
   profile?: React.ReactNode;
@@ -290,7 +291,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
             {currentMenuItems.map((menuItem: DrawerMenuItem, index: number) => (
               <ListItem key={index} disablePadding>
                 <ListItemButton onClick={() => {
-                  if(isMobile) handleDrawerToggle();
+                  if (isMobile) handleDrawerToggle();
                   router.push(menuItem.route)
                 }}>
                   <ListItemIcon>
@@ -346,6 +347,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
         }}
       >
         <Toolbar disableGutters sx={{ px: 4 }}>
+          <Toggler />
           <IconButton
             color="inherit"
             aria-label="open drawer"

@@ -4,6 +4,13 @@ import { Box, Button, IconButton, List, ListItem, ListItemButton, ListItemIcon, 
 import { FolderOutlined, Delete, MoreVert, EditNote, ExpandMore, Interests, FolderCopy } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem, GridColDef, GridRowModel } from "@mui/x-data-grid";
+import { Josefin_Sans } from "next/font/google";
+
+const josefin_Sans = Josefin_Sans({
+    weight: ["300", "400"],
+    style: ["normal", "italic"],
+    subsets: ["latin"],
+  });
 
 export type GroupType = {
     id: string;
@@ -86,8 +93,10 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
     const [addAnchorEl, setAddAnchorEl] = useState<null | HTMLElement>(null);
     const addMenuOpen = Boolean(addAnchorEl);
 
-    const handleGroupMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setGroupAnchorEl(event.currentTarget);
+    const handleGroupMenuClick = (event: React.MouseEvent<HTMLButtonElement>, groupId: string) => {
+        event.stopPropagation(); // 이벤트 버블링 방지
+        setSelectedGroupId(groupId); // 선택된 그룹 ID 설정
+        setGroupAnchorEl(event.currentTarget); // 메뉴 위치 설정
     };
 
     const handleGroupMenuClose = () => {
@@ -157,7 +166,7 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                     <GridActionsCellItem
                         key={`edit_${row.id}`}
                         icon={<Delete />}
-                        label="삭제"
+                        label="Delete"
                         className="textPrimary"
                         color="inherit"
                         onClick={() => handleDeleteAsset(row.id)}
@@ -176,14 +185,11 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                     <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Assets</Typography>
                     <Button
                         variant="contained"
+                        color="primary"
                         onClick={handleAddMenuClick}
                         sx={{
                             fontWeight: "bold",
                             fontSize: "0.875rem",
-                            bgcolor: "#004d40",
-                            "&:hover": {
-                                bgcolor: "#2B5A52",
-                            }
                         }}
                     >
                         Add<ExpandMore />
@@ -235,21 +241,24 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                                     </ListItemIcon>
                                                     <ListItemText primary={group.name} />
                                                 </Box>
-                                                <IconButton edge="end" size="small" onClick={handleGroupMenuClick}>
-                                                    <MoreVert />
-                                                </IconButton>
-                                                <Menu
-                                                    anchorEl={groupAnchorEl}
-                                                    open={groupMenuOpen}
-                                                    onClose={handleGroupMenuClose}
-                                                    MenuListProps={{
-                                                        "aria-labelledby": "basic-button",
-                                                    }}
-                                                >
-                                                    <MenuItem onClick={handleGroupMenuClose}><EditNote sx={{ mr: 1 }} />Details</MenuItem>
-                                                    <MenuItem onClick={handleGroupMenuClose}><Delete sx={{ mr: 1 }} />Delete</MenuItem>
-                                                </Menu>
                                             </ListItemButton>
+                                            <IconButton
+                                                edge="end"
+                                                size="small"
+                                                onClick={(event) => handleGroupMenuClick(event, group.id)}>
+                                                <MoreVert />
+                                            </IconButton>
+                                            <Menu
+                                                anchorEl={selectedGroupId === group.id ? groupAnchorEl : null}
+                                                open={groupMenuOpen && selectedGroupId === group.id}
+                                                onClose={handleGroupMenuClose}
+                                                MenuListProps={{
+                                                    "aria-labelledby": "basic-button",
+                                                }}
+                                            >
+                                                <MenuItem onClick={handleGroupMenuClose}><EditNote sx={{ mr: 1 }} />Details</MenuItem>
+                                                <MenuItem onClick={handleGroupMenuClose}><Delete sx={{ mr: 1 }} />Delete</MenuItem>
+                                            </Menu>
                                         </ListItem>
                                     ))}
                                 </List>

@@ -91,13 +91,10 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                     <Typography variant="h5" fontWeight="bold" sx={{ my: 2 }}>Spaces</Typography>
                     <Button
                         variant="contained"
+                        color="primary"
                         onClick={handleListItemClick}
                         sx={{
                             fontWeight: "bold",
-                            bgcolor: "#004d40",
-                            "&:hover": {
-                                bgcolor: "#2B5A52",
-                            }
                         }}
                     >
                         Add Space
@@ -217,14 +214,11 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                         <Image src="/qr_vector.jpg" width={200} height={200} alt="qr_vector" />
                                     </Box><Typography variant="h6" fontWeight="bold" sx={{ mt: 2, alignSelf: "center" }}>QR Codes</Typography><Typography sx={{ alignSelf: "center" }}>Currently, no QR codes re assinged to this asset.</Typography><Button
                                         variant="contained"
+                                        color="primary"
                                         onClick={() => setShowQR(true)}
                                         sx={{
                                             mt: 4,
-                                            bgcolor: "#004d40",
                                             fontWeight: "bold",
-                                            "&:hover": {
-                                                bgcolor: "#2B5A52",
-                                            }
                                         }}
                                     >
                                             Add QR code
@@ -243,12 +237,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                         <Box id="drawer_footer" sx={{ borderTop: 1, borderColor: "grey.300", }}>
                             <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", p: 2 }}>
                                 <Button variant="contained" color="inherit" onClick={toggleDrawer(false)}>Cancel</Button>
-                                <Button variant="contained" sx={{
-                                    bgcolor: "#004d40",
-                                    "&:hover": {
-                                        bgcolor: "#2B5A52",
-                                    }
-                                }}>Save Changes</Button>
+                                <Button variant="contained" color="primary">Save Changes</Button>
                             </Box>
                         </Box>
                     </Box>
