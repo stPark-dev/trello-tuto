@@ -153,7 +153,10 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const drawerIsOpen = useMemo(() => drawerState.open, [drawerState.open]);
   const drawerMode = useMemo(() => drawerState.mode, [drawerState.mode]);
 
-  const handleDrawerToggle = () => setDrawerState((prev) => ({ ...prev, open: !prev.open }));
+  const handleDrawerToggle = () => { 
+    console.info("########## Theme: ", theme)
+    setDrawerState((prev) => ({ ...prev, open: !prev.open }))
+  };
 
   // Right Drawer
   const [rightDrawerOpen, setRightDrawerOpen] = useState(false);
@@ -332,8 +335,8 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     <Box sx={{ display: "flex", height: "100vh", width: "100vw" }}>
       <CssBaseline />
       <AppBar
-        color="info"
         position="fixed"
+        color="info"
         sx={{
           [theme.breakpoints.up("md")]: drawerIsOpen && {
             width: `calc(100% - ${drawerWidth}px)`,

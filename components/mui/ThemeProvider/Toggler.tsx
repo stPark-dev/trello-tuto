@@ -14,12 +14,14 @@ interface IconProps {
 }
 
 const DynamicIcon = ({ name }: IconProps): ReactElement => {
-  if ("dark" === name) return <DarkModeIcon />;
+  if ("dark" === name) return <LightModeIcon />;
   return <LightModeIcon />;
 };
 
 const Toggler = (): ReactElement => {
   const [name, setMode] = useRecoilState(themeState);
+
+  console.info("say my name : ", name)
 
   const toggleMode = () => setMode(prevState => ("light" === prevState ? "dark" : "light"));
 

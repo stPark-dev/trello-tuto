@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
-import QRCode from 'qrcode';
-import { Button, TextField, Box } from '@mui/material';
+import React, { useEffect, useState } from "react";
+import QRCode from "qrcode";
+import { Button, TextField, Box } from "@mui/material";
 
 const QrCodeGenerator = () => {
-    const [qrCodeUrl, setQrCodeUrl] = useState('');
-    const [inputText, setInputText] = useState('');
+    const [qrCodeUrl, setQrCodeUrl] = useState("");
+    const [inputText, setInputText] = useState("");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputText(event.target.value);
@@ -23,9 +23,9 @@ const QrCodeGenerator = () => {
     };
 
     const downloadQRCode = () => {
-        const anchor = document.createElement('a');
+        const anchor = document.createElement("a");
         anchor.href = qrCodeUrl;
-        anchor.download = 'QRCode.png';
+        anchor.download = "QRCode.png";
         document.body.appendChild(anchor);
         anchor.click();
         document.body.removeChild(anchor);
@@ -51,9 +51,9 @@ const QrCodeGenerator = () => {
             autoComplete="off"
             onSubmit={handleSubmit}
             sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
                 my: 2
             }}
         >

@@ -46,7 +46,7 @@ const MainInsight = () => {
         }
     };
     return (
-        <Box sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
+        <Box color="info" sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%" }}>
             <Box sx={{ px: 5, my: 5, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
                 <Typography variant="h5" fontWeight="bold">Insights</Typography>
                 <Button

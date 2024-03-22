@@ -7,6 +7,7 @@ import { themeState } from "@/store/theme";
 
 const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
   const mode = useRecoilValue(themeState);
+  console.info('모오오오오오드 ', mode);
   const theme = useMemo(
     () =>
       createTheme({
@@ -87,10 +88,10 @@ const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
                 contrastText: "rgb(204, 204, 204)",
               },
               info: {
-                light: "#455A64", // 어두운 계열로 변경
-                main: "#37474F", // 어두운 계열로 변경
-                dark: "#263238", // 어두운 계열로 변경
-                contrastText: "#CFD8DC", // 대비되는 색상으로 변경
+                light: "#455A64",
+                main: "#37474F",
+                dark: "#263238",
+                contrastText: "#CFD8DC",
               },
               divider: "rgb(64, 64, 64)",
               background: {
