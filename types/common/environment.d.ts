@@ -105,6 +105,14 @@ declare namespace NodeJS {
      *   * UI Environment Has Same Name Of Variable.
      */
     NEXTAUTH_URL: Required<string>;
+    GITHUB_ID: Required<string>;
+    GITHUB_SECRET: Required<string>;
+    GOOGLE_CLIENT_ID: Required<string>;
+    GOOGLE_CLIENT_SECRET: Required<string>;
+    KAKAO_CLIENT_ID: Required<string>;
+    KAKAO_CLIENT_SECRET: Required<string>;
+    NAVER_CLIENT_ID: Required<string>;
+    NAVER_CLIENT_SECRET: Required<string>;
   }
 
   interface ViewtrackEnvironment {

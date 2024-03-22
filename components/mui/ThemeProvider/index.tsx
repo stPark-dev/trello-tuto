@@ -12,7 +12,7 @@ const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
       createTheme({
         palette: {
           mode,
-          ...(mode === "light" ? { 
+          ...(mode === "light" ? {
             primary: {
               light: "#7fc5c6",
               main: "#4DAEAE",
@@ -38,10 +38,10 @@ const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
               contrastText: "#FFFFFF",
             },
             info: {
-              light: "#85B9DA",
-              main: "#71AAD3",
-              dark: "#446D9C",
-              contrastText: "#FFFFFF",
+              light: "#FAFAFA",
+              main: "#F9F9F9",
+              dark: "#E0E0E0",
+              contrastText: "#424242",
             },
             success: {
               light: "#6DBC93",
@@ -85,6 +85,12 @@ const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
                 A400: "#71a4ff",
                 A700: "#5893ff",
                 contrastText: "rgb(204, 204, 204)",
+              },
+              info: {
+                light: "#455A64", // 어두운 계열로 변경
+                main: "#37474F", // 어두운 계열로 변경
+                dark: "#263238", // 어두운 계열로 변경
+                contrastText: "#CFD8DC", // 대비되는 색상으로 변경
               },
               divider: "rgb(64, 64, 64)",
               background: {

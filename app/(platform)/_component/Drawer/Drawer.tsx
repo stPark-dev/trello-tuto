@@ -99,8 +99,8 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   }));
 
   const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "rgba(0,0,0,0.5)",
     width: "100%",
+    color: "primary",
     "& .MuiInputBase-input": {
       padding: theme.spacing(1, 1, 1, 0),
       paddingLeft: `calc(1em + ${theme.spacing(4)})`,
@@ -332,6 +332,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     <Box sx={{ display: "flex", height: "100vh", width: "100vw" }}>
       <CssBaseline />
       <AppBar
+        color="info"
         position="fixed"
         sx={{
           [theme.breakpoints.up("md")]: drawerIsOpen && {
@@ -339,7 +340,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
             marginLeft: `${drawerWidth}px`,
           },
           ["> .MuiToolbar-root"]: {
-            bgcolor: "white",
             minHeight: headerHeight,
             borderBottom: `1px solid`,
           },
@@ -372,6 +372,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
             {navLinks.map(({ href, label, Icon, isActive }) => (
               <Box
                 key={href}
+                color="info"
                 sx={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -379,7 +380,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                   pt: 1,
                   fontSize: "1rem",
                   fontWeight: isActive ? "bold" : "normal",
-                  color: isActive ? "#004d40" : "#212121",
+                  // color: isActive ? "#004d40" : "#212121",
                   opacity: 0.8,
                   "&:hover": {
                     color: "#00897b",
@@ -503,7 +504,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           "& .MuiDrawer-paper": {
             width: drawerWidth,
             height: "100%",
-            bgcolor: "white",
             boxShadow: "1px 0px 1px -2px rgba(0,0,0,0.2), 2px 0px 2px 0px rgba(0,0,0,0.14)",
             overflow: "auto",
           },
