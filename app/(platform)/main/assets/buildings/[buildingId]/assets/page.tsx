@@ -1,7 +1,7 @@
 "use client"
 
-import { Box, Button, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, Typography } from "@mui/material";
-import { FolderOutlined, Delete, MoreVert, EditNote, ExpandMore, Interests, FolderCopy } from "@mui/icons-material";
+import { Box, Button, Checkbox, Dialog, Divider, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, Step, StepContent, StepLabel, Stepper, TextField, Tooltip, Typography, useTheme } from "@mui/material";
+import { FolderOutlined, Delete, MoreVert, EditNote, ExpandMore, Interests, FolderCopy, Apartment, Close } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem, GridColDef, GridRowModel } from "@mui/x-data-grid";
 
@@ -29,6 +29,40 @@ export type AssetType = {
     purchasedAt: string;
     comment: string | null;
 }
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+    PaperProps: {
+        style: {
+            maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+            width: 250,
+        },
+    },
+};
+
+const groupData = [
+    {
+        value: "Building",
+        label: "Building"
+    },
+    {
+        value: "Floor",
+        label: "Floor"
+    },
+    {
+        value: "Location",
+        label: "Location"
+    },
+    {
+        value: "Room",
+        label: "Room"
+    },
+    {
+        value: "Department",
+        label: "Department"
+    }
+]
 
 const data: AssetType[] = [
     {
@@ -77,7 +111,24 @@ const data: AssetType[] = [
     },
 ]
 
+const steps = [
+    {
+        label: "General info",
+        description: "Provide general information about the aseet.",
+    },
+    {
+        label: "Location & Type",
+        description:
+            "Define the asset locatgion and type.",
+    },
+    {
+        label: "Warranty & Info",
+        description: "Add extra information about the vendor, purchase date,...",
+    },
+];
+
 const AssetPage = ({ params }: { params: { buildingId: string } }) => {
+    const theme = useTheme();
     const [assets, setAssets] = useState<AssetType[]>(data);
     const [assetGroups, setAssetGroups] = useState<GroupType[]>([]);
     const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
@@ -86,19 +137,48 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
     const [addAnchorEl, setAddAnchorEl] = useState<null | HTMLElement>(null);
     const addMenuOpen = Boolean(addAnchorEl);
 
-    const handleSingleAssetMenuClick = () => {
+    const [singleAssetDiagOpen, setSingleAssetDiagOpen] = useState(false);
+    const [assetGroupDiagOpen, setAssetGroupDiagOpen] = useState(false);
 
+    const [spaceType, setSpaceType] = useState<string[]>([]); //Group으로 변경해야 함
+
+    const [activeStep, setActiveStep] = useState(0);
+    const handleNextStep = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
-    const handleAssetGroupMenuClick = () => {
+    const handleBackStep = () => {
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    };
 
+    const handleSelectBoxChange = (event: SelectChangeEvent<typeof spaceType>) => {
+        const {
+            target: { value },
+        } = event;
+        setSpaceType(
+            typeof value === "string" ? value.split(",") : value,
+        );
+    };
+
+    const handleSingleAssetDiagOpen = () => {
+        setSingleAssetDiagOpen(true)
+    };
+    const handleSingleAssetDiagClose = () => {
+        setSingleAssetDiagOpen(false)
+    };
+
+    const handleAssetGroupDiagOpen = () => {
+        setAssetGroupDiagOpen(true)
+    };
+    const handleAssetGroupDiagClose = () => {
+        setAssetGroupDiagOpen(false)
     };
 
 
     const handleGroupMenuClick = (event: React.MouseEvent<HTMLButtonElement>, groupId: string) => {
-        event.stopPropagation(); // 이벤트 버블링 방지
-        setSelectedGroupId(groupId); // 선택된 그룹 ID 설정
-        setGroupAnchorEl(event.currentTarget); // 메뉴 위치 설정
+        event.stopPropagation();
+        setSelectedGroupId(groupId);
+        setGroupAnchorEl(event.currentTarget);
     };
 
     const handleGroupMenuClose = () => {
@@ -179,6 +259,193 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
         },
     ];
 
+    const SingleAssetDialog = () => {
+        const [assetName, setAssetName] = useState("");
+        const [uniqIdentifier, setUniqIdentifier] = useState("")
+
+        const handleAssetNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setAssetName(event.target.value);
+        };
+        const handleUniqIdentifierChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setUniqIdentifier(event.target.value);
+        };
+
+        return (
+            <>
+                <Dialog
+                    open={singleAssetDiagOpen}
+                    onClose={handleSingleAssetDiagClose}
+                    fullWidth
+                    maxWidth="md"
+                    PaperProps={{
+                        component: "form",
+                        sx: { borderRadius: 1 },
+                    }}
+                >   <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", p: 2, borderBottom: 1, borderColor: "#ACACAC", justifyContent: "space-between" }}>
+                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }}>
+                                Create Asset
+                            </Box>
+                            <IconButton size="small" onClick={handleSingleAssetDiagClose}><Close /></IconButton>
+                        </Box>
+                        <Divider />
+                        <Box sx={{ p: 3, display: "flex", flexDirection: "row" }}>
+                            <Box sx={{ flexGrow: 1 }}>
+                                <Box sx={{ maxWidth: 250 }}>
+                                    <Stepper activeStep={activeStep} orientation="vertical">
+                                        {steps.map((step) => (
+                                            <Step key={step.label} expanded>
+                                                <StepLabel>
+                                                    <Typography sx={{ fontWeight: "bold" }}>{step.label}</Typography>
+                                                </StepLabel>
+                                                <StepContent>
+                                                    <Typography>{step.description}</Typography>
+                                                </StepContent>
+                                            </Step>
+                                        ))}
+                                    </Stepper>
+                                </Box>
+                            </Box>
+                            <Box sx={{ flexGrow: 4 }}>
+                                { }
+                                <Box sx={{ my: 2 }}>
+                                    <Typography variant="body1" fontWeight="bold">Asset name*</Typography>
+                                    <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide the name for the asset to be created.</Typography>
+                                    <FormControl sx={{ width: "100%" }} variant="outlined">
+                                        <OutlinedInput
+                                            id="outlined-adornment-name"
+                                            size="small"
+                                            aria-describedby="outlined-name-helper-text"
+                                            value={assetName} // 입력 상태 바인딩
+                                            onChange={handleAssetNameChange} // 변경 핸들러 바인딩
+                                            placeholder="e.g. Printer"
+                                            inputProps={{
+                                                "aria-label": "name",
+                                            }}
+                                        />
+                                    </FormControl>
+                                </Box>
+                                <Box sx={{ my: 2 }}>
+                                    <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
+                                    <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
+                                    <FormControl sx={{ width: "100%" }} variant="outlined">
+                                        <OutlinedInput
+                                            id="outlined-adornment-identifier"
+                                            size="small"
+                                            aria-describedby="outlined-identifier-helper-text"
+                                            value={uniqIdentifier}
+                                            onChange={handleUniqIdentifierChange}
+                                            inputProps={{
+                                                "aria-label": "identifier",
+                                            }}
+                                        />
+                                    </FormControl>
+                                </Box>
+                                <Box sx={{ my: 2 }}>
+                                    <Typography variant="body1" fontWeight="bold">Asset group</Typography>
+                                    <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
+                                    <FormControl fullWidth size="small">
+                                        <Select
+                                            labelId="type-multiple-checkbox-label"
+                                            id="type-multiple-checkbox"
+                                            multiple
+                                            value={spaceType}
+                                            onChange={handleSelectBoxChange}
+                                            renderValue={(selected) => selected.join("s, ")}
+                                            MenuProps={MenuProps}
+                                        >
+                                            {groupData.map(({ value, label }) => (
+                                                <MenuItem key={label} value={value}>
+                                                    <Checkbox checked={spaceType.indexOf(value) > -1} />
+                                                    <ListItemText primary={value} />
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                </Box>
+                                <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
+                                    <Button type="submit" variant="contained" color="primary" disabled={!assetName} onClick={handleNextStep}>
+                                        Submit
+                                    </Button>
+                                </Box>
+                            </Box>
+                        </Box>
+                    </Box>
+                </Dialog>
+            </>
+        );
+    }
+
+    const AssetGroupDialog = () => {
+        return (
+            <>
+                <Dialog
+                    open={assetGroupDiagOpen}
+                    onClose={handleAssetGroupDiagClose}
+                    PaperProps={{
+                        component: "form",
+                        sx: { borderRadius: 1, minWidth: 450 },
+                    }}
+                >   <Box sx={{ display: "flex", flexDirection: "column" }}>
+                        <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", p: 2, borderBottom: 1, borderColor: "#ACACAC", justifyContent: "space-between" }}>
+                            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "bold" }}>
+                                Create asset group
+                            </Box>
+                            <IconButton size="small" onClick={handleAssetGroupDiagClose}><Close /></IconButton>
+                        </Box>
+                        <Divider />
+                        <Box sx={{ p: 2 }}>
+                            <Box sx={{ my: 2 }}>
+                                <Typography variant="body1" fontWeight="bold">Group name</Typography>
+                                <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide the name for the group.</Typography>
+                                <FormControl sx={{ width: "100%" }} variant="outlined">
+                                    <OutlinedInput
+                                        id="outlined-adornment-identifier"
+                                        size="small"
+                                        placeholder="Group name"
+                                        aria-describedby="outlined-identifier-helper-text"
+                                        inputProps={{
+                                            "aria-label": "identifier",
+                                        }}
+                                    />
+                                </FormControl>
+                            </Box>
+                            <Box sx={{ my: 2 }}>
+                                <Typography variant="body1" fontWeight="bold">Asset group</Typography>
+                                <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
+                                <FormControl fullWidth size="small">
+                                    <Select
+                                        labelId="type-multiple-checkbox-label"
+                                        id="type-multiple-checkbox"
+                                        multiple
+                                        value={spaceType}
+                                        onChange={handleSelectBoxChange}
+                                        renderValue={(selected) => selected.join("s, ")}
+                                        MenuProps={MenuProps}
+                                    >
+                                        {groupData.map(({ value, label }) => (
+                                            <MenuItem key={label} value={value}>
+                                                <Checkbox checked={spaceType.indexOf(value) > -1} />
+                                                <ListItemText primary={value} />
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </Box>
+                        </Box>
+                        <Box sx={{ p: 2, gap: 1, display: "flex", alignItems: "center", justifyContent: "center", flexGrow: 1 }}>
+                            <Button type="submit" variant="contained" color="primary"
+                                sx={{
+                                    mr: 1,
+                                    flexGrow: 1,
+                                }}>Submit</Button>
+                        </Box>
+                    </Box>
+                </Dialog>
+            </>
+        );
+    }
+
 
     return (
         <>
@@ -204,13 +471,13 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                             "aria-labelledby": "basic-button",
                         }}
                     >
-                        <MenuItem onClick={handleSingleAssetMenuClick}><Interests sx={{ mr: 1 }} />Single Asset</MenuItem>
-                        <MenuItem onClick={handleAssetGroupMenuClick}><FolderCopy sx={{ mr: 1 }} />Asset Group</MenuItem>
+                        <MenuItem onClick={handleSingleAssetDiagOpen}><Interests sx={{ mr: 1 }} />Single Asset</MenuItem>
+                        <MenuItem onClick={handleAssetGroupDiagOpen}><FolderCopy sx={{ mr: 1 }} />Asset Group</MenuItem>
                     </Menu>
                 </Box>
                 <Box sx={{ width: "100%", height: "100vh", display: "flex", flexDirection: "row" }}>
-                    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", bgcolor: "#F2F4F7", p: 3, gap: 2 }}>
-                        <Box sx={{ bgcolor: "#ffffff", borderRadius: "0.25rem", gap: 1 }}>
+                    <Box sx={{ flex: 1, display: "flex", flexDirection: "column", bgcolor: theme.palette.mode === "dark" ? "#4D4D4D" : "#F2F4F7", p: 3, gap: 2 }}>
+                        <Box sx={{ color: theme.palette.mode === "dark" ? "#ffffff" : "#000000", bgcolor: theme.palette.mode === "dark" ? "#1F1F1F" : "#FFFFFF", borderRadius: "0.25rem", gap: 1 }}>
                             <List dense>
                                 <ListItem>
                                     <ListItemButton sx={{ display: "flex", justifyContent: "space-between" }} onClick={() => setSelectedGroupId(null)} >
@@ -220,7 +487,7 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                             </ListItemIcon>
                                             <ListItemText primary="All" />
                                         </Box>
-                                        <Box sx={{ width: 25, height: 25, textAlign: "center", bgcolor: "#F2F4F7", borderRadius: "50%" }}>
+                                        <Box sx={{ width: 25, height: 25, textAlign: "center", bgColor: theme.palette.mode === "dark" ? "#4D4D4D" : "#F2F4F7", borderRadius: "50%" }}>
                                             {data.length}
                                         </Box>
                                     </ListItemButton>
@@ -229,7 +496,7 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                         </Box>
                         <Box>
                             <Typography fontWeight="bold" sx={{ my: 1 }}>Asset Groups: </Typography>
-                            <Box sx={{ bgcolor: "#ffffff", borderRadius: "0.25rem" }}>
+                            <Box sx={{ color: theme.palette.mode === "dark" ? "#ffffff" : "#000000", bgcolor: theme.palette.mode === "dark" ? "#1F1F1F" : "#FFFFFF", borderRadius: "0.25rem" }}>
                                 <List dense>
                                     {assetGroups.map(group => (
                                         <ListItem key={group.id}>
@@ -270,7 +537,7 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                     <Box sx={{
                         flex: 6,
                         "& .asset-grid-header": {
-                            bgcolor: "#F2F4F7",
+                            bgColor: theme.palette.mode === "dark" ? "#4D4D4D" : "#F2F4F7",
                         },
                     }}>
                         <DataGrid
@@ -287,10 +554,13 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                             }}
                             pageSizeOptions={[5]}
                             disableRowSelectionOnClick
+                            sx={{ color: theme.palette.mode === "dark" ? "#ffffff" : "#000000", }}
                         />
                     </Box>
                 </Box>
             </Box>
+            <SingleAssetDialog />
+            <AssetGroupDialog />
         </>
     )
 }

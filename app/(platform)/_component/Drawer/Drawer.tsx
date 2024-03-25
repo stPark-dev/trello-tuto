@@ -358,7 +358,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
             aria-label="open drawer"
             onClick={handleDrawerToggle}
             size="medium"
-            sx={{ mr: 1, color: "rgba(0,0,0,0.5)" }}
+            sx={{ mr: 1}}
           >
             {drawerIsOpen ? <KeyboardDoubleArrowLeftSharp /> : <MenuSharp />}
           </IconButton>

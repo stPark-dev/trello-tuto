@@ -3,7 +3,7 @@
 import { HelpOutline, MoreVert } from "@mui/icons-material";
 import {
     Autocomplete, Avatar, Box, Button, Drawer, FormControl, IconButton, InputAdornment, OutlinedInput, Paper, SelectChangeEvent,
-    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography, alpha, styled
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Tooltip, Typography, alpha, styled, useTheme
 } from "@mui/material";
 import { useState } from "react";
 
@@ -86,6 +86,7 @@ const role_types = [
 ]
 
 const UserPage = () => {
+    const theme = useTheme();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [roleType, setRoleType] = useState<string[]>([]);
     const [selectedItem, setSelectedItem] = useState<User | null>(null);
@@ -155,7 +156,7 @@ const UserPage = () => {
                     Add User
                 </Button>
             </Box>
-            <Box sx={{ width: "100%", height: "100vh", bgcolor: "#F2F4F7" }}>
+            <Box sx={{ width: "100%", height: "100vh", bgcolor: theme.palette.mode === "dark" ? "#4D4D4D" : "#F2F4F7" }}>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 400 }} aria-label="simple table">
                         <TableHead>

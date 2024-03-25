@@ -4,7 +4,7 @@ import {
     HelpOutline, MoreVert, SvgIconComponent, Close,
     Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Devices, VolumeUp, CleaningServices, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
 } from "@mui/icons-material";
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled, useTheme } from "@mui/material";
 import { createElement, useEffect, useState } from "react";
 
 export type Translations = {
@@ -108,6 +108,7 @@ const data: Category[] = [
 
 
 const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
+    const theme = useTheme();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [iconDiagOpen, setIconDiagOpen] = useState(false);
     const [selectedItem, setSelectedItem] = useState<Category | null>(null);
@@ -213,7 +214,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                         Add Category
                     </Button>
                 </Box>
-                <Box sx={{ width: "100%", height: "100vh", bgcolor: "#F2F4F7" }}>
+                <Box sx={{ width: "100%", height: "100vh", bgcolor: theme.palette.mode === "dark" ? "#4D4D4D" : "#F2F4F7" }}>
                     <List
                         sx={{ width: "100%", bgcolor: "background.paper" }}
                         component="nav"
@@ -593,7 +594,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
                         </Box>
                     </Box>
                 </DialogContent>
-            </Dialog >
+            </Dialog>
         </>
     )
 }

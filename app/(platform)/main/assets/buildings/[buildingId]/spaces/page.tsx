@@ -2,7 +2,7 @@
 
 import QrCodeScanner from "@/components/QrCodeScanner";
 import { ExpandLess, ExpandMore, HelpOutline, MoreVert } from "@mui/icons-material";
-import { Box, Button, Checkbox, Collapse, Drawer, FormControl, Grid, IconButton, InputAdornment, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Checkbox, Collapse, Drawer, FormControl, Grid, IconButton, InputAdornment, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Tooltip, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -41,6 +41,7 @@ const data = [
 ]
 
 const SpacePage = ({ params }: { params: { buildingId: string } }) => {
+    const theme = useTheme();
     const [open, setOpen] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [showQR, setShowQR] = useState(false);
@@ -100,7 +101,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                         Add Space
                     </Button>
                 </Box>
-                <Box sx={{ width: "100%", height: "100vh",  bgcolor: "#F2F4F7"}}>
+                <Box sx={{ width: "100%", height: "100vh",  bgcolor: theme.palette.mode === "dark" ? "#4D4D4D" : "#F2F4F7"}}>
                     <List
                         sx={{ width: "100%", bgcolor: "background.paper" }}
                         component="nav"
