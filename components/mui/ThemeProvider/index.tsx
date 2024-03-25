@@ -7,7 +7,6 @@ import { themeState } from "@/store/theme";
 
 const ThemeProvider = ({ children }: PropsWithChildren): ReactElement => {
   const mode = useRecoilValue(themeState);
-  console.info('모오오오오오드 ', mode);
   const theme = useMemo(
     () =>
       createTheme({

@@ -4,24 +4,21 @@ import { ReactElement } from "react";
 
 import { useRecoilState } from "recoil";
 import { IconButton } from "@mui/material";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
 import { themeState } from "@/store/theme";
 import { ThemeNames } from "@/types/common/datatype";
+import { DarkMode, LightMode } from "@mui/icons-material";
 
 interface IconProps {
   name: ThemeNames;
 }
 
 const DynamicIcon = ({ name }: IconProps): ReactElement => {
-  if ("dark" === name) return <LightModeIcon />;
-  return <LightModeIcon />;
+  if (name === "dark") return <DarkMode />;
+  return <LightMode />;
 };
 
 const Toggler = (): ReactElement => {
   const [name, setMode] = useRecoilState(themeState);
-
-  console.info("say my name : ", name)
 
   const toggleMode = () => setMode(prevState => ("light" === prevState ? "dark" : "light"));
 

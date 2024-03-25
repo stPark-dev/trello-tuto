@@ -16,6 +16,7 @@ const localStorageEffect =
 
     // Retrieve the value stored at the specified key
     const stored = store.getItem(key) as ThemeNames;
+
     // Check if the value exists and is light or dark
     // If the value is valid, the call the provided function setSelf which initializes the atom value
     if (THEMES.includes(stored)) setSelf(stored);
@@ -31,7 +32,7 @@ const localStorageEffect =
   };
 
 export const themeState = atom<ThemeNames>({
-  key: "ViewTrackTheme",
+  key: "AppTheme",
   default: "light",
   // Now we need to add it to our effects array
   effects: [localStorageEffect("theme")],

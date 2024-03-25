@@ -1,13 +1,14 @@
 "use client"
 import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 
 dayjs.locale("ko");
 
 const Clock = () => {
+  const theme = useTheme();
   const [currentTime, setCurrentTime] = useState(dayjs());
   const [isClient, setIsClient] = useState(false);
 
@@ -28,7 +29,7 @@ const Clock = () => {
 
   return (
     <Box>
-      <Typography sx={{ color: "rgba(0,0,0,0.5)", fontSize: { xs: 12, md: 16 } }} >
+      <Typography sx={{ color: theme.palette.mode === "light" ? "#5C5C5C" : "#F0F0F0", fontSize: { xs: 12, md: 16 } }} >
         {formattedTime}
       </Typography>
     </Box >

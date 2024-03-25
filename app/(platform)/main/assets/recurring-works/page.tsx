@@ -51,21 +51,24 @@ const rows = [
 const RecurringTaskPage = () => {
     return (
         <>
-            <Box sx={{ height: 400, width: '100%' }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    initialState={{
-                        pagination: {
-                            paginationModel: {
-                                pageSize: 5,
+            <Box sx={{ display: "flex", flexDirection: "column"}}>
+                <Box sx={{ mt: 5 }}>Recurring</Box>
+                <Box sx={{ height: 400, width: '100%' }}>
+                    <DataGrid
+                        rows={rows}
+                        columns={columns}
+                        initialState={{
+                            pagination: {
+                                paginationModel: {
+                                    pageSize: 5,
+                                },
                             },
-                        },
-                    }}
-                    pageSizeOptions={[5]}
-                    checkboxSelection
-                    disableRowSelectionOnClick
-                />
+                        }}
+                        pageSizeOptions={[5]}
+                        checkboxSelection
+                        disableRowSelectionOnClick
+                    />
+                </Box>
             </Box>
         </>
     )

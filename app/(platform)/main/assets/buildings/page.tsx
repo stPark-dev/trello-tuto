@@ -188,7 +188,7 @@ const BuildingPage = () => {
                     Add building
                 </Button>
             </Box>
-            <Box sx={{ backgroundColor: theme.palette.grey[100], p: 5, overflow: "auto" }}>
+            <Box sx={{ p: 5, overflow: "auto", width: "100%", height: "100vh",  bgcolor: theme.palette.mode === "light" ? "#F2F4F7" : "#4D4D4D" }}>
                 <Grid container spacing={2}>
                     {data.map((building, index) => (
                         <Grid item xs={12} sm={6} md={4} key={index}>

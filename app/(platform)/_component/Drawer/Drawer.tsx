@@ -2,15 +2,12 @@
 
 import { alpha, styled, useTheme } from "@mui/material/styles";
 
-import { ChangeEvent, createElement, useEffect, useMemo, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 import Box, { BoxProps } from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Popper from "@mui/material/Popper";
-import Grow from "@mui/material/Grow";
-import Paper from "@mui/material/Paper";
 import List from "@mui/material/List";
 import { SvgIconTypeMap, Tab, Tabs } from "@mui/material";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
@@ -24,11 +21,12 @@ import BrandLogoLight from "@/public/landing/logo_main.png";
 
 import { useRecoilState } from "recoil";
 import { DrawerAtom, DrawerMode } from "./state/Drawer";
-import { CssBaseline, IconButton, InputBase, Link, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
+import Link from "next/link";
+import { CssBaseline, IconButton, InputBase, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
 import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat, Info, Interests, LocalOffer, Person, Shield, CreditCard } from "@mui/icons-material";
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 import Clock from "../Clock";
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname } from "next/navigation";
 import Toggler from "@/components/mui/ThemeProvider/Toggler";
 
 interface DrawerProps extends React.PropsWithChildren {
@@ -44,13 +42,13 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const router = useRouter();
   const currentPathName = usePathname();
   const { data: sessionData } = useSession();
-  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
   const [tabValue, setTabValue] = useState(0);
   const md = useMediaQuery(theme.breakpoints.up("md"), { defaultMatches: true });
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [drawerState, setDrawerState] = useRecoilState(DrawerAtom);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -153,7 +151,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const drawerIsOpen = useMemo(() => drawerState.open, [drawerState.open]);
   const drawerMode = useMemo(() => drawerState.mode, [drawerState.mode]);
 
-  const handleDrawerToggle = () => { 
+  const handleDrawerToggle = () => {
     console.info("########## Theme: ", theme)
     setDrawerState((prev) => ({ ...prev, open: !prev.open }))
   };
@@ -175,43 +173,43 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   }, [md, setDrawerState]);
 
   const drawerMenuItems: { [key: string]: DrawerMenuItem[] } = {
-    '/main/works': [
-      { text: 'All Works', icon: Task, route: '/main/works/all' },
-      { text: 'Assigned to me', icon: AssignmentReturn, route: '/main/works/views' }
+    "/main/works": [
+      { text: "All Works", icon: Task, route: "/main/works/all" },
+      { text: "Assigned to me", icon: AssignmentReturn, route: "/main/works/views" }
     ],
-    '/main/insights': [
-      { text: 'Location', icon: LocationOn, route: '/main/insights/location' }
+    "/main/insights": [
+      { text: "Location", icon: LocationOn, route: "/main/insights/location" }
     ],
-    '/main/assets': [
-      { text: 'Buildings', icon: Apartment, route: '/main/assets/buildings' },
-      { text: 'Documents', icon: DocumentScanner, route: '/main/assets/documents' },
-      { text: 'Recurring Works', icon: EventRepeat, route: '/main/assets/recurring-works' }
+    "/main/assets": [
+      { text: "Buildings", icon: Apartment, route: "/main/assets/buildings" },
+      { text: "Documents", icon: DocumentScanner, route: "/main/assets/documents" },
+      { text: "Recurring Works", icon: EventRepeat, route: "/main/assets/recurring-works" }
     ],
-    '/main/assets/buildings/[buildingId]': [
-      { text: 'Information', icon: Info, route: '/main/assets/buildings/[buildingId]/location' },
-      { text: 'Notifiactions', icon: Notifications, route: '/main/assets/buildings/[buildingId]/notifications' },
-      { text: 'Spaces', icon: LocationOn, route: '/main/assets/buildings/[buildingId]/spaces' },
-      { text: 'Assets', icon: Interests, route: '/main/assets/buildings/[buildingId]/assets' },
-      { text: 'Categories', icon: LocalOffer, route: '/main/assets/buildings/[buildingId]/categories' },
-      { text: 'Users', icon: Person, route: '/main/assets/buildings/[buildingId]/users' },
-      { text: 'Roles', icon: Shield, route: '/main/assets/buildings/[buildingId]/roles' },
-      { text: 'Billing and Plan', icon: CreditCard, route: '/main/assets/buildings/[buildingId]/billing' },
+    "/main/assets/buildings/[buildingId]": [
+      { text: "Information", icon: Info, route: "/main/assets/buildings/[buildingId]/location" },
+      { text: "Notifiactions", icon: Notifications, route: "/main/assets/buildings/[buildingId]/notifications" },
+      { text: "Spaces", icon: LocationOn, route: "/main/assets/buildings/[buildingId]/spaces" },
+      { text: "Assets", icon: Interests, route: "/main/assets/buildings/[buildingId]/assets" },
+      { text: "Categories", icon: LocalOffer, route: "/main/assets/buildings/[buildingId]/categories" },
+      { text: "Users", icon: Person, route: "/main/assets/buildings/[buildingId]/users" },
+      { text: "Roles", icon: Shield, route: "/main/assets/buildings/[buildingId]/roles" },
+      { text: "Billing and Plan", icon: CreditCard, route: "/main/assets/buildings/[buildingId]/billing" },
     ]
   };
   const getCurrentMenuItems = (currentPath: string): DrawerMenuItem[] => {
-    const pathSegments = currentPath.split('/');
-    const buildingIdIndex = pathSegments.findIndex(segment => segment === 'buildings') + 1;
+    const pathSegments = currentPath.split("/");
+    const buildingIdIndex = pathSegments.findIndex(segment => segment === "buildings") + 1;
     const buildingId = pathSegments.length > buildingIdIndex ? pathSegments[buildingIdIndex] : null;
 
     if (buildingId) {
-      // 'buildingId'가 있는 경우, 동적 경로를 체크합니다.
-      const dynamicKey = '/main/assets/buildings/[buildingId]';
-      const regex = new RegExp(dynamicKey.replace('[buildingId]', '[^/]+'));
+      // "buildingId"가 있는 경우, 동적 경로를 체크합니다.
+      const dynamicKey = "/main/assets/buildings/[buildingId]";
+      const regex = new RegExp(dynamicKey.replace("[buildingId]", "[^/]+"));
       if (regex.test(currentPath)) {
         // 현재 경로가 동적 경로와 일치하는 경우, 해당하는 메뉴 항목을 반환합니다.
         return drawerMenuItems[dynamicKey].map(item => ({
           ...item,
-          route: item.route.replace('[buildingId]', buildingId)
+          route: item.route.replace("[buildingId]", buildingId)
         }));
       }
     }
@@ -274,7 +272,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
       <Box component="nav">
         {isMobile && (
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={tabValue}
               onChange={handleTabChange}
@@ -283,9 +281,9 @@ const Drawer = ({ profile, children }: DrawerProps) => {
               textColor="primary"
               indicatorColor="primary"
             >
-              <Tab label="Works" onClick={() => router.push('/main/works/all')} />
-              <Tab label="Insights" onClick={() => router.push('/main/insights')} />
-              <Tab label="Assets" onClick={() => router.push('/main/assets/buildings')} />
+              <Tab label="Works" onClick={() => router.push("/main/works/all")} />
+              <Tab label="Insights" onClick={() => router.push("/main/insights")} />
+              <Tab label="Assets" onClick={() => router.push("/main/assets/buildings")} />
             </Tabs>
           </Box>
         )}
@@ -375,7 +373,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
             {navLinks.map(({ href, label, Icon, isActive }) => (
               <Box
                 key={href}
-                color="info"
                 sx={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -383,37 +380,42 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                   pt: 1,
                   fontSize: "1rem",
                   fontWeight: isActive ? "bold" : "normal",
-                  // color: isActive ? "#004d40" : "#212121",
                   opacity: 0.8,
                   "&:hover": {
-                    color: "#00897b",
                     opacity: 1,
                     textDecorationThickness: "2px",
                     textUnderlineOffset: "10px",
                   },
                   textDecoration: isActive ? "underline" : "none",
-                  textDecorationColor: "#004d40",
+                  textDecorationColor: theme.palette.mode === "light" ? "#004d40" : "#00BF9F",
                   textDecorationThickness: "2px",
                   textUnderlineOffset: "10px",
                 }}
-                component={Link}
-                href={href}
               >
-                <Icon sx={{ marginRight: 1 }} />
-                {label}
+                <Link href={href} passHref>
+                  <span style={{
+                    textDecoration: "none",
+                    color: theme.palette.mode === "light" ? "#004d40" : "#00BF9F",
+                    display: "inline-flex",
+                    alignItems: "center"
+                  }}>
+                    <Icon sx={{ marginRight: 1 }} />
+                    {label}
+                  </span>
+                </Link>
               </Box>
             ))}
           </Typography>
 
           <Box flexGrow={1} />
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: 1 }}>
+          <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 1 }}>
             {md && <Search>
               <SearchIconWrapper>
                 <SearchIcon />
               </SearchIconWrapper>
               <StyledInputBase
                 placeholder="검색어를 입력하세요"
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{ "aria-label": "search" }}
               />
             </Search>
             }
@@ -440,17 +442,17 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                     />
                   </Tooltip>
                   <Menu
-                    sx={{ mt: '45px' }}
+                    sx={{ mt: "45px" }}
                     id="menu-appbar"
                     anchorEl={anchorElUser}
                     anchorOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
+                      vertical: "top",
+                      horizontal: "right",
                     }}
                     keepMounted
                     transformOrigin={{
-                      vertical: 'top',
-                      horizontal: 'right',
+                      vertical: "top",
+                      horizontal: "right",
                     }}
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
@@ -481,7 +483,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
         open={rightDrawerOpen}
         onClose={toggleRightDrawer}
         sx={{
-          '& .MuiDrawer-paper': {
+          "& .MuiDrawer-paper": {
             width: drawerWidth * 1.5,
             marginTop: `${headerHeight}px`
           },

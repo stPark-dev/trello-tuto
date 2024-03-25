@@ -149,7 +149,7 @@ const MainWorks = () => {
         <>
             <Box sx={{ display: "flex", flexDirection: "column", width: "100%", height: "100%", overflow: "auto" }}>
                 <Box sx={{ px: 5, mt: 5, display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
-                    <Typography variant="h5" fontWeight="bold">All Works</Typography>
+                    <Typography variant="h5" fontWeight="bold">Assigned to me</Typography>
                     <Button
                         variant="contained"
                         color="primary"
@@ -188,76 +188,8 @@ const MainWorks = () => {
                             </Button> */}
                         </Box>
                     </Grid>
-                    <Grid item xs={12}> {/* 드래그 앤 드롭 컨텍스트를 이 부분에 배치 */}
-                        <DragDropContext onDragEnd={onDragEnd}>
-                            <Box sx={{ flexGrow: 1, height: "100%", overflow: "auto" }}> {/* 여기에 flexGrow 속성을 추가하여 남은 공간을 모두 차지하게 함 */}
-                                <Grid container spacing={2}>
-                                    {Object.entries(columns).map(([columnId, column]) => (
-                                        <Grid item xs={12} sm={4} key={columnId}>
-                                            <Paper elevation={3} sx={{ minHeight: "100%", p: 2 }}>
-                                                <Box display="flex" alignItems="center">
-                                                    {columnId === "open" && <FileOpenSharp color="action" sx={{ mr: 1 }} />}
-                                                    {columnId === "scheduled" && <AccessTime color="warning" sx={{ mr: 1 }} />}
-                                                    {columnId === "completed" && <CheckCircleOutline color="success" sx={{ mr: 1 }} />}
-                                                    <Typography variant="subtitle1">{column.title}</Typography>
-                                                    <Chip label={column.items.length.toString()} size="small" sx={{ ml: 1 }} />
-                                                    <IconButton
-                                                        onClick={() => addTaskToColumn(columnId, "New Task")}
-                                                        sx={{ ml: "auto" }}
-                                                    ><AddCircleOutlineSharp /></IconButton>
-                                                </Box>
-                                                <Droppable droppableId={columnId}>
-                                                    {(provided, snapshot) => (
-                                                        <Box
-                                                            {...provided.droppableProps}
-                                                            ref={provided.innerRef}
-                                                            sx={{ mt: 2, bgcolor: snapshot.isDraggingOver ? "background.default" : "background.paper" }}
-                                                        >
-                                                            {column.items.map((item, index) => {
-                                                                return (
-                                                                    <Draggable key={item.id} draggableId={item.id} index={index}>
-                                                                        {(provided, snapshot) => (
-                                                                            <Box
-                                                                                ref={provided.innerRef}
-                                                                                {...provided.draggableProps}
-                                                                                {...provided.dragHandleProps}
-                                                                                sx={{
-                                                                                    my: 2, p: 2,
-                                                                                    bgcolor: snapshot.isDragging ? "rgba(156, 156, 156, 0.5)" : "#9C9C9C",
-                                                                                    borderRadius: "10px",
-                                                                                    display: "flex",
-                                                                                    justifyContent: "space-between",
-                                                                                    alignItems: "center",
-                                                                                    "&:hover": {
-                                                                                        boxShadow: 3,
-                                                                                    }
-                                                                                }}
-                                                                            >
-                                                                                <Typography>{item.content}</Typography>
-                                                                                <IconButton
-                                                                                    onClick={() => removeTaskFromColumn(columnId, item.id)}
-                                                                                    size="small"
-                                                                                    sx={{ ml: "auto" }}
-                                                                                >
-                                                                                    <Delete />
-                                                                                </IconButton>
-                                                                            </Box>
-                                                                        )}
-                                                                    </Draggable>
-                                                                );
-                                                            })}
-                                                            {provided.placeholder}
-                                                        </Box>
-                                                    )}
-                                                </Droppable>
-                                            </Paper>
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                            </Box>
-                        </DragDropContext>
-                    </Grid>
                 </Grid>
+                <Box>Hello World</Box>
             </Box>
         </>
     )

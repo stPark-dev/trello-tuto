@@ -1,5 +1,4 @@
 /**
- * Environment For ViewTrack Platform
  *
  * Rules:
  *   - `URL` Type Variable Is Must Not End With '/'.
