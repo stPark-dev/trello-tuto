@@ -16,11 +16,11 @@ import MenuItem from "@mui/material/MenuItem";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
-import BrandLogoDark from "@/public/landing/logo_main.png";
-import BrandLogoLight from "@/public/landing/logo_main.png";
+import BrandLogoDark from "@/public/landing/logo_main_dark.png";
+import BrandLogoLight from "@/public/landing/logo_main_light.png";
 
 import { useRecoilState } from "recoil";
-import { DrawerAtom, DrawerMode } from "./state/Drawer";
+import { DrawerAtom } from "./state/Drawer";
 import Link from "next/link";
 import { CssBaseline, IconButton, InputBase, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
 import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat, Info, Interests, LocalOffer, Person, Shield, CreditCard } from "@mui/icons-material";
@@ -171,6 +171,10 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
     setDrawerState((prev) => ({ ...prev, submenu: {} }));
   }, [md, setDrawerState]);
+
+  useEffect(() => {
+    setLogoImage(Logos[theme.palette.mode]);
+  }, [theme.palette.mode]);
 
   const drawerMenuItems: { [key: string]: DrawerMenuItem[] } = {
     "/main/works": [
