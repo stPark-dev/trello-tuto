@@ -25,14 +25,14 @@ const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
                             display: "flex", flexDirection: "column", gap: 2, alignItems: "end"
                         }}>
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", color: "grey.900" }}>
+                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", }}>
                                     E-Mail Notifications
                                 </Typography>
                                 {/* Switch Component from MUI */}
                                 <Switch defaultChecked={false} color="primary" />
                             </Box>
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", color: "grey.900" }}>
+                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", }}>
                                     Push Notifications
                                 </Typography>
                                 <Switch defaultChecked={false} color="primary" />
@@ -59,14 +59,14 @@ const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
                             display: "flex", flexDirection: "column", gap: 2, alignItems: "end"
                         }}>
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", color: "grey.900" }}>
+                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", }}>
                                     E-Mail Notifications
                                 </Typography>
                                 {/* Switch Component from MUI */}
                                 <Switch defaultChecked={false} color="primary" />
                             </Box>
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", color: "grey.900" }}>
+                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", }}>
                                     Push Notifications
                                 </Typography>
                                 <Switch defaultChecked={false} color="primary" />
@@ -92,14 +92,14 @@ const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
                             display: "flex", flexDirection: "column", gap: 2, alignItems: "end"
                         }}>
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", color: "grey.900" }}>
+                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", }}>
                                     E-Mail Notifications
                                 </Typography>
                                 {/* Switch Component from MUI */}
                                 <Switch defaultChecked={false} color="primary" />
                             </Box>
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", color: "grey.900" }}>
+                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", }}>
                                     Push Notifications
                                 </Typography>
                                 <Switch defaultChecked={false} color="primary" />
@@ -125,14 +125,14 @@ const NotificationPage = ({ params }: { params: { buildingId: string } }) => {
                             display: "flex", flexDirection: "column", gap: 2, alignItems: "end"
                         }}>
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", color: "grey.900" }}>
+                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", }}>
                                     E-Mail Notifications
                                 </Typography>
                                 {/* Switch Component from MUI */}
                                 <Switch defaultChecked={false} color="primary" />
                             </Box>
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", color: "grey.900" }}>
+                                <Typography variant="body2" sx={{ mr: 2, fontWeight: "medium", }}>
                                     Push Notifications
                                 </Typography>
                                 <Switch defaultChecked={false} color="primary" />

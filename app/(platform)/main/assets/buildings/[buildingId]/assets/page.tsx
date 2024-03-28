@@ -1,7 +1,7 @@
 "use client"
 
 import { Box, Button, Checkbox, Dialog, Divider, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, Step, StepContent, StepLabel, Stepper, TextField, Tooltip, Typography, useTheme } from "@mui/material";
-import { FolderOutlined, Delete, MoreVert, EditNote, ExpandMore, Interests, FolderCopy, Apartment, Close } from "@mui/icons-material";
+import { FolderOutlined, Delete, MoreVert, EditNote, ExpandMore, Interests, FolderCopy, Apartment, Close, ArrowForward, ArrowBack } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem, GridColDef, GridRowModel } from "@mui/x-data-grid";
 
@@ -140,26 +140,6 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
     const [singleAssetDiagOpen, setSingleAssetDiagOpen] = useState(false);
     const [assetGroupDiagOpen, setAssetGroupDiagOpen] = useState(false);
 
-    const [spaceType, setSpaceType] = useState<string[]>([]); //Group으로 변경해야 함
-
-    const [activeStep, setActiveStep] = useState(0);
-    const handleNextStep = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-
-    const handleBackStep = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-
-    const handleSelectBoxChange = (event: SelectChangeEvent<typeof spaceType>) => {
-        const {
-            target: { value },
-        } = event;
-        setSpaceType(
-            typeof value === "string" ? value.split(",") : value,
-        );
-    };
-
     const handleSingleAssetDiagOpen = () => {
         setSingleAssetDiagOpen(true)
     };
@@ -262,6 +242,25 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
     const SingleAssetDialog = () => {
         const [assetName, setAssetName] = useState("");
         const [uniqIdentifier, setUniqIdentifier] = useState("")
+        const [spaceType, setSpaceType] = useState<string[]>([]); //추후 Group으로 변경해야 함
+        const [activeStep, setActiveStep] = useState(0);
+
+        const handleNextStep = () => {
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        };
+
+        const handleBackStep = () => {
+            setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        };
+
+        const handleSelectBoxChange = (event: SelectChangeEvent<typeof spaceType>) => {
+            const {
+                target: { value },
+            } = event;
+            setSpaceType(
+                typeof value === "string" ? value.split(",") : value,
+            );
+        };
 
         const handleAssetNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             setAssetName(event.target.value);
@@ -307,65 +306,187 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                 </Box>
                             </Box>
                             <Box sx={{ flexGrow: 4 }}>
-                                { }
-                                <Box sx={{ my: 2 }}>
-                                    <Typography variant="body1" fontWeight="bold">Asset name*</Typography>
-                                    <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide the name for the asset to be created.</Typography>
-                                    <FormControl sx={{ width: "100%" }} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-name"
-                                            size="small"
-                                            aria-describedby="outlined-name-helper-text"
-                                            value={assetName} // 입력 상태 바인딩
-                                            onChange={handleAssetNameChange} // 변경 핸들러 바인딩
-                                            placeholder="e.g. Printer"
-                                            inputProps={{
-                                                "aria-label": "name",
-                                            }}
-                                        />
-                                    </FormControl>
-                                </Box>
-                                <Box sx={{ my: 2 }}>
-                                    <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
-                                    <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
-                                    <FormControl sx={{ width: "100%" }} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-identifier"
-                                            size="small"
-                                            aria-describedby="outlined-identifier-helper-text"
-                                            value={uniqIdentifier}
-                                            onChange={handleUniqIdentifierChange}
-                                            inputProps={{
-                                                "aria-label": "identifier",
-                                            }}
-                                        />
-                                    </FormControl>
-                                </Box>
-                                <Box sx={{ my: 2 }}>
-                                    <Typography variant="body1" fontWeight="bold">Asset group</Typography>
-                                    <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
-                                    <FormControl fullWidth size="small">
-                                        <Select
-                                            labelId="type-multiple-checkbox-label"
-                                            id="type-multiple-checkbox"
-                                            multiple
-                                            value={spaceType}
-                                            onChange={handleSelectBoxChange}
-                                            renderValue={(selected) => selected.join("s, ")}
-                                            MenuProps={MenuProps}
+                                {activeStep === 0 && (
+                                    <>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Asset name*</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide the name for the asset to be created.</Typography>
+                                            <FormControl sx={{ width: "100%" }} variant="outlined">
+                                                <OutlinedInput
+                                                    id="outlined-adornment-name"
+                                                    size="small"
+                                                    aria-describedby="outlined-name-helper-text"
+                                                    value={assetName} // 입력 상태 바인딩
+                                                    onChange={handleAssetNameChange} // 변경 핸들러 바인딩
+                                                    placeholder="e.g. Printer"
+                                                    inputProps={{
+                                                        "aria-label": "name",
+                                                    }}
+                                                />
+                                            </FormControl>
+                                        </Box>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
+                                            <FormControl sx={{ width: "100%" }} variant="outlined">
+                                                <OutlinedInput
+                                                    id="outlined-adornment-identifier"
+                                                    size="small"
+                                                    aria-describedby="outlined-identifier-helper-text"
+                                                    value={uniqIdentifier}
+                                                    onChange={handleUniqIdentifierChange}
+                                                    inputProps={{
+                                                        "aria-label": "identifier",
+                                                    }}
+                                                />
+                                            </FormControl>
+                                        </Box>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Asset group</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
+                                            <FormControl fullWidth size="small">
+                                                <Select
+                                                    labelId="type-multiple-checkbox-label"
+                                                    id="type-multiple-checkbox"
+                                                    multiple
+                                                    value={spaceType}
+                                                    onChange={handleSelectBoxChange}
+                                                    renderValue={(selected) => selected.join("s, ")}
+                                                    MenuProps={MenuProps}
+                                                >
+                                                    {groupData.map(({ value, label }) => (
+                                                        <MenuItem key={label} value={value}>
+                                                            <Checkbox checked={spaceType.indexOf(value) > -1} />
+                                                            <ListItemText primary={value} />
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </Box>
+                                    </>
+                                )}
+                                {activeStep === 1 && (
+                                    <>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Asset group</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
+                                            <FormControl fullWidth size="small">
+                                                <Select
+                                                    labelId="type-multiple-checkbox-label"
+                                                    id="type-multiple-checkbox"
+                                                    multiple
+                                                    value={spaceType}
+                                                    onChange={handleSelectBoxChange}
+                                                    renderValue={(selected) => selected.join("s, ")}
+                                                    MenuProps={MenuProps}
+                                                >
+                                                    {groupData.map(({ value, label }) => (
+                                                        <MenuItem key={label} value={value}>
+                                                            <Checkbox checked={spaceType.indexOf(value) > -1} />
+                                                            <ListItemText primary={value} />
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </Box>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Asset group</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
+                                            <FormControl fullWidth size="small">
+                                                <Select
+                                                    labelId="type-multiple-checkbox-label"
+                                                    id="type-multiple-checkbox"
+                                                    multiple
+                                                    value={spaceType}
+                                                    onChange={handleSelectBoxChange}
+                                                    renderValue={(selected) => selected.join("s, ")}
+                                                    MenuProps={MenuProps}
+                                                >
+                                                    {groupData.map(({ value, label }) => (
+                                                        <MenuItem key={label} value={value}>
+                                                            <Checkbox checked={spaceType.indexOf(value) > -1} />
+                                                            <ListItemText primary={value} />
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </Box>
+                                    </>
+                                )}
+                                {activeStep === 2 && (
+                                    <>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
+                                            <FormControl sx={{ width: "100%" }} variant="outlined">
+                                                <OutlinedInput
+                                                    id="outlined-adornment-identifier"
+                                                    size="small"
+                                                    aria-describedby="outlined-identifier-helper-text"
+                                                    value={uniqIdentifier}
+                                                    onChange={handleUniqIdentifierChange}
+                                                    inputProps={{
+                                                        "aria-label": "identifier",
+                                                    }}
+                                                />
+                                            </FormControl>
+                                        </Box>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
+                                            <FormControl sx={{ width: "100%" }} variant="outlined">
+                                                <OutlinedInput
+                                                    id="outlined-adornment-identifier"
+                                                    size="small"
+                                                    aria-describedby="outlined-identifier-helper-text"
+                                                    value={uniqIdentifier}
+                                                    onChange={handleUniqIdentifierChange}
+                                                    inputProps={{
+                                                        "aria-label": "identifier",
+                                                    }}
+                                                />
+                                            </FormControl>
+                                        </Box>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
+                                            <FormControl sx={{ width: "100%" }} variant="outlined">
+                                                <OutlinedInput
+                                                    id="outlined-adornment-identifier"
+                                                    size="small"
+                                                    aria-describedby="outlined-identifier-helper-text"
+                                                    value={uniqIdentifier}
+                                                    onChange={handleUniqIdentifierChange}
+                                                    inputProps={{
+                                                        "aria-label": "identifier",
+                                                    }}
+                                                />
+                                            </FormControl>
+                                        </Box>
+                                    </>
+                                )}
+                                <Box sx={{ display: "flex", justifyContent: activeStep === 0 ? "flex-end" : "space-between", mt: 2 }}>
+                                    {activeStep !== 0 && (
+                                        <Button
+                                            type="button"
+                                            variant="contained"
+                                            color="secondary"
+                                            disabled={!assetName}
+                                            onClick={handleBackStep}
+                                            startIcon={<ArrowBack />}
                                         >
-                                            {groupData.map(({ value, label }) => (
-                                                <MenuItem key={label} value={value}>
-                                                    <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                    <ListItemText primary={value} />
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </Box>
-                                <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 2 }}>
-                                    <Button type="submit" variant="contained" color="primary" disabled={!assetName} onClick={handleNextStep}>
-                                        Submit
+                                            Go back
+                                        </Button>
+                                    )}
+                                    <Button
+                                        type="button"
+                                        variant="contained"
+                                        color="primary"
+                                        disabled={!assetName}
+                                        onClick={handleNextStep}
+                                        endIcon={<ArrowForward />}
+                                    >
+                                        Next step
                                     </Button>
                                 </Box>
                             </Box>
@@ -414,7 +535,7 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                 <Typography variant="body1" fontWeight="bold">Asset group</Typography>
                                 <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
                                 <FormControl fullWidth size="small">
-                                    <Select
+                                    {/* <Select
                                         labelId="type-multiple-checkbox-label"
                                         id="type-multiple-checkbox"
                                         multiple
@@ -429,7 +550,7 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                                 <ListItemText primary={value} />
                                             </MenuItem>
                                         ))}
-                                    </Select>
+                                    </Select> */}
                                 </FormControl>
                             </Box>
                         </Box>
