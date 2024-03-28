@@ -1,34 +1,14 @@
 "use client"
 
-import { Box, Button, Checkbox, Dialog, Divider, FormControl, FormHelperText, IconButton, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, Paper, Select, SelectChangeEvent, Step, StepContent, StepLabel, Stepper, TextField, Tooltip, Typography, useTheme } from "@mui/material";
-import { FolderOutlined, Delete, MoreVert, EditNote, ExpandMore, Interests, FolderCopy, Apartment, Close, ArrowForward, ArrowBack } from "@mui/icons-material";
+import { Box, Button, Checkbox, Dialog, Divider, FormControl, FormControlLabel, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, MenuItem, OutlinedInput, Select, Step, StepContent, StepLabel, Stepper, TextField, Typography, useTheme } from "@mui/material";
+import { FolderOutlined, Delete, MoreVert, EditNote, ExpandMore, Interests, FolderCopy, Close, ArrowForward, ArrowBack, ChevronRight } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { DataGrid, GridActionsCellItem, GridColDef, GridRowModel } from "@mui/x-data-grid";
-
-export type GroupType = {
-    id: string;
-    name: string;
-    createdAt: string;
-    updatedAt: string | null;
-    children: string[];
-    parentGroup: string | null;
-}
-
-export type AssetType = {
-    id: string;
-    name: string;
-    createdAt: string;
-    updatedAt: string | null;
-    identifier: string;
-    qrCodes: string[] | null;
-    documents: string[] | null;
-    group: GroupType;
-    brand: string;
-    supplier: string;
-    serialNumber: string;
-    purchasedAt: string;
-    comment: string | null;
-}
+import { AssetType, GroupType } from "@/types/fixDatatype";
+import { TreeItem, TreeView } from "@mui/x-tree-view";
+import { Dayjs } from "dayjs";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -41,73 +21,111 @@ const MenuProps = {
     },
 };
 
-const groupData = [
+const groupData: GroupType[] = [
     {
-        value: "Building",
-        label: "Building"
+        id: "62b5c3f2-671a-4821-9360-1189d55d7931",
+        name: "Cooking",
+        created_at: "2024-03-28T01:01:50.000000Z",
+        updated_at: "2024-03-28T01:01:50.000000Z",
+        children: [],
+        parent_group: null,
+        documents: []
     },
     {
-        value: "Floor",
-        label: "Floor"
-    },
-    {
-        value: "Location",
-        label: "Location"
-    },
-    {
-        value: "Room",
-        label: "Room"
-    },
-    {
-        value: "Department",
-        label: "Department"
+        id: "4f7401e9-4ea2-44cb-b679-666433a0ff24",
+        name: "Machine",
+        created_at: "2024-03-28T01:01:29.000000Z",
+        updated_at: "2024-03-28T01:01:29.000000Z",
+        children: [
+            {
+                id: "71d41f21-50c8-437d-81be-78d1100e22a8",
+                name: "M-A",
+                created_at: "2024-03-28T01:02:02.000000Z",
+                updated_at: "2024-03-28T01:02:02.000000Z",
+                children: [],
+                parent_group: "4f7401e9-4ea2-44cb-b679-666433a0ff24",
+                documents: []
+            }
+        ],
+        parent_group: null,
+        documents: []
     }
 ]
 
 const data: AssetType[] = [
     {
-        id: "40cd6126-aa4d-49cf-8267-343cbab53072",
-        name: "Desk 01",
-        createdAt: "2024-03-07T04:42:01.000000Z",
-        updatedAt: "2024-03-07T04:42:01.000000Z",
-        identifier: "CBD_001",
-        qrCodes: [],
-        documents: [],
-        group: {
-            id: "1da7787e-9fe3-4b11-8bda-2d8a41d46c12",
-            name: "1",
-            createdAt: "2024-03-21T02:06:40.000000Z",
-            updatedAt: "2024-03-21T02:06:40.000000Z",
-            children: [],
-            parentGroup: "8a76f7ec-2508-43d9-a63f-d8ec4dfaab2d",
+        id: "a13f1618-25bd-4272-b97b-68eb5413c620",
+        name: "Microwave",
+        space: {
+            id: "5ab7a114-f0e1-48b1-9979-82e2d27158a4",
+            parent_id: null,
+            name: "Office Building",
+            identifier: null,
+            type: {
+                value: "building",
+                label: "Building"
+            },
+            qr_codes: null,
+            created_at: "2024-03-28T00:59:44.000000Z",
+            updated_at: "2024-03-28T00:59:44.000000Z",
+            children: null,
         },
-        brand: "Sharp",
-        supplier: "Vendor 01",
-        serialNumber: "22dxccsdwaxDB",
-        purchasedAt: "2024-03-08T15:00:00+00:00",
-        comment: "Office Desk"
-    },
-    {
-        id: "281aacd5-ecca-4141-b3c5-708f201b2c3d",
-        name: "Chair 01",
-        createdAt: "2024-03-08T01:04:54.000000Z",
-        updatedAt: "2024-03-08T01:04:54.000000Z",
-        identifier: "cc-01s",
-        qrCodes: [],
+        created_at: "2024-03-28T01:09:51.000000Z",
+        updated_at: "2024-03-28T01:09:51.000000Z",
+        identifier: "mw001",
+        qr_codes: [],
         documents: [],
         group: {
-            id: "510148a5-acb7-44a8-9c96-0d6aea4343c9",
-            name: "2",
-            createdAt: "2024-03-21T02:06:49.000000Z",
-            updatedAt: "2024-03-21T02:06:49.000000Z",
+            id: "62b5c3f2-671a-4821-9360-1189d55d7931",
+            name: "Cooking",
+            created_at: "2024-03-28T01:01:50.000000Z",
+            updated_at: "2024-03-28T01:01:50.000000Z",
             children: [],
-            parentGroup: null,
+            parent_group: null,
+            documents: []
         },
         brand: "LG",
-        supplier: "Vendor 02",
-        serialNumber: "020102301366",
-        purchasedAt: "2024-03-05T15:00:00+00:00",
-        comment: "Comfortable Chair"
+        supplier: "Vendor A",
+        serial_number: "132125211324523",
+        purchased_at: "2024-03-01T15:00:00+00:00",
+        comment: "\ub0b4\uac00 \uc0b0 \uc804\uc790\ub808\uc778\uc9c0"
+    },
+    {
+        id: "c4d48b7f-87d0-469e-a200-9fb9e312aa60",
+        name: "Computer",
+        space: {
+            id: "95cf4e77-011a-4f39-ac75-b55c789da668",
+            parent_id: "5ab7a114-f0e1-48b1-9979-82e2d27158a4",
+            name: "Meeting Room 1",
+            identifier: null,
+            type: {
+                value: "room",
+                label: "Room"
+            },
+            qr_codes: null,
+            created_at: "2024-03-28T00:59:44.000000Z",
+            updated_at: "2024-03-28T00:59:44.000000Z",
+            children: null,
+        },
+        created_at: "2024-03-28T01:10:40.000000Z",
+        updated_at: "2024-03-28T01:10:40.000000Z",
+        identifier: "G-221",
+        qr_codes: [],
+        documents: [],
+        group: {
+            id: "71d41f21-50c8-437d-81be-78d1100e22a8",
+            name: "M-A",
+            created_at: "2024-03-28T01:02:02.000000Z",
+            updated_at: "2024-03-28T01:02:02.000000Z",
+            children: [],
+            parent_group: "4f7401e9-4ea2-44cb-b679-666433a0ff24",
+            documents: []
+        },
+        brand: "Samsung",
+        supplier: "Vendor A",
+        serial_number: "1232151351521213",
+        purchased_at: "2024-03-08T15:00:00+00:00",
+        comment: "\uc0bc\uc131 \ucef4\ud4e8\ud130"
     },
 ]
 
@@ -133,8 +151,8 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
     const [assetGroups, setAssetGroups] = useState<GroupType[]>([]);
     const [selectedGroupId, setSelectedGroupId] = useState<string | null>(null);
     const [groupAnchorEl, setGroupAnchorEl] = useState<null | HTMLElement>(null);
-    const groupMenuOpen = Boolean(groupAnchorEl);
     const [addAnchorEl, setAddAnchorEl] = useState<null | HTMLElement>(null);
+    const groupMenuOpen = Boolean(groupAnchorEl);
     const addMenuOpen = Boolean(addAnchorEl);
 
     const [singleAssetDiagOpen, setSingleAssetDiagOpen] = useState(false);
@@ -240,10 +258,58 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
     ];
 
     const SingleAssetDialog = () => {
-        const [assetName, setAssetName] = useState("");
-        const [uniqIdentifier, setUniqIdentifier] = useState("")
-        const [spaceType, setSpaceType] = useState<string[]>([]); //추후 Group으로 변경해야 함
         const [activeStep, setActiveStep] = useState(0);
+        const [assetName, setAssetName] = useState("");
+        const [uniqIdentifier, setUniqIdentifier] = useState("");
+        const [brand, setBrand] = useState("");
+        const [supplier, setSupplier] = useState("");
+        const [serialNum, setSerialNum] = useState("");
+        const [date, setDate] = useState<Dayjs | null>(null);
+        const [comment, setComment] = useState("");
+
+
+        // 트리 SelectBox =========================
+        const [filterText, setFilterText] = useState("");
+        const [checked, setChecked] = useState<string[]>([]);
+
+        const handleToggle = (event: React.ChangeEvent<HTMLInputElement>, nodeId: string) => {
+            const currentIndex = checked.indexOf(nodeId);
+            const newChecked = [...checked];
+
+            if (currentIndex === -1) {
+                newChecked.push(nodeId);
+            } else {
+                newChecked.splice(currentIndex, 1);
+            }
+
+            setChecked(newChecked);
+        };
+
+        const renderTree = (nodes: GroupType[]): any => nodes.map((node) => {
+            if (node.name.toLowerCase().includes(filterText.toLowerCase())) {
+                return (
+                    <TreeItem
+                        key={node.id}
+                        nodeId={node.id}
+                        label={
+                            <Box sx={{ display: "flex", alignItems: "center" }}>
+                                <Checkbox
+                                    checked={checked.includes(node.id)}
+                                    onChange={(event) => handleToggle(event, node.id)}
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+                                {node.name}
+                            </Box>
+                        }
+                    >
+                        {Array.isArray(node.children) ? renderTree(node.children) : null}
+                    </TreeItem>
+                );
+            }
+            return null;
+        });
+
+        // =========================
 
         const handleNextStep = () => {
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -253,20 +319,23 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
             setActiveStep((prevActiveStep) => prevActiveStep - 1);
         };
 
-        const handleSelectBoxChange = (event: SelectChangeEvent<typeof spaceType>) => {
-            const {
-                target: { value },
-            } = event;
-            setSpaceType(
-                typeof value === "string" ? value.split(",") : value,
-            );
-        };
-
         const handleAssetNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             setAssetName(event.target.value);
         };
         const handleUniqIdentifierChange = (event: React.ChangeEvent<HTMLInputElement>) => {
             setUniqIdentifier(event.target.value);
+        };
+        const handleBrandChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setBrand(event.target.value);
+        };
+        const handleSupplierChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setSupplier(event.target.value);
+        };
+        const handleSerialNumChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setSerialNum(event.target.value);
+        };
+        const handleCommentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setComment(event.target.value);
         };
 
         return (
@@ -316,8 +385,8 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                                     id="outlined-adornment-name"
                                                     size="small"
                                                     aria-describedby="outlined-name-helper-text"
-                                                    value={assetName} // 입력 상태 바인딩
-                                                    onChange={handleAssetNameChange} // 변경 핸들러 바인딩
+                                                    value={assetName}
+                                                    onChange={handleAssetNameChange}
                                                     placeholder="e.g. Printer"
                                                     inputProps={{
                                                         "aria-label": "name",
@@ -345,22 +414,22 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                             <Typography variant="body1" fontWeight="bold">Asset group</Typography>
                                             <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
                                             <FormControl fullWidth size="small">
-                                                <Select
-                                                    labelId="type-multiple-checkbox-label"
-                                                    id="type-multiple-checkbox"
-                                                    multiple
-                                                    value={spaceType}
-                                                    onChange={handleSelectBoxChange}
-                                                    renderValue={(selected) => selected.join("s, ")}
-                                                    MenuProps={MenuProps}
+                                                <TextField
+                                                    sx={{ mb: 2 }}
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    label="Search"
+                                                    size="small"
+                                                    value={filterText}
+                                                    onChange={(e) => setFilterText(e.target.value)}
+                                                />
+                                                <TreeView
+                                                    defaultCollapseIcon={<ExpandMore />}
+                                                    defaultExpandIcon={<ChevronRight />}
+                                                    multiSelect
                                                 >
-                                                    {groupData.map(({ value, label }) => (
-                                                        <MenuItem key={label} value={value}>
-                                                            <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                            <ListItemText primary={value} />
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
+                                                    {renderTree(groupData)}
+                                                </TreeView>
                                             </FormControl>
                                         </Box>
                                     </>
@@ -368,47 +437,47 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                 {activeStep === 1 && (
                                     <>
                                         <Box sx={{ my: 2 }}>
-                                            <Typography variant="body1" fontWeight="bold">Asset group</Typography>
-                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
+                                            <Typography variant="body1" fontWeight="bold">Location</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select a location for this asset.</Typography>
                                             <FormControl fullWidth size="small">
-                                                <Select
-                                                    labelId="type-multiple-checkbox-label"
-                                                    id="type-multiple-checkbox"
-                                                    multiple
-                                                    value={spaceType}
-                                                    onChange={handleSelectBoxChange}
-                                                    renderValue={(selected) => selected.join("s, ")}
-                                                    MenuProps={MenuProps}
+                                                <TextField
+                                                    sx={{ mb: 2 }}
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    label="Search"
+                                                    size="small"
+                                                    value={filterText}
+                                                    onChange={(e) => setFilterText(e.target.value)}
+                                                />
+                                                <TreeView
+                                                    defaultCollapseIcon={<ExpandMore />}
+                                                    defaultExpandIcon={<ChevronRight />}
+                                                    multiSelect
                                                 >
-                                                    {groupData.map(({ value, label }) => (
-                                                        <MenuItem key={label} value={value}>
-                                                            <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                            <ListItemText primary={value} />
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
+                                                    {renderTree(groupData)}
+                                                </TreeView>
                                             </FormControl>
                                         </Box>
                                         <Box sx={{ my: 2 }}>
-                                            <Typography variant="body1" fontWeight="bold">Asset group</Typography>
+                                            <Typography variant="body1" fontWeight="bold">Asset type</Typography>
                                             <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
                                             <FormControl fullWidth size="small">
-                                                <Select
-                                                    labelId="type-multiple-checkbox-label"
-                                                    id="type-multiple-checkbox"
-                                                    multiple
-                                                    value={spaceType}
-                                                    onChange={handleSelectBoxChange}
-                                                    renderValue={(selected) => selected.join("s, ")}
-                                                    MenuProps={MenuProps}
+                                                <TextField
+                                                    sx={{ mb: 2 }}
+                                                    fullWidth
+                                                    variant="outlined"
+                                                    label="Search"
+                                                    size="small"
+                                                    value={filterText}
+                                                    onChange={(e) => setFilterText(e.target.value)}
+                                                />
+                                                <TreeView
+                                                    defaultCollapseIcon={<ExpandMore />}
+                                                    defaultExpandIcon={<ChevronRight />}
+                                                    multiSelect
                                                 >
-                                                    {groupData.map(({ value, label }) => (
-                                                        <MenuItem key={label} value={value}>
-                                                            <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                            <ListItemText primary={value} />
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
+                                                    {renderTree(groupData)}
+                                                </TreeView>
                                             </FormControl>
                                         </Box>
                                     </>
@@ -416,50 +485,73 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                 {activeStep === 2 && (
                                     <>
                                         <Box sx={{ my: 2 }}>
-                                            <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
-                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
+                                            <Typography variant="body1" fontWeight="bold">Brand</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional brand for this asset.</Typography>
                                             <FormControl sx={{ width: "100%" }} variant="outlined">
                                                 <OutlinedInput
-                                                    id="outlined-adornment-identifier"
+                                                    id="outlined-adornment-brand"
                                                     size="small"
-                                                    aria-describedby="outlined-identifier-helper-text"
-                                                    value={uniqIdentifier}
-                                                    onChange={handleUniqIdentifierChange}
+                                                    aria-describedby="outlined-brand-helper-text"
+                                                    value={brand}
+                                                    onChange={handleBrandChange}
                                                     inputProps={{
-                                                        "aria-label": "identifier",
+                                                        "aria-label": "brand",
                                                     }}
                                                 />
                                             </FormControl>
                                         </Box>
                                         <Box sx={{ my: 2 }}>
-                                            <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
-                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
+                                            <Typography variant="body1" fontWeight="bold">Supplier</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional supplier for this asset.</Typography>
                                             <FormControl sx={{ width: "100%" }} variant="outlined">
                                                 <OutlinedInput
-                                                    id="outlined-adornment-identifier"
+                                                    id="outlined-adornment-supplier"
                                                     size="small"
-                                                    aria-describedby="outlined-identifier-helper-text"
-                                                    value={uniqIdentifier}
-                                                    onChange={handleUniqIdentifierChange}
+                                                    aria-describedby="outlined-supplier-helper-text"
+                                                    value={supplier}
+                                                    onChange={handleSupplierChange}
                                                     inputProps={{
-                                                        "aria-label": "identifier",
+                                                        "aria-label": "supplier",
                                                     }}
                                                 />
                                             </FormControl>
                                         </Box>
                                         <Box sx={{ my: 2 }}>
-                                            <Typography variant="body1" fontWeight="bold">Unique Identifier</Typography>
-                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional identifier for this asset.</Typography>
+                                            <Typography variant="body1" fontWeight="bold">Serial number</Typography>
+                                            <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Provide an optional serial number for this asset.</Typography>
                                             <FormControl sx={{ width: "100%" }} variant="outlined">
                                                 <OutlinedInput
-                                                    id="outlined-adornment-identifier"
+                                                    id="outlined-adornment-serial"
                                                     size="small"
-                                                    aria-describedby="outlined-identifier-helper-text"
-                                                    value={uniqIdentifier}
-                                                    onChange={handleUniqIdentifierChange}
+                                                    aria-describedby="outlined-serial-helper-text"
+                                                    value={serialNum}
+                                                    onChange={handleSerialNumChange}
                                                     inputProps={{
-                                                        "aria-label": "identifier",
+                                                        "aria-label": "serial",
                                                     }}
+                                                />
+                                            </FormControl>
+                                        </Box>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Purchase Date</Typography>
+                                            <FormControl sx={{ width: "100%" }} variant="outlined">
+                                                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                    <DatePicker value={date} onChange={(newValue) => setDate(newValue)} slotProps={{ textField: { size: "small" } }} />
+                                                </LocalizationProvider>
+                                            </FormControl>
+                                        </Box>
+                                        <Box sx={{ my: 2 }}>
+                                            <Typography variant="body1" fontWeight="bold">Comment</Typography>
+                                            <FormControl sx={{ width: "100%" }} variant="outlined">
+                                                <OutlinedInput
+                                                    id="outlined-adornment-comment"
+                                                    size="small"
+                                                    value={comment}
+                                                    onChange={handleCommentChange}
+                                                    multiline
+                                                    rows={4}
+                                                    fullWidth
+                                                    placeholder="Write comment here..."
                                                 />
                                             </FormControl>
                                         </Box>
@@ -535,22 +627,6 @@ const AssetPage = ({ params }: { params: { buildingId: string } }) => {
                                 <Typography variant="body1" fontWeight="bold">Asset group</Typography>
                                 <Typography variant="body2" fontWeight="bold" sx={{ mb: 1, color: "#A6A6A6" }}>Select an asset group for this asset.</Typography>
                                 <FormControl fullWidth size="small">
-                                    {/* <Select
-                                        labelId="type-multiple-checkbox-label"
-                                        id="type-multiple-checkbox"
-                                        multiple
-                                        value={spaceType}
-                                        onChange={handleSelectBoxChange}
-                                        renderValue={(selected) => selected.join("s, ")}
-                                        MenuProps={MenuProps}
-                                    >
-                                        {groupData.map(({ value, label }) => (
-                                            <MenuItem key={label} value={value}>
-                                                <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                <ListItemText primary={value} />
-                                            </MenuItem>
-                                        ))}
-                                    </Select> */}
                                 </FormControl>
                             </Box>
                         </Box>

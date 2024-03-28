@@ -1,6 +1,7 @@
 "use client"
 
 import QrCodeScanner from "@/components/QrCodeScanner";
+import { SpaceType } from "@/types/fixDatatype";
 import { ExpandLess, ExpandMore, HelpOutline, MoreVert } from "@mui/icons-material";
 import { Box, Button, Checkbox, Collapse, Drawer, FormControl, Grid, IconButton, InputAdornment, List, ListItemButton, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, Tooltip, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
@@ -17,26 +18,35 @@ const MenuProps = {
     },
 };
 
-const data = [
+const data: SpaceType[] = [
     {
-        value: "Building",
-        label: "Building"
-    },
-    {
-        value: "Floor",
-        label: "Floor"
-    },
-    {
-        value: "Location",
-        label: "Location"
-    },
-    {
-        value: "Room",
-        label: "Room"
-    },
-    {
-        value: "Department",
-        label: "Department"
+        id: "5ab7a114-f0e1-48b1-9979-82e2d27158a4",
+        parent_id: null,
+        name: "Office Building",
+        identifier: null,
+        type: {
+            value: "building",
+            label: "building"
+        },
+        qr_codes: null,
+        created_at: "2024-03-28",
+        updated_at: "2024-03-28",
+        children: [
+            {
+                id: "95cf4e77-011a-4f39-ac75-b55c789da668",
+                parent_id: "5ab7a114-f0e1-48b1-9979-82e2d27158a4",
+                name: "Meeting Room 1",
+                identifier: null,
+                type: {
+                    value: "room",
+                    label: "room"
+                },
+                qr_codes: null,
+                created_at: "2024-03-28",
+                updated_at: "2024-03-28",
+                children: []
+            }
+        ]
     }
 ]
 
@@ -101,7 +111,7 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                         Add Space
                     </Button>
                 </Box>
-                <Box sx={{ width: "100%", height: "100vh",  bgcolor: theme.palette.mode === "dark" ? "#4D4D4D" : "#F2F4F7"}}>
+                <Box sx={{ width: "100%", height: "100vh", bgcolor: theme.palette.mode === "dark" ? "#4D4D4D" : "#F2F4F7" }}>
                     <List
                         sx={{ width: "100%", bgcolor: "background.paper" }}
                         component="nav"
@@ -171,18 +181,18 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                 <Typography variant="body1" fontWeight="bold" sx={{ mb: 1 }}>Type</Typography>
                                 <FormControl fullWidth size="small">
                                     <Select
-                                        labelId="type-multiple-checkbox-label"
-                                        id="type-multiple-checkbox"
+                                        labelId="space-multiple-checkbox-label"
+                                        id="space-multiple-checkbox"
                                         multiple
                                         value={spaceType}
                                         onChange={handleSelectBoxChange}
                                         renderValue={(selected) => selected.join("s, ")}
                                         MenuProps={MenuProps}
                                     >
-                                        {data.map(({ value, label }) => (
-                                            <MenuItem key={label} value={value}>
-                                                <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                <ListItemText primary={value} />
+                                        {data.map(({ name, id }) => (
+                                            <MenuItem key={id} value={name}>
+                                                <Checkbox checked={spaceType.indexOf(name) > -1} />
+                                                <ListItemText primary={name} />
                                             </MenuItem>
                                         ))}
                                     </Select>
@@ -200,10 +210,10 @@ const SpacePage = ({ params }: { params: { buildingId: string } }) => {
                                         renderValue={(selected) => selected.join("s, ")}
                                         MenuProps={MenuProps}
                                     >
-                                        {data.map(({ value, label }) => (
-                                            <MenuItem key={label} value={value}>
-                                                <Checkbox checked={spaceType.indexOf(value) > -1} />
-                                                <ListItemText primary={value} />
+                                        {data.map(({ name, id }) => (
+                                            <MenuItem key={id} value={name}>
+                                                <Checkbox checked={spaceType.indexOf(name) > -1} />
+                                                <ListItemText primary={name} />
                                             </MenuItem>
                                         ))}
                                     </Select>

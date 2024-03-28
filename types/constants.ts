@@ -9,7 +9,7 @@ export const NEXTAUTH_PAGES: Record<string, string> = {
   signOut: "/sign-out2",
 };
 
-export type AuthProvider = 'github' | 'google' | 'kakao' | 'naver';
+export type AuthProvider = "github" | "google" | "kakao" | "naver";
 export const NEXTAUTH_PROVIDERS: AuthProvider[] = ["github", "google", "kakao", "naver"];
 
 export const NEXTAUTH_SECRET_KEY: Uint8Array = new TextEncoder().encode(process.env.NEXTAUTH_SECRET);

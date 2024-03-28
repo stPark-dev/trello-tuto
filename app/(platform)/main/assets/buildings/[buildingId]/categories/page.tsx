@@ -1,5 +1,6 @@
 "use client"
 
+import { CategoryType, TranslationsType } from "@/types/fixDatatype";
 import {
     HelpOutline, MoreVert, SvgIconComponent, Close,
     Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Devices, VolumeUp, CleaningServices, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
@@ -7,23 +8,7 @@ import {
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Drawer, FormControl, IconButton, InputAdornment, List, ListItemButton, ListItemIcon, ListItemText, MenuItem, OutlinedInput, Select, SelectChangeEvent, TextField, Tooltip, Typography, styled, useTheme } from "@mui/material";
 import { createElement, useEffect, useState } from "react";
 
-export type Translations = {
-    kor: string;
-    jpn: string;
-    eng: string;
-};
 
-export type Category = {
-    id: string;
-    tenantId: string;
-    name: string;
-    color: string;
-    Icon: SvgIconComponent;
-    createdAt: string;
-    updatedAt: string | null;
-    deletedAt: string | null;
-    translations: Translations;
-};
 
 const DialogIcons: SvgIconComponent[] = [
     Build, Chair, Share, Brush, House, WbSunny, Wifi, Shower, Air, ElectricBolt, Key, Help, AccountTree, Devices, VolumeUp, CleaningServices, LocalFireDepartment, Power, FormatPaint, WaterDrop, AcUnit, Wc, Hotel, Tv, Kitchen
@@ -42,7 +27,7 @@ const COLORS = {
     CYAN: "#00BCD4",
 };
 
-const data: Category[] = [
+const data: CategoryType[] = [
     {
         id: "ae33546c-f16d-4894-83df-07eca7a2cc39",
         tenantId: "8e7e5369-9b7e-4662-985d-2c8ebb98b722",
@@ -111,9 +96,9 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
     const theme = useTheme();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [iconDiagOpen, setIconDiagOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState<Category | null>(null);
+    const [selectedItem, setSelectedItem] = useState<CategoryType | null>(null);
     const [categoryName, setCategoryName] = useState("");
-    const [categoryTranslations, setCategoryTranslations] = useState<Translations>({
+    const [categoryTranslations, setCategoryTranslations] = useState<TranslationsType>({
         kor: "",
         jpn: "",
         eng: ""
@@ -165,7 +150,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
         setIconDiagOpen(false);
     };
 
-    const handleListItemClick = (item: Category) => {
+    const handleListItemClick = (item: CategoryType) => {
         setSelectedItem(item);
         setDrawerOpen(true);
     };
@@ -184,7 +169,7 @@ const CategoryPage = ({ params }: { params: { buildingId: string } }) => {
         setDrawerOpen(open);
     };
 
-    const updateCategoryTranslations = (language: keyof Translations, value: string) => {
+    const updateCategoryTranslations = (language: keyof TranslationsType, value: string) => {
         setCategoryTranslations(prevTranslations => ({
             ...prevTranslations,
             [language]: value
