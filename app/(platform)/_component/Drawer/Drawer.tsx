@@ -23,8 +23,9 @@ import { useRecoilState } from "recoil";
 import { DrawerAtom } from "./state/Drawer";
 import Link from "next/link";
 import { CssBaseline, IconButton, InputBase, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
-import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat, Info, Interests, LocalOffer, Person, Shield, CreditCard } from "@mui/icons-material";
+import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat, Info, Interests, LocalOffer, Person, Shield, CreditCard, AccountBox, ManageAccounts, CircleNotifications } from "@mui/icons-material";
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
+import { signOut } from "next-auth/react";
 import Clock from "../Clock";
 import { useRouter, usePathname } from "next/navigation";
 import Toggler from "@/components/mui/ThemeProvider/Toggler";
@@ -42,7 +43,16 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const router = useRouter();
   const currentPathName = usePathname();
   const { data: sessionData } = useSession();
-  const settings = ["Profile", "Account", "Dashboard", "Logout"];
+  const settings = [
+    {
+      mod: "Settings",
+      fnc: () => router.push("/main/settings/personal/profile")
+    },
+    {
+      mod: "Logout",
+      fnc: () => signOut({ callbackUrl: "/" })
+    }
+  ];
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -115,6 +125,8 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
 
   const isActive = (pathname: string) => currentPathName.startsWith(pathname);
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const navLinks = [
     { href: "/main/works/all", label: "Works", Icon: TaskAlt, isActive: isActive("/main/works") },
     { href: "/main/insights", label: "Insights", Icon: QueryStats, isActive: isActive("/main/insights") },
@@ -123,7 +135,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
   const headerHeight = 84;
   const drawerWidth = 360;
-
+  
   const Logos = {
     dark: BrandLogoDark.src,
     light: BrandLogoLight.src,
@@ -176,6 +188,11 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     setLogoImage(Logos[theme.palette.mode]);
   }, [theme.palette.mode]);
 
+  useEffect(() => {
+    const tabIndex = navLinks.findIndex(link => currentPathName.startsWith(link.href));
+    setTabValue(tabIndex !== -1 ? tabIndex : 100);
+  }, [currentPathName, navLinks]);
+
   const drawerMenuItems: { [key: string]: DrawerMenuItem[] } = {
     "/main/works": [
       { text: "All Works", icon: Task, route: "/main/works/all" },
@@ -198,6 +215,11 @@ const Drawer = ({ profile, children }: DrawerProps) => {
       { text: "Users", icon: Person, route: "/main/assets/buildings/[buildingId]/users" },
       { text: "Roles", icon: Shield, route: "/main/assets/buildings/[buildingId]/roles" },
       { text: "Billing and Plan", icon: CreditCard, route: "/main/assets/buildings/[buildingId]/billing" },
+    ],
+    "/main/settings/personal": [
+      { text: "Profile", icon: AccountBox, route: "/main/settings/personal/profile" },
+      { text: "Account Settings", icon: ManageAccounts, route: "/main/settings/personal/account" },
+      { text: "Notification Settings", icon: CircleNotifications, route: "/main/settings/personal/notifications" }
     ]
   };
   const getCurrentMenuItems = (currentPath: string): DrawerMenuItem[] => {
@@ -293,6 +315,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
         )}
         <Box sx={{ width: 250 }} role="presentation">
           <List sx={{ ml: 3, mt: 1 }}>
+            <Typography fontWeight="bold" variant="h4" sx={{ p: 2 }}>{/* Here */}</Typography>
             {currentMenuItems.map((menuItem: DrawerMenuItem, index: number) => (
               <ListItem key={index} disablePadding>
                 <ListItemButton onClick={() => {
@@ -358,7 +381,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
             aria-label="open drawer"
             onClick={handleDrawerToggle}
             size="medium"
-            sx={{ mr: 1}}
+            sx={{ mr: 1 }}
           >
             {drawerIsOpen ? <KeyboardDoubleArrowLeftSharp /> : <MenuSharp />}
           </IconButton>
@@ -462,20 +485,21 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                     onClose={handleCloseUserMenu}
                   >
                     {settings.map((setting) => (
-                      <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                        <Typography textAlign="center">{setting}</Typography>
+                      <MenuItem key={setting.mod} onClick={() => { setting.fnc(); handleCloseUserMenu(); }}>
+                        <Typography textAlign="center">{setting.mod}</Typography>
                       </MenuItem>
                     ))}
                   </Menu>
                 </Box>
-                <Box sx={{ ml: 2 }}>
+                {/* <Box sx={{ ml: 2 }}>
                   <SignOutButton />
-                </Box>
+                </Box> */}
               </Box>
             ) : (
-              <Box sx={{ ml: 2 }}>
-                <SignOutButton />
-              </Box>
+              <></>
+              // <Box sx={{ ml: 2 }}>
+              //   <SignOutButton />
+              // </Box>
             )}
           </Box>
         </Toolbar>
