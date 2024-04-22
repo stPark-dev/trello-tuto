@@ -14,8 +14,7 @@ import type { DataRule, DataRules, RecordInvalidateDescription } from "../../typ
  * @param [value [,...value]] 검사할 값
  * @return boolean
  */
-export const isEmpty = (...value: Array<unknown>): boolean =>
-  [null, undefined, "", NaN].some((empty) => value.flatMap((e) => e).includes(empty));
+export const isEmpty = (...value: Array<unknown>): boolean => [null, undefined, "", NaN].some(empty => value.flatMap(e => e).includes(empty));
 
 /**
  * 비밀번호 유효성 검사
@@ -40,9 +39,7 @@ export const complexity = (password = ""): string | undefined => {
 
   if (!/[0-9]/.test(password)) return `숫자가 반드시 포함되어야 합니다.`;
   if (!new RegExp(`[${allowedSpecialCharacters.join("")}]`).test(password))
-    return `다음 중 하나 이상의 특수문자가 반드시 포함되어야합니다. ${allowedSpecialCharacters
-      .map((c) => `\`${c}\``)
-      .join(", ")}`;
+    return `다음 중 하나 이상의 특수문자가 반드시 포함되어야합니다. ${allowedSpecialCharacters.map(c => `\`${c}\``).join(", ")}`;
 
   if (!/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{9,}$/.test(password))
     return `비밀번호는 반드시 공백없이 9자 이상의 영문자 + 숫자 + 특수문자 조합이어야 합니다.`;
@@ -69,11 +66,7 @@ export const complexity = (password = ""): string | undefined => {
  * @param rule 필드 검사 규칙
  * @returns string: 오류메시지 | null: 정의되지 않은 오류 | void: 오류없음
  */
-export const dataInvalidate = (
-  source: Record<string, unknown>,
-  key: string,
-  rule?: DataRule
-): string | null | void => {
+export const dataInvalidate = (source: Record<string, unknown>, key: string, rule?: DataRule): string | null | void => {
   if (!rule) return;
 
   const { required, validator, maxLength, min, max } = rule ?? {};
@@ -82,8 +75,7 @@ export const dataInvalidate = (
   if (required && isEmpty(value)) return "필수 항목 입니다.";
 
   if ("string" === typeof value) {
-    if (maxLength && maxLength < value.length)
-      return `"${maxLength}" 글자보다 많이 입력할 수 없습니다.: "${value.length - maxLength}" 초과`;
+    if (maxLength && maxLength < value.length) return `"${maxLength}" 글자보다 많이 입력할 수 없습니다.: "${value.length - maxLength}" 초과`;
   }
 
   if ("number" === typeof value) {
@@ -111,10 +103,7 @@ export const dataInvalidate = (
  * @param rules 검사 규칙
  * @returns Record<키, string: 오류메시지 | null: 정의되지 않은 오류 | void: 오류없음>
  */
-export const recordInvalidate = (
-  record: Record<string, unknown>,
-  rules?: DataRules
-): RecordInvalidateDescription => {
+export const recordInvalidate = (record: Record<string, unknown>, rules?: DataRules): RecordInvalidateDescription => {
   const ruleKeys = Object.keys(rules ?? {});
 
   return ruleKeys.reduce((acc, key) => {
