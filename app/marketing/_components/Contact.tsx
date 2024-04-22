@@ -1,16 +1,5 @@
 import { AccountCircle, Email } from "@mui/icons-material";
-import {
-  Box,
-  Card,
-  FormControl,
-  Grid,
-  Input,
-  InputAdornment,
-  InputLabel,
-  Button,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Card, FormControl, Grid, Input, InputAdornment, InputLabel, Button, TextField, Typography } from "@mui/material";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { CustomButton } from "@/components/Button";
@@ -29,11 +18,7 @@ const Contact = () => {
           margin: "auto",
         }}
       >
-        <Grid
-          container
-          spacing={1}
-          sx={{ maxWidth: "80vw", flexDirection: { xs: "column-reverse", md: "row" } }}
-        >
+        <Grid container spacing={1} sx={{ maxWidth: "80vw", flexDirection: { xs: "column-reverse", md: "row" } }}>
           <Grid
             item
             xs={12}
@@ -121,13 +106,7 @@ const Contact = () => {
                   }
                 ></Input>
               </FormControl>
-              <TextField
-                label="What can I help you with?"
-                multiline
-                variant="outlined"
-                rows={5}
-                sx={{ width: "100%", mt: 3 }}
-              />
+              <TextField label="What can I help you with?" multiline variant="outlined" rows={5} sx={{ width: "100%", mt: 3 }} />
               <Box sx={{ mt: 5 }}>
                 <CustomButton size="large" cvariant="default">
                   Submit

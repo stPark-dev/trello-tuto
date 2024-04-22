@@ -23,7 +23,32 @@ import { useRecoilState } from "recoil";
 import { DrawerAtom } from "./state/Drawer";
 import Link from "next/link";
 import { CssBaseline, IconButton, InputBase, ListItem, ListItemButton, ListItemIcon, ListItemText, Menu, Tooltip, useMediaQuery } from "@mui/material";
-import { CloseSharp, KeyboardDoubleArrowLeftSharp, MenuSharp, TaskAlt, QueryStats, Business, Notifications, Search as SearchIcon, MoreVert, Task, AssignmentReturn, LocationOn, DocumentScanner, Apartment, EventRepeat, Info, Interests, LocalOffer, Person, Shield, CreditCard, AccountBox, ManageAccounts, CircleNotifications } from "@mui/icons-material";
+import {
+  CloseSharp,
+  KeyboardDoubleArrowLeftSharp,
+  MenuSharp,
+  TaskAlt,
+  QueryStats,
+  Business,
+  Notifications,
+  Search as SearchIcon,
+  MoreVert,
+  Task,
+  AssignmentReturn,
+  LocationOn,
+  DocumentScanner,
+  Apartment,
+  EventRepeat,
+  Info,
+  Interests,
+  LocalOffer,
+  Person,
+  Shield,
+  CreditCard,
+  AccountBox,
+  ManageAccounts,
+  CircleNotifications,
+} from "@mui/icons-material";
 import SignOutButton from "../../(nextauth)/_components/SignOutButton";
 import { signOut } from "next-auth/react";
 import Clock from "../Clock";
@@ -35,7 +60,7 @@ interface DrawerProps extends React.PropsWithChildren {
 }
 interface DrawerMenuItem {
   text: string;
-  icon: OverridableComponent<SvgIconTypeMap<{}, "svg">>;
+  icon: OverridableComponent<SvgIconTypeMap<object, "svg">>;
   route: string;
 }
 const Drawer = ({ profile, children }: DrawerProps) => {
@@ -46,12 +71,12 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const settings = [
     {
       mod: "Settings",
-      fnc: () => router.push("/main/settings/personal/profile")
+      fnc: () => router.push("/main/settings/personal/profile"),
     },
     {
       mod: "Logout",
-      fnc: () => signOut({ callbackUrl: "/" })
-    }
+      fnc: () => signOut({ callbackUrl: "/" }),
+    },
   ];
 
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -123,9 +148,8 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     },
   }));
 
-
   const isActive = (pathname: string) => currentPathName.startsWith(pathname);
-  
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const navLinks = [
     { href: "/main/works/all", label: "Works", Icon: TaskAlt, isActive: isActive("/main/works") },
@@ -135,7 +159,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
   const headerHeight = 84;
   const drawerWidth = 360;
-  
+
   const Logos = {
     dark: BrandLogoDark.src,
     light: BrandLogoLight.src,
@@ -164,8 +188,8 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const drawerMode = useMemo(() => drawerState.mode, [drawerState.mode]);
 
   const handleDrawerToggle = () => {
-    console.info("########## Theme: ", theme)
-    setDrawerState((prev) => ({ ...prev, open: !prev.open }))
+    console.info("########## Theme: ", theme);
+    setDrawerState(prev => ({ ...prev, open: !prev.open }));
   };
 
   // Right Drawer
@@ -175,13 +199,12 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     setRightDrawerOpen(!rightDrawerOpen);
   };
 
-  const handleOnClose = (e: unknown, reason: "escapeKeyDown" | "backdropClick") =>
-    "backdropClick" === reason && handleDrawerToggle();
+  const handleOnClose = (e: unknown, reason: "escapeKeyDown" | "backdropClick") => "backdropClick" === reason && handleDrawerToggle();
 
   useEffect(() => {
     if (!md) return;
 
-    setDrawerState((prev) => ({ ...prev, submenu: {} }));
+    setDrawerState(prev => ({ ...prev, submenu: {} }));
   }, [md, setDrawerState]);
 
   useEffect(() => {
@@ -196,15 +219,13 @@ const Drawer = ({ profile, children }: DrawerProps) => {
   const drawerMenuItems: { [key: string]: DrawerMenuItem[] } = {
     "/main/works": [
       { text: "All Works", icon: Task, route: "/main/works/all" },
-      { text: "Assigned to me", icon: AssignmentReturn, route: "/main/works/views" }
+      { text: "Assigned to me", icon: AssignmentReturn, route: "/main/works/views" },
     ],
-    "/main/insights": [
-      { text: "Location", icon: LocationOn, route: "/main/insights/location" }
-    ],
+    "/main/insights": [{ text: "Location", icon: LocationOn, route: "/main/insights/location" }],
     "/main/assets": [
       { text: "Buildings", icon: Apartment, route: "/main/assets/buildings" },
       { text: "Documents", icon: DocumentScanner, route: "/main/assets/documents" },
-      { text: "Recurring Works", icon: EventRepeat, route: "/main/assets/recurring-works" }
+      { text: "Recurring Works", icon: EventRepeat, route: "/main/assets/recurring-works" },
     ],
     "/main/assets/buildings/[buildingId]": [
       { text: "Information", icon: Info, route: "/main/assets/buildings/[buildingId]/location" },
@@ -219,8 +240,8 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     "/main/settings/personal": [
       { text: "Profile", icon: AccountBox, route: "/main/settings/personal/profile" },
       { text: "Account Settings", icon: ManageAccounts, route: "/main/settings/personal/account" },
-      { text: "Notification Settings", icon: CircleNotifications, route: "/main/settings/personal/notifications" }
-    ]
+      { text: "Notification Settings", icon: CircleNotifications, route: "/main/settings/personal/notifications" },
+    ],
   };
   const getCurrentMenuItems = (currentPath: string): DrawerMenuItem[] => {
     const pathSegments = currentPath.split("/");
@@ -235,7 +256,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
         // 현재 경로가 동적 경로와 일치하는 경우, 해당하는 메뉴 항목을 반환합니다.
         return drawerMenuItems[dynamicKey].map(item => ({
           ...item,
-          route: item.route.replace("[buildingId]", buildingId)
+          route: item.route.replace("[buildingId]", buildingId),
         }));
       }
     }
@@ -247,7 +268,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
     }
     return [];
   };
-
 
   const currentMenuItems = useMemo(() => getCurrentMenuItems(currentPathName), [currentPathName]);
 
@@ -274,23 +294,12 @@ const Drawer = ({ profile, children }: DrawerProps) => {
           }}
           onClick={() => fileInputRef.current?.click()}
         >
-          <input
-            type="file"
-            ref={fileInputRef}
-            onChange={handleLogoChange}
-            style={{ display: "none" }}
-            accept="image/*"
-          />
-          <Image
-            src={logoImage}
-            width={Math.ceil(360 / 2)}
-            height={Math.ceil(56 / 2)}
-            alt="Brand Logo"
-          />
+          <input type="file" ref={fileInputRef} onChange={handleLogoChange} style={{ display: "none" }} accept="image/*" />
+          <Image src={logoImage} width={Math.ceil(360 / 2)} height={Math.ceil(56 / 2)} alt="Brand Logo" />
         </Box>
 
         {!md && (
-          <IconButton sx={{ flexShrink: 0, }} onClick={handleDrawerToggle}>
+          <IconButton sx={{ flexShrink: 0 }} onClick={handleDrawerToggle}>
             <CloseSharp />
           </IconButton>
         )}
@@ -299,14 +308,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
       <Box component="nav">
         {isMobile && (
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Tabs
-              value={tabValue}
-              onChange={handleTabChange}
-              aria-label="basic tabs example"
-              variant="fullWidth"
-              textColor="primary"
-              indicatorColor="primary"
-            >
+            <Tabs value={tabValue} onChange={handleTabChange} aria-label="basic tabs example" variant="fullWidth" textColor="primary" indicatorColor="primary">
               <Tab label="Works" onClick={() => router.push("/main/works/all")} />
               <Tab label="Insights" onClick={() => router.push("/main/insights")} />
               <Tab label="Assets" onClick={() => router.push("/main/assets/buildings")} />
@@ -315,13 +317,17 @@ const Drawer = ({ profile, children }: DrawerProps) => {
         )}
         <Box sx={{ width: 250 }} role="presentation">
           <List sx={{ ml: 3, mt: 1 }}>
-            <Typography fontWeight="bold" variant="h4" sx={{ p: 2 }}>{/* Here */}</Typography>
+            <Typography fontWeight="bold" variant="h4" sx={{ p: 2 }}>
+              {/* Here */}
+            </Typography>
             {currentMenuItems.map((menuItem: DrawerMenuItem, index: number) => (
               <ListItem key={index} disablePadding>
-                <ListItemButton onClick={() => {
-                  if (isMobile) handleDrawerToggle();
-                  router.push(menuItem.route)
-                }}>
+                <ListItemButton
+                  onClick={() => {
+                    if (isMobile) handleDrawerToggle();
+                    router.push(menuItem.route);
+                  }}
+                >
                   <ListItemIcon>
                     <menuItem.icon />
                   </ListItemIcon>
@@ -376,13 +382,7 @@ const Drawer = ({ profile, children }: DrawerProps) => {
       >
         <Toolbar disableGutters sx={{ px: 4 }}>
           <Toggler />
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerToggle}
-            size="medium"
-            sx={{ mr: 1 }}
-          >
+          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle} size="medium" sx={{ mr: 1 }}>
             {drawerIsOpen ? <KeyboardDoubleArrowLeftSharp /> : <MenuSharp />}
           </IconButton>
 
@@ -420,12 +420,14 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                 }}
               >
                 <Link href={href} passHref>
-                  <span style={{
-                    textDecoration: "none",
-                    color: theme.palette.mode === "light" ? "#004d40" : "#00BF9F",
-                    display: "inline-flex",
-                    alignItems: "center"
-                  }}>
+                  <span
+                    style={{
+                      textDecoration: "none",
+                      color: theme.palette.mode === "light" ? "#004d40" : "#00BF9F",
+                      display: "inline-flex",
+                      alignItems: "center",
+                    }}
+                  >
                     <Icon sx={{ marginRight: 1 }} />
                     {label}
                   </span>
@@ -436,19 +438,16 @@ const Drawer = ({ profile, children }: DrawerProps) => {
 
           <Box flexGrow={1} />
           <Box sx={{ display: "flex", alignItems: "center", justifyContent: "flex-end", gap: 1 }}>
-            {md && <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="검색어를 입력하세요"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-            }
+            {md && (
+              <Search>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase placeholder="검색어를 입력하세요" inputProps={{ "aria-label": "search" }} />
+              </Search>
+            )}
 
-            {drawerState.headerToolbox &&
-              getToolbox(drawerState.headerToolbox, drawerState.headerToolboxProps)}
+            {drawerState.headerToolbox && getToolbox(drawerState.headerToolbox, drawerState.headerToolboxProps)}
 
             {profile && profile}
 
@@ -484,8 +483,14 @@ const Drawer = ({ profile, children }: DrawerProps) => {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    {settings.map((setting) => (
-                      <MenuItem key={setting.mod} onClick={() => { setting.fnc(); handleCloseUserMenu(); }}>
+                    {settings.map(setting => (
+                      <MenuItem
+                        key={setting.mod}
+                        onClick={() => {
+                          setting.fnc();
+                          handleCloseUserMenu();
+                        }}
+                      >
                         <Typography textAlign="center">{setting.mod}</Typography>
                       </MenuItem>
                     ))}
@@ -513,19 +518,24 @@ const Drawer = ({ profile, children }: DrawerProps) => {
         sx={{
           "& .MuiDrawer-paper": {
             width: drawerWidth * 1.5,
-            marginTop: `${headerHeight}px`
+            marginTop: `${headerHeight}px`,
           },
         }}
       >
         <Box>
-          <Typography variant="subtitle2" fontWeight="bold">Notification</Typography>
-
+          <Typography variant="subtitle2" fontWeight="bold">
+            Notification
+          </Typography>
         </Box>
         <Box>
-          <Typography variant="subtitle2" fontWeight="bold">Activities</Typography>
+          <Typography variant="subtitle2" fontWeight="bold">
+            Activities
+          </Typography>
         </Box>
         <Box>
-          <Typography variant="subtitle2" fontWeight="bold">빠른 연락처</Typography>
+          <Typography variant="subtitle2" fontWeight="bold">
+            빠른 연락처
+          </Typography>
         </Box>
       </MuiDrawer>
       <MuiDrawer
@@ -576,6 +586,6 @@ const Drawer = ({ profile, children }: DrawerProps) => {
         </Box>
       </Box>
     </Box>
-  )
-}
+  );
+};
 export default Drawer;

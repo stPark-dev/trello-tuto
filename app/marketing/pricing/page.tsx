@@ -100,16 +100,12 @@ const PricingPage = () => {
               >
                 Pricing
               </Typography>
-              <Typography sx={{ mt: 4, fontSize: "1.125rem", color: "#262626" }}>
-                We believe Teamvolt should be accessible to all companies.
-              </Typography>
+              <Typography sx={{ mt: 4, fontSize: "1.125rem", color: "#262626" }}>We believe Teamvolt should be accessible to all companies.</Typography>
             </Box>
           </Box>
 
           <Box sx={{ display: "flex", flexGrow: 1, alignItems: "center" }}>
-            <Box
-              sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: "1.5rem" }}
-            >
+            <Box sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, gap: "1.5rem" }}>
               <Card
                 sx={{
                   display: "flex",
@@ -119,23 +115,14 @@ const PricingPage = () => {
                   flex: { md: "1 1 0%" },
                 }}
               >
-                <Grid
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  direction="column"
-                  rowSpacing={1}
-                  columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                >
+                <Grid container justifyContent="center" alignItems="center" direction="column" rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                   <Grid item xs={12}>
                     <Typography variant="h4" fontWeight={700}>
                       Basic
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Box
-                      sx={{ display: "flex", mb: 3, textAlign: "center", alignItems: "flex-end" }}
-                    >
+                    <Box sx={{ display: "flex", mb: 3, textAlign: "center", alignItems: "flex-end" }}>
                       <Typography variant="h3" color="primary">
                         $20
                       </Typography>
@@ -180,23 +167,14 @@ const PricingPage = () => {
                   flex: { md: "1 1 0%" },
                 }}
               >
-                <Grid
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  direction="column"
-                  rowSpacing={1}
-                  columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                >
+                <Grid container justifyContent="center" alignItems="center" direction="column" rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                   <Grid item xs={12}>
                     <Typography variant="h4" fontWeight={700}>
                       Essential
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Box
-                      sx={{ display: "flex", mb: 3, textAlign: "center", alignItems: "flex-end" }}
-                    >
+                    <Box sx={{ display: "flex", mb: 3, textAlign: "center", alignItems: "flex-end" }}>
                       <Typography variant="h3" color="primary">
                         $40
                       </Typography>
@@ -241,23 +219,14 @@ const PricingPage = () => {
                   flex: { md: "1 1 0%" },
                 }}
               >
-                <Grid
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  direction="column"
-                  rowSpacing={1}
-                  columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                >
+                <Grid container justifyContent="center" alignItems="center" direction="column" rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                   <Grid item xs={12}>
                     <Typography variant="h4" fontWeight={700}>
                       Premium
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
-                    <Box
-                      sx={{ display: "flex", mb: 3, textAlign: "center", alignItems: "flex-end" }}
-                    >
+                    <Box sx={{ display: "flex", mb: 3, textAlign: "center", alignItems: "flex-end" }}>
                       <Typography variant="h3" color="primary">
                         $60
                       </Typography>
@@ -337,11 +306,8 @@ const PricingPage = () => {
                   </StyledTableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
-                    <StyledTableRow
-                      key={row.name}
-                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                    >
+                  {rows.map(row => (
+                    <StyledTableRow key={row.name} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
                       <StyledTableCell component="th" scope="row">
                         {row.name}
                       </StyledTableCell>

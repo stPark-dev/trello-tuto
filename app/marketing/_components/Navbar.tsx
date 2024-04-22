@@ -36,11 +36,7 @@ export const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-    if (
-      event.type === "keydown" &&
-      ((event as React.KeyboardEvent).key === "Tab" ||
-        (event as React.KeyboardEvent).key === "Shift")
-    ) {
+    if (event.type === "keydown" && ((event as React.KeyboardEvent).key === "Tab" || (event as React.KeyboardEvent).key === "Shift")) {
       return;
     }
 
@@ -48,12 +44,7 @@ export const Navbar = () => {
   };
   const mobileMenu = (
     <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-      <Box
-        sx={{ width: 250 }}
-        role="presentation"
-        onClick={toggleDrawer(false)}
-        onKeyDown={toggleDrawer(false)}
-      >
+      <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
         {/* 여기에 모바일 메뉴 항목을 넣습니다 */}
       </Box>
     </Drawer>
@@ -73,7 +64,7 @@ export const Navbar = () => {
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, type: string) => {
     setAnchorEl(event.currentTarget);
     setMenuType(type);
-    setRotate((prev) => ({ ...prev, [type]: true }));
+    setRotate(prev => ({ ...prev, [type]: true }));
   };
 
   const handleMenuClose = () => {
@@ -173,12 +164,7 @@ export const Navbar = () => {
             }}
           >
             <Logo />
-            <Button
-              color="inherit"
-              component="span"
-              onClick={(e) => handleMenuOpen(e, "Industries")}
-              sx={{ marginLeft: 2 }}
-            >
+            <Button color="inherit" component="span" onClick={e => handleMenuOpen(e, "Industries")} sx={{ marginLeft: 2 }}>
               Industries{" "}
               <KeyboardArrowDownIcon
                 sx={{
@@ -195,7 +181,7 @@ export const Navbar = () => {
             >
               {renderMenuItems()}
             </Menu>
-            <Button color="inherit" component="span" onClick={(e) => handleMenuOpen(e, "Solution")}>
+            <Button color="inherit" component="span" onClick={e => handleMenuOpen(e, "Solution")}>
               Solution{" "}
               <KeyboardArrowDownIcon
                 sx={{

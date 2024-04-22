@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import localFont from "next/font/local";
@@ -13,7 +13,6 @@ import CarouselComponent from "./_components/Carousel";
 import Contact from "./_components/Contact";
 import EnterprisesComponent from "./_components/Enterprises";
 import ReasonGridComponent from "./_components/ReasonGrid";
-
 
 const headingFont = localFont({
   src: "../../public/fonts/font.woff2",
@@ -91,9 +90,7 @@ const MarketingPage = () => {
               textTransform: "uppercase",
             }}
           >
-            <WorkspacePremiumIcon
-              style={{ height: "1.5rem", width: "1.5rem", marginRight: "0.5rem" }}
-            />
+            <WorkspacePremiumIcon style={{ height: "1.5rem", width: "1.5rem", marginRight: "0.5rem" }} />
             No.1 Asset management
           </Box>
           <Box
@@ -134,8 +131,8 @@ const MarketingPage = () => {
             mx: "auto",
           }}
         >
-          Collaborate, manage projects, and reach new productivity peaks. From high rises to the home
-          office, the way your team works is unique - accomplish it all with TeamVolt.
+          Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique - accomplish it
+          all with TeamVolt.
         </Box>
         <CustomButton size="small" cvariant="teamvolt" sx={{ my: 5 }}>
           <Link href="/sign-in2" style={{ textDecoration: "none", color: "#FAFAFA" }}>
@@ -157,12 +154,7 @@ const MarketingPage = () => {
         >
           {/* Intro */}
 
-          <motion.div
-            initial="offscreen"
-            whileInView="onscreen"
-            viewport={{ once: true, amount: 0.5 }}
-            variants={textVariants}
-          >
+          <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.5 }} variants={textVariants}>
             <Box sx={{ mt: 5 }}>
               <Box sx={{ mb: 3, px: { sm: 3, lg: 4 } }}>
                 <Box sx={{ mx: "2rem", maxWidth: "42rem", textAlign: "center" }}>
@@ -244,9 +236,7 @@ const MarketingPage = () => {
                     >
                       Step 1
                     </Box>
-                    <span style={{ fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600 }}>
-                      Sign up for a Free Account
-                    </span>
+                    <span style={{ fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600 }}>Sign up for a Free Account</span>
                   </Box>
                 </Box>
                 <Box component="li" sx={{ flex: { md: "1 1 0%" } }}>
@@ -283,8 +273,7 @@ const MarketingPage = () => {
                       Step 2
                     </span>
                     <span style={{ fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600 }}>
-                      Make a <span style={{ color: "rgb(219 190 107)" }}>Assets</span> &{" "}
-                      <span style={{ color: "rgb(219 190 107)" }}>Users</span>
+                      Make a <span style={{ color: "rgb(219 190 107)" }}>Assets</span> & <span style={{ color: "rgb(219 190 107)" }}>Users</span>
                     </span>
                   </Box>
                 </Box>
@@ -321,9 +310,7 @@ const MarketingPage = () => {
                     >
                       Step 3
                     </span>
-                    <span style={{ fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600 }}>
-                      Start Your coorperation
-                    </span>
+                    <span style={{ fontSize: "1.25rem", lineHeight: "1.75rem", fontWeight: 600 }}>Start Your coorperation</span>
                   </Box>
                 </Box>
               </Box>
@@ -331,12 +318,7 @@ const MarketingPage = () => {
           </motion.div>
         </Box>
 
-        <motion.div
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.5 }}
-          variants={imgVariants1}
-        >
+        <motion.div initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.5 }} variants={imgVariants1}>
           <Box
             id="leftImg"
             sx={{

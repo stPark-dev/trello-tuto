@@ -5,13 +5,12 @@ import KakaoProvider from "next-auth/providers/kakao";
 import NaverProvider from "next-auth/providers/naver";
 import { NEXTAUTH_PAGES } from "@/types/constants";
 
-
 export const authOptions: AuthOptions = {
   providers: [
     GitHubProvider({
-        name: "GitHub",
-        clientId: process.env.GITHUB_ID as string,
-        clientSecret: process.env.GITHUB_SECRET as string,
+      name: "GitHub",
+      clientId: process.env.GITHUB_ID as string,
+      clientSecret: process.env.GITHUB_SECRET as string,
     }),
     GoogleProvider({
       name: "Google",
@@ -31,14 +30,14 @@ export const authOptions: AuthOptions = {
   ],
   pages: NEXTAUTH_PAGES,
   callbacks: {
-    async jwt({token, account}) {
-      if(account) token.provider = account.provider;
+    async jwt({ token, account }) {
+      if (account) token.provider = account.provider;
       return token;
     },
     async session({ session, token }) {
-      console.info(token)
-      return session
-    }
+      console.info(token);
+      return session;
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
 };

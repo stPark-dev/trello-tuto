@@ -8,13 +8,13 @@ const SignOutButton = () => {
       onClick={() => signOut({ callbackUrl: "/" })}
       type="button"
       sx={{
-        px: 2, 
+        px: 2,
         py: 1,
-        color: "white", 
+        color: "white",
         bgcolor: "grey",
-        '&:hover': {
+        "&:hover": {
           bgcolor: "grey.500",
-        }
+        },
       }}
     >
       {"Sign out"}

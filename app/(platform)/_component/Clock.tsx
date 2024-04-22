@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Box, useTheme } from "@mui/material";
@@ -29,10 +29,8 @@ const Clock = () => {
 
   return (
     <Box>
-      <Typography sx={{ color: theme.palette.mode === "light" ? "#5C5C5C" : "#F0F0F0", fontSize: { xs: 12, md: 16 } }} >
-        {formattedTime}
-      </Typography>
-    </Box >
+      <Typography sx={{ color: theme.palette.mode === "light" ? "#5C5C5C" : "#F0F0F0", fontSize: { xs: 12, md: 16 } }}>{formattedTime}</Typography>
+    </Box>
   );
 };
 

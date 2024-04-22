@@ -12,9 +12,11 @@ const SignInPage = async () => {
     redirect("/main/works/all");
   } else {
     return (
-      <Box sx={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", alignItems: "cneter", justifyContent: "center", textAlign: "center" }}>
+      <Box
+        sx={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", alignItems: "cneter", justifyContent: "center", textAlign: "center" }}
+      >
         <Box sx={{ fontSize: "50px", mb: 5 }}>NextAuth.js Sign In Page</Box>
-        {NEXTAUTH_PROVIDERS.map((provider) => (
+        {NEXTAUTH_PROVIDERS.map(provider => (
           <SignInButton key={provider} provider={provider} />
         ))}
       </Box>
