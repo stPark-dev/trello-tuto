@@ -3,6 +3,7 @@
 import { Logo } from "@/components/Logo";
 import { Box, Typography } from "@mui/material";
 import { CustomButton } from "@/components/Button";
+import Image from "next/image";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,11 +13,13 @@ export const Footer = () => {
         position: "fixed",
         bottom: 0,
         width: "100vw",
+        height: "6.5rem",
         p: 2,
-        borderTop: 1,
-        borderTopColor: "divider",
-        backgroundColor: "background.paper",
+        backgroundColor: "#2CBBCF",
         zIndex: 9999,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
       <Box
@@ -30,8 +33,17 @@ export const Footer = () => {
           width: "100%",
         }}
       >
-        <Logo />
+        <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+          <Image alt="head" src="/landing/Teamvolt/logo_head.png" width="50" height="50" />
+          <Typography variant="h3" fontFamily="kleague" color="#ffffff">
+            팀볼투
+          </Typography>
+          <Typography variant="h5" fontFamily="kleague" color="#ffffff">
+            TEAMVOLT
+          </Typography>
+        </Box>
         <Typography
+          fontFamily="kleague"
           sx={{
             display: { xs: "none", sm: "block" },
             fontSize: "0.75rem",

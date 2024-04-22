@@ -1,27 +1,21 @@
-"use client"
-import { Box } from "@mui/material";
-import { Footer } from "./components/Footer";
-import { Navbar } from "./components/Navbar";
+"use client";
 
 import { RecoilRoot, RecoilEnv } from "recoil";
+import { Inter } from "next/font/google";
+import { ThemeProvider } from "@/provider/ThemeProvider";
+const inter = Inter({ subsets: ["latin"] });
 RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
 
-const MarketingLayout = ({
-  children
-}: {
-  children: React.ReactNode;
-}) => {
+export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <RecoilRoot>
-      <Box>
-        <Navbar />
-        <Box mt={"3.5rem"}>
-          {children}
-        </Box>
-        <Footer />
-      </Box>
-    </RecoilRoot>
+    <html>
+      <body className={inter.className} style={{ margin: 0 }}>
+        <main>
+          <RecoilRoot>
+            <ThemeProvider>{children}</ThemeProvider>
+          </RecoilRoot>
+        </main>
+      </body>
+    </html>
   );
-};
-
-export default MarketingLayout;
+}

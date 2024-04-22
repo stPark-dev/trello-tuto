@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
 import { siteConfig } from "@/config/site";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import AuthSession from '@/components/AuthSession';
+import AuthSession from "@/components/AuthSession";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,9 +31,7 @@ export default function RootLayout({
     <html lang="en">
       <title>Teamvolt</title>
       <body className={inter.className}>
-        <AuthSession>
-          {children}
-        </AuthSession>
+        <AuthSession>{children}</AuthSession>
       </body>
     </html>
   );

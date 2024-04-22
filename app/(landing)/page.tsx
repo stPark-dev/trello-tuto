@@ -1,12 +1,19 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import { Hero } from "./components/Hero";
+import { Box } from "@mui/material";
+import { HeroDesc } from "./components/HeroDesc";
 
 const LandingMainPage = () => {
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box>sdasds</Box>
+      <Box sx={{ display: "flex", flexDirection: "column", maxHeight: "100vh", overflow: "auto" }}>
+        <Navbar />
+        <Hero />
+        <HeroDesc />
+        <Footer />
       </Box>
     </>
   );

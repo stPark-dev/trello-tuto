@@ -12,19 +12,19 @@ export const Logo = () => {
       <Link href="/" underline="none">
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
             gap: 1,
             opacity: 0.75,
-            '&:hover': {
+            "&:hover": {
               opacity: 1,
             },
-            transition: 'opacity 0.3s',
-            cursor: 'pointer',
+            transition: "opacity 0.3s",
+            cursor: "pointer",
           }}
         >
-            <Image alt="logo" src="/landing/logo_main.png" width={Math.ceil(1664 / 10)} height={Math.ceil(217 / 10)} />
+          <Image alt="logo" src="/landing/logo_main_light.png" width={Math.ceil(1664 / 10)} height={Math.ceil(217 / 10)} />
         </Box>
       </Link>
     </>
