@@ -8,7 +8,7 @@ import { Box } from "@mui/material";
 const LandingMainPage = () => {
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", overflowY: "auto" }}>
         <Navbar />
         <Hero />
         <Footer />
