@@ -114,7 +114,7 @@ export const Navbar = () => {
   return (
     <>
       <Box sx={{ backgroundColor: "#2CBBCF", height: "3rem", display: "flex", justifyContent: "center", alignItems: "center" }}>
-        <Typography fontWeight="bold">팀볼트 도입이 고민이라면? 재앙서만 먼저 받아보세요</Typography>
+        <Typography fontWeight="bold">팀볼트 도입이 고민이라면? 제안서만 먼저 받아보세요</Typography>
         <Button variant="text" sx={{ mx: 3, fontWeight: "500", color: "#000000", textDecoration: "underline", ":hover": { textDecoration: "underline" } }}>
           더 알아보기
         </Button>
