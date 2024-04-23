@@ -9,8 +9,7 @@ export const Footer = () => {
   return (
     <Box
       sx={{
-        width: "100vw",
-        height: "5.5rem",
+        height: "6rem",
         p: 3,
         backgroundColor: "#2CBBCF",
         zIndex: 9999,

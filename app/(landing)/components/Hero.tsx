@@ -4,8 +4,10 @@ import Image from "next/image";
 export const Hero = () => {
   return (
     <>
-      <Box sx={{ position: "relative", width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
-        <Image src="/landing/Teamvolt/Asset 6@4x.png" alt="heroimg" width={1920} height={800} />
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Box sx={{ position: "relative", width: "100vw", height: "100vh" }}>
+          <Image src="/landing/Teamvolt/hero_img.png" alt="heroimg" fill />
+        </Box>
         <Box sx={{ display: "flex", flexDirection: "row", backgroundColor: "#444444", justifyContent: "center", alignItems: "center", gap: 8, p: 10 }}>
           <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center", py: 5 }}>
             <Typography variant="h2" fontWeight="bold">

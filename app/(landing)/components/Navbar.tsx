@@ -122,7 +122,7 @@ export const Navbar = () => {
       <Box
         sx={{
           height: "3.5rem",
-          px: 20,
+          px: 10,
           borderBottomWidth: "1px",
           backgroundColor: "rgb(255 255 255)",
           display: "flex",
