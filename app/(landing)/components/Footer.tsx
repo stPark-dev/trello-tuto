@@ -1,15 +1,24 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
 import { CustomButton } from "@/components/Button";
+import { Instagram, OpenInNew } from "@mui/icons-material";
+
+import { Box, Divider, Typography } from "@mui/material";
+import { Montserrat } from "next/font/google";
 import Image from "next/image";
 
+const textFont = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-montserrat",
+  weight: ["400", "500", "800", "900"],
+});
+
 export const Footer = () => {
-  const currentYear = new Date().getFullYear();
   return (
     <Box
       sx={{
-        height: "6rem",
+        height: "12rem",
         p: 3,
         backgroundColor: "#2CBBCF",
         zIndex: 9999,
@@ -20,13 +29,13 @@ export const Footer = () => {
     >
       <Box
         sx={{
+          width: "100%",
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-between",
+          justifyContent: "space-around",
           alignItems: "center",
-          maxWidth: "lg",
+          maxWidth: "xl",
           mx: "auto",
-          width: "100%",
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
@@ -38,33 +47,46 @@ export const Footer = () => {
             TEAMVOLT
           </Typography>
         </Box>
-        <Typography
-          fontFamily="kleague"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            fontSize: "0.75rem",
-            mt: { sm: 2 },
-          }}
-        >
-          © {currentYear}. Gractor, Inc. All rights reserved.
-        </Typography>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: { xs: "row", sm: "row" },
-            alignItems: "center",
-            justifyContent: "center",
-            "& > * + *": {
-              ml: { sm: 2 },
-            },
-          }}
-        >
-          <CustomButton size="small" cvariant="ghost" sx={{ mx: 2 }}>
-            Privacy Policy
-          </CustomButton>
-          <CustomButton size="small" cvariant="ghost" sx={{ mx: 2 }}>
-            Terms of Service
-          </CustomButton>
+        <Box sx={{ display: "flex", flexDirection: "column", fontFamily: "Noto Sans KR", color: "#C2F1F8" }}>
+          <Typography sx={{ fontSize: "1rem", fontWeight: 300, lineHeight: "1.6rem" }}>팀볼트 주식회사 그렉터</Typography>
+          <Typography sx={{ fontSize: "1rem", fontWeight: 300, lineHeight: "1.6rem" }}>대표이사. 김영신</Typography>
+          <Typography sx={{ fontSize: "1rem", fontWeight: 300, lineHeight: "1.6rem" }}>
+            서울 송파구 올림픽로 82 현대빌딩 3층 | 사업자등록 123-12-123456 [사업자등록확인]
+          </Typography>
+          <Divider sx={{ borderColor: "#ffffff", borderStyle: "dashed", my: 2 }} />
+          <Typography sx={{ fontSize: "1rem", fontWeight: 350, lineHeight: "1.6rem" }}>
+            이용약관 | 개인정보처리방침 | Copyright © gractor. All Rights Reserved
+          </Typography>
+        </Box>
+        <Box sx={{ display: "flex", flexDirection: "column", textAlign: "right", color: "#ffffff" }}>
+          <Typography className={textFont.className} sx={{ fontSize: "1.25rem", lineHeight: "1.5rem" }}>
+            유선문의 (오전09:00~오후06:00)
+          </Typography>
+          <Typography className={textFont.className} sx={{ fontSize: "1.625rem", fontWeight: 700, lineHeight: "1.95rem" }}>
+            010-1234-5678
+          </Typography>
+          <Typography className={textFont.className} sx={{ fontSize: "1.625rem", fontWeight: 700, lineHeight: "1.95rem" }}>
+            카카오톡 team7942
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              fontFamily: "Noto Sans KR",
+              p: 2,
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "0.625rem",
+            }}
+          >
+            <CustomButton cvariant="outline" sx={{ borderRadius: "1.875rem" }}>
+              <Instagram sx={{ mr: 1 }} /> 인스타그램
+            </CustomButton>
+            <CustomButton cvariant="outline" sx={{ borderRadius: "1.875rem" }}>
+              <OpenInNew sx={{ mr: 1 }} />
+              그렉터
+            </CustomButton>
+          </Box>
         </Box>
       </Box>
     </Box>
