@@ -3,7 +3,6 @@ import { Box, Card, FormControl, Grid, Input, InputAdornment, InputLabel, Button
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { CustomButton } from "@/components/Button";
-
 const contactFont = Montserrat({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400"],
