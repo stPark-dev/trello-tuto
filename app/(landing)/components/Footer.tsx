@@ -1,6 +1,5 @@
 "use client";
 
-import { Logo } from "@/components/Logo";
 import { Box, Typography } from "@mui/material";
 import { CustomButton } from "@/components/Button";
 import Image from "next/image";
@@ -10,10 +9,8 @@ export const Footer = () => {
   return (
     <Box
       sx={{
-        position: "fixed",
-        bottom: 0,
         width: "100vw",
-        height: "6.5rem",
+        height: "5.5rem",
         p: 2,
         backgroundColor: "#2CBBCF",
         zIndex: 9999,

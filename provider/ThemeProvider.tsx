@@ -11,6 +11,5 @@ export const ThemeProvider = ({ children }: React.PropsWithChildren) => {
 
   const theme = useMemo(() => createTheme(getDesignTokens(themeState)), [themeState]);
 
-  console.info(theme);
   return <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>;
 };
