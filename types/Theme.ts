@@ -19,7 +19,7 @@ export const drawerMiniWidth = 50;
 export const rowHeight = 30;
 
 const typography: TypographyOptions = {
-  fontSize: 11,
+  fontSize: 15,
   fontFamily: ["Roboto", "Arial", '"Noto Sans KR"', "sans-serif", "kleague"].join(", "),
 };
 
@@ -190,9 +190,15 @@ const defaultComponents: Components<Omit<Theme, "components">> = {
   MuiButton: {
     defaultProps: { size: "small" },
     styleOverrides: {
+      sizeLarge: {
+        fontSize: 20,
+        minWidth: "200px",
+        lineHeight: 2.5,
+        padding: "4px 20px",
+      },
       sizeMedium: {
         minWidth: "52px",
-        lineHeight: 1.5,
+        lineHeight: 2,
         padding: "3px 15px",
       },
       sizeSmall: {

@@ -50,8 +50,10 @@ export const Navbar = () => {
   );
 
   const [rotate, setRotate] = useState<{ [key: string]: boolean }>({
-    Industries: false,
-    Solution: false,
+    Introduce: false,
+    CustomerCase: false,
+    Manual: false,
+    CustomerCenter: false,
   });
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [menuType, setMenuType] = useState<string>("");
@@ -59,18 +61,25 @@ export const Navbar = () => {
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, type: string) => {
     setAnchorEl(event.currentTarget);
     setMenuType(type);
-    setRotate(prev => ({ ...prev, [type]: true }));
+    setRotate(prev => ({
+      ...{
+        Introduce: false,
+        CustomerCase: false,
+        Manual: false,
+      },
+      [type]: true,
+    }));
   };
 
   const handleMenuClose = () => {
     setAnchorEl(null);
     setMenuType("");
-    setRotate({ Industries: false, Solution: false });
+    setRotate({ Introduce: false, CustomerCase: false, Manual: false });
   };
 
   const renderMenuItems = () => {
     switch (menuType) {
-      case "Industries":
+      case "Introduce":
         return [
           <MenuItem key="maintenance">
             <ListItemIcon>
@@ -91,7 +100,37 @@ export const Navbar = () => {
             <ListItemText>Cleaning</ListItemText>
           </MenuItem>,
         ];
-      case "Solution":
+      case "CustomerCase":
+        return [
+          <MenuItem key="document">
+            <ListItemIcon>
+              <DescriptionIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Document</ListItemText>
+          </MenuItem>,
+          <MenuItem key="asset">
+            <ListItemIcon>
+              <StorageIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Asset</ListItemText>
+          </MenuItem>,
+        ];
+      case "Manual":
+        return [
+          <MenuItem key="document">
+            <ListItemIcon>
+              <DescriptionIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Document</ListItemText>
+          </MenuItem>,
+          <MenuItem key="asset">
+            <ListItemIcon>
+              <StorageIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Asset</ListItemText>
+          </MenuItem>,
+        ];
+      case "CustomerCenter":
         return [
           <MenuItem key="document">
             <ListItemIcon>
@@ -160,35 +199,60 @@ export const Navbar = () => {
               }}
             >
               <Logo />
-              <Button color="inherit" component="span" onClick={e => handleMenuOpen(e, "Industries")} sx={{ marginLeft: 2 }}>
-                Industries{" "}
+              <Button color="inherit" component="span" onClick={e => handleMenuOpen(e, "Introduce")} sx={{ marginLeft: 2 }}>
+                서비스 소개{" "}
                 <KeyboardArrowDownIcon
                   sx={{
-                    transform: rotate.Industries ? "rotate(180deg)" : "rotate(0deg)",
+                    transform: rotate.Introduce ? "rotate(180deg)" : "rotate(0deg)",
                     transition: "transform 0.3s ease-in-out",
                   }}
                 />
               </Button>
               <Menu
                 anchorEl={anchorEl}
-                open={Boolean(anchorEl) && menuType === "Industries"}
+                open={Boolean(anchorEl) && menuType === "Introduce"}
                 onClose={handleMenuClose}
                 MenuListProps={{ onMouseLeave: handleMenuClose }}
               >
                 {renderMenuItems()}
               </Menu>
-              <Button color="inherit" component="span" onClick={e => handleMenuOpen(e, "Solution")}>
-                Solution{" "}
+              <Button color="inherit" component="span" onClick={e => handleMenuOpen(e, "CustomerCase")}>
+                고객 사례{" "}
                 <KeyboardArrowDownIcon
                   sx={{
-                    transform: rotate.Solution ? "rotate(180deg)" : "rotate(0deg)",
+                    transform: rotate.CustomerCase ? "rotate(180deg)" : "rotate(0deg)",
                     transition: "transform 0.3s ease-in-out",
                   }}
                 />
               </Button>
               <Menu
                 anchorEl={anchorEl}
-                open={Boolean(anchorEl) && menuType === "Solution"}
+                open={Boolean(anchorEl) && menuType === "CustomerCase"}
+                onClose={handleMenuClose}
+                MenuListProps={{ onMouseLeave: handleMenuClose }}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                {renderMenuItems()}
+              </Menu>
+              <Button color="inherit" component="span" onClick={e => handleMenuOpen(e, "Manual")}>
+                사용 매뉴얼{" "}
+                <KeyboardArrowDownIcon
+                  sx={{
+                    transform: rotate.Manual ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.3s ease-in-out",
+                  }}
+                />
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl) && menuType === "Manual"}
                 onClose={handleMenuClose}
                 MenuListProps={{ onMouseLeave: handleMenuClose }}
                 anchorOrigin={{
@@ -203,10 +267,35 @@ export const Navbar = () => {
                 {renderMenuItems()}
               </Menu>
               <Button color="inherit" component="span">
-                <Link href="/pricing" style={{ textDecoration: "none", color: "#737373" }}>
-                  Pricing
+                <Link href="/marketing/pricing" style={{ textDecoration: "none", color: "#737373" }}>
+                  멤버쉽
                 </Link>
               </Button>
+              <Button color="inherit" component="span" onClick={e => handleMenuOpen(e, "CustomerCenter")}>
+                고객 센터{" "}
+                <KeyboardArrowDownIcon
+                  sx={{
+                    transform: rotate.CustomerCenter ? "rotate(180deg)" : "rotate(0deg)",
+                    transition: "transform 0.3s ease-in-out",
+                  }}
+                />
+              </Button>
+              <Menu
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl) && menuType === "CustomerCenter"}
+                onClose={handleMenuClose}
+                MenuListProps={{ onMouseLeave: handleMenuClose }}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+              >
+                {renderMenuItems()}
+              </Menu>
             </Box>
           )}
 
@@ -221,12 +310,12 @@ export const Navbar = () => {
               justifyContent: { xs: "flex-end" },
             }}
           >
-            <CustomButton size="small" cvariant="outline">
+            <CustomButton size="medium" cvariant="outline">
               <Link href="/sign-in2" style={{ textDecoration: "none", color: "#000000" }}>
                 로그인
               </Link>
             </CustomButton>
-            <CustomButton size="small" cvariant="primary" sx={{ mx: 2 }}>
+            <CustomButton size="medium" cvariant="primary" sx={{ mx: 2 }}>
               <Link href="/sign-in2" style={{ textDecoration: "none", color: "#FAFAFA" }}>
                 체험 시작하기
               </Link>

@@ -1,3 +1,4 @@
+import { CustomButton } from "@/components/Button";
 import { Box, Divider, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -7,6 +8,23 @@ export const Hero = () => {
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Box sx={{ position: "relative", width: "100vw", height: "100vh" }}>
           <Image src="/landing/Teamvolt/hero_img.png" alt="heroimg" fill />
+          <Box sx={{ position: "absolute", top: "40%", left: "25%", transform: "translate(-50%, -50%)", textAlign: "left", color: "#000000" }}>
+            <Typography variant="h3" component="h1" fontWeight="bold">
+              혁신적인 현업 시스템으로 업무하는
+            </Typography>
+            <Typography variant="h3" component="h1" fontWeight="bold">
+              스마트 자산 관리 솔루션
+            </Typography>
+            <Typography variant="body1">팀볼트는 나와 나의 자산을 혁신으로 연결 해 주는, 새로운 빅 데이터 현업 프로세스를 만들어 갑니다.</Typography>
+            <Box sx={{ my: 10, ml: 10, display: "flex", flexDirection: "row", gap: 5 }}>
+              <CustomButton cvariant="primary" size="large" sx={{ borderRadius: 5 }}>
+                서비스 신청하기
+              </CustomButton>
+              <CustomButton cvariant="outline" size="large" sx={{ borderRadius: 5 }}>
+                사용방법 다운로드
+              </CustomButton>
+            </Box>
+          </Box>
         </Box>
         <Box sx={{ display: "flex", flexDirection: "row", backgroundColor: "#444444", justifyContent: "center", alignItems: "center", gap: 8, p: 10 }}>
           <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center", py: 5 }}>
