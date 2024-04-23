@@ -6,8 +6,8 @@ export const Hero = () => {
     <>
       <Box sx={{ position: "relative", width: "100%", height: "100%", display: "flex", flexDirection: "column" }}>
         <Image src="/landing/Teamvolt/Asset 6@4x.png" alt="heroimg" width={1920} height={800} />
-        <Box sx={{ display: "flex", flexDirection: "row", backgroundColor: "#444444", justifyContent: "center", alignItems: "center", gap: 2, p: 10 }}>
-          <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center" }}>
+        <Box sx={{ display: "flex", flexDirection: "row", backgroundColor: "#444444", justifyContent: "center", alignItems: "center", gap: 8, p: 10 }}>
+          <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center", py: 5 }}>
             <Typography variant="h2" fontWeight="bold">
               50%
             </Typography>
@@ -17,7 +17,7 @@ export const Hero = () => {
             </Box>
           </Box>
           <Divider orientation="vertical" flexItem sx={{ borderWidth: 1, borderColor: "#DDDDDD" }} />
-          <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center" }}>
+          <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center", py: 5 }}>
             <Typography variant="h2" fontWeight="bold">
               256
             </Typography>
@@ -27,7 +27,7 @@ export const Hero = () => {
             </Box>
           </Box>
           <Divider orientation="vertical" flexItem sx={{ borderWidth: 1, borderColor: "#DDDDDD" }} />
-          <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center" }}>
+          <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center", py: 5 }}>
             <Typography variant="h2" fontWeight="bold">
               30%
             </Typography>

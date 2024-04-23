@@ -11,7 +11,7 @@ export const Footer = () => {
       sx={{
         width: "100vw",
         height: "5.5rem",
-        p: 2,
+        p: 3,
         backgroundColor: "#2CBBCF",
         zIndex: 9999,
         display: "flex",
