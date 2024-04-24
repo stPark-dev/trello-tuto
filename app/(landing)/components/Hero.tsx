@@ -5,7 +5,7 @@ import Image from "next/image";
 export const Hero = () => {
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+      <Box sx={{ display: "flex", flexDirection: "column", zIndex: 9999 }}>
         <Box sx={{ position: "relative", width: "100vw", height: "100vh" }}>
           <Image src="/landing/Teamvolt/hero_img.png" alt="heroimg" fill />
           <Box sx={{ position: "absolute", top: "40%", left: "25%", transform: "translate(-50%, -50%)", textAlign: "left", color: "#000000" }}>

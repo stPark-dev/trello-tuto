@@ -1,14 +1,13 @@
-import { CustomButton } from "@/components/Button";
-import { Box, SvgIconTypeMap, Typography } from "@mui/material";
-import { OverridableComponent } from "@mui/material/OverridableComponent";
+import { Box, Typography } from "@mui/material";
+import Image from "next/image";
 
-interface CardProps {
+export interface CardProps {
   width: string | number;
   height: string | number;
   title: string;
   desc: string;
   feature: string;
-  icon: OverridableComponent<SvgIconTypeMap<object, "svg">>;
+  iconSrc: string;
 }
 
 export const CardComponent = ({ ...props }: CardProps) => {
@@ -16,7 +15,7 @@ export const CardComponent = ({ ...props }: CardProps) => {
     <Box
       sx={{
         backgroundColor: "#FFFFFF",
-        p: 2,
+        padding: "3rem 2rem",
         minWidth: props.width,
         height: props.height,
         boxShadow: 3,
@@ -24,18 +23,18 @@ export const CardComponent = ({ ...props }: CardProps) => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 2,
-        borderRadius: "16px",
+        gap: "3.6875rem",
+        borderRadius: "0.5rem",
         border: 1,
         borderColor: "primary.main",
       }}
     >
-      <props.icon />
+      <Image src={props.iconSrc} alt={props.title} width={40} height={40} />
       <Typography variant="h6" fontWeight="bold" sx={{ textAlign: "center" }}>
         {props.title}
       </Typography>
-      <Typography sx={{ textAlign: "center" }}>{props.desc}</Typography>
-      <Typography sx={{ p: 1, backgroundColor: "primary.main", color: "#ffffff", borderRadius: 3, textAlign: "center" }}>{props.feature}</Typography>
+      <Typography sx={{ textAlign: "center", whiteSpace: "pre-line" }}>{props.desc}</Typography>
+      <Typography sx={{ p: 1, backgroundColor: "primary.main", color: "#ffffff", borderRadius: "0.5rem", textAlign: "center" }}>{props.feature}</Typography>
     </Box>
   );
 };
