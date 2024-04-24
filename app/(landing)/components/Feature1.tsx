@@ -1,7 +1,7 @@
 import { CustomButton } from "@/components/Button";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import { CardComponent, CardProps } from "./CardComponent";
+import { CardComponent, CardProps } from "./ui/CardComponent";
 
 const CardElement: CardProps[] = [
   {
@@ -38,9 +38,9 @@ const CardElement: CardProps[] = [
   },
 ];
 
-export const Manual = () => {
+export const Feature1 = () => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "row" }}>
+    <div style={{ display: "flex", flexDirection: "row" }}>
       <Box
         sx={{
           p: 20,
@@ -69,7 +69,7 @@ export const Manual = () => {
           </CustomButton>
         </Box>
       </Box>
-      <Box sx={{ flexGrow: 0, position: "relative", width: "50vw", height: "120vh" }}>
+      <Box sx={{ flexShrink: 0, position: "relative", width: "50vw", height: "120vh" }}>
         <Image src="/landing/Teamvolt/ellipse_masking.png" alt="heroimg" fill style={{ transform: "translateY(-5%)" }} />
         <Box
           sx={{
@@ -123,6 +123,6 @@ export const Manual = () => {
           </Box>
         </Box>
       </Box>
-    </Box>
+    </div>
   );
 };

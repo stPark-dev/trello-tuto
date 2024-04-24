@@ -4,7 +4,8 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { Hero } from "./components/Hero";
 import { Box } from "@mui/material";
-import { Manual } from "./components/Manual";
+import { Feature1 } from "./components/Feature1";
+import { Feature2 } from "./components/Feature2";
 
 const LandingMainPage = () => {
   return (
@@ -12,7 +13,8 @@ const LandingMainPage = () => {
       <Box sx={{ display: "flex", flexDirection: "column", overflowX: "hidden" }}>
         <Navbar />
         <Hero />
-        <Manual />
+        <Feature1 />
+        <Feature2 />
         <Footer />
       </Box>
     </>
