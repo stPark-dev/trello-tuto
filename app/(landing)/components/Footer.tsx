@@ -39,7 +39,7 @@ export const Footer = () => {
         }}
       >
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-          <Image alt="head" src="/landing/Teamvolt/logo_head.png" width="50" height="50" />
+          <Image alt="head" src="/landing/Teamvolt/logo_head.png" width={70} height={70} />
           <Typography variant="h3" fontFamily="kleague" color="#ffffff">
             팀볼투
           </Typography>
@@ -79,10 +79,10 @@ export const Footer = () => {
               gap: "0.625rem",
             }}
           >
-            <CustomButton cvariant="outline" sx={{ borderRadius: "1.875rem" }}>
+            <CustomButton cvariant="outline" sx={{ borderRadius: 5 }}>
               <Instagram sx={{ mr: 1 }} /> 인스타그램
             </CustomButton>
-            <CustomButton cvariant="outline" sx={{ borderRadius: "1.875rem" }}>
+            <CustomButton cvariant="outline" sx={{ borderRadius: 5 }}>
               <OpenInNew sx={{ mr: 1 }} />
               그렉터
             </CustomButton>

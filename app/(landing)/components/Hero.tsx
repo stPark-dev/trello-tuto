@@ -1,11 +1,13 @@
 import { CustomButton } from "@/components/Button";
-import { Box, Divider, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
+import Typography from "@mui/material/Typography";
 import Image from "next/image";
 
 export const Hero = () => {
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column", zIndex: 9999 }}>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Box sx={{ position: "relative", width: "100vw", height: "100vh" }}>
           <Image src="/landing/Teamvolt/hero_img.png" alt="heroimg" fill />
           <Box sx={{ position: "absolute", top: "40%", left: "25%", transform: "translate(-50%, -50%)", textAlign: "left", color: "#000000" }}>
@@ -26,7 +28,18 @@ export const Hero = () => {
             </Box>
           </Box>
         </Box>
-        <Box sx={{ display: "flex", flexDirection: "row", backgroundColor: "#444444", justifyContent: "center", alignItems: "center", gap: 8, p: 10 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            backgroundColor: "#444444",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 8,
+            p: 10,
+            zIndex: 9999,
+          }}
+        >
           <Box sx={{ color: "#FFFFFF", display: "flex", flexDirection: "row", gap: 2, alignItems: "center", py: 5 }}>
             <Typography variant="h2" fontWeight="bold">
               50%
