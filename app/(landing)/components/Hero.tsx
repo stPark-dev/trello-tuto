@@ -12,7 +12,7 @@ export const Hero = () => {
           <Image src="/landing/Teamvolt/hero_img.png" alt="heroimg" fill />
           <Box sx={{ position: "absolute", top: "40%", left: "25%", transform: "translate(-50%, -50%)", textAlign: "left", color: "#000000" }}>
             <Typography variant="h3" component="h1" fontWeight="bold">
-              혁신적인 현업 시스템으로 업무하는
+              혁신적인 협업 시스템으로 업무하는
             </Typography>
             <Typography variant="h3" component="h1" fontWeight="bold">
               스마트 자산 관리 솔루션
