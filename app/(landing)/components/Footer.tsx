@@ -41,7 +41,7 @@ export const Footer = () => {
         <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
           <Image alt="head" src="/landing/Teamvolt/logo_head.png" width={70} height={70} />
           <Typography variant="h3" fontFamily="kleague" color="#ffffff">
-            팀볼투
+            팀볼트
           </Typography>
           <Typography variant="h5" fontFamily="kleague" color="#ffffff">
             TEAMVOLT

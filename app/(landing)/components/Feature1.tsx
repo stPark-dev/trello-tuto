@@ -43,7 +43,6 @@ export const Feature1 = () => {
     <div style={{ display: "flex", flexDirection: "row" }}>
       <Box
         sx={{
-          p: 20,
           display: "flex",
           flexDirection: "column",
           flexGrow: 2,
