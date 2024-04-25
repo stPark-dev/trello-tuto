@@ -17,7 +17,7 @@ const CardElement: CardProps[] = [
     height: "352px",
     title: "정보 반영 및 의사 결정 지연",
     desc: "자산 변화 실시간 반영 및 분석이\n 어려워 효과적인 결정이 힘듦",
-    feature: "정보반영 및실시간 협업 시스템 구축",
+    feature: "정보반영 및 실시간 협업 시스템 구축",
     iconSrc: "/landing/Teamvolt/Frame2.svg",
   },
   {

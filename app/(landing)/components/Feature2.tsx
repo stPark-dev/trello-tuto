@@ -116,17 +116,18 @@ export const Feature2 = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              alignItems: "start", // 왼쪽 정렬을 위해 alignItems를 start로 변경
+              alignItems: "start",
               p: 2,
               gap: 2,
               flexShrink: 0,
-              flexGrow: 0, // Box가 확장되지 않도록 설정
-              width: "40%", // Box의 폭을 30%로 조정
+              flexGrow: 0,
+              width: "40%",
               border: "2px solid #0089A8",
               borderRadius: 2,
               boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.30)",
-              bgcolor: "rgba(204, 242, 246)",
-              transform: "translate(20%, -30%)",
+              bgcolor: "rgba(204, 242, 246, 0.5)",
+              transform: "translate(20%, -40%)",
+              backdropFilter: "blur(5px)",
             }}
           >
             <Box width="100%" height="100%">
