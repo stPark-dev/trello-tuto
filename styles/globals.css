@@ -41,3 +41,8 @@ body {
   font-family: "kleague";
   src: url("/fonts/KLeagueBasic-Medium.ttf") format("truetype");
 }
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("/fonts/PretendardVariable.ttf") format("truetype");
+}

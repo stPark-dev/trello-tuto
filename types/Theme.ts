@@ -20,7 +20,7 @@ export const rowHeight = 30;
 
 const typography: TypographyOptions = {
   fontSize: 15,
-  fontFamily: ["Roboto", "Arial", '"Noto Sans KR"', "sans-serif", "kleague"].join(", "),
+  fontFamily: ["Pretendard", "Roboto", "Arial", '"Noto Sans KR"', "sans-serif", "kleague"].join(", "),
 };
 
 const defaultMixins: Mixins = {

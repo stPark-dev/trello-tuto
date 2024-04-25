@@ -47,25 +47,29 @@ export const Feature1 = () => {
           flexDirection: "column",
           flexGrow: 2,
           justifyContent: "center",
-          alignItems: "start",
+          alignItems: "center",
           color: "#000000",
         }}
       >
-        <Typography color="primary" fontWeight={700}>
-          Problem
-        </Typography>
-        <Typography variant="h4" component="h1" fontWeight="bold">
-          효율적인 협업 시스템으로
-        </Typography>
-        <Typography variant="h4" component="h1" fontWeight="bold">
-          완성하는 스마트 자산 관리 솔루션
-        </Typography>
-        <Typography variant="body1">팀볼트는 나의 자산을 효율적으로 관리 할 수 있도록</Typography>
-        <Typography variant="body1">보다 나은 관리 프로세스를 만들어 갑니다.</Typography>
-        <Box sx={{ my: 10, display: "flex", flexDirection: "row" }}>
-          <CustomButton cvariant="outline" size="large" sx={{ borderRadius: 5 }}>
-            사용방법 다운로드
-          </CustomButton>
+        <Box>
+          <Typography color="primary" fontWeight={700}>
+            Problem
+          </Typography>
+          <Box sx={{ my: 2 }}>
+            <Typography variant="h4" component="h1" fontWeight="bold">
+              효율적인 협업 시스템으로
+            </Typography>
+            <Typography variant="h4" component="h1" fontWeight="bold">
+              완성하는 스마트 자산 관리 솔루션
+            </Typography>
+          </Box>
+          <Typography variant="body1">팀볼트는 나의 자산을 효율적으로 관리 할 수 있도록</Typography>
+          <Typography variant="body1">보다 나은 관리 프로세스를 만들어 갑니다.</Typography>
+          <Box sx={{ my: 5, display: "flex", flexDirection: "row" }}>
+            <CustomButton cvariant="outline" size="large" sx={{ borderRadius: 5 }}>
+              사용방법 다운로드
+            </CustomButton>
+          </Box>
         </Box>
       </Box>
       <Box sx={{ flexShrink: 0, position: "relative", width: "50vw", height: "120vh" }}>

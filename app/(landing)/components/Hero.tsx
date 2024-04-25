@@ -10,7 +10,17 @@ export const Hero = () => {
       <div style={{ display: "flex", flexDirection: "column" }}>
         <Box sx={{ position: "relative", width: "100vw", height: "100vh" }}>
           <Image src="/landing/Teamvolt/hero_img.png" alt="heroimg" fill />
-          <Box sx={{ position: "absolute", top: "40%", left: "25%", transform: "translate(-50%, -50%)", textAlign: "left", color: "#000000" }}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "40%",
+              left: "25%",
+              transform: "translate(-50%, -50%)",
+              textAlign: "left",
+              color: "#000000",
+              fontFamily: "Pretendard",
+            }}
+          >
             <Typography variant="h3" component="h1" fontWeight="bold">
               혁신적인 협업 시스템으로 업무하는
             </Typography>
