@@ -73,7 +73,13 @@ export const Feature1 = () => {
         </Box>
       </Box>
       <Box sx={{ flexShrink: 0, position: "relative", width: "50vw", height: "120vh" }}>
-        <Image src="/landing/Teamvolt/ellipse_masking.png" alt="heroimg" fill style={{ transform: "translateY(-5%)" }} />
+        <Image
+          src="/landing/Teamvolt/ellipse_masking.png"
+          alt="heroimg"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ transform: "translateY(-5%)" }}
+        />
         <Box
           sx={{
             position: "absolute",

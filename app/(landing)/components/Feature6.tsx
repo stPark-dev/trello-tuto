@@ -49,13 +49,11 @@ export const Feature6 = () => {
               justifyContent: "center",
               alignItems: "center",
               flexGrow: 7,
-              backgroundColor: "#F3F8FF",
               width: "100%",
               height: "100%",
             }}
           >
-            요쏘
-            {/* <Image src="/landing/Teamvolt/Asset 28@4x.png" alt="1" fill style={{ objectFit: "contain" }} /> */}
+            <Image src="/landing/Teamvolt/Asset 28@4x.png" alt="1" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
           </div>
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flexGrow: 3 }}>
             <Typography variant="h5" fontWeight="bold">
@@ -87,12 +85,11 @@ export const Feature6 = () => {
               justifyContent: "center",
               alignItems: "center",
               flexGrow: 7,
-              backgroundColor: "#F3F8FF",
               width: "100%",
               height: "100%",
             }}
           >
-            {/* <Image src="/landing/Teamvolt/Asset 31@4x.png" alt="1" fill style={{ objectFit: "contain" }} /> */}
+            <Image src="/landing/Teamvolt/Asset 31@4x.png" alt="2" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
           </div>
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flexGrow: 3 }}>
             <Typography variant="h5" fontWeight="bold">
@@ -118,18 +115,18 @@ export const Feature6 = () => {
           }}
         >
           <div
+            id="imageDiv"
             style={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
               flexGrow: 7,
-              backgroundColor: "#F3F8FF",
               width: "100%",
               height: "100%",
             }}
           >
-            {/* <Image src="/landing/Teamvolt/rabbit.png" alt="1" fill style={{ objectFit: "contain" }} /> */}
+            <Image src="/landing/Teamvolt/rabbit.png" alt="3" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
           </div>
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flexGrow: 3 }}>
             <Typography variant="h5" fontWeight="bold">
