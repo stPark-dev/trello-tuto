@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import { Pagination } from "swiper/modules";
 
 export const Feature6 = () => {
   return (
@@ -42,15 +42,7 @@ export const Feature6 = () => {
           </Box>
         </Box>
       </Box>
-      <Swiper
-        modules={[Autoplay]}
-        spaceBetween={100}
-        slidesPerView={2}
-        centeredSlides={true}
-        autoplay={{ delay: 2500, disableOnInteraction: false }}
-        loop={true}
-        style={{ width: "40%" }}
-      >
+      <Swiper spaceBetween={50} slidesPerView={1.8} centeredSlides={true} loop={true} style={{ width: "40%", flexGrow: 1 }}>
         <Box sx={{ display: "flex", flexDirection: "row", gap: 3, transform: "translateX(200px)" }}>
           <SwiperSlide>
             <Box
