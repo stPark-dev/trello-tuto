@@ -2,10 +2,11 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { CustomButton } from "@/components/Button";
 import Image from "next/image";
+import { Divider } from "@mui/material";
 
 export const Feature6 = () => {
   return (
-    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center", my: 10, gap: 4 }}>
+    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-around", alignItems: "center", px: 20, my: 10, gap: 4 }}>
       <Box>
         <Typography color="primary" fontWeight={700}>
           Problem
@@ -56,11 +57,12 @@ export const Feature6 = () => {
             <Image src="/landing/Teamvolt/Asset 28@4x.png" alt="1" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
           </div>
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flexGrow: 3 }}>
-            <Typography variant="h5" fontWeight="bold">
+            <Typography variant="h6" fontWeight="bold">
               자산 관리 솔루션
             </Typography>
-            <Box>-</Box>
+            <Box sx={{ width: "20%", borderBottom: "3px solid #aaa", lineHeight: "0.1em", my: 2 }}></Box>
             <Typography variant="body2">시설 및 건물정보, 공간정보 관리</Typography>
+            <Typography variant="body2">&nbsp;</Typography>
           </Box>
         </Box>
         <Box
@@ -92,11 +94,12 @@ export const Feature6 = () => {
             <Image src="/landing/Teamvolt/Asset 31@4x.png" alt="2" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
           </div>
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flexGrow: 3 }}>
-            <Typography variant="h5" fontWeight="bold">
+            <Typography variant="h6" fontWeight="bold">
               점검시스템 구축
             </Typography>
-            <Box>-</Box>
-            <Typography variant="body2">시설 및 건물정보, 공간정보 관리</Typography>
+            <Box sx={{ width: "20%", borderBottom: "3px solid #aaa", lineHeight: "0.1em", my: 2 }}></Box>
+            <Typography variant="body2">민원접수 및 처리, 유지보수, 주차관리등</Typography>
+            <Typography variant="body2">관리 솔루션을 제공합니다. </Typography>
           </Box>
         </Box>
         <Box
@@ -129,11 +132,12 @@ export const Feature6 = () => {
             <Image src="/landing/Teamvolt/rabbit.png" alt="3" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
           </div>
           <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flexGrow: 3 }}>
-            <Typography variant="h5" fontWeight="bold">
+            <Typography variant="h6" fontWeight="bold">
               실시간 관리
             </Typography>
-            <Box>-</Box>
-            <Typography variant="body2">시설 및 건물정보, 공간정보 관리</Typography>
+            <Box sx={{ width: "20%", borderBottom: "3px solid #aaa", lineHeight: "0.1em", my: 2 }}></Box>
+            <Typography variant="body2">CCTV관리, 출입관리, 실시간 민원알림</Typography>
+            <Typography variant="body2">서비스 제공</Typography>
           </Box>
         </Box>
       </Box>
