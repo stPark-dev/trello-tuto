@@ -56,10 +56,10 @@ export const Feature1 = () => {
             Problem
           </Typography>
           <Box sx={{ my: 2 }}>
-            <Typography variant="h4" component="h1" fontWeight="bold">
+            <Typography variant="h4" fontWeight="bold">
               효율적인 협업 시스템으로
             </Typography>
-            <Typography variant="h4" component="h1" fontWeight="bold">
+            <Typography variant="h4" fontWeight="bold">
               완성하는 스마트 자산 관리 솔루션
             </Typography>
           </Box>
