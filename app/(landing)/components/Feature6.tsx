@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import { Autoplay, Pagination } from "swiper/modules";
 
 export const Feature6 = () => {
   return (
@@ -42,7 +42,18 @@ export const Feature6 = () => {
           </Box>
         </Box>
       </Box>
-      <Swiper spaceBetween={50} slidesPerView={1.8} centeredSlides={true} loop={true} style={{ width: "40%", flexGrow: 1 }}>
+      <Swiper
+        modules={[Autoplay]}
+        spaceBetween={30}
+        slidesPerView={1.8}
+        centeredSlides={true}
+        loop={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        style={{ width: "40%", flexGrow: 1 }}
+      >
         <Box sx={{ display: "flex", flexDirection: "row", gap: 3, transform: "translateX(200px)" }}>
           <SwiperSlide>
             <Box
@@ -119,6 +130,46 @@ export const Feature6 = () => {
                 <Box sx={{ width: "20%", borderBottom: "3px solid #aaa", lineHeight: "0.1em", my: 2 }}></Box>
                 <Typography variant="body2">민원접수 및 처리, 유지보수, 주차관리등</Typography>
                 <Typography variant="body2">관리 솔루션을 제공합니다. </Typography>
+              </Box>
+            </Box>
+          </SwiperSlide>
+          <SwiperSlide>
+            <Box
+              sx={{
+                position: "relative",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                p: 2,
+                border: "1px solid",
+                borderRadius: 2,
+                borderColor: "primary.main",
+                width: 400,
+                height: 500,
+              }}
+            >
+              <div
+                id="imageDiv"
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flexGrow: 7,
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Image src="/landing/Teamvolt/rabbit.png" alt="3" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
+              </div>
+              <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flexGrow: 3 }}>
+                <Typography variant="h6" fontWeight="bold">
+                  실시간 관리
+                </Typography>
+                <Box sx={{ width: "20%", borderBottom: "3px solid #aaa", lineHeight: "0.1em", my: 2 }}></Box>
+                <Typography variant="body2">CCTV관리, 출입관리, 실시간 민원알림</Typography>
+                <Typography variant="body2">서비스 제공</Typography>
               </Box>
             </Box>
           </SwiperSlide>
