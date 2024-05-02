@@ -78,6 +78,7 @@ export const Feature6 = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexGrow: 7,
+                  backgroundColor: "#F3F8FF",
                   width: "100%",
                   height: "100%",
                 }}
@@ -117,6 +118,7 @@ export const Feature6 = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexGrow: 7,
+                  backgroundColor: "#F3F8FF",
                   width: "100%",
                   height: "100%",
                 }}
@@ -157,19 +159,20 @@ export const Feature6 = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexGrow: 7,
+                  backgroundColor: "#F3F8FF",
                   width: "100%",
                   height: "100%",
                 }}
               >
-                <Image src="/landing/Teamvolt/rabbit.png" alt="3" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
+                <Image src="/landing/Teamvolt/design.png" alt="3" width={300} height={300} style={{ objectFit: "contain", width: "100%" }} />
               </div>
               <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", flexGrow: 3 }}>
                 <Typography variant="h6" fontWeight="bold">
-                  실시간 관리
+                  신속한 확인 및 처리
                 </Typography>
                 <Box sx={{ width: "20%", borderBottom: "3px solid #aaa", lineHeight: "0.1em", my: 2 }}></Box>
-                <Typography variant="body2">CCTV관리, 출입관리, 실시간 민원알림</Typography>
-                <Typography variant="body2">서비스 제공</Typography>
+                <Typography variant="body2">예상치 못한 위험 상황 정보도 신속하고 정확하게 </Typography>
+                <Typography variant="body2">처리할 수 있도록 돕는 양방향 데이터 공유 시스템</Typography>
               </Box>
             </Box>
           </SwiperSlide>
@@ -197,6 +200,7 @@ export const Feature6 = () => {
                   justifyContent: "center",
                   alignItems: "center",
                   flexGrow: 7,
+                  backgroundColor: "#F3F8FF",
                   width: "100%",
                   height: "100%",
                 }}
