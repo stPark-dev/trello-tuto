@@ -27,9 +27,10 @@ export const CardComponent = ({ ...props }: CardProps) => {
         borderRadius: "0.5rem",
         border: 1,
         borderColor: "primary.main",
+        p: 6,
       }}
     >
-      <Image src={props.iconSrc} alt={props.title} width={40} height={40} style={{ width: "auto", height: "auto" }} />
+      <Image src={props.iconSrc} alt={props.title} width={30} height={30} style={{ width: "auto", height: "auto" }} />
       <Typography variant="h6" fontWeight="bold" sx={{ textAlign: "center" }}>
         {props.title}
       </Typography>

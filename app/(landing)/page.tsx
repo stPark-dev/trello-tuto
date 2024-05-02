@@ -10,6 +10,8 @@ import { Feature3 } from "./components/Feature3";
 import { Feature4 } from "./components/Feature4";
 import { Feature5 } from "./components/Feature5";
 import { Feature6 } from "./components/Feature6";
+import { Feature7 } from "./components/Feature7";
+import { Feature8 } from "./components/Feature8";
 
 const LandingMainPage = () => {
   return (
@@ -23,6 +25,8 @@ const LandingMainPage = () => {
         <Feature4 />
         <Feature5 />
         <Feature6 />
+        <Feature7 />
+        <Feature8 />
         <Footer />
       </Box>
     </>

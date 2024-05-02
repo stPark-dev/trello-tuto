@@ -19,7 +19,7 @@ export const Feature5 = () => {
           </Typography>
         </Box>
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", my: 10, gap: 4, p: 5 }}>
+      <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "center", my: 5, gap: 4, p: 5 }}>
         <Box sx={{ position: "relative", width: 600, height: 600 }}>
           <Image
             src="/landing/Teamvolt/ellipse_661.png"
